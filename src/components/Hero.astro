@@ -13,6 +13,8 @@ interface CTA {
 interface Props {
   eyebrow?: string;
   title: string;
+  /** Optional pre-formatted HTML title. Supports <em>italic serif</em> accents. If set, replaces `title`. */
+  titleHtml?: string;
   sub?: string;
   updatedDate?: string;
   primaryCta?: CTA;
@@ -24,6 +26,7 @@ interface Props {
 const {
   eyebrow,
   title,
+  titleHtml,
   sub,
   updatedDate,
   primaryCta,
@@ -48,7 +51,11 @@ const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
   <div class="container-max hero__inner">
     <div class="hero__left">
       {eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
-      <h1 class="hero__title">{cleanTitle}</h1>
+      {titleHtml ? (
+        <h1 class="hero__title" set:html={titleHtml} />
+      ) : (
+        <h1 class="hero__title">{cleanTitle}</h1>
+      )}
       {sub && <p class="hero__sub">{sub}</p>}
 
       <div class="hero__meta">
@@ -188,10 +195,22 @@ const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
   .hero__title {
     margin: 0;
     color: var(--color-type);
-    font-size: clamp(2.3rem, 4.6vw, 3.6rem);
-    line-height: 1.08;
-    font-weight: 740;
-    letter-spacing: -0.03em;
+    font-size: clamp(2.4rem, 4.8vw, 3.9rem);
+    line-height: 1.05;
+    font-weight: 720;
+    letter-spacing: -0.035em;
+  }
+  .hero__title :global(em),
+  .hero__title :global(i) {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-accent);
+    letter-spacing: -0.01em;
+    /* Editorial serifs are narrower — bump size slightly so italic phrase reads with equal weight. */
+    font-size: 1.08em;
+    line-height: 1;
+    padding-right: 0.04em;
   }
   .hero--compact .hero__title { font-size: clamp(1.9rem, 3.2vw, 2.6rem); line-height: 1.15; }
 

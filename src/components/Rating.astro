@@ -57,15 +57,17 @@ const fillPct = Math.max(8, clamped * 10);
   .rating__num {
     display: inline-flex;
     align-items: baseline;
-    gap: 0.18rem;
-    font-family: var(--font-sans);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.035em;
+    gap: 0.22rem;
+    font-family: var(--font-editorial);
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: -0.02em;
     line-height: 1;
+    font-feature-settings: "tnum", "lnum";
   }
   .rating__int {
-    font-weight: 780;
-    font-size: 2.25rem;
+    font-weight: 400;
+    font-size: 2.55rem;
+    font-style: normal;
   }
   .rating__max {
     font-family: var(--font-mono);
@@ -100,13 +102,13 @@ const fillPct = Math.max(8, clamped * 10);
   }
 
   /* ---- Sizes ---- */
-  .rating--sm .rating__int { font-size: 1.6rem; }
+  .rating--sm .rating__int { font-size: 1.85rem; }
   .rating--sm .rating__max { font-size: 0.62rem; }
   .rating--sm { min-width: 3rem; }
 
-  .rating--md .rating__int { font-size: 2.25rem; }
+  .rating--md .rating__int { font-size: 2.55rem; }
 
-  .rating--lg .rating__int { font-size: 3rem; }
+  .rating--lg .rating__int { font-size: 3.4rem; }
   .rating--lg .rating__max { font-size: 0.86rem; }
   .rating--lg { min-width: 5rem; }
 

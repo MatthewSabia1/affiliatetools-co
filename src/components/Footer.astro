@@ -1,6 +1,6 @@
 ---
 /**
- * Footer — comprehensive, SaaS-tier. Five-column grid with full site map, legal, and disclosure.
+ * Footer — editorial masthead. Publication header + directory columns + legal strip.
  */
 import {
   COMPETITOR_NAMES,
@@ -36,12 +36,44 @@ const guideCols = LISTICLE_SLUGS.map((slug) => ({
   label: listicleLabels[slug],
 }));
 
-const year = new Date().getFullYear();
+const now = new Date();
+const year = now.getFullYear();
+const issueDate = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+// Volume = # of months since launch (Apr 2026); minimum 1 for safety.
+const launch = new Date('2026-04-01');
+const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now.getMonth() - launch.getMonth() + 1);
 ---
 
 <footer class="site-footer">
+  {/* Masthead band */}
+  <div class="site-footer__masthead">
+    <div class="container-wide site-footer__mast-inner">
+      <div class="mast-left">
+        <p class="mast-kicker">The AffiliateTools Review</p>
+        <p class="mast-title">
+          <em>An independent directory</em> for affiliate-marketer software.
+        </p>
+      </div>
+      <div class="mast-right">
+        <div class="mast-meta">
+          <span class="mast-meta__k">Volume</span>
+          <span class="mast-meta__v">01</span>
+        </div>
+        <div class="mast-meta">
+          <span class="mast-meta__k">Issue</span>
+          <span class="mast-meta__v">№ {String(months).padStart(2, '0')}</span>
+        </div>
+        <div class="mast-meta">
+          <span class="mast-meta__k">Published</span>
+          <span class="mast-meta__v">{issueDate}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Directory columns */}
   <div class="container-wide site-footer__inner">
-    <div class="site-footer__top">
+    <div class="site-footer__grid">
       <div class="site-footer__brand">
         <a class="site-footer__logo" href="/" aria-label={`${SITE_NAME} home`}>
           <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
@@ -51,12 +83,21 @@ const year = new Date().getFullYear();
           <span class="site-footer__logo-name">AffiliateTools<span class="site-footer__logo-tld">.co</span></span>
         </a>
         <p class="site-footer__tagline">
-          Independent, hands-on reviews of the software affiliate marketers actually run. Operated by the <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a> team — and we disclose that openly.
+          Hands-on reviews of the software affiliate marketers actually run. Operated by the <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a> team — disclosed on every page.
         </p>
         <div class="site-footer__badges">
-          <span class="site-footer__badge">Editorial independence</span>
-          <span class="site-footer__badge">Zero paid placements</span>
-          <span class="site-footer__badge">Updated quarterly</span>
+          <span class="site-footer__badge"><span class="dot dot--success"></span> Editorial independence</span>
+          <span class="site-footer__badge"><span class="dot dot--success"></span> Zero paid placements</span>
+          <span class="site-footer__badge"><span class="dot dot--success"></span> Quarterly refresh</span>
+        </div>
+
+        <div class="site-footer__masthead-card">
+          <p class="mast-card__label">Masthead</p>
+          <ul class="mast-card__list">
+            <li><span class="mast-card__role">Founding editor</span><span class="mast-card__name">Matthew Sabia</span></li>
+            <li><span class="mast-card__role">Review testing</span><span class="mast-card__name">AdRecon team</span></li>
+            <li><span class="mast-card__role">Editorial QA</span><span class="mast-card__name">AdRecon team</span></li>
+          </ul>
         </div>
       </div>
 
@@ -76,7 +117,7 @@ const year = new Date().getFullYear();
             {versusCols.map((l) => (
               <li><a href={l.href}>{l.label}</a></li>
             ))}
-            <li><a href={routes.hub()}>All comparisons →</a></li>
+            <li><a href={routes.hub()} class="site-footer__more">All comparisons →</a></li>
           </ul>
         </div>
 
@@ -90,31 +131,41 @@ const year = new Date().getFullYear();
         </div>
 
         <div class="site-footer__col">
-          <h3 class="site-footer__heading">Company</h3>
+          <h3 class="site-footer__heading">Editorial</h3>
           <ul class="site-footer__list">
             <li><a href={routes.about()}>About</a></li>
             <li><a href={routes.methodology()}>Methodology</a></li>
             <li><a href="/disclosure/">Editorial disclosure</a></li>
+            <li><a href="/guides/">Guides</a></li>
             <li><a href={routes.contact()}>Contact</a></li>
             <li><a href="/sitemap/">Site map</a></li>
           </ul>
 
-          <h3 class="site-footer__heading" style="margin-top: 1.8rem;">Legal</h3>
+          <h3 class="site-footer__heading site-footer__heading--sub">Legal</h3>
           <ul class="site-footer__list">
-            <li><a href="/privacy/">Privacy Policy</a></li>
-            <li><a href="/terms/">Terms of Service</a></li>
-            <li><a href="/cookies/">Cookie Policy</a></li>
+            <li><a href="/privacy/">Privacy</a></li>
+            <li><a href="/terms/">Terms</a></li>
+            <li><a href="/cookies/">Cookies</a></li>
           </ul>
         </div>
       </div>
+    </div>
+
+    {/* Disclosure band */}
+    <div class="site-footer__disclosure">
+      <span class="site-footer__disclosure-label">Disclosure</span>
+      <p class="site-footer__disclosure-body">
+        AffiliateTools.co is operated by <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a>, a Meta-focused ad intelligence platform. AdRecon is a direct competitor to most tools reviewed on this site. We fund AffiliateTools.co operationally, but accept no paid placements or sponsored rankings. See our full <a href={routes.methodology()}>methodology</a> and <a href="/disclosure/">editorial disclosure</a> for how this affects our reviews.
+      </p>
     </div>
 
     <div class="site-footer__legal">
       <p class="site-footer__copy">
         © {year} {SITE_NAME} · All trademarks are property of their respective owners.
       </p>
-      <p class="site-footer__fine">
-        AffiliateTools.co is operated by <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a>, a Meta-focused ad intelligence platform. AdRecon is a competitor to most tools reviewed on this site. See our <a href={routes.methodology()}>methodology</a> and <a href="/disclosure/">editorial disclosure</a>.
+      <p class="site-footer__build">
+        <span class="dot dot--success"></span>
+        Built by operators · Published from New York
       </p>
     </div>
   </div>
@@ -125,29 +176,121 @@ const year = new Date().getFullYear();
     margin-top: 6rem;
     border-top: 1px solid var(--color-line);
     background: var(--color-surface);
+    position: relative;
   }
+
+  /* ---- Masthead band ---- */
+  .site-footer__masthead {
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-canvas);
+    padding: 2.5rem 0 2.25rem;
+    position: relative;
+  }
+  .site-footer__masthead::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--color-accent) 14%,
+      var(--color-accent) 86%,
+      transparent 100%);
+    opacity: 0.9;
+  }
+  .site-footer__mast-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+  }
+  @media (max-width: 820px) {
+    .site-footer__mast-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+  .mast-kicker {
+    margin: 0 0 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-weight: 650;
+  }
+  .mast-title {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    line-height: 1.2;
+    color: var(--color-type);
+    letter-spacing: -0.025em;
+    font-weight: 720;
+    max-width: 32ch;
+  }
+  .mast-title :global(em) {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-accent);
+    font-size: 1.05em;
+  }
+  .mast-right {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.25rem;
+    padding-bottom: 0.2rem;
+  }
+  .mast-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0 0.85rem;
+    border-left: 1px solid var(--color-line);
+    min-width: 7rem;
+  }
+  .mast-meta:first-child { padding-left: 0; border-left: 0; }
+  .mast-meta__k {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-type-mute);
+    font-weight: 600;
+  }
+  .mast-meta__v {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--color-type);
+    letter-spacing: -0.01em;
+    font-feature-settings: "lnum";
+  }
+
+  /* ---- Directory columns ---- */
   .site-footer__inner {
-    padding-top: 4rem;
+    padding-top: 3.5rem;
     padding-bottom: 2.5rem;
   }
 
-  .site-footer__top {
+  .site-footer__grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
   }
   @media (min-width: 1024px) {
-    .site-footer__top { grid-template-columns: 1fr 2.2fr; gap: 4rem; }
+    .site-footer__grid { grid-template-columns: 1fr 2.2fr; gap: 4rem; }
   }
 
-  .site-footer__brand { max-width: 22rem; }
+  .site-footer__brand { max-width: 24rem; }
   .site-footer__logo {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
     text-decoration: none;
     color: var(--color-accent);
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
@@ -172,24 +315,69 @@ const year = new Date().getFullYear();
   .site-footer__badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    font-size: 0.7rem;
-    color: var(--color-type-mute);
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    color: var(--color-type-dim);
     font-weight: 500;
     letter-spacing: -0.005em;
-    padding: 0.22rem 0.6rem;
+    padding: 0.26rem 0.65rem;
     border-radius: 999px;
     background: var(--color-canvas);
     border: 1px solid var(--color-line);
   }
-  .site-footer__badge::before {
-    content: "";
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--color-success);
+  .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
+  .dot--success { background: var(--color-success); box-shadow: 0 0 0 2px rgba(31, 122, 62, 0.15); }
+
+  /* ---- Masthead card ---- */
+  .site-footer__masthead-card {
+    margin-top: 1.75rem;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.15rem 1.1rem;
+  }
+  .mast-card__label {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-type-mute);
+    font-weight: 650;
+  }
+  .mast-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.42rem;
+  }
+  .mast-card__list li {
+    display: grid;
+    grid-template-columns: minmax(7rem, 9rem) 1fr;
+    gap: 0.85rem;
+    align-items: baseline;
+    font-size: 0.85rem;
+    margin: 0;
+    padding: 0.1rem 0;
+    border-bottom: 1px dashed var(--color-line);
+  }
+  .mast-card__list li:last-child { border-bottom: 0; }
+  .mast-card__role {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-type-mute);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .mast-card__name {
+    color: var(--color-type);
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
+  /* ---- Link columns ---- */
   .site-footer__cols {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -200,13 +388,18 @@ const year = new Date().getFullYear();
   }
 
   .site-footer__heading {
-    font-size: 0.78rem;
-    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
     font-weight: 650;
     color: var(--color-type);
-    letter-spacing: -0.005em;
-    margin: 0 0 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-line);
   }
+  .site-footer__heading--sub { margin-top: 1.75rem; }
+
   .site-footer__list {
     list-style: none;
     padding: 0;
@@ -225,25 +418,64 @@ const year = new Date().getFullYear();
     transition: color 0.15s ease;
   }
   .site-footer__list a:hover { color: var(--color-accent); text-decoration: none; }
+  .site-footer__more { color: var(--color-accent) !important; font-weight: 600 !important; }
 
+  /* ---- Disclosure band ---- */
+  .site-footer__disclosure {
+    margin-top: 3rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  @media (max-width: 680px) {
+    .site-footer__disclosure { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+  .site-footer__disclosure-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-weight: 650;
+    padding-top: 0.15rem;
+  }
+  .site-footer__disclosure-body {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--color-type-dim);
+    max-width: 56rem;
+  }
+
+  /* ---- Legal strip ---- */
   .site-footer__legal {
-    margin-top: 3.5rem;
+    margin-top: 2rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--color-line);
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
   .site-footer__copy {
     margin: 0;
     color: var(--color-type-mute);
-    font-size: 0.8rem;
-  }
-  .site-footer__fine {
-    margin: 0;
-    color: var(--color-type-subtle);
     font-size: 0.78rem;
-    line-height: 1.55;
-    max-width: 58rem;
+  }
+  .site-footer__build {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-type-mute);
+    letter-spacing: 0.03em;
   }
 </style>
