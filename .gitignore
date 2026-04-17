@@ -17,9 +17,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# editor
+# editor / IDE / AI workspace
 .vscode/
 .idea/
+.claude/
 .DS_Store
 
 # research notes (internal — not committed)

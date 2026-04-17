@@ -2,11 +2,12 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
+import { getCollection } from 'astro:content';
 import { breadcrumbList } from '@/lib/schema';
-import { routes, COMPETITOR_SLUGS, VERSUS_SLUGS, LISTICLE_SLUGS, COMPETITOR_NAMES } from '@/lib/constants';
+import { routes, COMPETITOR_SLUGS, VERSUS_SLUGS, COMPETITOR_NAMES } from '@/lib/constants';
 
 const title = 'Site Map — AffiliateTools.co';
-const description = 'Full HTML site map of AffiliateTools.co — every page on the site organized by section.';
+const description = 'Full HTML site map of AffiliateTools.co — every review, comparison, ranking, buyer guide, and educational resource organized by section.';
 const canonical = '/sitemap/';
 const jsonLd = [
   breadcrumbList([
@@ -15,13 +16,24 @@ const jsonLd = [
   ]),
 ];
 
-const listicleLabels: Record<(typeof LISTICLE_SLUGS)[number], string> = {
-  'best-ad-spy-tools-2026': 'Best ad spy tools of 2026',
-  'best-ad-spy-tools-for-affiliate-marketers': 'Best for affiliate marketers',
-  'best-ad-spy-tools-for-facebook-ads': 'Best for Facebook ads',
-  'best-ad-spy-tools-for-clickbank': 'Best for ClickBank affiliates',
-  'adspy-alternatives': 'AdSpy alternatives',
-  'best-free-ad-spy-tools': 'Best free ad spy tools',
+const listicles = (await getCollection('listicles', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const intents = (await getCollection('intent', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const guides = (await getCollection('guides', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const allVersus = (await getCollection('versus', ({ data }) => !data.draft)).map((v) => v.slug);
+const adreconVersus = allVersus.filter((s) => s.startsWith('adrecon-vs-'));
+const competitorVersus = allVersus.filter((s) => !s.startsWith('adrecon-vs-'));
+
+const prettifyVersus = (slug: string): string => {
+  const parts = slug.split('-vs-');
+  const pretty = (p: string) =>
+    COMPETITOR_NAMES[p as keyof typeof COMPETITOR_NAMES] ?? p.charAt(0).toUpperCase() + p.slice(1);
+  return `${pretty(parts[0] ?? '')} vs ${pretty(parts[1] ?? '')}`;
 };
 ---
 
@@ -33,7 +45,7 @@ const listicleLabels: Record<(typeof LISTICLE_SLUGS)[number], string> = {
   <Hero
     eyebrow="Navigation"
     title="Site map"
-    sub="Every page on AffiliateTools.co, organized by section."
+    sub={`Every page on AffiliateTools.co — ${COMPETITOR_SLUGS.length} reviews, ${allVersus.length} head-to-heads, ${listicles.length} rankings, ${intents.length} buyer-intent pages, and ${guides.length} guides.`}
     variant="compact"
   />
 
@@ -53,35 +65,15 @@ const listicleLabels: Record<(typeof LISTICLE_SLUGS)[number], string> = {
         <ul>
           <li><a href={routes.hub()}>Category hub</a></li>
         </ul>
-      </section>
 
-      <section class="sitemap-col">
-        <h2>Reviews</h2>
+        <h2 style="margin-top: 2.5rem;">Reviews</h2>
         <ul>
           {COMPETITOR_SLUGS.map((slug) => (
             <li><a href={routes.review(slug)}>{COMPETITOR_NAMES[slug]} review</a></li>
           ))}
         </ul>
-      </section>
 
-      <section class="sitemap-col">
-        <h2>Head-to-head comparisons</h2>
-        <ul>
-          {VERSUS_SLUGS.map((slug) => (
-            <li><a href={routes.versus(slug)}>AdRecon vs {COMPETITOR_NAMES[slug]}</a></li>
-          ))}
-        </ul>
-
-        <h2 style="margin-top: 2.5rem;">Rankings</h2>
-        <ul>
-          {LISTICLE_SLUGS.map((slug) => (
-            <li><a href={routes.listicle(slug)}>{listicleLabels[slug]}</a></li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="sitemap-col">
-        <h2>Legal</h2>
+        <h2 style="margin-top: 2.5rem;">Legal</h2>
         <ul>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/terms/">Terms of Service</a></li>
@@ -94,6 +86,48 @@ const listicleLabels: Record<(typeof LISTICLE_SLUGS)[number], string> = {
           <li><a href="/sitemap-index.xml">XML sitemap index</a></li>
           <li><a href="/robots.txt">robots.txt</a></li>
           <li><a href="/rss.xml">RSS feed</a></li>
+        </ul>
+      </section>
+
+      <section class="sitemap-col">
+        <h2>AdRecon head-to-heads</h2>
+        <ul>
+          {VERSUS_SLUGS.map((slug) => (
+            <li><a href={routes.versus(slug)}>AdRecon vs {COMPETITOR_NAMES[slug]}</a></li>
+          ))}
+        </ul>
+
+        <h2 style="margin-top: 2.5rem;">Competitor head-to-heads</h2>
+        <ul>
+          {competitorVersus.map((slug) => (
+            <li><a href={`/ad-spy-tools/${slug}/`}>{prettifyVersus(slug)}</a></li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="sitemap-col">
+        <h2>Rankings</h2>
+        <ul>
+          {listicles.map((l) => (
+            <li><a href={`/ad-spy-tools/${l.slug}/`}>{l.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="sitemap-col">
+        <h2>Buyer-intent pages</h2>
+        <ul>
+          {intents.map((i) => (
+            <li><a href={`/ad-spy-tools/${i.slug}/`}>{i.data.title}</a></li>
+          ))}
+        </ul>
+
+        <h2 style="margin-top: 2.5rem;">Guides</h2>
+        <ul>
+          <li><a href="/guides/">All guides</a></li>
+          {guides.map((g) => (
+            <li><a href={`/guides/${g.slug}/`}>{g.data.title}</a></li>
+          ))}
         </ul>
       </section>
     </div>
@@ -118,6 +152,6 @@ const listicleLabels: Record<(typeof LISTICLE_SLUGS)[number], string> = {
   }
   .sitemap-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.55rem; }
   .sitemap-col li { margin: 0; }
-  .sitemap-col a { color: var(--color-type-dim); font-size: 0.9rem; text-decoration: none; }
+  .sitemap-col a { color: var(--color-type-dim); font-size: 0.9rem; text-decoration: none; line-height: 1.4; }
   .sitemap-col a:hover { color: var(--color-accent); text-decoration: none; }
 </style>

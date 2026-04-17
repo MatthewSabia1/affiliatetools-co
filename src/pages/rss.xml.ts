@@ -34,7 +34,7 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: `${SITE_NAME} — Honest reviews of ad spy tools`,
-    description: 'Independent, hands-on reviews and comparisons of ad spy tools for affiliate marketers. Operated by the AdRecon team.',
+    description: 'Independent, hands-on reviews and comparisons of ad spy tools for affiliate marketers.',
     site: context.site ?? SITE_URL,
     items,
     customData: `<language>en-us</language>`,

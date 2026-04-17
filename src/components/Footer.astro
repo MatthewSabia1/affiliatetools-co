@@ -11,6 +11,7 @@ import {
   routes,
   SITE_NAME,
 } from '@/lib/constants';
+import { getCollection } from 'astro:content';
 
 const reviewCols = COMPETITOR_SLUGS.map((slug) => ({
   href: routes.review(slug),
@@ -31,10 +32,32 @@ const listicleLabels: Record<(typeof LISTICLE_SLUGS)[number], string> = {
   'best-free-ad-spy-tools': 'Best free ad spy tools',
 };
 
-const guideCols = LISTICLE_SLUGS.map((slug) => ({
+const rankingCols = LISTICLE_SLUGS.map((slug) => ({
   href: routes.listicle(slug),
   label: listicleLabels[slug],
 }));
+
+// Surface the full guide library + a handful of high-intent buyer questions so
+// long-tail pages aren't orphaned from the footer link graph.
+const guidesEntries = await getCollection('guides', ({ data }) => !data.draft);
+const guideCols = guidesEntries
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .slice(0, 6)
+  .map((g) => ({ href: `/guides/${g.slug}/`, label: g.data.title }));
+
+const intentEntries = await getCollection('intent', ({ data }) => !data.draft);
+const topIntentSlugs = new Set([
+  'is-adspy-worth-it',
+  'is-bigspy-worth-it',
+  'adspy-pricing',
+  'bigspy-pricing',
+  'bigspy-alternatives',
+  'adspy-free-trial',
+]);
+const intentCols = intentEntries
+  .filter((e) => topIntentSlugs.has(e.slug))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .map((e) => ({ href: `/ad-spy-tools/${e.slug}/`, label: e.data.title }));
 
 const now = new Date();
 const year = now.getFullYear();
@@ -83,7 +106,7 @@ const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now
           <span class="site-footer__logo-name">AffiliateTools<span class="site-footer__logo-tld">.co</span></span>
         </a>
         <p class="site-footer__tagline">
-          Hands-on reviews of the software affiliate marketers actually run. Operated by the <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a> team — disclosed on every page.
+          Hands-on reviews of the software affiliate marketers actually run. Independent editorial — no pay-to-rank.
         </p>
         <div class="site-footer__badges">
           <span class="site-footer__badge"><span class="dot dot--success"></span> Editorial independence</span>
@@ -94,9 +117,9 @@ const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now
         <div class="site-footer__masthead-card">
           <p class="mast-card__label">Masthead</p>
           <ul class="mast-card__list">
-            <li><span class="mast-card__role">Founding editor</span><span class="mast-card__name">Matthew Sabia</span></li>
-            <li><span class="mast-card__role">Review testing</span><span class="mast-card__name">AdRecon team</span></li>
-            <li><span class="mast-card__role">Editorial QA</span><span class="mast-card__name">AdRecon team</span></li>
+            <li><span class="mast-card__role">Editorial</span><span class="mast-card__name">AffiliateTools.co team</span></li>
+            <li><span class="mast-card__role">Review testing</span><span class="mast-card__name">In-house research desk</span></li>
+            <li><span class="mast-card__role">Editorial QA</span><span class="mast-card__name">Editorial team</span></li>
           </ul>
         </div>
       </div>
@@ -124,19 +147,34 @@ const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now
         <div class="site-footer__col">
           <h3 class="site-footer__heading">Rankings</h3>
           <ul class="site-footer__list">
-            {guideCols.map((l) => (
+            {rankingCols.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
+            <li><a href="/sitemap/" class="site-footer__more">All rankings →</a></li>
+          </ul>
+
+          <h3 class="site-footer__heading site-footer__heading--sub">Buyer questions</h3>
+          <ul class="site-footer__list">
+            {intentCols.map((l) => (
               <li><a href={l.href}>{l.label}</a></li>
             ))}
           </ul>
         </div>
 
         <div class="site-footer__col">
-          <h3 class="site-footer__heading">Editorial</h3>
+          <h3 class="site-footer__heading">Guides</h3>
+          <ul class="site-footer__list">
+            {guideCols.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
+            <li><a href="/guides/" class="site-footer__more">All guides →</a></li>
+          </ul>
+
+          <h3 class="site-footer__heading site-footer__heading--sub">Editorial</h3>
           <ul class="site-footer__list">
             <li><a href={routes.about()}>About</a></li>
             <li><a href={routes.methodology()}>Methodology</a></li>
             <li><a href="/disclosure/">Editorial disclosure</a></li>
-            <li><a href="/guides/">Guides</a></li>
             <li><a href={routes.contact()}>Contact</a></li>
             <li><a href="/sitemap/">Site map</a></li>
           </ul>
@@ -155,7 +193,7 @@ const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now
     <div class="site-footer__disclosure">
       <span class="site-footer__disclosure-label">Disclosure</span>
       <p class="site-footer__disclosure-body">
-        AffiliateTools.co is operated by <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a>, a Meta-focused ad intelligence platform. AdRecon is a direct competitor to most tools reviewed on this site. We fund AffiliateTools.co operationally, but accept no paid placements or sponsored rankings. See our full <a href={routes.methodology()}>methodology</a> and <a href="/disclosure/">editorial disclosure</a> for how this affects our reviews.
+        Some links on AffiliateTools.co are affiliate links — if you sign up for a tool through those links, we may earn a commission at no extra cost to you. Affiliate relationships never determine ranking position or editorial verdicts. Read our full <a href={routes.methodology()}>methodology</a> and <a href="/disclosure/">editorial disclosure</a> for details on how we score, what we test, and how we handle conflicts.
       </p>
     </div>
 
@@ -165,7 +203,7 @@ const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now
       </p>
       <p class="site-footer__build">
         <span class="dot dot--success"></span>
-        Built by operators · Published from New York
+        Independent editorial · Refreshed quarterly
       </p>
     </div>
   </div>
@@ -279,7 +317,10 @@ const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now
     gap: 3rem;
   }
   @media (min-width: 1024px) {
-    .site-footer__grid { grid-template-columns: 1fr 2.2fr; gap: 4rem; }
+    .site-footer__grid { grid-template-columns: 1fr 2.8fr; gap: 4rem; }
+  }
+  @media (min-width: 1280px) {
+    .site-footer__grid { grid-template-columns: 1fr 3.4fr; gap: 4rem; }
   }
 
   .site-footer__brand { max-width: 24rem; }
@@ -383,7 +424,10 @@ const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now
     gap: 2rem 2.5rem;
   }
   @media (min-width: 768px) {
-    .site-footer__cols { grid-template-columns: repeat(4, 1fr); }
+    .site-footer__cols { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1120px) {
+    .site-footer__cols { grid-template-columns: repeat(5, 1fr); gap: 2rem 2rem; }
   }
 
   .site-footer__heading {

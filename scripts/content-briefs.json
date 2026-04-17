@@ -1,0 +1,200 @@
+{
+  "notes": "25 programmatic-SEO briefs. Each produces one MDX file. Types: listicle | intent | guide. Slugs must be unique across content collections.",
+  "briefs": [
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-youtube",
+      "title": "Best Ad Spy Tools for YouTube (2026): 7 Platforms Reviewed",
+      "targetKeyword": "best ad spy tools for YouTube",
+      "intent": "long-tail",
+      "angle": "YouTube ad research — who actually indexes YouTube, who pretends to, and what the affiliate workflow looks like. AdRecon does NOT cover YouTube — lead with that, recommend PowerAdSpy or BigSpy for YouTube."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-native-ads",
+      "title": "Best Ad Spy Tools for Native Ads (Taboola, Outbrain, RevContent) in 2026",
+      "targetKeyword": "best ad spy tools for native ads",
+      "intent": "long-tail",
+      "angle": "Native ad research across Taboola/Outbrain/RevContent. PowerAdSpy wins this category. AdRecon is Meta-only. Be honest that AdRecon does not fit this use case."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-google-ads",
+      "title": "Best Ad Spy Tools for Google Ads (Search + Display) in 2026",
+      "targetKeyword": "best ad spy tools for Google Ads",
+      "intent": "long-tail",
+      "angle": "Google Search + Display research. PowerAdSpy and BigSpy have coverage; AdRecon does not cover Google. Recommend accordingly."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-beginners",
+      "title": "Best Ad Spy Tools for Beginners: Easiest to Learn in 2026",
+      "targetKeyword": "best ad spy tools for beginners",
+      "intent": "head-term",
+      "angle": "Ease of learning, UX quality, friendly pricing. BigSpy free tier + Foreplay UX are natural beginner picks. AdRecon is operator-focused, recommend as upgrade path once they outgrow free tier."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-under-100",
+      "title": "Best Ad Spy Tools Under $100/Month: 2026 Ranking",
+      "targetKeyword": "best ad spy tools under $100",
+      "intent": "bottom-funnel",
+      "angle": "Price-anchored ranking. BigSpy, Foreplay start under $100. AdRecon lifetime $299 breaks even in month 3 — lead with TCO math."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-health-offers",
+      "title": "Best Ad Spy Tools for Health & Nutra Affiliate Offers (2026)",
+      "targetKeyword": "best ad spy tools for health offers",
+      "intent": "long-tail",
+      "angle": "Health/nutra niche on Meta. AdRecon's niche classifier (health vertical) plus affiliate-network classification wins the primary use case."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-crypto-offers",
+      "title": "Best Ad Spy Tools for Crypto Affiliate Offers (2026)",
+      "targetKeyword": "best ad spy tools for crypto",
+      "intent": "long-tail",
+      "angle": "Crypto vertical on Meta/TikTok. Compliance angles. AdRecon covers Meta; PiPiADS covers TikTok crypto creatives."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-sweepstakes",
+      "title": "Best Ad Spy Tools for Sweepstakes Affiliates (2026)",
+      "targetKeyword": "best ad spy tools for sweepstakes",
+      "intent": "long-tail",
+      "angle": "Sweeps vertical across Meta + TikTok + Native. Multi-platform angle. AdRecon is strong on Meta sweeps creative research."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-lead-generation",
+      "title": "Best Ad Spy Tools for Lead Generation Campaigns (2026)",
+      "targetKeyword": "best ad spy tools for lead generation",
+      "intent": "long-tail",
+      "angle": "B2B + consumer lead-gen research. Landing page depth matters — AdRecon's Landing Page Ripper is the workflow match."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-bizopp",
+      "title": "Best Ad Spy Tools for BizOpp Affiliate Offers (2026)",
+      "targetKeyword": "best ad spy tools for BizOpp",
+      "intent": "long-tail",
+      "angle": "BizOpp / make-money-online niche. AdRecon has BizOpp as first-class niche tag. Compliance nuance."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-pinterest",
+      "title": "Best Ad Spy Tools for Pinterest Ads (2026)",
+      "targetKeyword": "best ad spy tools for Pinterest",
+      "intent": "long-tail",
+      "angle": "Pinterest ad research. Niche — BigSpy has coverage, Minea for e-commerce Pinterest. AdRecon does NOT cover Pinterest."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-linkedin",
+      "title": "Best Ad Spy Tools for LinkedIn Ads (2026)",
+      "targetKeyword": "best ad spy tools for LinkedIn",
+      "intent": "long-tail",
+      "angle": "LinkedIn ad research — a gap in the industry. Admit that no tool covers LinkedIn well; recommend workarounds."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-enterprise-ad-spy-tools",
+      "title": "Best Enterprise Ad Spy Tools & Ad Intelligence Platforms (2026)",
+      "targetKeyword": "best enterprise ad spy tools",
+      "intent": "head-term",
+      "angle": "Enterprise/agency tier — multi-seat, compliance, large catalog. PowerAdSpy, BigSpy Enterprise, Foreplay Agency. AdRecon Agency $599 fits mid-market."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-lifetime-ad-spy-tools",
+      "title": "Best Lifetime Ad Spy Tools: No-Subscription Picks (2026)",
+      "targetKeyword": "best lifetime ad spy tools",
+      "intent": "bottom-funnel",
+      "angle": "Lifetime-license tools. AdRecon ($299 / $599 lifetime) is the standout. Honest: almost all competitors are subscription-only — this is AdRecon's structural advantage."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-maxweb",
+      "title": "Best Ad Spy Tools for MaxWeb Affiliates (2026)",
+      "targetKeyword": "best ad spy tools for MaxWeb",
+      "intent": "long-tail",
+      "angle": "MaxWeb-specific research. AdRecon auto-classifies MaxWeb creatives — the category fit. Only 1-2 real competitors can claim MaxWeb coverage."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-supplements",
+      "title": "Best Ad Spy Tools for Supplement Affiliate Offers (2026)",
+      "targetKeyword": "best ad spy tools for supplements",
+      "intent": "long-tail",
+      "angle": "Supplement/nutra creatives on Meta. Compliance sensitivity. AdRecon's health + affiliate-network tags match workflow."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-finance-offers",
+      "title": "Best Ad Spy Tools for Finance & Fintech Offers (2026)",
+      "targetKeyword": "best ad spy tools for finance offers",
+      "intent": "long-tail",
+      "angle": "Finance / fintech / credit / trading offers. Compliance and creative research. Multi-platform focus — Meta + Native."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-real-estate",
+      "title": "Best Ad Spy Tools for Real Estate Lead Gen (2026)",
+      "targetKeyword": "best ad spy tools for real estate",
+      "intent": "long-tail",
+      "angle": "Real estate + mortgage lead-gen research. Local intent angle. AdRecon Meta depth + landing page captures fit the lead-gen workflow."
+    },
+    {
+      "type": "intent",
+      "slug": "pipiads-alternatives",
+      "intentKind": "alternatives",
+      "competitorSlug": "pipiads",
+      "title": "PiPiADS Alternatives: 6 Tools Compared for TikTok + Beyond (2026)",
+      "description": "Looking for a PiPiADS alternative? Compare PiPiADS against 6 other ad spy tools for TikTok, Meta, and multi-platform affiliate research. Updated April 2026.",
+      "angle": "PiPiADS is TikTok-specialist. Honest alternatives: Minea (TikTok + e-commerce), BigSpy (broader coverage), AdRecon (Meta side). Plus honest note that no single tool matches PiPiADS for pure TikTok."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-choose-an-ad-spy-tool",
+      "title": "How to Choose an Ad Spy Tool: 2026 Buyer's Framework",
+      "description": "A step-by-step framework for picking an ad spy tool: platform coverage, budget tier, use-case fit, and the 8 scoring dimensions that matter most.",
+      "angle": "Frame decision around: (1) platform (Meta vs TikTok vs multi); (2) niche (affiliate vs DTC vs agency); (3) budget; (4) workflow depth. Show the 8-dim scoring rubric used on this site."
+    },
+    {
+      "type": "guide",
+      "slug": "how-long-should-an-ad-run-to-be-a-winner",
+      "title": "How Long Should an Ad Run to Be Considered a Winner?",
+      "description": "A data-driven guide to interpreting days-running as a profitability signal: why 120+ days matters, what shorter windows mean, and how to avoid false positives.",
+      "angle": "Explain the days-running profitability signal. AdRecon's Proven Creatives proof tiers (15+/30+/60+/90+) are concrete implementation. Educational — signal interpretation."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-research-digistore24-offers",
+      "title": "How to Research Digistore24 Offers Before Launching a Campaign",
+      "description": "A complete research workflow for Digistore24 affiliate offers: finding active advertisers, studying creatives, reverse-engineering funnels, and pricing the opportunity.",
+      "angle": "Digistore24-specific research workflow. AdRecon auto-classifies Digistore24 creatives — mention as one tool among a complete workflow (also Facebook Ad Library, SimilarWeb, Digistore24 marketplace)."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-research-buygoods-offers",
+      "title": "How to Research BuyGoods Offers: A Complete Affiliate Workflow",
+      "description": "Full workflow for BuyGoods affiliate research: finding active offers, studying creatives and landing pages, and picking the next offer to test.",
+      "angle": "BuyGoods-specific workflow. AdRecon auto-classifies BuyGoods creatives. Educational, not promotional — walk through the steps honestly."
+    },
+    {
+      "type": "guide",
+      "slug": "meta-ad-library-vs-paid-ad-spy-tools",
+      "title": "Meta Ad Library vs Paid Ad Spy Tools: When Free Is Enough",
+      "description": "A brutally honest comparison: when Facebook's free Meta Ad Library is enough, and when you need a paid ad spy tool. With hard examples.",
+      "angle": "Educational comparison. Honest: Meta Ad Library is free and powerful. Paid tools add (1) dead-ad archives, (2) affiliate-network classification, (3) landing page captures, (4) historical depth. Be honest about free-tier limits before pitching paid."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-find-winning-meta-creatives",
+      "title": "How to Find Winning Meta Creatives: A 2026 Research Workflow",
+      "description": "Step-by-step workflow for finding and validating winning Meta (Facebook/Instagram) ad creatives — signals, filters, cross-advertiser grouping, and pitfalls.",
+      "angle": "Workflow guide. Cover: days-running filter, cross-advertiser grouping (AdRecon Proven Creatives), landing page teardown, creative decomposition (hook/angle/CTA). Tool-agnostic framing."
+    }
+  ]
+}

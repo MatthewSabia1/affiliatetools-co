@@ -9,7 +9,7 @@ export const SITE_TAGLINE = 'Independent reviews of ad spy tools and affiliate m
 export const SITE_DESCRIPTION =
   'Honest, research-backed reviews of ad spy tools, landing page platforms, affiliate networks, and the software affiliate marketers actually use.';
 
-/** AdRecon (operator of this site) — CTA destination. */
+/** AdRecon — primary affiliate partner and top-ranked recommendation. */
 export const ADRECON_HOME_URL = 'https://adrecon.io';
 export const ADRECON_APP_URL = 'https://adrecon.io/app/';
 

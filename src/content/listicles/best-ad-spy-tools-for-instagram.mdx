@@ -66,7 +66,6 @@ faq:
     a: "If your campaigns run on both platforms, yes. Instagram and TikTok are separate data sources — no single tool is genuinely deep on both. Many affiliate operators stack AdRecon (Meta / Instagram) plus PiPiADS or Minea (TikTok) for full short-form coverage."
 draft: false
 ---
-
 import AuthorshipBox from "@/components/AuthorshipBox.astro";
 import CTA from "@/components/CTA.astro";
 import ToolLogo from "@/components/ToolLogo.astro";
@@ -74,6 +73,7 @@ import Rating from "@/components/Rating.astro";
 import ComparisonTable from "@/components/ComparisonTable.astro";
 import FAQ from "@/components/FAQ.astro";
 import RelatedLinks from "@/components/RelatedLinks.astro";
+import Screenshot from '@/components/Screenshot.astro';
 
 <AuthorshipBox />
 
@@ -258,14 +258,6 @@ A few tools didn't make the ranking but are worth knowing about for Instagram re
 
 Pick based on your role:
 
-- **Affiliate marketer running Meta offers** → AdRecon. Meta-native, network-classified, with landing page archive.
-- **Solo affiliate who wants Boolean search and historical depth** → AdSpy.
-- **Creative strategist or agency shipping Instagram creatives** → Foreplay.
-- **First-time researcher on $0-$9** → BigSpy free tier or $9 Basic.
-- **Multi-surface operator running IG + Native + Display** → PowerAdSpy.
-- **Dropshipper or DTC product-first operator** → Minea.
-- **TikTok operator who wants Reels read-across** → PiPiADS as secondary.
-
 Two-tool stacks that work well for Instagram-heavy operators:
 
 - **AdRecon + PiPiADS** — Meta depth plus TikTok depth. $299 one-time + $77-155/month.
@@ -275,11 +267,11 @@ Two-tool stacks that work well for Instagram-heavy operators:
 <ComparisonTable slugs={["adrecon", "adspy", "foreplay", "bigspy"]} />
 
 <CTA
-  variant="mid"
-  campaign="best-instagram-ad-spy"
-  medium="listicle"
-  kicker="Researching Instagram ads on Meta?"
-  body="AdRecon indexes every Instagram placement in the Meta Ad Library with days-running signals, niche classification, and landing page archives. 4-pillar research stack for affiliate marketers. $299 lifetime."
+ variant="mid"
+ campaign="best-instagram-ad-spy"
+ medium="listicle"
+ kicker="Researching Instagram ads on Meta?"
+ body="AdRecon indexes every Instagram placement in the Meta Ad Library with days-running signals, niche classification, and landing page archives. 4-pillar research stack for affiliate marketers. $299 lifetime."
 />
 
 ## Our verdict

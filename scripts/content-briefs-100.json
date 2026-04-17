@@ -1,0 +1,785 @@
+{
+  "notes": "100 programmatic-SEO briefs. 60 listicles, 30 guides, 10 intent pages. Generated 2026-04-17T22:53:19.671Z.",
+  "briefs": [
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-insurance-offers",
+      "title": "Best Ad Spy Tools For Insurance Offers (2026)",
+      "targetKeyword": "best ad spy tools for insurance offers",
+      "intent": "long-tail",
+      "angle": "Insurance affiliate creatives are compliance-heavy — who captures active ads cleanly and who doesn't. AdRecon's network classifier doesn't cover insurance networks directly, so be honest about where it wins (Meta research) and where it doesn't."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-loan-offers",
+      "title": "Best Ad Spy Tools For Loan Offers (2026)",
+      "targetKeyword": "best ad spy tools for loan offers",
+      "intent": "long-tail",
+      "angle": "Personal loans, mortgages, auto refi — a regulated, high-CPM niche. Meta depth matters here. AdRecon covers the Meta side well."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-forex-offers",
+      "title": "Best Ad Spy Tools For Forex Offers (2026)",
+      "targetKeyword": "best ad spy tools for forex offers",
+      "intent": "long-tail",
+      "angle": "Forex/trading offers are among Meta's tightest compliance niches. Focus on dead-ad tracking — ads flash on and off. AdRecon's is_active flag helps."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-weight-loss-offers",
+      "title": "Best Ad Spy Tools For Weight Loss Offers (2026)",
+      "targetKeyword": "best ad spy tools for weight loss offers",
+      "intent": "long-tail",
+      "angle": "Weight-loss/nutra is the single biggest ClickBank vertical. AdRecon's ClickBank tag + health niche classifier is a direct fit."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-dating-offers",
+      "title": "Best Ad Spy Tools For Dating Offers (2026)",
+      "targetKeyword": "best ad spy tools for dating offers",
+      "intent": "long-tail",
+      "angle": "Dating/sweeps-adjacent creatives. Meta, TikTok, native. Multi-platform angle — AdRecon is Meta-only."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-gambling-offers",
+      "title": "Best Ad Spy Tools For Gambling Offers (2026)",
+      "targetKeyword": "best ad spy tools for gambling offers",
+      "intent": "long-tail",
+      "angle": "iGaming/sportsbook creatives. Heavy compliance, geo-restricted. Multi-platform angle."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-mobile-gaming-offers",
+      "title": "Best Ad Spy Tools For Mobile Gaming Offers (2026)",
+      "targetKeyword": "best ad spy tools for mobile gaming offers",
+      "intent": "long-tail",
+      "angle": "Mobile game CPI/CPA. TikTok and Meta focus. PiPiADS is strong here."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-travel-offers",
+      "title": "Best Ad Spy Tools For Travel Offers (2026)",
+      "targetKeyword": "best ad spy tools for travel offers",
+      "intent": "long-tail",
+      "angle": "Travel/cruise/destination affiliate offers. Largely seasonal. Meta is the primary channel."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-personal-development",
+      "title": "Best Ad Spy Tools For Personal Development (2026)",
+      "targetKeyword": "best ad spy tools for personal development",
+      "intent": "long-tail",
+      "angle": "PD/coaching/courses — ClickBank and Digistore territory. AdRecon's network classifier matches the workflow."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-survival-niche",
+      "title": "Best Ad Spy Tools For Survival Niche (2026)",
+      "targetKeyword": "best ad spy tools for survival niche",
+      "intent": "long-tail",
+      "angle": "Survival/prepper offers — a top ClickBank vertical with big winners. AdRecon's survival sub-niche tag fits."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-pets-niche",
+      "title": "Best Ad Spy Tools For Pets Niche (2026)",
+      "targetKeyword": "best ad spy tools for pets niche",
+      "intent": "long-tail",
+      "angle": "Pet products / DTC + affiliate. Meta creative depth, TikTok for virality."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-home-improvement",
+      "title": "Best Ad Spy Tools For Home Improvement (2026)",
+      "targetKeyword": "best ad spy tools for home improvement",
+      "intent": "long-tail",
+      "angle": "Home services / improvement / solar. Lead-gen heavy. AdRecon lead-gen angle."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-solar-offers",
+      "title": "Best Ad Spy Tools For Solar Offers (2026)",
+      "targetKeyword": "best ad spy tools for solar offers",
+      "intent": "long-tail",
+      "angle": "Solar lead-gen affiliate offers. Meta + native. High CPM niche."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-beauty-niche",
+      "title": "Best Ad Spy Tools For Beauty Niche (2026)",
+      "targetKeyword": "best ad spy tools for beauty niche",
+      "intent": "long-tail",
+      "angle": "Beauty/skincare creatives — DTC dominant, TikTok-first. Minea fits."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-fitness-offers",
+      "title": "Best Ad Spy Tools For Fitness Offers (2026)",
+      "targetKeyword": "best ad spy tools for fitness offers",
+      "intent": "long-tail",
+      "angle": "Fitness / body transformation / supplement. ClickBank / Meta. AdRecon match."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-fintech-offers",
+      "title": "Best Ad Spy Tools For Fintech Offers (2026)",
+      "targetKeyword": "best ad spy tools for fintech offers",
+      "intent": "long-tail",
+      "angle": "Fintech / neobank / credit cards. Compliance heavy. Multi-platform."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-credit-repair",
+      "title": "Best Ad Spy Tools For Credit Repair (2026)",
+      "targetKeyword": "best ad spy tools for credit repair",
+      "intent": "long-tail",
+      "angle": "Credit repair / debt-relief offers. Meta + native. AdRecon network tag wins."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-education-offers",
+      "title": "Best Ad Spy Tools For Education Offers (2026)",
+      "targetKeyword": "best ad spy tools for education offers",
+      "intent": "long-tail",
+      "angle": "EdTech / course affiliate. Meta + YouTube. AdRecon Meta side."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-solar-leadgen",
+      "title": "Best Ad Spy Tools For Solar Leadgen (2026)",
+      "targetKeyword": "best ad spy tools for solar leadgen",
+      "intent": "long-tail",
+      "angle": "Solar lead-gen specifically. Meta. Landing page archive value is high."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-saas-affiliates",
+      "title": "Best Ad Spy Tools For SaaS Affiliates (2026)",
+      "targetKeyword": "best ad spy tools for saas affiliates",
+      "intent": "long-tail",
+      "angle": "SaaS affiliate programs — ConvertKit, ClickFunnels, etc. Meta + LinkedIn."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-reddit-ads",
+      "title": "Best Ad Spy Tools For Reddit Ads (2026)",
+      "targetKeyword": "best ad spy tools for reddit ads",
+      "intent": "long-tail",
+      "angle": "Reddit ad research. PowerAdSpy covers Reddit; most tools don't. Honest platform landscape."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-quora-ads",
+      "title": "Best Ad Spy Tools For Quora Ads (2026)",
+      "targetKeyword": "best ad spy tools for quora ads",
+      "intent": "long-tail",
+      "angle": "Quora ad research. PowerAdSpy covers Quora. AdRecon does not."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-snapchat-ads",
+      "title": "Best Ad Spy Tools For Snapchat Ads (2026)",
+      "targetKeyword": "best ad spy tools for snapchat ads",
+      "intent": "long-tail",
+      "angle": "Snapchat ad research. Almost no tool covers Snap well — say so plainly."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-x-twitter-ads",
+      "title": "Best Ad Spy Tools For X Twitter Ads (2026)",
+      "targetKeyword": "best ad spy tools for x twitter ads",
+      "intent": "long-tail",
+      "angle": "X/Twitter ad research. BigSpy covers Twitter shallowly."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-instagram-reels",
+      "title": "Best Ad Spy Tools For Instagram Reels (2026)",
+      "targetKeyword": "best ad spy tools for instagram reels",
+      "intent": "long-tail",
+      "angle": "Instagram Reels ads specifically. AdRecon covers Meta including Reels."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-threads-ads",
+      "title": "Best Ad Spy Tools For Threads Ads (2026)",
+      "targetKeyword": "best ad spy tools for threads ads",
+      "intent": "long-tail",
+      "angle": "Threads ads — new surface. AdRecon does cover Threads."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-meta-advantage-plus",
+      "title": "Best Ad Spy Tools For Meta Advantage Plus (2026)",
+      "targetKeyword": "best ad spy tools for meta advantage plus",
+      "intent": "long-tail",
+      "angle": "Meta Advantage+ campaign research. Meta-only, recent."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-youtube-shorts",
+      "title": "Best Ad Spy Tools For Youtube Shorts (2026)",
+      "targetKeyword": "best ad spy tools for youtube shorts",
+      "intent": "long-tail",
+      "angle": "YouTube Shorts research. Short-form video angle."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-tiktok-shop",
+      "title": "Best Ad Spy Tools For Tiktok Shop (2026)",
+      "targetKeyword": "best ad spy tools for tiktok shop",
+      "intent": "long-tail",
+      "angle": "TikTok Shop specifically. PiPiADS + Minea cover this."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-instagram-reels-affiliates",
+      "title": "Best Ad Spy Tools For Instagram Reels Affiliates (2026)",
+      "targetKeyword": "best ad spy tools for instagram reels affiliates",
+      "intent": "long-tail",
+      "angle": "Reels affiliate creatives — Meta research focus."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-agencies-under-10-clients",
+      "title": "Best Ad Spy Tools For Agencies Under 10 Clients (2026)",
+      "targetKeyword": "best ad spy tools for agencies under 10 clients",
+      "intent": "long-tail",
+      "angle": "Small agency tier — under 10 clients. Agency workflow + budget tier."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-affiliate-managers",
+      "title": "Best Ad Spy Tools For Affiliate Managers (2026)",
+      "targetKeyword": "best ad spy tools for affiliate managers",
+      "intent": "long-tail",
+      "angle": "Affiliate managers monitoring their network's offers. AdRecon Offers Directory fits."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-media-buyers-on-meta",
+      "title": "Best Ad Spy Tools For Media Buyers On Meta (2026)",
+      "targetKeyword": "best ad spy tools for media buyers on meta",
+      "intent": "long-tail",
+      "angle": "Media buyers on Meta specifically. AdRecon + AdSpy comparison."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-solo-entrepreneurs",
+      "title": "Best Ad Spy Tools For Solo Entrepreneurs (2026)",
+      "targetKeyword": "best ad spy tools for solo entrepreneurs",
+      "intent": "long-tail",
+      "angle": "Solo operators with tight budgets. Lifetime pricing matters — AdRecon wins TCO."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-course-creators",
+      "title": "Best Ad Spy Tools For Course Creators (2026)",
+      "targetKeyword": "best ad spy tools for course creators",
+      "intent": "long-tail",
+      "angle": "Course creators studying competitor hooks. ClickBank focus."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-dtc-brands",
+      "title": "Best Ad Spy Tools For Dtc Brands (2026)",
+      "targetKeyword": "best ad spy tools for dtc brands",
+      "intent": "long-tail",
+      "angle": "DTC brand creative research. Minea + Foreplay strong; AdRecon weaker fit."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-performance-marketers",
+      "title": "Best Ad Spy Tools For Performance Marketers (2026)",
+      "targetKeyword": "best ad spy tools for performance marketers",
+      "intent": "long-tail",
+      "angle": "Performance marketers — days-running + cross-advertiser grouping. AdRecon wins."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-freelancers",
+      "title": "Best Ad Spy Tools For Freelancers (2026)",
+      "targetKeyword": "best ad spy tools for freelancers",
+      "intent": "long-tail",
+      "angle": "Freelance media buyers. Portability, reasonable pricing. AdRecon lifetime."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-in-house-growth-teams",
+      "title": "Best Ad Spy Tools For In House Growth Teams (2026)",
+      "targetKeyword": "best ad spy tools for in house growth teams",
+      "intent": "long-tail",
+      "angle": "In-house growth teams at SaaS / DTC. Multi-user, agency-ish."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-copywriters",
+      "title": "Best Ad Spy Tools For Copywriters (2026)",
+      "targetKeyword": "best ad spy tools for copywriters",
+      "intent": "long-tail",
+      "angle": "Copywriters studying winning hooks. Cross-advertiser creative grouping is key."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-api-access",
+      "title": "Best Ad Spy Tools With Api Access (2026)",
+      "targetKeyword": "best ad spy tools with api access",
+      "intent": "bottom-funnel",
+      "angle": "API access — rare in the category. Most tools don't expose one."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-team-seats",
+      "title": "Best Ad Spy Tools With Team Seats (2026)",
+      "targetKeyword": "best ad spy tools with team seats",
+      "intent": "bottom-funnel",
+      "angle": "Team-seat support. BigSpy Enterprise, Foreplay Agency. AdRecon Agency $599."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-landing-page-capture",
+      "title": "Best Ad Spy Tools With Landing Page Capture (2026)",
+      "targetKeyword": "best ad spy tools with landing page capture",
+      "intent": "bottom-funnel",
+      "angle": "Landing-page capture capability — unique to AdRecon among reviewed tools. Honest survey of the (limited) alternatives."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-free-trials",
+      "title": "Best Ad Spy Tools With Free Trials (2026)",
+      "targetKeyword": "best ad spy tools with free trials",
+      "intent": "bottom-funnel",
+      "angle": "Free-trial availability. BigSpy has real free tier; AdSpy and AdRecon don't."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-lifetime-pricing",
+      "title": "Best Ad Spy Tools With Lifetime Pricing (2026)",
+      "targetKeyword": "best ad spy tools with lifetime pricing",
+      "intent": "bottom-funnel",
+      "angle": "Lifetime pricing — AdRecon is the standout. Alternatives compared honestly."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-affiliate-network-classification",
+      "title": "Best Ad Spy Tools With Affiliate Network Classification (2026)",
+      "targetKeyword": "best ad spy tools with affiliate network classification",
+      "intent": "bottom-funnel",
+      "angle": "Affiliate-network auto-classification — AdRecon's defining feature. Only 1-2 others do any network tagging."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-dead-ad-tracking",
+      "title": "Best Ad Spy Tools With Dead Ad Tracking (2026)",
+      "targetKeyword": "best ad spy tools with dead ad tracking",
+      "intent": "bottom-funnel",
+      "angle": "Dead-ad / is_active tracking. AdRecon surfaces it first-class; most don't."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-proof-tier-filtering",
+      "title": "Best Ad Spy Tools With Proof Tier Filtering (2026)",
+      "targetKeyword": "best ad spy tools with proof tier filtering",
+      "intent": "bottom-funnel",
+      "angle": "Proof-tier creative filtering (15+/30+/60+/90+ linked ads). Unique to AdRecon."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-boolean-search",
+      "title": "Best Ad Spy Tools With Boolean Search (2026)",
+      "targetKeyword": "best ad spy tools with boolean search",
+      "intent": "bottom-funnel",
+      "angle": "Boolean search operators. AdSpy's historical strength."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-with-multi-country-geo",
+      "title": "Best Ad Spy Tools With Multi Country Geo (2026)",
+      "targetKeyword": "best ad spy tools with multi country geo",
+      "intent": "bottom-funnel",
+      "angle": "Multi-country geo research. BigSpy's geographic breadth."
+    },
+    {
+      "type": "listicle",
+      "slug": "cheapest-ad-spy-tools-2026",
+      "title": "Cheapest Ad Spy Tools 2026 (2026)",
+      "targetKeyword": "cheapest ad spy tools 2026",
+      "intent": "head-term",
+      "angle": "Cheapest tools — BigSpy free tier, Basic $9/mo. Lifetime angle: AdRecon wins long-run."
+    },
+    {
+      "type": "listicle",
+      "slug": "most-accurate-ad-spy-tools",
+      "title": "Most Accurate Ad Spy Tools (2026)",
+      "targetKeyword": "most accurate ad spy tools",
+      "intent": "head-term",
+      "angle": "Data-accuracy angle — crawl depth, freshness, dead-ad tracking. Comparative."
+    },
+    {
+      "type": "listicle",
+      "slug": "most-advanced-ad-spy-tools",
+      "title": "Most Advanced Ad Spy Tools (2026)",
+      "targetKeyword": "most advanced ad spy tools",
+      "intent": "head-term",
+      "angle": "Feature-depth angle — AI, LP capture, network classification, proof tiers."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-2026",
+      "title": "Best Ad Spy Tools For 2026 (2026)",
+      "targetKeyword": "best ad spy tools for 2026",
+      "intent": "head-term",
+      "angle": "Generic 'best of 2026' — broad ranking, similar to existing flagship but new angle."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-rated-ad-spy-tools",
+      "title": "Best Rated Ad Spy Tools (2026)",
+      "targetKeyword": "best rated ad spy tools",
+      "intent": "head-term",
+      "angle": "Highest-scored tools across the 8 dimensions."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-small-business",
+      "title": "Best Ad Spy Tools For Small Business (2026)",
+      "targetKeyword": "best ad spy tools for small business",
+      "intent": "head-term",
+      "angle": "Small-business angle — pricing + ease."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-startups",
+      "title": "Best Ad Spy Tools For Startups (2026)",
+      "targetKeyword": "best ad spy tools for startups",
+      "intent": "head-term",
+      "angle": "Startup growth angle — lean budgets, multi-platform."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-for-scaling-campaigns",
+      "title": "Best Ad Spy Tools For Scaling Campaigns (2026)",
+      "targetKeyword": "best ad spy tools for scaling campaigns",
+      "intent": "head-term",
+      "angle": "Scaling winning campaigns — depth + freshness matter most."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-replacement-for-facebook-ad-library",
+      "title": "Best Ad Spy Tools Replacement For Facebook Ad Library (2026)",
+      "targetKeyword": "best ad spy tools replacement for facebook ad library",
+      "intent": "alternatives",
+      "angle": "FB Ad Library is free but limited. Paid alternatives add network tagging, LP archives."
+    },
+    {
+      "type": "listicle",
+      "slug": "best-ad-spy-tools-alternative-to-adspy",
+      "title": "Best Ad Spy Tools Alternative To Adspy (2026)",
+      "targetKeyword": "best ad spy tools alternative to adspy",
+      "intent": "alternatives",
+      "angle": "AdSpy alternatives — overlap with existing adspy-alternatives listicle but different framing."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-spy-on-tiktok-ads",
+      "title": "How To Spy On TikTok Ads",
+      "description": "Step-by-step TikTok ad research. PiPiADS is the specialist.",
+      "angle": "Step-by-step TikTok ad research. PiPiADS is the specialist. Include the free TikTok Creative Center as the $0 starting point."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-reverse-engineer-a-competitor-funnel",
+      "title": "How To Reverse Engineer A Competitor Funnel",
+      "description": "A complete workflow to take a competitor ad → landing page → offer → post-conversion experience. AdRecon Landing Page Ripper is the central tool.",
+      "angle": "A complete workflow to take a competitor ad → landing page → offer → post-conversion experience. AdRecon Landing Page Ripper is the central tool."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-find-winning-angles-on-clickbank",
+      "title": "How To Find Winning Angles On ClickBank",
+      "description": "Angle discovery on ClickBank — what separates a $50K/mo affiliate's angle from a beginner's. Pattern analysis across Proven Creatives.",
+      "angle": "Angle discovery on ClickBank — what separates a $50K/mo affiliate's angle from a beginner's. Pattern analysis across Proven Creatives."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-research-affiliate-offers-before-launching",
+      "title": "How To Research Affiliate Offers Before Launching",
+      "description": "Pre-launch offer research — how to know if an offer is worth testing. Signals: days running, creative volume, LP sophistication, network reputation.",
+      "angle": "Pre-launch offer research — how to know if an offer is worth testing. Signals: days running, creative volume, LP sophistication, network reputation."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-build-a-facebook-ad-swipe-file",
+      "title": "How To Build A Facebook Ad Swipe File",
+      "description": "Swipe-file construction — folder structure, tagging, notes. Foreplay's strength.",
+      "angle": "Swipe-file construction — folder structure, tagging, notes. Foreplay's strength."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-spot-winning-meta-creatives-in-2026",
+      "title": "How To Spot Winning Meta Creatives In 2026",
+      "description": "What a 2026 winner looks like — format, pacing, hook, price anchor. Concrete heuristics.",
+      "angle": "What a 2026 winner looks like — format, pacing, hook, price anchor. Concrete heuristics."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-find-profitable-affiliate-niches",
+      "title": "How To Find Profitable Affiliate Niches",
+      "description": "Niche discovery from ad-spy data. Signal: multi-advertiser offer aggregation in AdRecon's Winning Offers Directory.",
+      "angle": "Niche discovery from ad-spy data. Signal: multi-advertiser offer aggregation in AdRecon's Winning Offers Directory."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-use-facebook-ad-library-for-free-research",
+      "title": "How To Use Facebook Ad Library For Free Research",
+      "description": "Tactical guide to the free Meta Ad Library — filters, search, exports, limits. When free is enough.",
+      "angle": "Tactical guide to the free Meta Ad Library — filters, search, exports, limits. When free is enough."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-track-competitor-ad-spend-estimates",
+      "title": "How To Track Competitor Ad Spend Estimates",
+      "description": "Estimating competitor spend from public data. Caveats: none of the tools publish real spend.",
+      "angle": "Estimating competitor spend from public data. Caveats: none of the tools publish real spend."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-find-winning-landing-pages",
+      "title": "How To Find Winning Landing Pages",
+      "description": "LP discovery workflow — from winning ad → LP → teardown. AdRecon LP Ripper + Wayback fallback.",
+      "angle": "LP discovery workflow — from winning ad → LP → teardown. AdRecon LP Ripper + Wayback fallback."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-research-warriorplus-offers",
+      "title": "How To Research Warriorplus Offers",
+      "description": "WarriorPlus offer research — BizOpp-heavy niche. AdRecon's WP classifier.",
+      "angle": "WarriorPlus offer research — BizOpp-heavy niche. AdRecon's WP classifier."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-research-maxweb-offers",
+      "title": "How To Research Maxweb Offers",
+      "description": "MaxWeb offer research — newer CPA network. AdRecon MaxWeb classifier.",
+      "angle": "MaxWeb offer research — newer CPA network. AdRecon MaxWeb classifier."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-build-a-meta-ad-research-workflow",
+      "title": "How To Build A Meta Ad Research Workflow",
+      "description": "An end-to-end weekly workflow for Meta affiliate research. Time allocation + deliverables.",
+      "angle": "An end-to-end weekly workflow for Meta affiliate research. Time allocation + deliverables."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-scale-a-winning-affiliate-creative",
+      "title": "How To Scale A Winning Affiliate Creative",
+      "description": "From winning ad to scaled campaign — creative iteration, hook variations, audience refresh..",
+      "angle": "From winning ad to scaled campaign — creative iteration, hook variations, audience refresh."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-pick-an-affiliate-network",
+      "title": "How To Pick An Affiliate Network",
+      "description": "Network-selection framework — CR, EPC, policies, offer mix. How ad spy tools help.",
+      "angle": "Network-selection framework — CR, EPC, policies, offer mix. How ad spy tools help."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-analyze-a-meta-ad-library-listing",
+      "title": "How To Analyze A Meta Ad Library Listing",
+      "description": "Reading a Meta Ad Library entry like a pro — fields, signals, what's missing..",
+      "angle": "Reading a Meta Ad Library entry like a pro — fields, signals, what's missing."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-identify-creative-fatigue-in-meta",
+      "title": "How To Identify Creative Fatigue In Meta",
+      "description": "Creative fatigue detection — frequency, CTR decay, spend shifts. Signals in ad-spy data.",
+      "angle": "Creative fatigue detection — frequency, CTR decay, spend shifts. Signals in ad-spy data."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-use-cross-advertiser-grouping-for-creative-ideas",
+      "title": "How To Use Cross Advertiser Grouping For Creative Ideas",
+      "description": "Cross-advertiser grouping — AdRecon's Proven Creatives — and how it feeds ideation..",
+      "angle": "Cross-advertiser grouping — AdRecon's Proven Creatives — and how it feeds ideation."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-research-tiktok-creators-before-partnerships",
+      "title": "How To Research TikTok Creators Before Partnerships",
+      "description": "Creator research + ad spy. Minea's influencer side.",
+      "angle": "Creator research + ad spy. Minea's influencer side."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-find-viral-tiktok-product-ads",
+      "title": "How To Find Viral TikTok Product Ads",
+      "description": "Product-ad discovery on TikTok. Minea + PiPiADS.",
+      "angle": "Product-ad discovery on TikTok. Minea + PiPiADS."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-build-a-client-ready-ad-report",
+      "title": "How To Build A Client Ready Ad Report",
+      "description": "Agency deliverable — ad report for clients. Foreplay strength.",
+      "angle": "Agency deliverable — ad report for clients. Foreplay strength."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-structure-a-creative-brief-from-ad-spy-data",
+      "title": "How To Structure A Creative Brief From Ad Spy Data",
+      "description": "Brief-writing workflow grounded in ad-spy evidence. Foreplay brief builder.",
+      "angle": "Brief-writing workflow grounded in ad-spy evidence. Foreplay brief builder."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-spy-on-shopify-store-ads",
+      "title": "How To Spy On Shopify Store Ads",
+      "description": "Shopify DTC ad research. Minea product-first workflow.",
+      "angle": "Shopify DTC ad research. Minea product-first workflow."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-monitor-your-competitors-weekly",
+      "title": "How To Monitor Your Competitors Weekly",
+      "description": "A weekly competitor monitoring cadence. Tool setup + saved filters + email digests.",
+      "angle": "A weekly competitor monitoring cadence. Tool setup + saved filters + email digests."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-run-a-meta-compliance-pre-check",
+      "title": "How To Run A Meta Compliance Pre Check",
+      "description": "Pre-launch compliance check using ad-spy data. Banned angles, rejected creatives.",
+      "angle": "Pre-launch compliance check using ad-spy data. Banned angles, rejected creatives."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-use-days-running-as-a-profitability-signal",
+      "title": "How To Use Days Running As A Profitability Signal",
+      "description": "Days-running as a signal — the 120-day heuristic, false positives, seasonal effects..",
+      "angle": "Days-running as a signal — the 120-day heuristic, false positives, seasonal effects."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-find-winning-hooks-from-ad-spy",
+      "title": "How To Find Winning Hooks From Ad Spy",
+      "description": "Hook-mining workflow. Pattern recognition across winners.",
+      "angle": "Hook-mining workflow. Pattern recognition across winners."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-diversify-from-meta-to-other-platforms",
+      "title": "How To Diversify From Meta To Other Platforms",
+      "description": "Diversification playbook — Meta → TikTok/Native/Google. Tool-by-platform mapping.",
+      "angle": "Diversification playbook — Meta → TikTok/Native/Google. Tool-by-platform mapping."
+    },
+    {
+      "type": "guide",
+      "slug": "how-to-avoid-common-ad-spy-mistakes",
+      "title": "How To Avoid Common Ad Spy Mistakes",
+      "description": "Top 10 mistakes operators make with ad spy data — false winners, outdated captures, geo bias..",
+      "angle": "Top 10 mistakes operators make with ad spy data — false winners, outdated captures, geo bias."
+    },
+    {
+      "type": "guide",
+      "slug": "affiliate-marketers-research-stack-2026",
+      "title": "Affiliate Marketers Research Stack 2026",
+      "description": "The complete 2026 research stack — ad spy + LP capture + tracking + network dashboards. AdRecon as the central Meta piece.",
+      "angle": "The complete 2026 research stack — ad spy + LP capture + tracking + network dashboards. AdRecon as the central Meta piece."
+    },
+    {
+      "type": "intent",
+      "slug": "facebook-ad-library-alternatives",
+      "intentKind": "alternatives",
+      "competitorSlug": null,
+      "title": "Facebook Ad Library Alternatives: 7 Paid Tools That Do More",
+      "description": "Paid alternatives to the free Meta Ad Library, with honest pros/cons and pricing math. AdRecon disclosed.",
+      "angle": "Paid alternatives to the free Meta Ad Library, with honest pros/cons and pricing math. AdRecon disclosed."
+    },
+    {
+      "type": "intent",
+      "slug": "adspy-vs-bigspy-which-should-i-buy",
+      "intentKind": "alternatives",
+      "competitorSlug": "adspy",
+      "title": "AdSpy vs BigSpy: Which Should You Actually Buy in 2026?",
+      "description": "Direct AdSpy vs BigSpy decision guide — pricing, features, workflow fit.",
+      "angle": "Direct AdSpy vs BigSpy decision guide — pricing, features, workflow fit."
+    },
+    {
+      "type": "intent",
+      "slug": "is-adrecon-worth-it",
+      "intentKind": "worth-it",
+      "competitorSlug": "adrecon",
+      "title": "Is AdRecon Worth $299? An Honest Buyer Decision Framework",
+      "description": "From the AdRecon team directly: when $299 lifetime is worth it, and when it genuinely is not. Meta-only scope, no AI features, newer tool caveats acknowledged.",
+      "angle": "From the AdRecon team directly: when $299 lifetime is worth it, and when it genuinely is not. Meta-only scope, no AI features, newer tool caveats acknowledged."
+    },
+    {
+      "type": "intent",
+      "slug": "cheap-adspy-alternatives",
+      "intentKind": "alternatives",
+      "competitorSlug": "adspy",
+      "title": "Cheap AdSpy Alternatives: 6 Tools Under $100/Month (2026)",
+      "description": "Budget alternatives to AdSpy — BigSpy, AdRecon lifetime, Foreplay Inspiration tier.",
+      "angle": "Budget alternatives to AdSpy — BigSpy, AdRecon lifetime, Foreplay Inspiration tier."
+    },
+    {
+      "type": "intent",
+      "slug": "free-ad-spy-tools-that-actually-work",
+      "intentKind": "alternatives",
+      "competitorSlug": null,
+      "title": "Free Ad Spy Tools That Actually Work: The Honest List (2026)",
+      "description": "What works at $0 — BigSpy free, Meta Ad Library, TikTok Creative Center. And when free stops being enough.",
+      "angle": "What works at $0 — BigSpy free, Meta Ad Library, TikTok Creative Center. And when free stops being enough."
+    },
+    {
+      "type": "intent",
+      "slug": "adrecon-vs-facebook-ad-library",
+      "intentKind": "alternatives",
+      "competitorSlug": "adrecon",
+      "title": "AdRecon vs Facebook Ad Library: When Free Is Enough",
+      "description": "Honest comparison: the free Meta Ad Library vs AdRecon. Disclosure-first, since we operate AdRecon.",
+      "angle": "Honest comparison: the free Meta Ad Library vs AdRecon. Disclosure-first, since we operate AdRecon."
+    },
+    {
+      "type": "intent",
+      "slug": "pipiads-vs-minea-for-tiktok",
+      "intentKind": "alternatives",
+      "competitorSlug": "pipiads",
+      "title": "PiPiADS vs Minea for TikTok Ad Research (2026)",
+      "description": "PiPiADS is TikTok-specialist; Minea is TikTok + e-commerce. Which one fits which workflow.",
+      "angle": "PiPiADS is TikTok-specialist; Minea is TikTok + e-commerce. Which one fits which workflow."
+    },
+    {
+      "type": "intent",
+      "slug": "foreplay-vs-adspy-for-agencies",
+      "intentKind": "alternatives",
+      "competitorSlug": "foreplay",
+      "title": "Foreplay vs AdSpy for Agencies: Which Actually Fits an Agency Workflow?",
+      "description": "Agency-first comparison. Foreplay briefs + swipe files vs AdSpy raw search.",
+      "angle": "Agency-first comparison. Foreplay briefs + swipe files vs AdSpy raw search."
+    },
+    {
+      "type": "intent",
+      "slug": "bigspy-vs-adrecon-for-starters",
+      "intentKind": "alternatives",
+      "competitorSlug": "bigspy",
+      "title": "BigSpy vs AdRecon for New Affiliates: Free Start vs Lifetime Buy",
+      "description": "The first-tool decision. BigSpy free tier vs AdRecon $299 lifetime.",
+      "angle": "The first-tool decision. BigSpy free tier vs AdRecon $299 lifetime."
+    },
+    {
+      "type": "intent",
+      "slug": "minea-vs-pipiads-for-dropshipping",
+      "intentKind": "alternatives",
+      "competitorSlug": "minea",
+      "title": "Minea vs PiPiADS for Dropshipping: Which Wins in 2026?",
+      "description": "Dropshipping-specific comparison. Minea is product-first; PiPiADS is TikTok-first.",
+      "angle": "Dropshipping-specific comparison. Minea is product-first; PiPiADS is TikTok-first."
+    }
+  ]
+}

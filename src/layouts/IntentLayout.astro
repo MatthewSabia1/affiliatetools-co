@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Hero from "@/components/Hero.astro";
 import AuthorshipBox from "@/components/AuthorshipBox.astro";
+import CTA from "@/components/CTA.astro";
 import { routes, absoluteUrl } from "@/lib/constants";
 import {
   breadcrumbList,
@@ -21,6 +22,7 @@ export interface Props {
   publishDate: string;
   updatedDate: string;
   faq?: Array<{ q: string; a: string }>;
+  slug?: string;
 }
 
 const {
@@ -28,9 +30,11 @@ const {
   description,
   canonical,
   intentKind,
+  competitorSlug,
   publishDate,
   updatedDate,
   faq,
+  slug,
 } = Astro.props;
 
 const crumbItems = [
@@ -44,6 +48,13 @@ const eyebrowLabel: Record<Props["intentKind"], string> = {
   pricing: "Pricing breakdown",
   "free-trial": "Free-trial guide",
   alternatives: "Alternatives",
+};
+
+const ctaKickerByIntent: Record<Props["intentKind"], string> = {
+  "worth-it": "Weighing whether to buy?",
+  pricing: "Looking for better pricing?",
+  "free-trial": "Want more than a trial tier?",
+  alternatives: "Serious about Meta affiliate research?",
 };
 
 const pageUrl = absoluteUrl(canonical);
@@ -67,6 +78,8 @@ const jsonLd: JsonLd[] = [
 if (faq && faq.length > 0) {
   jsonLd.push(faqPage(faq));
 }
+
+const campaignSlug = slug ?? competitorSlug ?? "intent";
 ---
 
 <BaseLayout
@@ -94,9 +107,16 @@ if (faq && faq.length > 0) {
     </div>
   </article>
 
+  <CTA
+    variant="footer"
+    medium="intent"
+    campaign={`intent-${campaignSlug}`}
+    kicker={ctaKickerByIntent[intentKind]}
+  />
+
   <style>
     .intent-article {
-      padding-block: 2.5rem 4rem;
+      padding-block: 2.5rem 3rem;
     }
   </style>
 </BaseLayout>

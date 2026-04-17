@@ -1,10 +1,8 @@
 ---
 /**
- * Nav — clean SaaS top bar. Light theme, minimal chrome, one wordmark, one CTA.
+ * Nav — clean SaaS top bar. Light theme, minimal chrome.
  */
-import { buildAdreconCta, routes, SITE_URL } from '@/lib/constants';
-
-const ctaHref = buildAdreconCta({ medium: 'home', campaign: 'nav' });
+import { routes, SITE_URL } from '@/lib/constants';
 
 const links = [
   { href: routes.hub(), label: 'Ad Spy Tools' },
@@ -50,8 +48,8 @@ const isActive = (href: string) =>
         <span class="site-nav__search-label">Browse tools</span>
         <span class="site-nav__search-kbd">/</span>
       </a>
-      <a class="btn btn-primary btn-sm" href={ctaHref} rel="noopener">
-        Try AdRecon
+      <a class="btn btn-secondary btn-sm" href={routes.listicle('best-ad-spy-tools-2026')}>
+        2026 ranking →
       </a>
     </div>
 
@@ -69,8 +67,8 @@ const isActive = (href: string) =>
             <a href={l.href} class="site-nav__drawer-link">{l.label}</a>
           ))
         }
-        <a class="btn btn-primary site-nav__drawer-cta" href={ctaHref} rel="noopener">
-          Try AdRecon →
+        <a class="btn btn-secondary site-nav__drawer-cta" href={routes.listicle('best-ad-spy-tools-2026')}>
+          See the 2026 ranking →
         </a>
       </div>
     </details>

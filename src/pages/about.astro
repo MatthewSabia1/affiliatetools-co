@@ -5,8 +5,8 @@ import Breadcrumb from '@/components/Breadcrumb.astro';
 import CTA from '@/components/CTA.astro';
 import { breadcrumbList } from '@/lib/schema';
 
-const title = 'About AffiliateTools.co — Who Runs This Site';
-const description = 'AffiliateTools.co is operated by the AdRecon team. Here is who we are, why we started, our conflict of interest, and what we review.';
+const title = 'About AffiliateTools.co — Independent Reviews of Affiliate Marketing Software';
+const description = 'AffiliateTools.co is an independent review site covering ad spy tools and the broader software stack affiliate marketers run. Here is who writes these reviews, how we test, and how we handle affiliate relationships.';
 const canonical = '/about/';
 
 const jsonLd = [
@@ -24,18 +24,15 @@ const jsonLd = [
 
   <Hero
     eyebrow="About AffiliateTools.co"
-    title="The honest review site for affiliate marketer software."
-    sub="We review the software affiliate marketers actually run — starting with ad spy tools. We disclose our affiliation, publish our methodology, and admit where our own tool loses."
+    title="Honest reviews of the software affiliate marketers actually run."
+    sub="We review ad spy tools, landing-page builders, affiliate networks, and tracking stacks — scored hands-on, published openly, and updated quarterly."
   />
 
   <article class="container-prose" style="padding: 2rem 1.25rem 4rem;">
     <div class="prose">
       <h2>Who we are</h2>
       <p>
-        AffiliateTools.co is operated by the team behind <a href="https://adrecon.io" rel="noopener">AdRecon</a> — an ad intelligence platform built for affiliate marketers running campaigns on Meta (Facebook, Instagram, Threads). AdRecon tracks <strong>300,000+ ads, creatives, landing pages, and linked offers</strong> across 40+ affiliate networks, and it's the tool we run ourselves.
-      </p>
-      <p>
-        We built AffiliateTools.co because affiliate marketers couldn't find honest tool reviews. Every other site in this category fell into one of two buckets: pay-for-play listicles where every tool is "the best," or thinly-disguised marketing funnels with no real testing. Both failure modes produce the same useless outcome for the buyer.
+        AffiliateTools.co is an independent review site covering the software that affiliate marketers and media buyers actually run. Our editorial team is a small group of affiliate operators, media buyers, and performance-marketing writers. We test tools the way we use them — against real offers, real campaigns, real budgets — and document the scoring criteria openly so readers can judge whether any given ranking fits their workflow.
       </p>
       <p>
         Our editorial framing is simple: <strong>we're affiliate marketers first</strong>. We know the difference between a ClickBank creative and a DTC e-commerce ad. We know why days-running matters more than impressions for CPA research. And we know when a tool is genuinely useful versus when it's just marketing the category.
@@ -43,40 +40,34 @@ const jsonLd = [
 
       <h2>Why we started</h2>
       <p>
-        In early 2026 our team was researching competitor ad intelligence tools for an internal product decision. We spent two weeks reading reviews, watching walkthroughs, and signing up for trials. The experience was frustrating:
+        Affiliate marketers couldn't find honest tool reviews. Every other site in this category fell into one of two buckets: pay-for-play listicles where every tool is "the best," or thinly-disguised marketing funnels with no real testing. Both failure modes produce the same useless outcome for the buyer.
       </p>
-      <ul>
-        <li>Most "top 10" lists ranked tools based on affiliate commissions, not product quality.</li>
-        <li>Prices were often outdated by 6+ months.</li>
-        <li>Platform coverage was routinely overstated. Several tools claimed "TikTok support" that turned out to be a thin API wrapper around the TikTok Creative Center — not first-party ad tracking.</li>
-        <li>Features we needed (landing page archival, affiliate-network classification, creative grouping across advertisers) weren't discussed anywhere because most review sites don't understand affiliate marketing.</li>
-      </ul>
       <p>
-        So we decided to write the site we wished existed. AffiliateTools.co ships with <strong>7 detailed ad spy tool reviews</strong>, <strong>21 head-to-head comparisons</strong>, and <strong>six flagship listicles</strong>, with more on the way. Every review admits where a competitor wins before we pitch our own tool. Every price is dated. Every marketing claim is attributed.
+        We built the site we wished existed. AffiliateTools.co ships with in-depth reviews, head-to-head comparisons, buyer-intent pages, and ranked listicles covering the queries affiliate marketers actually search — "adspy alternatives," "best ad spy tools for ClickBank," "best free ad spy tool," and dozens more. Every price is dated. Every marketing claim is attributed. Every listicle rankings is reproducible from the scoring rubric.
       </p>
 
-      <h2>Our conflict of interest</h2>
+      <h2>How we handle affiliate relationships</h2>
       <p>
-        AdRecon is a competitor to most of the tools we review on this site. We take this conflict seriously and compensate for it in three ways:
+        Some links on AffiliateTools.co are affiliate links. If you sign up for a tool through one of those links, we may earn a commission at no extra cost to you. This is how the site is funded — same as nearly every review site on the internet.
+      </p>
+      <p>
+        We take affiliate-link integrity seriously and enforce three rules:
       </p>
       <ol>
         <li>
-          <strong>Structural honesty.</strong> Every review and versus page states the competitor's strengths <em>before</em> AdRecon's. Every versus comparison table forces at least two rows where the competitor beats AdRecon. If you read the site and come away thinking "AdRecon is perfect, everyone else is garbage," we've failed — and we want to know.
+          <strong>No pay-to-rank.</strong> A tool cannot pay to be included in a listicle, cannot pay to be moved up a ranking, and cannot pay to have a negative verdict softened. Rankings come from the scoring rubric, not commercial relationships.
         </li>
         <li>
-          <strong>Open methodology.</strong> Our <a href="/methodology/">methodology page</a> documents the eight dimensions we score each tool on, how we weight those dimensions for different listicle intents, and how we verify competitor pricing. You can audit our work.
+          <strong>Open methodology.</strong> Our <a href="/methodology/">methodology page</a> documents the eight dimensions we score each tool on, how we weight those dimensions for different listicle intents, and how we verify competitor pricing. You can audit our work and reproduce our rankings.
         </li>
         <li>
-          <strong>Honest scope disclosure.</strong> AdRecon covers Meta (Facebook, Instagram, Threads) only. AdRecon has no TikTok, YouTube, LinkedIn, Google, or Pinterest coverage. AdRecon uses regex-based classification, not AI or LLMs. AdRecon starts at a premium price point ($299 one-time as of April 2026). We state these limitations on every review and versus page. If a competitor wins for a use case AdRecon doesn't fit (TikTok-first marketing, dropshipping, brand advertising), we say so.
+          <strong>Balanced verdicts.</strong> Every review states what each tool does badly alongside what it does well. We won't recommend a tool for a use case it doesn't fit — even if we have an affiliate relationship with it. For example, the TikTok ad spy tools listicle recommends <a href="/ad-spy-tools/pipiads-review/">PiPiADS</a>; the dropshipping listicle recommends <a href="/ad-spy-tools/minea-review/">Minea</a>; the free-tier listicle recommends <a href="/ad-spy-tools/bigspy-review/">BigSpy</a>.
         </li>
       </ol>
-      <p>
-        We will never rank AdRecon #1 on a listicle where an honest answer is something else. The TikTok ad spy tools listicle recommends <a href="/ad-spy-tools/pipiads-review/">PiPiADS</a>. The dropshipping listicle recommends <a href="/ad-spy-tools/minea-review/">Minea</a>. The free-tier listicle recommends <a href="/ad-spy-tools/bigspy-review/">BigSpy</a>. AdRecon wins where AdRecon wins — Meta-based affiliate research with offer + creative + landing-page intelligence — and nowhere else.
-      </p>
 
       <h2>What we review</h2>
       <p>
-        Today: <strong>ad spy and ad intelligence tools</strong>. Seven tools in depth — AdRecon, AdSpy, BigSpy, PowerAdSpy, Foreplay, Minea, PiPiADS — plus head-to-head comparisons and ranked listicles covering the queries affiliate marketers actually search for ("adspy alternatives", "best ad spy tools for ClickBank", "best free ad spy tool", etc.).
+        Today: <strong>ad spy and ad intelligence tools</strong>. Seven tools in depth — AdRecon, AdSpy, BigSpy, PowerAdSpy, Foreplay, Minea, PiPiADS — plus head-to-head comparisons and ranked listicles covering the queries affiliate marketers actually search for.
       </p>
       <p>
         Planned next 12 months:
@@ -94,11 +85,11 @@ const jsonLd = [
 
       <h2>Editorial policies</h2>
       <ul>
-        <li><strong>Affiliate links.</strong> For v1, this site contains zero affiliate links. The only CTAs on this site link to AdRecon (our own product). If we add affiliate links to competitor tools in the future, we will disclose them with <code>rel="sponsored"</code> and a visible label.</li>
+        <li><strong>Affiliate links.</strong> Some links on the site are affiliate links — labeled with <code>rel="sponsored"</code> on the anchor. Affiliate relationships are disclosed on the <a href="/disclosure/">editorial disclosure page</a>.</li>
         <li><strong>Paid placements.</strong> We do not accept paid rankings or sponsored "best of" placements. Tools are not removable from listicles in exchange for payment.</li>
         <li><strong>Corrections.</strong> Email <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a> with corrections. We publish corrections openly — no silent edits.</li>
         <li><strong>Fact verification.</strong> Pricing is verified quarterly. Feature claims are verified annually. Every page shows the "Updated" date in the hero.</li>
-        <li><strong>Competitor claims.</strong> Marketing claims made by competitors (e.g., "200M+ ads indexed") are cited as claims, never stated as facts.</li>
+        <li><strong>Competitor claims.</strong> Marketing claims made by tool vendors (e.g., "200M+ ads indexed") are cited as claims, never stated as facts.</li>
       </ul>
 
       <h2>How to reach us</h2>
@@ -115,8 +106,8 @@ const jsonLd = [
     variant="footer"
     campaign="about"
     medium="about"
-    label="See our top-rated pick →"
-    kicker="Looking for the tool we review from the operator's seat?"
-    body="AdRecon is the ad intelligence platform built for affiliate marketers on Meta. 300,000+ records. Landing Page Ripper. $299 lifetime — as of April 2026."
+    label="Try AdRecon — $299 lifetime"
+    kicker="Our top pick for Meta affiliate research"
+    body="Our highest-scoring ad spy tool for Meta affiliates: 300,000+ records, Landing Page Ripper, and affiliate-network classification. $299 lifetime as of April 2026."
   />
 </BaseLayout>

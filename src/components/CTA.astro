@@ -1,6 +1,478 @@
 ---
 /**
- * Promotional AdRecon CTA blocks intentionally suppressed so the site stays
- * editorial-first and lets the content do the convincing.
+ * Affiliate recommendation block for AdRecon.
+ *
+ * Rendered as a standard editor's-pick affiliate call-to-action — the kind
+ * every directory site uses to surface a paid partner. Framing is neutral:
+ * "Editor's pick" / "Affiliate partner", never "our tool" or "the operator."
+ *
+ * Variants:
+ *   - `mid`    — inset inline card inside long-form content
+ *   - `footer` — full-width closer at the end of a page
+ *   - `inline` — compact one-line variant for sidebars
  */
+import { buildAdreconCta, ADRECON_SCALE_SHORT, DATA_AS_OF } from '@/lib/constants';
+
+interface Props {
+  variant?: 'mid' | 'footer' | 'inline';
+  campaign: string;
+  medium: 'review' | 'versus' | 'listicle' | 'guide' | 'intent' | 'hub' | 'home' | 'about' | 'methodology' | 'footer';
+  content?: string;
+  kicker?: string;
+  body?: string;
+  label?: string;
+}
+
+const {
+  variant = 'mid',
+  campaign,
+  medium,
+  content,
+  kicker,
+  body,
+  label = 'Try AdRecon — $299 lifetime',
+} = Astro.props;
+
+const href = buildAdreconCta({
+  medium: medium === 'footer' ? 'footer' : medium as any,
+  campaign,
+  content,
+});
+
+const defaultKicker =
+  medium === 'guide'
+    ? 'Doing Meta affiliate research?'
+    : medium === 'intent'
+      ? 'Our affiliate-focused editor\'s pick'
+      : 'Our pick for Meta affiliates';
+
+const defaultBody =
+  `AdRecon — ${ADRECON_SCALE_SHORT} across Meta, ` +
+  `affiliate-network classification (ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus), ` +
+  `and a built-in Landing Page Ripper. One-time $299 lifetime as of ${DATA_AS_OF}.`;
+
+const resolvedKicker = kicker || defaultKicker;
+const resolvedBody = body || defaultBody;
 ---
+
+{variant === 'inline' && (
+  <aside class="cta-inline" aria-label="Editor's pick">
+    <span class="cta-inline__mark" aria-hidden="true">◆</span>
+    <div class="cta-inline__copy">
+      <p class="cta-inline__kick">{resolvedKicker}</p>
+      <p class="cta-inline__body">{resolvedBody}</p>
+    </div>
+    <a class="cta-inline__btn" href={href} rel="nofollow sponsored noopener">
+      {label}
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8m0 0L7 3m4 4l-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </aside>
+)}
+
+{variant === 'mid' && (
+  <aside class="cta-mid" aria-label="Editor's pick">
+    <span class="cta-mid__label">
+      <span class="cta-mid__dot" aria-hidden="true"></span>
+      Editor's pick · Affiliate partner
+    </span>
+    <p class="cta-mid__kicker">{resolvedKicker}</p>
+    <p class="cta-mid__body">{resolvedBody}</p>
+    <div class="cta-mid__actions">
+      <a class="cta-mid__btn" href={href} rel="nofollow sponsored noopener">
+        {label}
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8m0 0L7 3m4 4l-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="cta-mid__link" href="/methodology/">How we scored this</a>
+    </div>
+  </aside>
+)}
+
+{variant === 'footer' && (
+  <section class="cta-footer" aria-label="Editor's pick">
+    <div class="container-wide cta-footer__inner">
+      <div class="cta-footer__head">
+        <span class="cta-footer__eyebrow">
+          <span class="cta-footer__dot" aria-hidden="true"></span>
+          Editor's pick · Affiliate partner
+        </span>
+        <span class="cta-footer__meta">Lifetime · Meta-only · As of {DATA_AS_OF}</span>
+      </div>
+      <div class="cta-footer__body">
+        <div class="cta-footer__copy">
+          <h2 class="cta-footer__title">
+            {resolvedKicker}
+            <em class="cta-footer__em"> AdRecon is our top pick for Meta affiliates.</em>
+          </h2>
+          <p class="cta-footer__sub">{resolvedBody}</p>
+          <ul class="cta-footer__bullets">
+            <li><strong>300,000+ records</strong> — ads, creatives, landing pages, and offers across Facebook, Instagram, Threads.</li>
+            <li><strong>Landing Page Ripper</strong> — full HTML/CSS/asset ZIP archives, unique to AdRecon.</li>
+            <li><strong>Network classification</strong> — ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus, auto-tagged.</li>
+            <li><strong>$299 one-time</strong> — lifetime access, not a subscription.</li>
+          </ul>
+        </div>
+        <div class="cta-footer__actions">
+          <a class="cta-footer__btn" href={href} rel="nofollow sponsored noopener">
+            {label}
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8m0 0L7 3m4 4l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="cta-footer__secondary" href="/ad-spy-tools/adrecon-review/">
+            Read the full AdRecon review first →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  /* ---------- INLINE (sidebar / tight slots) ---------- */
+  .cta-inline {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.85rem;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-line);
+    border-left: 3px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+    margin: 1.25rem 0;
+  }
+  .cta-inline__mark {
+    color: var(--color-accent);
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .cta-inline__copy { min-width: 0; }
+  .cta-inline__kick {
+    margin: 0 0 0.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-type-mute);
+    font-weight: 600;
+  }
+  .cta-inline__body {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--color-type-dim);
+    line-height: 1.45;
+  }
+  .cta-inline__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.85rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .15s ease;
+  }
+  .cta-inline__btn:hover { background: var(--color-accent-hover); color: #fff; text-decoration: none; }
+  @media (max-width: 620px) {
+    .cta-inline { grid-template-columns: auto 1fr; }
+    .cta-inline__btn { grid-column: 1 / -1; justify-self: start; }
+  }
+
+  /* ---------- MID (inset in long-form content) ---------- */
+  .cta-mid {
+    margin: 2.25rem 0;
+    padding: 1.5rem 1.75rem 1.4rem;
+    background: linear-gradient(180deg, var(--color-canvas-tint) 0%, var(--color-canvas) 100%);
+    border: 1px solid var(--color-line);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xs);
+    position: relative;
+  }
+  .cta-mid__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 650;
+    color: var(--color-accent);
+    margin: 0 0 0.85rem;
+  }
+  .cta-mid__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    display: inline-block;
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+  }
+  .cta-mid__kicker {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-type);
+  }
+  .cta-mid__body {
+    margin: 0 0 1.1rem;
+    font-size: 0.96rem;
+    color: var(--color-type-dim);
+    line-height: 1.55;
+    max-width: 54ch;
+  }
+  .cta-mid__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1.2rem;
+    align-items: center;
+  }
+  .cta-mid__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.65rem 1.1rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.92rem;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background .15s ease, transform .15s ease, box-shadow .15s ease;
+    box-shadow: 0 2px 6px -2px rgba(14, 44, 95, 0.35);
+  }
+  .cta-mid__btn:hover {
+    background: var(--color-accent-hover);
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px -2px rgba(14, 44, 95, 0.45);
+  }
+  .cta-mid__link {
+    font-size: 0.85rem;
+    font-weight: 550;
+    color: var(--color-type-dim);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-line-2);
+    padding-bottom: 1px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .cta-mid__link:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+    text-decoration: none;
+  }
+  .cta-mid__disclosure {
+    margin: 1.15rem 0 0;
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--color-line-2);
+    font-size: 0.74rem;
+    color: var(--color-type-mute);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  /* ---------- FOOTER (end-of-page closer) ---------- */
+  .cta-footer {
+    margin-top: 4rem;
+    padding: 3rem 0 3rem;
+    background:
+      radial-gradient(ellipse 70% 60% at 15% 0%, rgba(14, 44, 95, 0.08), transparent 70%),
+      linear-gradient(180deg, #f7f8fa 0%, var(--color-canvas) 100%);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(14, 44, 95, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(14, 44, 95, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 100% 0%, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 100% 0%, black 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-footer__inner {
+    position: relative;
+    padding-inline: 1.5rem;
+  }
+  .cta-footer__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .cta-footer__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 650;
+    color: var(--color-accent);
+  }
+  .cta-footer__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+  }
+  .cta-footer__meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-type-mute);
+    letter-spacing: 0.04em;
+  }
+  .cta-footer__body {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .cta-footer__body { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  .cta-footer__title {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.65rem, 2.6vw, 2.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.028em;
+    font-weight: 720;
+    color: var(--color-type);
+    max-width: 24ch;
+  }
+  .cta-footer__em {
+    font-style: italic;
+    font-weight: 460;
+    color: var(--color-accent);
+    display: inline;
+  }
+  .cta-footer__sub {
+    margin: 0 0 1.25rem;
+    font-size: 1.02rem;
+    color: var(--color-type-dim);
+    line-height: 1.6;
+    max-width: 52ch;
+  }
+  .cta-footer__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .cta-footer__bullets li {
+    position: relative;
+    padding: 0.3rem 0 0.3rem 1.3rem;
+    font-size: 0.94rem;
+    color: var(--color-type-dim);
+    line-height: 1.5;
+    border-bottom: 1px dashed var(--color-line);
+    margin: 0;
+  }
+  .cta-footer__bullets li:last-child { border-bottom: 0; }
+  .cta-footer__bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 8px;
+    height: 2px;
+    background: var(--color-accent);
+    transform: translateY(-50%);
+  }
+  .cta-footer__bullets strong {
+    color: var(--color-type);
+    font-weight: 650;
+  }
+  .cta-footer__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.75rem 1.5rem;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .cta-footer__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.4rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: 650;
+    font-size: 1rem;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    box-shadow: 0 4px 12px -2px rgba(14, 44, 95, 0.35);
+    transition: background .15s ease, transform .15s ease, box-shadow .15s ease;
+    width: 100%;
+    justify-content: center;
+  }
+  .cta-footer__btn:hover {
+    background: var(--color-accent-hover);
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px -2px rgba(14, 44, 95, 0.45);
+  }
+  .cta-footer__secondary {
+    font-size: 0.88rem;
+    color: var(--color-type-dim);
+    text-decoration: none;
+    font-weight: 550;
+    border-bottom: 1px solid var(--color-line-2);
+    padding-bottom: 1px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .cta-footer__secondary:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+    text-decoration: none;
+  }
+  .cta-footer__disclosure {
+    margin: 2rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px dashed var(--color-line);
+    font-size: 0.78rem;
+    color: var(--color-type-mute);
+    line-height: 1.6;
+    max-width: 72rem;
+  }
+  .cta-footer__disclosure-label {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-weight: 650;
+  }
+  .cta-footer__disclosure a {
+    color: var(--color-accent);
+    font-weight: 550;
+  }
+</style>

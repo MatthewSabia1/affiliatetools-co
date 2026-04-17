@@ -6,7 +6,7 @@ import CTA from '@/components/CTA.astro';
 import { breadcrumbList } from '@/lib/schema';
 
 const title = 'Methodology — How AffiliateTools.co Reviews & Ranks Ad Spy Tools';
-const description = 'Our full methodology: 8 scoring dimensions, how we test, how we weight listicles, how we handle conflict of interest, and how we verify pricing.';
+const description = 'Our full methodology: 8 scoring dimensions, how we test, how we weight listicles, and how we verify pricing. Reproducible rankings, dated prices, no pay-to-rank.';
 const canonical = '/methodology/';
 
 const jsonLd = [
@@ -25,14 +25,14 @@ const jsonLd = [
   <Hero
     eyebrow="Methodology"
     title="How we review and rank ad spy tools."
-    sub="Eight dimensions. Weighted per listicle intent. Pricing verified quarterly. AdRecon ownership disclosed on every page. Here's the full playbook."
+    sub="Eight dimensions. Weighted per listicle intent. Pricing verified quarterly. Affiliate relationships disclosed where present. Here's the full playbook."
   />
 
   <article class="container-prose" style="padding: 2rem 1.25rem 4rem;">
     <div class="prose">
       <h2>Our scoring framework</h2>
       <p>
-        Every ad spy tool we review gets scored on the same 8-dimension rubric. Scores are 1–10, assigned by the AdRecon team after firsthand testing. Here's what each dimension measures:
+        Every ad spy tool we review gets scored on the same 8-dimension rubric. Scores are 1–10, assigned by our editorial team after firsthand testing. Here's what each dimension measures:
       </p>
 
       <h3>1. Coverage (1–10)</h3>
@@ -57,12 +57,12 @@ const jsonLd = [
 
       <h3>5. Landing pages (1–10)</h3>
       <p>
-        Landing page research capabilities. Does the tool capture landing page URLs? Show screenshots? Archive the full HTML and assets? AdRecon scores a 10 on this dimension because of the <a href="https://adrecon.io" rel="noopener">Landing Page Ripper</a> — a downloader that captures complete LP archives. Most competitors don't capture landing pages at all, scoring 2–4.
+        Landing page research capabilities. Does the tool capture landing page URLs? Show screenshots? Archive the full HTML and assets? AdRecon scores a 10 on this dimension because of its Landing Page Ripper — a built-in downloader that captures complete LP archives. Most competitors don't capture landing pages at all, scoring 2–4.
       </p>
 
       <h3>6. Offers (1–10)</h3>
       <p>
-        Affiliate offer intelligence. Does the tool aggregate offers across all tracked ads? Show network breakdowns? Surface top offers by days-running? Most tools don't have offer intelligence as a first-class concept and score low here. AdRecon's <strong>Winning Offers Directory</strong> is the main reason it scores high on this dimension.
+        Affiliate offer intelligence. Does the tool aggregate offers across all tracked ads? Show network breakdowns? Surface top offers by days-running? Most tools don't have offer intelligence as a first-class concept and score low here. AdRecon's Winning Offers Directory is the main reason it scores high on this dimension.
       </p>
 
       <h3>7. Affiliate focus (1–10)</h3>
@@ -119,16 +119,16 @@ const jsonLd = [
         If you spot a pricing error, email <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a> with the source URL and we'll update within 72 hours.
       </p>
 
-      <h2>Conflict of interest policy</h2>
+      <h2>Affiliate relationships and pay-to-rank</h2>
       <p>
-        AdRecon operates AffiliateTools.co. AdRecon is a direct competitor to most tools reviewed here. To prevent bias from poisoning reader trust, we apply these structural rules:
+        Some tools on this site are affiliate partners — links may earn us a commission at no extra cost to you. Affiliate relationships never determine ranking position or editorial verdicts. Structural rules we apply:
       </p>
       <ul>
-        <li><strong>Every review states the competitor's strengths before stating AdRecon's.</strong> Ordering is deliberate — the brain anchors on the first claim.</li>
-        <li><strong>Every versus comparison table has at least two rows where the competitor beats AdRecon.</strong> If we can't find two, AdRecon doesn't earn the comparison.</li>
-        <li><strong>AdRecon's limitations are stated on every page.</strong> Meta-only coverage, no AI features, premium pricing, newer tool with smaller historical DB. These appear in the review body, not buried in a footer.</li>
-        <li><strong>AdRecon is not always #1.</strong> On listicles where the honest answer is something else (TikTok, dropshipping, free tier), AdRecon isn't #1. On the TikTok listicle, AdRecon isn't ranked at all — we state openly that AdRecon doesn't cover TikTok.</li>
-        <li><strong>Competitor marketing claims are never quoted as facts.</strong> "AdSpy claims 200M+ ads" — never "AdSpy has 200M+ ads." This is the cheap credibility tax that most affiliate-tool review sites don't pay.</li>
+        <li><strong>Affiliate links are disclosed.</strong> Anchors use <code>rel="sponsored"</code> so browsers and crawlers treat them correctly. Category-level disclosure is on the <a href="/disclosure/">editorial disclosure page</a>.</li>
+        <li><strong>No pay-to-rank.</strong> A tool cannot pay to be included in a listicle, cannot pay to be moved up a ranking, and cannot pay to have a negative verdict softened.</li>
+        <li><strong>No sponsored "best of" slots.</strong> Rankings come from the scoring rubric, not commercial relationships.</li>
+        <li><strong>Balanced verdicts.</strong> Every review states specific things each tool does badly. If we can't find real limitations, the tool doesn't earn the review.</li>
+        <li><strong>Competitor marketing claims are never quoted as facts.</strong> "AdSpy claims 200M+ ads" — never "AdSpy has 200M+ ads." This is the cheap credibility tax most affiliate-tool review sites don't pay.</li>
       </ul>
 
       <h2>What we don't do</h2>
@@ -137,9 +137,9 @@ const jsonLd = [
       </p>
       <ul>
         <li>We don't accept paid placements. If a tool pays to be ranked or included, we reject it.</li>
-        <li>We don't accept undisclosed affiliate links. If we add affiliate links later, they'll be disclosed with <code>rel="sponsored"</code> and a visible label.</li>
+        <li>We don't hide affiliate links. Every affiliate link uses <code>rel="sponsored"</code>.</li>
         <li>We don't fabricate user quotes or testimonials. If no real quote exists, no quote appears.</li>
-        <li>We don't fabricate star ratings. Our scorecards are AdRecon's editorial opinion, labeled as such.</li>
+        <li>We don't fabricate star ratings. Our scorecards are our editorial opinion, labeled as such.</li>
         <li>We don't publish "10x better" or "the best tool ever" superlatives. Specific claims or nothing.</li>
         <li>We don't cover tools we haven't actually used. Every review is based on hands-on testing, not marketing copy.</li>
       </ul>
@@ -154,7 +154,7 @@ const jsonLd = [
 
       <h2>Feedback welcome</h2>
       <p>
-        We're an operator team running this site as a side effort to our main work on AdRecon. If you spot something wrong, want us to cover a tool we haven't reviewed yet, or have a factual correction — email us at <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a>. We read everything.
+        If you spot something wrong, want us to cover a tool we haven't reviewed yet, or have a factual correction — email us at <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a>. We read everything.
       </p>
     </div>
   </article>
@@ -163,8 +163,8 @@ const jsonLd = [
     variant="footer"
     campaign="methodology"
     medium="methodology"
-    label="See the tool our team actually uses →"
-    kicker="Curious what AdRecon does differently?"
-    body="Built for affiliate research: Meta ad intelligence + Landing Page Ripper + Proven Creatives + Winning Offers. $299 lifetime as of April 2026."
+    label="Try AdRecon — $299 lifetime"
+    kicker="Our top pick for Meta affiliate research"
+    body="Our highest-scoring ad spy tool for Meta affiliates: 300,000+ records, Landing Page Ripper, and affiliate-network classification. $299 lifetime as of April 2026."
   />
 </BaseLayout>
