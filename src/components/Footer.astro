@@ -229,11 +229,10 @@ const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now
     max-width: 32ch;
   }
   .mast-title :global(em) {
-    font-family: var(--font-editorial);
     font-style: italic;
-    font-weight: 400;
+    font-weight: 460;
     color: var(--color-accent);
-    font-size: 1.05em;
+    letter-spacing: -0.028em;
   }
   .mast-right {
     display: flex;
@@ -259,13 +258,13 @@ const months = Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + now
     font-weight: 600;
   }
   .mast-meta__v {
-    font-family: var(--font-editorial);
-    font-style: italic;
-    font-size: 1.25rem;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.2rem;
     line-height: 1;
     color: var(--color-type);
-    letter-spacing: -0.01em;
-    font-feature-settings: "lnum";
+    letter-spacing: -0.025em;
+    font-variant-numeric: tabular-nums lining-nums;
   }
 
   /* ---- Directory columns ---- */

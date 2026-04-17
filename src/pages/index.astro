@@ -6,6 +6,7 @@ import ToolLogo from '@/components/ToolLogo.astro';
 import Rating from '@/components/Rating.astro';
 import FAQ from '@/components/FAQ.astro';
 import ScoringMethodology from '@/components/ScoringMethodology.astro';
+import WinnersGrid from '@/components/WinnersGrid.astro';
 import { getCompetitorsInDisplayOrder, overallScore } from '@/lib/competitors';
 import { routes, SITE_URL, SITE_DESCRIPTION, VERSUS_SLUGS } from '@/lib/constants';
 import { collectionPageJsonLd, breadcrumbList, faqPage } from '@/lib/schema';
@@ -164,7 +165,19 @@ const pullquote = {
     primaryCta={{ href: '/ad-spy-tools/', label: 'Browse ad spy tools' }}
     secondaryCta={{ href: '/methodology/', label: 'How we test' }}
     withStats={true}
-  />
+  >
+    <div class="hero-filters" slot="filters">
+      <span class="hero-filters__key">Filter by use case</span>
+      <div class="hero-filters__chips">
+        <a href="/ad-spy-tools/adrecon-review/" class="hero-filters__chip">Meta affiliates</a>
+        <a href="/ad-spy-tools/pipiads-review/" class="hero-filters__chip">TikTok</a>
+        <a href="/ad-spy-tools/bigspy-review/" class="hero-filters__chip">Free tier</a>
+        <a href="/ad-spy-tools/foreplay-review/" class="hero-filters__chip">Agency workflow</a>
+        <a href="/ad-spy-tools/minea-review/" class="hero-filters__chip">Dropshipping</a>
+        <a href="/ad-spy-tools/best-ad-spy-tools-for-clickbank/" class="hero-filters__chip">ClickBank</a>
+      </div>
+    </div>
+  </Hero>
 
   {/* ========== TRUST STRIP ========== */}
   <section class="trust-strip" aria-label="At-a-glance editorial facts">
@@ -396,18 +409,27 @@ const pullquote = {
     </div>
   </section>
 
-  {/* ========== EDITORIAL PULLQUOTE BAND ========== */}
-  <section class="container-wide section-block pullquote-wrap">
-    <figure class="pullquote">
-      <span class="pullquote__mark" aria-hidden="true">“</span>
-      <blockquote class="pullquote__body">
+  {/* ========== WINNERS GRID (scatter quadrant chart) ========== */}
+  <section class="container-wide section-block">
+    <WinnersGrid />
+  </section>
+
+  {/* ========== EDITORIAL NOTE BAND ========== */}
+  <section class="container-wide section-block ednote-wrap">
+    <figure class="ednote">
+      <div class="ednote__label-row">
+        <span class="ednote__label">Editor's note</span>
+        <span class="ednote__rule" aria-hidden="true"></span>
+        <span class="ednote__meta">Vol. 01 · April 2026</span>
+      </div>
+      <blockquote class="ednote__body">
         {pullquote.body}
       </blockquote>
-      <figcaption class="pullquote__cap">
-        <span class="pullquote__name">{pullquote.attribution}</span>
-        <span class="pullquote__role">{pullquote.role}</span>
+      <figcaption class="ednote__sig">
+        <span class="ednote__sig-dash" aria-hidden="true"></span>
+        <span class="ednote__sig-name">{pullquote.attribution}</span>
+        <span class="ednote__sig-role">{pullquote.role}</span>
       </figcaption>
-      <span class="pullquote__rule" aria-hidden="true"></span>
     </figure>
   </section>
 
@@ -565,6 +587,63 @@ const pullquote = {
     padding-right: 0.55rem;
     margin-right: 0.3rem;
     border-right: 1px solid var(--color-line-2);
+  }
+
+  /* ========== HERO FILTER CHIPS ========== */
+  .hero-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-top: 1.65rem;
+    padding-top: 1.45rem;
+    border-top: 1px dashed var(--color-line-2);
+    max-width: 48rem;
+  }
+  .hero-filters__key {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-type-mute);
+    font-weight: 650;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hero-filters__key::after {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 1px;
+    background: var(--color-line-2);
+  }
+  .hero-filters__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .hero-filters__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.42rem 0.85rem;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 550;
+    color: var(--color-type-dim);
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease, background .15s ease, transform .15s ease;
+  }
+  .hero-filters__chip:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: var(--color-accent-softer);
+    text-decoration: none;
+    transform: translateY(-1px);
   }
 
   /* ========== TRUST STRIP ========== */
@@ -1000,13 +1079,12 @@ const pullquote = {
     justify-content: center;
   }
   .matrix__rank-n {
-    font-family: var(--font-editorial);
-    font-size: 1.5rem;
-    font-weight: 400;
-    font-style: italic;
-    font-variant-numeric: lining-nums;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
     color: var(--color-accent);
-    letter-spacing: -0.01em;
+    letter-spacing: 0.02em;
     line-height: 1;
   }
 
@@ -1089,12 +1167,12 @@ const pullquote = {
     min-width: 0;
   }
   .matrix__dim-val {
-    font-family: var(--font-editorial);
-    font-weight: 400;
-    font-size: 1.15rem;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.05rem;
     line-height: 1;
     font-variant-numeric: lining-nums tabular-nums;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.025em;
   }
   .matrix__dim--high .matrix__dim-val { color: var(--color-success); }
   .matrix__dim--med  .matrix__dim-val { color: var(--color-warning); }
@@ -1219,75 +1297,96 @@ const pullquote = {
     .matrix__tagline { display: -webkit-box; }
   }
 
-  /* ========== EDITORIAL PULLQUOTE BAND ========== */
-  .pullquote-wrap { padding-top: 5rem; padding-bottom: 5rem; }
-  .pullquote {
-    max-width: 58rem;
+  /* ========== EDITOR'S NOTE ========== */
+  .ednote-wrap {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  .ednote {
+    max-width: 62rem;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 2.75rem 3rem 2.5rem;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-line);
+    border-left: 3px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
     position: relative;
-    text-align: left;
   }
-  .pullquote__mark {
-    display: block;
-    font-family: var(--font-editorial);
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(4rem, 9vw, 7rem);
-    color: var(--color-accent);
-    line-height: 1;
-    margin-bottom: -0.35em;
-    margin-left: -0.12em;
-    opacity: 0.85;
+  @media (max-width: 720px) {
+    .ednote { padding: 2rem 1.5rem; }
   }
-  .pullquote__body {
-    margin: 0;
-    padding: 0;
-    font-family: var(--font-editorial);
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(1.65rem, 2.6vw, 2.35rem);
-    line-height: 1.28;
-    letter-spacing: -0.015em;
-    color: var(--color-type);
-  }
-  .pullquote__cap {
+
+  .ednote__label-row {
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    margin-top: 1.75rem;
-    padding-top: 1.1rem;
-    border-top: 1px solid var(--color-line);
-    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 650;
   }
-  .pullquote__name {
+  .ednote__label { color: var(--color-accent); }
+  .ednote__rule {
+    flex: 1;
+    height: 1px;
+    background: var(--color-line);
+  }
+  .ednote__meta {
+    color: var(--color-type-mute);
+    letter-spacing: 0.14em;
+  }
+
+  .ednote__body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(1.4rem, 2.1vw, 1.85rem);
+    line-height: 1.35;
+    letter-spacing: -0.022em;
+    color: var(--color-type);
+    max-width: 52rem;
+  }
+  .ednote__body::first-line {
+    /* Subtle: lead of the note gets slight visual accent without being precious. */
+    letter-spacing: -0.024em;
+  }
+
+  .ednote__sig {
+    margin-top: 1.75rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--color-line);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.86rem;
+  }
+  .ednote__sig-dash {
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+  .ednote__sig-name {
     font-family: var(--font-sans);
     font-weight: 700;
     color: var(--color-type);
     letter-spacing: -0.01em;
   }
-  .pullquote__cap::before {
-    content: "";
-    display: inline-block;
-    width: 28px;
-    height: 2px;
-    background: var(--color-accent);
-  }
-  .pullquote__role {
+  .ednote__sig-role {
     font-family: var(--font-mono);
-    font-size: 0.76rem;
+    font-size: 0.72rem;
     color: var(--color-type-mute);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
-  .pullquote__role::before {
-    content: "";
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--color-type-subtle);
-    margin: 0 0.55rem 0.15rem 0.25rem;
-    vertical-align: middle;
+  .ednote__sig-role::before {
+    content: "·";
+    color: var(--color-type-subtle);
+    margin: 0 0.4rem 0 0.2rem;
   }
 
   /* ========== EDITORS BAND ========== */

@@ -1,0 +1,321 @@
+---
+/**
+ * WinnersGrid.astro — G2 Grid®-style scatter chart.
+ * Plots all 7 tools on 2 axes (Coverage vs Value) with quadrant tints.
+ * Pure SVG + CSS — no dependencies.
+ */
+import { getCompetitorsInDisplayOrder } from '@/lib/competitors';
+import { routes } from '@/lib/constants';
+
+const competitors = await getCompetitorsInDisplayOrder();
+
+// Plot points: x = price/value (higher = better value), y = coverage (higher = more)
+const points = competitors.map((c) => ({
+  slug: c.data.slug,
+  name: c.data.name,
+  x: c.data.scores.price,      // Value axis
+  y: c.data.scores.coverage,   // Coverage axis
+  href: routes.review(c.data.slug as any),
+  brand: c.data.brandColor ?? '#0e2c5f',
+}));
+
+// SVG coordinate space: 0..100 in each axis. Padding so labels fit.
+const CHART_W = 640;
+const CHART_H = 420;
+const PAD_L = 72;
+const PAD_R = 32;
+const PAD_T = 32;
+const PAD_B = 56;
+const INNER_W = CHART_W - PAD_L - PAD_R;
+const INNER_H = CHART_H - PAD_T - PAD_B;
+
+// Map 1..10 → pixel in plot area
+function xPx(score: number): number {
+  const clamped = Math.max(1, Math.min(10, score));
+  return PAD_L + ((clamped - 1) / 9) * INNER_W;
+}
+function yPx(score: number): number {
+  const clamped = Math.max(1, Math.min(10, score));
+  // Flip — higher score = higher on chart = lower y in SVG.
+  return PAD_T + (1 - (clamped - 1) / 9) * INNER_H;
+}
+
+// Resolve overlapping labels with a tiny repulsion pass (greedy).
+type Plotted = { slug: string; name: string; href: string; brand: string; cx: number; cy: number; lx: number; ly: number };
+const plotted: Plotted[] = points.map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  href: p.href,
+  brand: p.brand,
+  cx: xPx(p.x),
+  cy: yPx(p.y),
+  lx: xPx(p.x) + 14,
+  ly: yPx(p.y) + 4,
+}));
+
+// Gentle label repulsion so names don't stack
+for (let pass = 0; pass < 5; pass++) {
+  for (let i = 0; i < plotted.length; i++) {
+    for (let j = i + 1; j < plotted.length; j++) {
+      const dx = plotted[i].lx - plotted[j].lx;
+      const dy = plotted[i].ly - plotted[j].ly;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 26) {
+        const nudge = (26 - dist) / 2;
+        plotted[i].ly -= nudge / 2;
+        plotted[j].ly += nudge / 2;
+      }
+    }
+  }
+}
+
+// Midlines for quadrant divides (at 5.5)
+const midX = xPx(5.5);
+const midY = yPx(5.5);
+
+// Tick marks
+const ticks = [2, 4, 6, 8, 10];
+---
+
+<figure class="wgrid">
+  <figcaption class="wgrid__caption">
+    <span class="wgrid__kick">Plot · Coverage × Value</span>
+    <h3 class="wgrid__title">Where each tool lands</h3>
+    <p class="wgrid__sub">
+      All 7 ad spy tools plotted by Meta coverage depth against value-per-dollar. Use
+      this to see category at a glance; use the matrix above for numerical detail.
+    </p>
+  </figcaption>
+
+  <div class="wgrid__chart-wrap">
+    <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="wgrid__svg" aria-label="Tool positioning scatter plot">
+      {/* Quadrant tints */}
+      <rect x={PAD_L} y={PAD_T} width={midX - PAD_L} height={midY - PAD_T} class="wgrid__q wgrid__q--tl"/>
+      <rect x={midX} y={PAD_T} width={CHART_W - PAD_R - midX} height={midY - PAD_T} class="wgrid__q wgrid__q--tr"/>
+      <rect x={PAD_L} y={midY} width={midX - PAD_L} height={CHART_H - PAD_B - midY} class="wgrid__q wgrid__q--bl"/>
+      <rect x={midX} y={midY} width={CHART_W - PAD_R - midX} height={CHART_H - PAD_B - midY} class="wgrid__q wgrid__q--br"/>
+
+      {/* Grid lines */}
+      {ticks.map((t) => (
+        <g>
+          <line x1={xPx(t)} y1={PAD_T} x2={xPx(t)} y2={CHART_H - PAD_B} class="wgrid__grid"/>
+          <line x1={PAD_L} y1={yPx(t)} x2={CHART_W - PAD_R} y2={yPx(t)} class="wgrid__grid"/>
+        </g>
+      ))}
+
+      {/* Axes */}
+      <line x1={PAD_L} y1={CHART_H - PAD_B} x2={CHART_W - PAD_R} y2={CHART_H - PAD_B} class="wgrid__axis"/>
+      <line x1={PAD_L} y1={PAD_T} x2={PAD_L} y2={CHART_H - PAD_B} class="wgrid__axis"/>
+
+      {/* Quadrant labels */}
+      <text x={midX - 12} y={PAD_T + 22} text-anchor="end" class="wgrid__qlbl">SPECIALISTS</text>
+      <text x={midX + 12} y={PAD_T + 22} text-anchor="start" class="wgrid__qlbl wgrid__qlbl--lead">LEADERS</text>
+      <text x={midX - 12} y={CHART_H - PAD_B - 12} text-anchor="end" class="wgrid__qlbl">NICHE</text>
+      <text x={midX + 12} y={CHART_H - PAD_B - 12} text-anchor="start" class="wgrid__qlbl">CONTENDERS</text>
+
+      {/* Axis labels */}
+      <text x={CHART_W / 2} y={CHART_H - 16} text-anchor="middle" class="wgrid__axlbl">
+        Value → (better value-per-dollar)
+      </text>
+      <g transform={`rotate(-90, 20, ${PAD_T + INNER_H / 2})`}>
+        <text x={20} y={PAD_T + INNER_H / 2} text-anchor="middle" class="wgrid__axlbl">
+          Coverage → (more Meta depth)
+        </text>
+      </g>
+
+      {/* Data points */}
+      {plotted.map((p, i) => (
+        <g class="wgrid__pt">
+          {/* Label line */}
+          <line x1={p.cx} y1={p.cy} x2={p.lx} y2={p.ly} class="wgrid__ptline"/>
+          {/* Outer ring */}
+          <circle cx={p.cx} cy={p.cy} r="7" class="wgrid__ring" style={`--brand: ${p.brand};`}/>
+          {/* Inner fill */}
+          <circle cx={p.cx} cy={p.cy} r="4.5" class="wgrid__dot" style={`--brand: ${p.brand};`}/>
+          {/* Label */}
+          <a href={p.href} class="wgrid__lblwrap">
+            <rect x={p.lx - 2} y={p.ly - 10} rx={3} ry={3} class="wgrid__lblbg"/>
+            <text x={p.lx + 2} y={p.ly + 2} class="wgrid__lbl">{p.name}</text>
+          </a>
+        </g>
+      ))}
+    </svg>
+  </div>
+
+  {/* Legend */}
+  <ul class="wgrid__legend">
+    <li><span class="wgrid__ldot" style="--c: var(--color-accent);"></span> Top-right = <strong>Leaders</strong> (both strong)</li>
+    <li><span class="wgrid__ldot" style="--c: var(--color-warning);"></span> Top-left = <strong>Specialists</strong> (deep but pricey)</li>
+    <li><span class="wgrid__ldot" style="--c: var(--color-success);"></span> Bottom-right = <strong>Contenders</strong> (value picks)</li>
+    <li><span class="wgrid__ldot" style="--c: var(--color-type-subtle);"></span> Bottom-left = <strong>Niche</strong> (narrow use)</li>
+  </ul>
+</figure>
+
+<style>
+  .wgrid {
+    margin: 0;
+    padding: 2rem;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (min-width: 1024px) {
+    .wgrid {
+      grid-template-columns: 1fr 1.6fr;
+      gap: 3rem;
+      padding: 2.5rem;
+    }
+    .wgrid__chart-wrap { grid-row: span 2; }
+    .wgrid__legend { grid-column: 1; }
+  }
+
+  .wgrid__caption { max-width: 42rem; }
+  .wgrid__kick {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-weight: 650;
+    margin-bottom: 0.85rem;
+  }
+  .wgrid__kick::before {
+    content: "";
+    width: 20px;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0.5;
+  }
+  .wgrid__title {
+    margin: 0 0 0.65rem;
+    font-size: clamp(1.5rem, 2.2vw, 1.95rem);
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    font-weight: 720;
+  }
+  .wgrid__sub {
+    margin: 0;
+    color: var(--color-type-mute);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .wgrid__chart-wrap {
+    width: 100%;
+    position: relative;
+  }
+  .wgrid__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    font-family: var(--font-sans);
+  }
+
+  /* Quadrant tints */
+  .wgrid__q { opacity: 0.5; }
+  .wgrid__q--tr { fill: color-mix(in oklch, var(--color-accent) 6%, var(--color-canvas-tint)); }
+  .wgrid__q--tl { fill: color-mix(in oklch, var(--color-warning) 5%, var(--color-canvas-tint)); }
+  .wgrid__q--br { fill: color-mix(in oklch, var(--color-success) 5%, var(--color-canvas-tint)); }
+  .wgrid__q--bl { fill: var(--color-canvas-tint); }
+
+  .wgrid__grid { stroke: var(--color-line); stroke-dasharray: 2 4; stroke-width: 1; }
+  .wgrid__axis { stroke: var(--color-line-2); stroke-width: 1.5; }
+
+  .wgrid__qlbl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    fill: var(--color-type-subtle);
+    font-weight: 600;
+  }
+  .wgrid__qlbl--lead { fill: var(--color-accent); font-weight: 700; }
+
+  .wgrid__axlbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    fill: var(--color-type-mute);
+    font-weight: 500;
+  }
+
+  .wgrid__pt {
+    transition: transform .2s ease;
+    transform-origin: center;
+  }
+  .wgrid__pt:hover { transform: scale(1.04); }
+
+  .wgrid__ptline {
+    stroke: color-mix(in oklch, var(--brand, var(--color-accent)) 40%, var(--color-line));
+    stroke-width: 1;
+    opacity: 0.75;
+  }
+
+  .wgrid__ring {
+    fill: none;
+    stroke: var(--brand, var(--color-accent));
+    stroke-width: 1.5;
+    opacity: 0.35;
+  }
+  .wgrid__dot {
+    fill: var(--brand, var(--color-accent));
+    stroke: var(--color-canvas);
+    stroke-width: 1.5;
+  }
+
+  .wgrid__lblbg {
+    fill: var(--color-canvas);
+    opacity: 0.95;
+    width: 64px;
+    height: 14px;
+  }
+  .wgrid__lbl {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 650;
+    fill: var(--color-type);
+    letter-spacing: -0.01em;
+    pointer-events: none;
+  }
+  .wgrid__lblwrap { cursor: pointer; }
+  .wgrid__lblwrap:hover .wgrid__lbl { fill: var(--color-accent); }
+
+  .wgrid__legend {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    align-self: end;
+    font-size: 0.82rem;
+    color: var(--color-type-dim);
+  }
+  .wgrid__legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--color-canvas-tint);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    margin: 0;
+  }
+  .wgrid__ldot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--c, var(--color-accent));
+    box-shadow: 0 0 0 2px color-mix(in oklch, var(--c, var(--color-accent)) 15%, transparent);
+    flex: 0 0 auto;
+  }
+  .wgrid__legend strong { color: var(--color-type); letter-spacing: -0.01em; }
+</style>

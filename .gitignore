@@ -25,5 +25,8 @@ pnpm-debug.log*
 # research notes (internal — not committed)
 _research/
 
+# local QA screenshots
+.tmp/
+
 # OS
 Thumbs.db

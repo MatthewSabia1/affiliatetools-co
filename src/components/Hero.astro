@@ -77,6 +77,8 @@ const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
           )}
         </div>
       )}
+
+      <slot name="filters" />
     </div>
 
     {withStats && (
@@ -202,15 +204,11 @@ const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
   }
   .hero__title :global(em),
   .hero__title :global(i) {
-    font-family: var(--font-editorial);
     font-style: italic;
-    font-weight: 400;
+    font-weight: 460;
     color: var(--color-accent);
-    letter-spacing: -0.01em;
-    /* Editorial serifs are narrower — bump size slightly so italic phrase reads with equal weight. */
-    font-size: 1.08em;
-    line-height: 1;
-    padding-right: 0.04em;
+    letter-spacing: -0.035em;
+    padding-right: 0.02em;
   }
   .hero--compact .hero__title { font-size: clamp(1.9rem, 3.2vw, 2.6rem); line-height: 1.15; }
 

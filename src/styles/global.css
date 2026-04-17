@@ -1,5 +1,5 @@
-/* ---- Fonts: Hanken Grotesk (sans, variable) + IBM Plex Mono (data) + Instrument Serif (display accent) ---- */
-@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap");
+/* ---- Fonts: Hanken Grotesk (sans, variable) + IBM Plex Mono (data). Two families, no trendy serifs. ---- */
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
 
 @import "tailwindcss";
 
@@ -8,8 +8,8 @@
   /* ---- Fonts ---- */
   --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
   --font-display: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  /* Editorial serif used ONLY for italic accents / pullquotes / rating numerals — never primary H1. */
-  --font-editorial: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
+  /* Legacy alias — kept so older components still resolve. All editorial accents now use sans italic or mono. */
+  --font-editorial: var(--font-sans);
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* ---- Canvas / surface (light) ---- */
@@ -147,19 +147,12 @@ h1 {
   font-weight: 740;
   letter-spacing: -0.03em;
 }
-/* Italic fragments in H1 flip to editorial serif — Bloomberg Businessweek-style pop. */
+/* Italic fragments inside headings — accent color, same sans, kept natural italic of Hanken. */
 h1 em, h1 i, h2 em, h2 i {
-  font-family: var(--font-editorial);
   font-style: italic;
-  font-weight: 400;
+  font-weight: 440;
   color: var(--color-accent);
-  letter-spacing: -0.01em;
-}
-.ed-italic {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
 }
 
 h2 {
