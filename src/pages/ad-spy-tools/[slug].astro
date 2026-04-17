@@ -1,10 +1,10 @@
 ---
-import type { GetStaticPaths } from "astro";
-import ListicleLayout from "@/layouts/ListicleLayout.astro";
-import IntentLayout from "@/layouts/IntentLayout.astro";
-import RelatedLinks from "@/components/RelatedLinks.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-import type { ListicleCandidate } from "@/lib/cross-links";
+import type { GetStaticPaths } from 'astro';
+import ListicleLayout from '@/layouts/ListicleLayout.astro';
+import IntentLayout from '@/layouts/IntentLayout.astro';
+import RelatedLinks from '@/components/RelatedLinks.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { LISTICLE_SLUGS, type ListicleSlug } from '@/lib/constants';
 
 /**
  * Dispatch route — every `/ad-spy-tools/{slug}/` URL that is NOT a review and NOT a versus page.
@@ -18,26 +18,26 @@ import type { ListicleCandidate } from "@/lib/cross-links";
  */
 
 type PropsShape =
-  | { kind: "listicle"; entry: CollectionEntry<"listicles"> }
-  | { kind: "intent"; entry: CollectionEntry<"intent"> };
+  | { kind: 'listicle'; entry: CollectionEntry<'listicles'> }
+  | { kind: 'intent'; entry: CollectionEntry<'intent'> };
 
 export const getStaticPaths = (async () => {
-  const listicles = await getCollection("listicles", ({ data }) => !data.draft);
-  const intents = await getCollection("intent", ({ data }) => !data.draft);
+  const listicles = await getCollection('listicles', ({ data }) => !data.draft);
+  const intents = await getCollection('intent', ({ data }) => !data.draft);
 
   const paths: Array<{ params: { slug: string }; props: PropsShape }> = [];
 
   for (const entry of listicles) {
     paths.push({
       params: { slug: entry.slug },
-      props: { kind: "listicle", entry },
+      props: { kind: 'listicle', entry },
     });
   }
 
   for (const entry of intents) {
     paths.push({
       params: { slug: entry.slug },
-      props: { kind: "intent", entry },
+      props: { kind: 'intent', entry },
     });
   }
 
@@ -45,17 +45,8 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const props = Astro.props as PropsShape;
-const listicleCandidates: ListicleCandidate[] =
-  props.kind === "listicle"
-    ? (await getCollection("listicles", ({ data }) => !data.draft)).map(
-        (entry) => ({
-          slug: entry.slug,
-          title: entry.data.title,
-          description: entry.data.description,
-          intent: entry.data.intent,
-        }),
-      )
-    : [];
+
+const LISTICLE_SLUG_SET = new Set<string>(LISTICLE_SLUGS);
 
 const rendered = await props.entry.render();
 const Content = rendered.Content;
@@ -63,20 +54,18 @@ const headings = rendered.headings;
 ---
 
 {
-  props.kind === "listicle" && (
+  props.kind === 'listicle' && (
     <ListicleLayout listicle={props.entry} headings={headings}>
       <Content />
-      <RelatedLinks
-        kind="listicle"
-        slug={props.entry.slug}
-        listicleCandidates={listicleCandidates}
-      />
+      {LISTICLE_SLUG_SET.has(props.entry.slug) && (
+        <RelatedLinks kind="listicle" slug={props.entry.slug as ListicleSlug} />
+      )}
     </ListicleLayout>
   )
 }
 
 {
-  props.kind === "intent" && (
+  props.kind === 'intent' && (
     <IntentLayout
       title={props.entry.data.title}
       description={props.entry.data.description}
@@ -86,6 +75,7 @@ const headings = rendered.headings;
       publishDate={props.entry.data.publishDate}
       updatedDate={props.entry.data.updatedDate}
       faq={props.entry.data.faq}
+      campaignSlug={props.entry.slug}
     >
       <Content />
     </IntentLayout>

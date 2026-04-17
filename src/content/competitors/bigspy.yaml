@@ -7,7 +7,6 @@ pricingUrl: https://bigspy.com/pricing
 logo:
   path: /logos/bigspy.svg
   invertInLight: false
-  surface: neutral
   width: 240
   height: 48
 brandColor: "#ff4d4f"

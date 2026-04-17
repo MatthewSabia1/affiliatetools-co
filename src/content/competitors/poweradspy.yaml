@@ -7,7 +7,6 @@ pricingUrl: https://poweradspy.com/pricing
 logo:
   path: /logos/poweradspy.svg
   invertInLight: false
-  surface: neutral
   width: 280
   height: 48
 brandColor: "#3b82f6"

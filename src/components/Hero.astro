@@ -17,7 +17,7 @@ interface Props {
   updatedDate?: string;
   primaryCta?: CTA;
   secondaryCta?: CTA;
-  variant?: "default" | "compact";
+  variant?: 'default' | 'compact';
   withStats?: boolean;
 }
 
@@ -28,28 +28,22 @@ const {
   updatedDate,
   primaryCta,
   secondaryCta,
-  variant = "default",
+  variant = 'default',
   withStats = false,
 } = Astro.props;
 
 function formatUpdated(d?: string): string | null {
   if (!d) return null;
-  const parsed = new Date(/^\d{4}-\d{2}-\d{2}$/.test(d) ? `${d}T00:00:00Z` : d);
+  const parsed = new Date(d);
   if (isNaN(parsed.getTime())) return d;
-  return parsed.toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
+  return parsed.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 }
 
 const updatedLabel = formatUpdated(updatedDate);
-const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
+const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
 ---
 
-<section
-  class:list={["hero", `hero--${variant}`, withStats && "hero--with-stats"]}
->
+<section class:list={['hero', `hero--${variant}`, withStats && 'hero--with-stats']}>
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="container-max hero__inner">
     <div class="hero__left">
@@ -58,100 +52,68 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
       {sub && <p class="hero__sub">{sub}</p>}
 
       <div class="hero__meta">
-        {
-          updatedLabel && (
-            <span class="hero__updated">Updated {updatedLabel}</span>
-          )
-        }
+        {updatedLabel && <span class="hero__updated">Updated {updatedLabel}</span>}
         <slot />
       </div>
 
-      {
-        (primaryCta || secondaryCta) && (
-          <div class="hero__ctas">
-            {primaryCta && (
-              <a
-                class="btn btn-primary btn-lg"
-                href={primaryCta.href}
-                rel="noopener"
-              >
-                {primaryCta.label}
-              </a>
-            )}
-            {secondaryCta && (
-              <a
-                class="btn btn-secondary btn-lg"
-                href={secondaryCta.href}
-                rel={secondaryCta.rel ?? "noopener"}
-              >
-                {secondaryCta.label}
-              </a>
-            )}
-          </div>
-        )
-      }
+      {(primaryCta || secondaryCta) && (
+        <div class="hero__ctas">
+          {primaryCta && (
+            <a class="btn btn-primary btn-lg" href={primaryCta.href} rel="noopener">
+              {primaryCta.label}
+            </a>
+          )}
+          {secondaryCta && (
+            <a class="btn btn-secondary btn-lg" href={secondaryCta.href} rel={secondaryCta.rel ?? 'noopener'}>
+              {secondaryCta.label}
+            </a>
+          )}
+        </div>
+      )}
     </div>
 
-    {
-      withStats && (
-        <aside class="hero__stats" aria-label="AffiliateTools at a glance">
-          <div class="hero__stats-head">
-            <span class="hero__stats-dot" aria-hidden="true" />
-            <span>LIVE · AffiliateTools index</span>
+    {withStats && (
+      <aside class="hero__stats" aria-label="AffiliateTools at a glance">
+        <div class="hero__stats-head">
+          <span class="hero__stats-dot" aria-hidden="true"></span>
+          <span>LIVE · AffiliateTools index</span>
+        </div>
+        <ul class="hero__stats-list">
+          <li>
+            <span class="hero__stats-val"><span class="hero__stats-num" data-count="7">7</span></span>
+            <span class="hero__stats-key">Tools reviewed hands-on</span>
+          </li>
+          <li>
+            <span class="hero__stats-val"><span class="hero__stats-num" data-count="300000">300K+</span></span>
+            <span class="hero__stats-key">Records tracked across Meta</span>
+          </li>
+          <li>
+            <span class="hero__stats-val"><span class="hero__stats-num" data-count="8">8</span></span>
+            <span class="hero__stats-key">Weighted scoring dimensions</span>
+          </li>
+          <li>
+            <span class="hero__stats-val"><span class="hero__stats-num" data-count="0">0</span></span>
+            <span class="hero__stats-key">Paid placements accepted</span>
+          </li>
+        </ul>
+        <div class="hero__stats-foot">
+          <div class="hero__stats-bar">
+            <span class="hero__stats-bar-label">Methodology</span>
+            <span class="hero__stats-bar-track">
+              <span class="hero__stats-bar-fill" style="width: 96%;"></span>
+            </span>
+            <span class="hero__stats-bar-val">96% transparent</span>
           </div>
-          <ul class="hero__stats-list">
-            <li>
-              <span class="hero__stats-val">
-                <span class="hero__stats-num" data-count="7">
-                  7
-                </span>
-              </span>
-              <span class="hero__stats-key">Tools reviewed hands-on</span>
-            </li>
-            <li>
-              <span class="hero__stats-val">
-                <span class="hero__stats-num" data-count="300000">
-                  300K+
-                </span>
-              </span>
-              <span class="hero__stats-key">Records tracked across Meta</span>
-            </li>
-            <li>
-              <span class="hero__stats-val">
-                <span class="hero__stats-num" data-count="8">
-                  8
-                </span>
-              </span>
-              <span class="hero__stats-key">Weighted scoring dimensions</span>
-            </li>
-            <li>
-              <span class="hero__stats-val">
-                <span class="hero__stats-num" data-count="0">
-                  0
-                </span>
-              </span>
-              <span class="hero__stats-key">Paid placements accepted</span>
-            </li>
-          </ul>
-          <div class="hero__stats-foot">
-            <div class="hero__stats-bar">
-              <span class="hero__stats-bar-label">Methodology</span>
-              <span class="hero__stats-bar-track">
-                <span class="hero__stats-bar-fill" style="width: 96%;" />
-              </span>
-              <span class="hero__stats-bar-val">96% transparent</span>
-            </div>
-            <div class="hero__stats-bar">
-              <span class="hero__stats-bar-label">Refresh cadence</span>
-              <span class="hero__stats-bar-track">
-                <span class="hero__stats-bar-fill" style="width: 100%;" />
-              </span>
-              <span class="hero__stats-bar-val">Quarterly</span>
-            </div>
+          <div class="hero__stats-bar">
+            <span class="hero__stats-bar-label">Refresh cadence</span>
+            <span class="hero__stats-bar-track">
+              <span class="hero__stats-bar-fill" style="width: 100%;"></span>
+            </span>
+            <span class="hero__stats-bar-val">Quarterly</span>
           </div>
-        </aside>
-      )
-    }
+        </div>
+      </aside>
+    )}
   </div>
 </section>
 
@@ -162,33 +124,17 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
     border-bottom: 1px solid var(--color-line);
     overflow: hidden;
   }
-  .hero--default {
-    padding: 4.5rem 0 3.5rem;
-  }
-  .hero--compact {
-    padding: 2.5rem 0 2rem;
-  }
+  .hero--default { padding: 4.5rem 0 3.5rem; }
+  .hero--compact { padding: 2.5rem 0 2rem; }
 
   .hero__bg {
     position: absolute;
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(
-        ellipse 60% 50% at 15% 0%,
-        rgba(14, 44, 95, 0.08),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 40% 40% at 85% 100%,
-        rgba(14, 44, 95, 0.05),
-        transparent 60%
-      ),
-      linear-gradient(
-        180deg,
-        var(--color-canvas-tint) 0%,
-        var(--color-canvas) 100%
-      );
+      radial-gradient(ellipse 60% 50% at 15% 0%, rgba(14, 44, 95, 0.08), transparent 60%),
+      radial-gradient(ellipse 40% 40% at 85% 100%, rgba(14, 44, 95, 0.05), transparent 60%),
+      linear-gradient(180deg, var(--color-canvas-tint) 0%, var(--color-canvas) 100%);
   }
   /* grid overlay for hero */
   .hero__bg::before {
@@ -200,11 +146,7 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
       linear-gradient(to bottom, rgba(14, 44, 95, 0.04) 1px, transparent 1px);
     background-size: 64px 64px;
     mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
-    -webkit-mask-image: radial-gradient(
-      ellipse at 50% 30%,
-      black 0%,
-      transparent 75%
-    );
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
   }
 
   .hero__inner {
@@ -218,14 +160,9 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
     grid-template-columns: 1fr;
   }
   @media (min-width: 1024px) {
-    .hero--with-stats .hero__inner {
-      grid-template-columns: 1.3fr 1fr;
-      gap: 3.5rem;
-    }
+    .hero--with-stats .hero__inner { grid-template-columns: 1.3fr 1fr; gap: 3.5rem; }
   }
-  .hero__left {
-    max-width: 54rem;
-  }
+  .hero__left { max-width: 54rem; }
 
   .hero__eyebrow {
     font-family: var(--font-mono);
@@ -256,10 +193,7 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
     font-weight: 740;
     letter-spacing: -0.03em;
   }
-  .hero--compact .hero__title {
-    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
-    line-height: 1.15;
-  }
+  .hero--compact .hero__title { font-size: clamp(1.9rem, 3.2vw, 2.6rem); line-height: 1.15; }
 
   .hero__sub {
     margin: 1.1rem 0 0;
@@ -313,11 +247,7 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
   .hero__stats {
     position: relative;
     background:
-      radial-gradient(
-        ellipse 80% 50% at 50% 0%,
-        rgba(40, 90, 170, 0.2),
-        transparent 70%
-      ),
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(40, 90, 170, 0.2), transparent 70%),
       linear-gradient(180deg, #0f1724 0%, #0a0f1a 100%);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -332,11 +262,7 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.04) 0%,
-      transparent 30%
-    );
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, transparent 30%);
     pointer-events: none;
     border-radius: 16px;
   }
@@ -361,13 +287,8 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
     animation: pulse 2.5s ease-in-out infinite;
   }
   @keyframes pulse {
-    0%,
-    100% {
-      box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
-    }
-    50% {
-      box-shadow: 0 0 0 6px rgba(52, 211, 153, 0.05);
-    }
+    0%, 100% { box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2); }
+    50% { box-shadow: 0 0 0 6px rgba(52, 211, 153, 0.05); }
   }
 
   .hero__stats-list {
@@ -436,15 +357,11 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
     background: linear-gradient(90deg, #6aa5f7, #d3e4fd);
     border-radius: 2px;
     transform-origin: left;
-    animation: barFill 1.1s cubic-bezier(0.2, 0.9, 0.3, 1) 0.3s both;
+    animation: barFill 1.1s cubic-bezier(.2,.9,.3,1) .3s both;
   }
   @keyframes barFill {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
-    }
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
   }
   .hero__stats-bar-val {
     font-family: var(--font-mono);
@@ -455,8 +372,6 @@ const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
   }
 
   @media (max-width: 1023px) {
-    .hero__stats {
-      margin-top: 1.5rem;
-    }
+    .hero__stats { margin-top: 1.5rem; }
   }
 </style>

@@ -7,7 +7,6 @@ pricingUrl: https://foreplay.co/pricing
 logo:
   path: /logos/foreplay.svg
   invertInLight: false
-  surface: neutral
   width: 240
   height: 48
 brandColor: "#a78bfa"

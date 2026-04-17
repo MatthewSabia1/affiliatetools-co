@@ -1,101 +1,40 @@
 ---
 /**
- * Footer — comprehensive, editorial-grade. Five-column grid with full site map,
- * legal pages, and standards.
+ * Footer — comprehensive, SaaS-tier. Five-column grid with full site map, legal, and disclosure.
  */
-import { getCollection } from "astro:content";
 import {
   COMPETITOR_NAMES,
+  VERSUS_SLUGS,
   COMPETITOR_SLUGS,
+  LISTICLE_SLUGS,
+  ADRECON_HOME_URL,
   routes,
   SITE_NAME,
-} from "@/lib/constants";
+} from '@/lib/constants';
 
 const reviewCols = COMPETITOR_SLUGS.map((slug) => ({
   href: routes.review(slug),
   label: COMPETITOR_NAMES[slug],
 }));
 
-const allVersusPages = await getCollection("versus", ({ data }) => !data.draft);
-const comparisonPriority = [
-  "adrecon-vs-adspy",
-  "adspy-vs-bigspy",
-  "adrecon-vs-foreplay",
-  "foreplay-vs-minea",
-  "adrecon-vs-minea",
-  "minea-vs-pipiads",
-] as const;
-const versusCols = [...allVersusPages]
-  .sort((a, b) => {
-    const aIdx = comparisonPriority.indexOf(
-      a.slug as (typeof comparisonPriority)[number],
-    );
-    const bIdx = comparisonPriority.indexOf(
-      b.slug as (typeof comparisonPriority)[number],
-    );
-    const safeA = aIdx === -1 ? Number.MAX_SAFE_INTEGER : aIdx;
-    const safeB = bIdx === -1 ? Number.MAX_SAFE_INTEGER : bIdx;
-    return safeA - safeB || a.data.title.localeCompare(b.data.title);
-  })
-  .slice(0, 6)
-  .map((entry) => ({
-    href: `/ad-spy-tools/${entry.slug}/`,
-    label: entry.data.title,
-  }));
+const versusCols = VERSUS_SLUGS.slice(0, 6).map((slug) => ({
+  href: routes.versus(slug),
+  label: `AdRecon vs ${COMPETITOR_NAMES[slug]}`,
+}));
 
-const listicles = await getCollection("listicles", ({ data }) => !data.draft);
-const listiclePriority = [
-  "best-ad-spy-tools-2026",
-  "best-ad-spy-tools-for-affiliate-marketers",
-  "best-ad-spy-tools-for-facebook-ads",
-  "best-ad-spy-tools-for-clickbank",
-  "adspy-alternatives",
-  "best-free-ad-spy-tools",
-] as const;
-const listicleCols = [...listicles]
-  .sort((a, b) => {
-    const aIdx = listiclePriority.indexOf(
-      a.slug as (typeof listiclePriority)[number],
-    );
-    const bIdx = listiclePriority.indexOf(
-      b.slug as (typeof listiclePriority)[number],
-    );
-    const safeA = aIdx === -1 ? Number.MAX_SAFE_INTEGER : aIdx;
-    const safeB = bIdx === -1 ? Number.MAX_SAFE_INTEGER : bIdx;
-    return safeA - safeB || a.data.title.localeCompare(b.data.title);
-  })
-  .slice(0, 6)
-  .map((entry) => ({
-    href: `/ad-spy-tools/${entry.slug}/`,
-    label: entry.data.title,
-  }));
+const listicleLabels: Record<(typeof LISTICLE_SLUGS)[number], string> = {
+  'best-ad-spy-tools-2026': 'Best ad spy tools 2026',
+  'best-ad-spy-tools-for-affiliate-marketers': 'Best for affiliate marketers',
+  'best-ad-spy-tools-for-facebook-ads': 'Best for Facebook ads',
+  'best-ad-spy-tools-for-clickbank': 'Best for ClickBank',
+  'adspy-alternatives': 'AdSpy alternatives',
+  'best-free-ad-spy-tools': 'Best free ad spy tools',
+};
 
-const guides = await getCollection("guides", ({ data }) => !data.draft);
-const guidePriority = [
-  "what-is-an-ad-spy-tool",
-  "how-to-spy-on-facebook-ads",
-  "how-to-find-winning-clickbank-offers",
-  "how-to-research-landing-pages",
-  "how-to-analyze-ad-creative",
-  "affiliate-marketer-software-stack",
-] as const;
-const guideCols = [...guides]
-  .sort((a, b) => {
-    const aIdx = guidePriority.indexOf(
-      a.slug as (typeof guidePriority)[number],
-    );
-    const bIdx = guidePriority.indexOf(
-      b.slug as (typeof guidePriority)[number],
-    );
-    const safeA = aIdx === -1 ? Number.MAX_SAFE_INTEGER : aIdx;
-    const safeB = bIdx === -1 ? Number.MAX_SAFE_INTEGER : bIdx;
-    return safeA - safeB || a.data.title.localeCompare(b.data.title);
-  })
-  .slice(0, 5)
-  .map((entry) => ({
-    href: `${routes.guides()}${entry.slug}/`,
-    label: entry.data.title,
-  }));
+const guideCols = LISTICLE_SLUGS.map((slug) => ({
+  href: routes.listicle(slug),
+  label: listicleLabels[slug],
+}));
 
 const year = new Date().getFullYear();
 ---
@@ -106,39 +45,18 @@ const year = new Date().getFullYear();
       <div class="site-footer__brand">
         <a class="site-footer__logo" href="/" aria-label={`${SITE_NAME} home`}>
           <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
-            <rect
-              x="2"
-              y="2"
-              width="20"
-              height="20"
-              rx="5"
-              fill="currentColor"
-              opacity="0.12"></rect>
-            <path
-              d="M7 15 L12 6 L17 15 M9 12 H15"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              fill="none"></path>
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="currentColor" opacity="0.12"/>
+            <path d="M7 15 L12 6 L17 15 M9 12 H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </svg>
-          <span class="site-footer__logo-name"
-            >AffiliateTools<span class="site-footer__logo-tld">.co</span></span
-          >
+          <span class="site-footer__logo-name">AffiliateTools<span class="site-footer__logo-tld">.co</span></span>
         </a>
         <p class="site-footer__tagline">
-          Independent, hands-on reviews of ad spy tools and affiliate research
-          workflows for working affiliate marketers.
-        </p>
-        <p class="site-footer__contact">
-          Editorial desk: <a href="mailto:hello@affiliatetools.co"
-            >hello@affiliatetools.co</a
-          >
+          Independent, hands-on reviews of the software affiliate marketers actually run. Operated by the <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a> team — and we disclose that openly.
         </p>
         <div class="site-footer__badges">
-          <span class="site-footer__badge">Hands-on reviews</span>
+          <span class="site-footer__badge">Editorial independence</span>
           <span class="site-footer__badge">Zero paid placements</span>
-          <span class="site-footer__badge">Pricing checked quarterly</span>
+          <span class="site-footer__badge">Updated quarterly</span>
         </div>
       </div>
 
@@ -146,26 +64,18 @@ const year = new Date().getFullYear();
         <div class="site-footer__col">
           <h3 class="site-footer__heading">Reviews</h3>
           <ul class="site-footer__list">
-            {
-              reviewCols.map((l) => (
-                <li>
-                  <a href={l.href}>{l.label}</a>
-                </li>
-              ))
-            }
+            {reviewCols.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
           </ul>
         </div>
 
         <div class="site-footer__col">
           <h3 class="site-footer__heading">Comparisons</h3>
           <ul class="site-footer__list">
-            {
-              versusCols.map((l) => (
-                <li>
-                  <a href={l.href}>{l.label}</a>
-                </li>
-              ))
-            }
+            {versusCols.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
             <li><a href={routes.hub()}>All comparisons →</a></li>
           </ul>
         </div>
@@ -173,28 +83,9 @@ const year = new Date().getFullYear();
         <div class="site-footer__col">
           <h3 class="site-footer__heading">Rankings</h3>
           <ul class="site-footer__list">
-            {
-              listicleCols.map((l) => (
-                <li>
-                  <a href={l.href}>{l.label}</a>
-                </li>
-              ))
-            }
-            <li><a href={routes.hub()}>All rankings →</a></li>
-          </ul>
-        </div>
-
-        <div class="site-footer__col">
-          <h3 class="site-footer__heading">Guides</h3>
-          <ul class="site-footer__list">
-            {
-              guideCols.map((l) => (
-                <li>
-                  <a href={l.href}>{l.label}</a>
-                </li>
-              ))
-            }
-            <li><a href={routes.guides()}>All guides →</a></li>
+            {guideCols.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
           </ul>
         </div>
 
@@ -202,21 +93,17 @@ const year = new Date().getFullYear();
           <h3 class="site-footer__heading">Company</h3>
           <ul class="site-footer__list">
             <li><a href={routes.about()}>About</a></li>
-            <li><a href={routes.guides()}>Guides</a></li>
             <li><a href={routes.methodology()}>Methodology</a></li>
-            <li><a href={routes.disclosure()}>Editorial standards</a></li>
+            <li><a href="/disclosure/">Editorial disclosure</a></li>
             <li><a href={routes.contact()}>Contact</a></li>
-            <li><a href={routes.sitemap()}>Site map</a></li>
-            <li><a href={routes.rss()}>RSS feed</a></li>
+            <li><a href="/sitemap/">Site map</a></li>
           </ul>
 
-          <h3 class="site-footer__heading" style="margin-top: 1.8rem;">
-            Legal
-          </h3>
+          <h3 class="site-footer__heading" style="margin-top: 1.8rem;">Legal</h3>
           <ul class="site-footer__list">
-            <li><a href={routes.privacy()}>Privacy Policy</a></li>
-            <li><a href={routes.terms()}>Terms of Service</a></li>
-            <li><a href={routes.cookies()}>Cookie Policy</a></li>
+            <li><a href="/privacy/">Privacy Policy</a></li>
+            <li><a href="/terms/">Terms of Service</a></li>
+            <li><a href="/cookies/">Cookie Policy</a></li>
           </ul>
         </div>
       </div>
@@ -224,13 +111,10 @@ const year = new Date().getFullYear();
 
     <div class="site-footer__legal">
       <p class="site-footer__copy">
-        © {year}
-        {SITE_NAME} · All trademarks are property of their respective owners.
+        © {year} {SITE_NAME} · All trademarks are property of their respective owners.
       </p>
       <p class="site-footer__fine">
-        Read our <a href={routes.methodology()}>methodology</a> and <a
-          href={routes.disclosure()}>editorial standards</a
-        > for how reviews, rankings, and corrections are handled.
+        AffiliateTools.co is operated by <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a>, a Meta-focused ad intelligence platform. AdRecon is a competitor to most tools reviewed on this site. See our <a href={routes.methodology()}>methodology</a> and <a href="/disclosure/">editorial disclosure</a>.
       </p>
     </div>
   </div>
@@ -253,15 +137,10 @@ const year = new Date().getFullYear();
     gap: 3rem;
   }
   @media (min-width: 1024px) {
-    .site-footer__top {
-      grid-template-columns: 1fr 2.2fr;
-      gap: 4rem;
-    }
+    .site-footer__top { grid-template-columns: 1fr 2.2fr; gap: 4rem; }
   }
 
-  .site-footer__brand {
-    max-width: 22rem;
-  }
+  .site-footer__brand { max-width: 22rem; }
   .site-footer__logo {
     display: inline-flex;
     align-items: center;
@@ -272,17 +151,9 @@ const year = new Date().getFullYear();
     font-weight: 700;
     letter-spacing: -0.02em;
   }
-  .site-footer__logo:hover {
-    text-decoration: none;
-    color: var(--color-accent-hover);
-  }
-  .site-footer__logo-name {
-    color: var(--color-type);
-  }
-  .site-footer__logo-tld {
-    color: var(--color-type-mute);
-    font-weight: 500;
-  }
+  .site-footer__logo:hover { text-decoration: none; color: var(--color-accent-hover); }
+  .site-footer__logo-name { color: var(--color-type); }
+  .site-footer__logo-tld { color: var(--color-type-mute); font-weight: 500; }
 
   .site-footer__tagline {
     margin: 1rem 0 0;
@@ -290,16 +161,7 @@ const year = new Date().getFullYear();
     font-size: 0.95rem;
     line-height: 1.6;
   }
-  .site-footer__contact {
-    margin: 0.8rem 0 0;
-    color: var(--color-type-mute);
-    font-size: 0.82rem;
-    line-height: 1.5;
-  }
-  .site-footer__contact a {
-    color: var(--color-accent);
-    font-family: var(--font-mono);
-  }
+  .site-footer__tagline a { color: var(--color-accent); }
 
   .site-footer__badges {
     display: flex;
@@ -334,14 +196,7 @@ const year = new Date().getFullYear();
     gap: 2rem 2.5rem;
   }
   @media (min-width: 768px) {
-    .site-footer__cols {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  @media (min-width: 1180px) {
-    .site-footer__cols {
-      grid-template-columns: repeat(5, 1fr);
-    }
+    .site-footer__cols { grid-template-columns: repeat(4, 1fr); }
   }
 
   .site-footer__heading {
@@ -360,9 +215,7 @@ const year = new Date().getFullYear();
     flex-direction: column;
     gap: 0.55rem;
   }
-  .site-footer__list li {
-    margin: 0;
-  }
+  .site-footer__list li { margin: 0; }
   .site-footer__list a {
     color: var(--color-type-dim);
     text-decoration: none;
@@ -371,10 +224,7 @@ const year = new Date().getFullYear();
     line-height: 1.4;
     transition: color 0.15s ease;
   }
-  .site-footer__list a:hover {
-    color: var(--color-accent);
-    text-decoration: none;
-  }
+  .site-footer__list a:hover { color: var(--color-accent); text-decoration: none; }
 
   .site-footer__legal {
     margin-top: 3.5rem;

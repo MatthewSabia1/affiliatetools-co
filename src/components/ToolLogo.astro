@@ -83,12 +83,20 @@ const resolvedSurface =
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
+    line-height: 0;
   }
   .tool-logo img {
     display: block;
     object-fit: contain;
-    max-height: 100%;
+    /* Let the rendered height follow the size prop, with width derived
+       from the intrinsic aspect ratio (set on the <img> width/height attrs). */
+    width: auto;
+    max-width: 100%;
   }
+  .size-sm img { height: 20px; }
+  .size-md img { height: 28px; }
+  .size-lg img { height: 40px; }
+  .size-xl img { height: 56px; }
   .tool-logo__name {
     font-family: var(--font-sans);
     font-weight: 700;

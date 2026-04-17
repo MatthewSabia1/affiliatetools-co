@@ -1,13 +1,11 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection, z } from 'astro:content';
 
 /* -------------------- competitors (data) -------------------- */
 const pricingTier = z.object({
   name: z.string(),
   monthly: z.number().nullable(),
   annual: z.number().nullable().optional(),
-  billing: z
-    .enum(["monthly", "annual", "one-time", "custom"])
-    .default("monthly"),
+  billing: z.enum(['monthly', 'annual', 'one-time', 'custom']).default('monthly'),
   seatsIncluded: z.number().optional(),
   highlight: z.string().optional(),
   features: z.array(z.string()).default([]),
@@ -25,7 +23,7 @@ const screenshot = z.object({
 const score = z.number().min(1).max(10);
 
 const competitorsCollection = defineCollection({
-  type: "data",
+  type: 'data',
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -36,21 +34,18 @@ const competitorsCollection = defineCollection({
     logo: z.object({
       path: z.string(),
       invertInLight: z.boolean().default(false),
-      surface: z
-        .enum(["transparent", "neutral", "dark"])
-        .default("transparent"),
       width: z.number().optional(),
       height: z.number().optional(),
     }),
-    brandColor: z.string().default("#888888"),
+    brandColor: z.string().default('#888888'),
 
-    platforms: z.array(z.string()), // ['Meta (Facebook, Instagram)', 'TikTok', ...]
-    primaryUseCases: z.array(z.string()), // ['Affiliate research', 'Dropshipping', ...]
+    platforms: z.array(z.string()),                // ['Meta (Facebook, Instagram)', 'TikTok', ...]
+    primaryUseCases: z.array(z.string()),          // ['Affiliate research', 'Dropshipping', ...]
 
     pricing: z.object({
       startingMonthly: z.number().nullable(),
-      currency: z.enum(["USD", "EUR", "GBP"]).default("USD"),
-      priceAsOf: z.string(), // ISO date YYYY-MM-DD
+      currency: z.enum(['USD', 'EUR', 'GBP']).default('USD'),
+      priceAsOf: z.string(),                       // ISO date YYYY-MM-DD
       freeTier: z.boolean().default(false),
       freeTrial: z
         .object({
@@ -67,22 +62,22 @@ const competitorsCollection = defineCollection({
 
     coverage: z.object({
       platforms: z.array(z.string()),
-      claimedAdCount: z.string().nullable().default(null), // phrase exactly as competitor claims
+      claimedAdCount: z.string().nullable().default(null),  // phrase exactly as competitor claims
       geoCount: z.number().nullable().optional(),
-      historyDepth: z.string().nullable().optional(), // "2015-present"
-      updateCadence: z.string().nullable().optional(), // "daily", "hourly", "real-time"
+      historyDepth: z.string().nullable().optional(),       // "2015-present"
+      updateCadence: z.string().nullable().optional(),      // "daily", "hourly", "real-time"
     }),
 
-    // 1–10 scorecard, AffiliateTools.co editorial opinion
+    // 1–10 scorecard, AdRecon's editorial opinion
     scores: z.object({
-      coverage: score, // platform + ad breadth
-      dataFreshness: score, // update cadence, deduplication
-      price: score, // value per dollar
-      ux: score, // UI quality + learning curve
-      landingPages: score, // LP research capabilities
-      offers: score, // affiliate-offer intelligence
-      affiliateFocus: score, // how well it fits affiliate marketers
-      search: score, // search + filters
+      coverage: score,                  // platform + ad breadth
+      dataFreshness: score,             // update cadence, deduplication
+      price: score,                     // value per dollar
+      ux: score,                        // UI quality + learning curve
+      landingPages: score,              // LP research capabilities
+      offers: score,                    // affiliate-offer intelligence
+      affiliateFocus: score,            // how well it fits affiliate marketers
+      search: score,                    // search + filters
     }),
 
     strengths: z.array(z.string()).min(3),
@@ -91,7 +86,7 @@ const competitorsCollection = defineCollection({
     bestFor: z.array(z.string()).min(1),
     notFor: z.array(z.string()).min(1),
 
-    standoutFeature: z.string(), // one-liner: single most notable thing
+    standoutFeature: z.string(),        // one-liner: single most notable thing
 
     screenshots: z.array(screenshot).default([]),
 
@@ -99,33 +94,33 @@ const competitorsCollection = defineCollection({
     externalRatings: z
       .array(
         z.object({
-          source: z.string(), // "G2", "Capterra", "Product Hunt"
+          source: z.string(),           // "G2", "Capterra", "Product Hunt"
           rating: z.number().nullable(),
           outOf: z.number().default(5),
           reviewCount: z.number().nullable().optional(),
           url: z.string().url(),
-          asOf: z.string(), // YYYY-MM-DD
+          asOf: z.string(),             // YYYY-MM-DD
         }),
       )
       .default([]),
 
     // Meta for lists / cards
-    cardBlurb: z.string(), // ~160 chars for card grids
+    cardBlurb: z.string(),              // ~160 chars for card grids
   }),
 });
 
 /* -------------------- reviews (content MDX) -------------------- */
 const reviewsCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     competitorSlug: z.string(),
     title: z.string(),
     description: z.string(),
     headline: z.string().optional(),
-    publishDate: z.string(), // YYYY-MM-DD
+    publishDate: z.string(),             // YYYY-MM-DD
     updatedDate: z.string(),
     heroEyebrow: z.string().optional(),
-    verdict: z.string(), // 1-sentence takeaway
+    verdict: z.string(),                 // 1-sentence takeaway
     overallScore: z.number().min(1).max(10),
     faq: z
       .array(
@@ -141,15 +136,15 @@ const reviewsCollection = defineCollection({
 
 /* -------------------- versus (content MDX) -------------------- */
 const versusCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
-    competitorSlug: z.string(), // the non-AdRecon side
+    competitorSlug: z.string(),          // the non-AdRecon side
     title: z.string(),
     description: z.string(),
     publishDate: z.string(),
     updatedDate: z.string(),
     tldr: z.object({
-      chooseAdrecon: z.string(), // one sentence
+      chooseAdrecon: z.string(),         // one sentence
       chooseCompetitor: z.string(),
     }),
     focusAxes: z.array(z.string()).min(3), // e.g. ['price', 'coverage', 'affiliateFocus']
@@ -167,21 +162,21 @@ const versusCollection = defineCollection({
 
 /* -------------------- listicles (content MDX) -------------------- */
 const listiclesCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string(),
     targetKeyword: z.string(),
     publishDate: z.string(),
     updatedDate: z.string(),
-    intent: z.enum(["head-term", "bottom-funnel", "long-tail", "alternatives"]),
-    methodologySummary: z.string(), // 1-2 sentences (full methodology in MDX body)
+    intent: z.enum(['head-term', 'bottom-funnel', 'long-tail', 'alternatives']),
+    methodologySummary: z.string(),       // 1-2 sentences (full methodology in MDX body)
     ranking: z
       .array(
         z.object({
           rank: z.number(),
           competitorSlug: z.string(),
-          verdict: z.string(), // 1-sentence takeaway
+          verdict: z.string(),            // 1-sentence takeaway
           bestFor: z.string(),
           standoutFeature: z.string(),
           priceNote: z.string(),
@@ -202,12 +197,12 @@ const listiclesCollection = defineCollection({
 
 /* -------------------- intent (content MDX) -------------------- */
 const intentCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string(),
     competitorSlug: z.string().optional(),
-    intentKind: z.enum(["worth-it", "pricing", "free-trial", "alternatives"]),
+    intentKind: z.enum(['worth-it', 'pricing', 'free-trial', 'alternatives']),
     publishDate: z.string(),
     updatedDate: z.string(),
     faq: z
@@ -224,7 +219,7 @@ const intentCollection = defineCollection({
 
 /* -------------------- guides (content MDX) -------------------- */
 const guidesCollection = defineCollection({
-  type: "content",
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string(),

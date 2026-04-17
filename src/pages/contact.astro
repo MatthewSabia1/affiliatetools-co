@@ -1,30 +1,24 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import Hero from "@/components/Hero.astro";
-import Breadcrumb from "@/components/Breadcrumb.astro";
-import { breadcrumbList } from "@/lib/schema";
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import { breadcrumbList } from '@/lib/schema';
 
-const title = "Contact AffiliateTools.co";
-const description =
-  "Get in touch — corrections, partnerships, tip-offs, general questions. Email first; we read everything.";
-const canonical = "/contact/";
+const title = 'Contact AffiliateTools.co';
+const description = 'Get in touch — corrections, partnerships, tip-offs, general questions. Email first; we read everything.';
+const canonical = '/contact/';
 
 const jsonLd = [
   breadcrumbList([
-    { name: "Home", path: "/" },
-    { name: "Contact", path: "/contact/" },
+    { name: 'Home', path: '/' },
+    { name: 'Contact', path: '/contact/' },
   ]),
 ];
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  canonical={canonical}
-  jsonLd={jsonLd}
->
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
   <section class="container-max" style="padding: 1.5rem 1.25rem 0;">
-    <Breadcrumb items={[{ name: "Home", href: "/" }, { name: "Contact" }]} />
+    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'Contact' }]} />
   </section>
 
   <Hero
@@ -37,66 +31,35 @@ const jsonLd = [
     <div class="prose">
       <h2>Primary email</h2>
       <p>
-        <a
-          href="mailto:hello@affiliatetools.co"
-          style="font-family: var(--font-mono); font-size: 1.1rem;"
-          >hello@affiliatetools.co</a
-        >
+        <a href="mailto:hello@affiliatetools.co" style="font-family: var(--font-mono); font-size: 1.1rem;">hello@affiliatetools.co</a>
       </p>
-      <p>Send anything here. We triage on arrival.</p>
+      <p>
+        Send anything here. We triage on arrival.
+      </p>
 
       <h2>Which channel for which issue</h2>
       <p>
-        Whatever your question, email above works. But if you want us to route
-        faster:
+        Whatever your question, email above works. But if you want us to route faster:
       </p>
       <ul>
-        <li>
-          <strong>Corrections & factual errors</strong> — Subject: <code
-            >CORRECTION</code
-          >. Include the page URL + the error + your source. We publish
-          corrections within 72 hours.
-        </li>
-        <li>
-          <strong>Pricing updates</strong> — Subject: <code>PRICING</code>.
-          Include tool name + current price from the vendor's site + screenshot
-          link if possible.
-        </li>
-        <li>
-          <strong>Tool we missed</strong> — Subject: <code>MISSING TOOL</code>.
-          Tell us the tool name + URL + why it deserves coverage.
-        </li>
-        <li>
-          <strong>Partnership / press inquiries</strong> — Subject: <code
-            >PARTNERSHIP</code
-          >. We don't do paid placements, but we do respond to media requests
-          and genuine partnership ideas.
-        </li>
-        <li>
-          <strong>Feedback on the site</strong> — Subject: <code>FEEDBACK</code
-          >. Tell us what we got right, what we got wrong, or what you'd like us
-          to cover next.
-        </li>
+        <li><strong>Corrections & factual errors</strong> — Subject: <code>CORRECTION</code>. Include the page URL + the error + your source. We publish corrections within 72 hours.</li>
+        <li><strong>Pricing updates</strong> — Subject: <code>PRICING</code>. Include tool name + current price from the vendor's site + screenshot link if possible.</li>
+        <li><strong>Tool we missed</strong> — Subject: <code>MISSING TOOL</code>. Tell us the tool name + URL + why it deserves coverage.</li>
+        <li><strong>Partnership / press inquiries</strong> — Subject: <code>PARTNERSHIP</code>. We don't do paid placements, but we do respond to media requests and genuine partnership ideas.</li>
+        <li><strong>Feedback on the site</strong> — Subject: <code>FEEDBACK</code>. Tell us what we got right, what we got wrong, or what you'd like us to cover next.</li>
       </ul>
 
       <h2>What we don't respond to</h2>
       <ul>
         <li>Outreach asking for paid-placement terms (we don't do this).</li>
-        <li>
-          Requests to remove a negative review without a factual correction.
-        </li>
+        <li>Requests to remove a negative review without a factual correction.</li>
         <li>Generic "please link to us" requests.</li>
-        <li>
-          Boilerplate outbound sales to add your tool to a listicle for a fee.
-        </li>
+        <li>Boilerplate outbound sales to add your tool to a listicle for a fee.</li>
       </ul>
 
-      <h2>Vendor support</h2>
+      <h2>About AdRecon</h2>
       <p>
-        For product support, billing, account access, or vendor-specific
-        questions about any tool mentioned on this site, contact that vendor
-        directly through its own support channel rather than this editorial
-        inbox.
+        This site is operated by the team behind <a href="https://adrecon.io">AdRecon</a>. For AdRecon product support, billing, or access questions, please use the support channel on adrecon.io — not this email.
       </p>
     </div>
   </article>

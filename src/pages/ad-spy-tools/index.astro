@@ -1,171 +1,49 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import Hero from "@/components/Hero.astro";
-import Breadcrumb from "@/components/Breadcrumb.astro";
-import FAQ from "@/components/FAQ.astro";
-import ToolLogo from "@/components/ToolLogo.astro";
-import Rating from "@/components/Rating.astro";
-import { getCollection } from "astro:content";
-import { getCompetitorsInDisplayOrder, overallScore } from "@/lib/competitors";
-import {
-  routes,
-  SITE_URL,
-  type CompetitorSlug,
-} from "@/lib/constants";
-import { breadcrumbList, collectionPageJsonLd, faqPage } from "@/lib/schema";
-import { formatStartingPrice } from "@/lib/pricing";
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
+import ToolLogo from '@/components/ToolLogo.astro';
+import Rating from '@/components/Rating.astro';
+import { getCompetitorsInDisplayOrder, overallScore } from '@/lib/competitors';
+import { routes, SITE_URL, VERSUS_SLUGS } from '@/lib/constants';
+import { breadcrumbList, collectionPageJsonLd, faqPage } from '@/lib/schema';
 
 const competitors = await getCompetitorsInDisplayOrder();
-const allListicles = await getCollection(
-  "listicles",
-  ({ data }) => !data.draft,
-);
-const allIntentPages = await getCollection("intent", ({ data }) => !data.draft);
-const allVersusPages = await getCollection("versus", ({ data }) => !data.draft);
 
-const featuredListiclePriority = [
-  "best-ad-spy-tools-2026",
-  "best-ad-spy-tools-for-affiliate-marketers",
-  "best-ad-spy-tools-for-facebook-ads",
-  "adspy-alternatives",
-  "best-free-ad-spy-tools",
-  "best-ad-spy-tools-for-clickbank",
-] as const;
-
-const featuredListicleSet = new Set<string>(featuredListiclePriority);
-
-const listicles = [...allListicles].sort((a, b) => {
-  const aIdx = featuredListiclePriority.indexOf(
-    a.slug as (typeof featuredListiclePriority)[number],
-  );
-  const bIdx = featuredListiclePriority.indexOf(
-    b.slug as (typeof featuredListiclePriority)[number],
-  );
-  const safeA = aIdx === -1 ? Number.MAX_SAFE_INTEGER : aIdx;
-  const safeB = bIdx === -1 ? Number.MAX_SAFE_INTEGER : bIdx;
-  return safeA - safeB || a.data.title.localeCompare(b.data.title);
-});
-
-const featuredListicles = listicles.filter((entry) =>
-  featuredListicleSet.has(entry.slug),
-);
-const specialistListicles = listicles.filter(
-  (entry) => !featuredListicleSet.has(entry.slug),
-);
-const featuredComparisonPriority = [
-  "adrecon-vs-adspy",
-  "adspy-vs-bigspy",
-  "adrecon-vs-foreplay",
-  "foreplay-vs-minea",
-  "adrecon-vs-minea",
-  "minea-vs-pipiads",
-] as const;
-const featuredComparisonSet = new Set<string>(featuredComparisonPriority);
-const featuredComparisons = [...allVersusPages]
-  .sort((a, b) => {
-    const aIdx = featuredComparisonPriority.indexOf(
-      a.slug as (typeof featuredComparisonPriority)[number],
-    );
-    const bIdx = featuredComparisonPriority.indexOf(
-      b.slug as (typeof featuredComparisonPriority)[number],
-    );
-    const safeA = aIdx === -1 ? Number.MAX_SAFE_INTEGER : aIdx;
-    const safeB = bIdx === -1 ? Number.MAX_SAFE_INTEGER : bIdx;
-    return safeA - safeB || a.data.title.localeCompare(b.data.title);
-  })
-  .slice(0, 6);
-
-const competitorPairComparisons = [...allVersusPages]
-  .filter(
-    (entry) =>
-      !entry.slug.startsWith("adrecon-vs-") &&
-      !featuredComparisonSet.has(entry.slug),
-  )
-  .sort((a, b) => a.data.title.localeCompare(b.data.title));
-
-const intentPriority = [
-  "worth-it",
-  "pricing",
-  "free-trial",
-  "alternatives",
-] as const;
-type IntentKind = (typeof intentPriority)[number];
-
-const intentLabels: Record<IntentKind, { title: string; description: string }> =
-  {
-    "worth-it": {
-      title: "Worth-it questions",
-      description:
-        "Direct verdict pages for buyers deciding whether a tool earns a place in the stack.",
-    },
-    pricing: {
-      title: "Pricing breakdowns",
-      description:
-        "Bottom-funnel pricing pages with cost comparisons, tier notes, and long-term math.",
-    },
-    "free-trial": {
-      title: "Free-trial guides",
-      description:
-        "Trial availability, limits, and the best no-risk evaluation paths by tool.",
-    },
-    alternatives: {
-      title: "Alternatives pages",
-      description:
-        "Replacement-focused pages for buyers trying to move off a specific tool.",
-    },
-  };
-
-const intentPages = [...allIntentPages].sort((a, b) => {
-  const aIdx = intentPriority.indexOf(a.data.intentKind);
-  const bIdx = intentPriority.indexOf(b.data.intentKind);
-  return aIdx - bIdx || a.data.title.localeCompare(b.data.title);
-});
-
-const intentGroups = intentPriority.map((kind) => ({
-  kind,
-  ...intentLabels[kind],
-  entries: intentPages.filter((entry) => entry.data.intentKind === kind),
-}));
-
-const faqs = [
-  {
-    q: "What is an ad spy tool?",
-    a: "An ad spy tool is a software platform that indexes advertiser ads from public ad libraries (Meta Ad Library, TikTok Creative Center, etc.) so you can research which creatives competitors are running, for how long, on which platforms, and linked to which landing pages or offers. Affiliate marketers and media buyers use ad spy tools to find winning creative patterns, avoid dead campaigns, and shortcut the research phase before testing new creative.",
-  },
-  {
-    q: "Are ad spy tools legal?",
-    a: "Yes — ad spy tools rest on public data. The Meta Ad Library is a legally mandated public repository of all active ads on Facebook and Instagram. TikTok and Google maintain similar (narrower) libraries. Ad spy tools simply index, search, and annotate what is already public. Using an ad spy tool does not require a contract with Meta, TikTok, or any ad platform.",
-  },
-  {
-    q: "What's the difference between Meta-only and multi-platform tools?",
-    a: "Meta-only ad spy tools (like AdSpy, AdRecon) focus exclusively on Facebook, Instagram, and Threads. Multi-platform tools (like BigSpy, PowerAdSpy) cover multiple ad surfaces — Facebook, TikTok, YouTube, Pinterest, Google Display — but typically with less depth per platform. Meta-only tools tend to win on historical depth, filter precision, and affiliate-specific features. Multi-platform tools win on breadth and usually offer lower entry prices.",
-  },
-  {
-    q: "Which ad spy tool is best for affiliate marketers?",
-    a: "If you run affiliate campaigns on Meta (Facebook, Instagram) — especially on networks like ClickBank, Digistore24, BuyGoods, MaxWeb, or WarriorPlus — AdRecon is the closest fit because of its affiliate-network classification and Winning Offers Directory. AdSpy is a fair alternative for Boolean-search power users who don't need landing page archives. BigSpy is the best free-tier starting point.",
-  },
-  {
-    q: "How much should I spend on an ad spy tool?",
-    a: "Ranges from $0 (free tiers like BigSpy) to $299/mo (top enterprise tiers). Most serious affiliate marketers spend $79–$199/month on ad intelligence. AdRecon at $299 one-time (lifetime) is the outlier on pricing model — one payment vs recurring subscription. Budget should scale with how many campaigns you test per month; if you're testing 3+ campaigns weekly, a good ad spy tool saves enough research time to justify $100+/mo.",
-  },
+const listicles = [
+  { slug: 'best-ad-spy-tools-2026', title: 'Best Ad Spy Tools of 2026', blurb: 'Our flagship ranking — 7 tools tested across 8 dimensions.' },
+  { slug: 'best-ad-spy-tools-for-affiliate-marketers', title: 'Best for Affiliate Marketers', blurb: 'Affiliate-specific picks with CPA-network classification in mind.' },
+  { slug: 'best-ad-spy-tools-for-facebook-ads', title: 'Best for Facebook Ads', blurb: 'Meta-focused picks for Facebook & Instagram research.' },
+  { slug: 'adspy-alternatives', title: 'AdSpy Alternatives', blurb: 'Better-value alternatives to the $149/mo incumbent.' },
+  { slug: 'best-free-ad-spy-tools', title: 'Best Free Ad Spy Tools', blurb: 'What actually works at $0 — and when to upgrade.' },
+  { slug: 'best-ad-spy-tools-for-clickbank', title: 'Best for ClickBank', blurb: 'Tools that auto-detect ClickBank creatives vs those that don\'t.' },
 ];
 
-const title = "Ad Spy Tools Compared: 7 Platforms Reviewed (2026)";
-const description =
-  "Hands-on reviews and honest comparisons of the 7 most-used ad spy tools for affiliate marketers. AdRecon, AdSpy, BigSpy, PowerAdSpy, Foreplay, Minea, and PiPiADS — scored across 8 dimensions. Updated April 2026.";
-const canonical = "/ad-spy-tools/";
+const faqs = [
+  { q: 'What is an ad spy tool?', a: 'An ad spy tool is a software platform that indexes advertiser ads from public ad libraries (Meta Ad Library, TikTok Creative Center, etc.) so you can research which creatives competitors are running, for how long, on which platforms, and linked to which landing pages or offers. Affiliate marketers and media buyers use ad spy tools to find winning creative patterns, avoid dead campaigns, and shortcut the research phase before testing new creative.' },
+  { q: 'Are ad spy tools legal?', a: 'Yes — ad spy tools rest on public data. The Meta Ad Library is a legally mandated public repository of all active ads on Facebook and Instagram. TikTok and Google maintain similar (narrower) libraries. Ad spy tools simply index, search, and annotate what is already public. Using an ad spy tool does not require a contract with Meta, TikTok, or any ad platform.' },
+  { q: 'What\'s the difference between Meta-only and multi-platform tools?', a: 'Meta-only ad spy tools (like AdSpy, AdRecon) focus exclusively on Facebook, Instagram, and Threads. Multi-platform tools (like BigSpy, PowerAdSpy) cover multiple ad surfaces — Facebook, TikTok, YouTube, Pinterest, Google Display — but typically with less depth per platform. Meta-only tools tend to win on historical depth, filter precision, and affiliate-specific features. Multi-platform tools win on breadth and usually offer lower entry prices.' },
+  { q: 'Which ad spy tool is best for affiliate marketers?', a: 'If you run affiliate campaigns on Meta (Facebook, Instagram) — especially on networks like ClickBank, Digistore24, BuyGoods, MaxWeb, or WarriorPlus — AdRecon is the closest fit because of its affiliate-network classification and Winning Offers Directory. AdSpy is a fair alternative for Boolean-search power users who don\'t need landing page archives. BigSpy is the best free-tier starting point.' },
+  { q: 'How much should I spend on an ad spy tool?', a: 'Ranges from $0 (free tiers like BigSpy) to $299/mo (top enterprise tiers). Most serious affiliate marketers spend $79–$199/month on ad intelligence. AdRecon at $299 one-time (lifetime) is the outlier on pricing model — one payment vs recurring subscription. Budget should scale with how many campaigns you test per month; if you\'re testing 3+ campaigns weekly, a good ad spy tool saves enough research time to justify $100+/mo.' },
+];
+
+const title = 'Ad Spy Tools Compared: 7 Platforms Reviewed (2026)';
+const description = 'Hands-on reviews and honest comparisons of the 7 most-used ad spy tools for affiliate marketers. AdRecon, AdSpy, BigSpy, PowerAdSpy, Foreplay, Minea, and PiPiADS — scored across 8 dimensions. Updated April 2026.';
+const canonical = '/ad-spy-tools/';
 
 const jsonLd = [
   breadcrumbList([
-    { name: "Home", path: "/" },
-    { name: "Ad Spy Tools", path: "/ad-spy-tools/" },
+    { name: 'Home', path: '/' },
+    { name: 'Ad Spy Tools', path: '/ad-spy-tools/' },
   ]),
   collectionPageJsonLd({
     pageUrl: `${SITE_URL}/ad-spy-tools/`,
-    name: "Ad Spy Tools — AffiliateTools.co",
+    name: 'Ad Spy Tools — AffiliateTools.co',
     description,
     hasPart: competitors.map((c) => ({
-      url: `${SITE_URL}${routes.review(c.data.slug as CompetitorSlug)}`,
+      url: `${SITE_URL}${routes.review(c.data.slug as any)}`,
       name: `${c.data.name} Review`,
       description: c.data.cardBlurb,
     })),
@@ -174,439 +52,129 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  canonical={canonical}
-  jsonLd={jsonLd}
->
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
   <section class="container-max" style="padding: 1.5rem 1.25rem 0;">
-    <Breadcrumb
-      items={[{ name: "Home", href: "/" }, { name: "Ad Spy Tools" }]}
-    />
+    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'Ad Spy Tools' }]} />
   </section>
 
   <Hero
     eyebrow="Ad spy tools · Category hub"
     title="Ad spy tools compared"
-    sub="Seven platforms tested hands-on across eight dimensions. Pricing dates, scope limits, and methodology notes are published on the pages readers actually use."
+    sub="Seven platforms tested hands-on across eight dimensions. AdRecon operates this site — we disclose our bias openly and recommend competitors when they actually win."
     updatedDate="2026-04-17"
-    primaryCta={{
-      href: "/ad-spy-tools/best-ad-spy-tools-2026/",
-      label: "See the 2026 ranking",
-    }}
-    secondaryCta={{ href: "/methodology/", label: "Our methodology" }}
+    primaryCta={{ href: '/ad-spy-tools/best-ad-spy-tools-2026/', label: 'See the 2026 ranking' }}
+    secondaryCta={{ href: '/methodology/', label: 'Our methodology' }}
   />
 
   <section class="container-max" style="padding: 2.5rem 1.25rem 1rem;">
     <div class="quick-picks-grid card card-accent" style="padding: 1.5rem;">
-      <h2
-        style="margin: 0 0 1rem; font-size: 1.25rem; font-family: var(--font-sans); font-weight: 700;"
-      >
-        Quick picks
-      </h2>
+      <h2 style="margin: 0 0 1rem; font-size: 1.25rem; font-family: var(--font-sans); font-weight: 700;">Quick picks</h2>
       <ul class="quick-picks">
-        <li>
-          <strong>Best overall for Meta affiliates:</strong>
-          <a href={routes.review("adrecon")}>AdRecon</a>
-        </li>
-        <li>
-          <strong>Best for Boolean search depth:</strong>
-          <a href={routes.review("adspy")}>AdSpy</a>
-        </li>
-        <li>
-          <strong>Best free tier:</strong>
-          <a href={routes.review("bigspy")}>BigSpy</a>
-        </li>
-        <li>
-          <strong>Best for TikTok:</strong>
-          <a href={routes.review("pipiads")}>PiPiADS</a>
-        </li>
-        <li>
-          <strong>Best for dropshipping / e-commerce:</strong>
-          <a href={routes.review("minea")}>Minea</a>
-        </li>
-        <li>
-          <strong>Best for agencies / creative strategists:</strong>
-          <a href={routes.review("foreplay")}>Foreplay</a>
-        </li>
-        <li>
-          <strong>Best for multi-platform including Native:</strong>
-          <a href={routes.review("poweradspy")}>PowerAdSpy</a>
-        </li>
+        <li><strong>Best overall for Meta affiliates:</strong> <a href={routes.review('adrecon')}>AdRecon</a></li>
+        <li><strong>Best for Boolean search depth:</strong> <a href={routes.review('adspy')}>AdSpy</a></li>
+        <li><strong>Best free tier:</strong> <a href={routes.review('bigspy')}>BigSpy</a></li>
+        <li><strong>Best for TikTok:</strong> <a href={routes.review('pipiads')}>PiPiADS</a></li>
+        <li><strong>Best for dropshipping / e-commerce:</strong> <a href={routes.review('minea')}>Minea</a></li>
+        <li><strong>Best for agencies / creative strategists:</strong> <a href={routes.review('foreplay')}>Foreplay</a></li>
+        <li><strong>Best for multi-platform including Native:</strong> <a href={routes.review('poweradspy')}>PowerAdSpy</a></li>
       </ul>
     </div>
   </section>
 
   <section class="container-max" style="padding: 2rem 1.25rem;">
     <h2>All 7 ad spy tool reviews</h2>
-    <p class="muted">
-      Each review is based on hands-on testing. Scorecards reflect our editorial
-      opinion across 8 weighted dimensions. Updated quarterly.
-    </p>
+    <p class="muted">Each review is based on hands-on testing. Scorecards reflect our editorial opinion across 8 weighted dimensions. Updated quarterly.</p>
     <div class="review-grid">
-      {
-        competitors.map((c) => (
-          <a
-            class="card review-card"
-            href={routes.review(c.data.slug as CompetitorSlug)}
-          >
-            <div class="review-card-head">
-              <ToolLogo slug={c.data.slug as CompetitorSlug} size="md" />
-              <Rating value={overallScore(c.data.scores)} />
-            </div>
-            <h3 style="font-family: var(--font-sans); font-weight: 700; margin: 0;">
-              {c.data.name}
-            </h3>
-            <p class="muted" style="font-size: 0.95rem; margin: 0;">
-              {c.data.tagline}
-            </p>
-            <div class="review-card-foot">
-              <span>
-                {formatStartingPrice(c.data.pricing, {
-                  prefixFrom: true,
-                  customLabel: "Custom",
-                })}
-              </span>
-              <span class="arrow">Read full review →</span>
-            </div>
-          </a>
-        ))
-      }
+      {competitors.map((c) => (
+        <a class="card review-card" href={routes.review(c.data.slug as any)}>
+          <div class="review-card-head">
+            <ToolLogo slug={c.data.slug as any} size="md" />
+            <Rating value={overallScore(c.data.scores)} />
+          </div>
+          <h3 style="font-family: var(--font-sans); font-weight: 700; margin: 0;">{c.data.name}</h3>
+          <p class="muted" style="font-size: 0.95rem; margin: 0;">{c.data.tagline}</p>
+          <div class="review-card-foot">
+            <span>{c.data.pricing.startingMonthly === null ? (c.data.slug === 'adrecon' ? '$299 lifetime' : 'Custom') : `From $${c.data.pricing.startingMonthly}/mo`}</span>
+            <span class="arrow">Read full review →</span>
+          </div>
+        </a>
+      ))}
     </div>
   </section>
 
   <section class="container-max" style="padding: 2rem 1.25rem;">
-    <h2>Most-read comparisons</h2>
-    <p class="muted">
-      Direct tool-vs-tool breakdowns across the matchups buyers ask about most.
-    </p>
+    <h2>Head-to-head comparisons</h2>
+    <p class="muted">AdRecon vs every competitor — honest, side-by-side. Forced to admit where each rival wins.</p>
     <div class="versus-grid">
-      {
-        featuredComparisons.map((entry) => (
-          <a class="card versus-card" href={`/ad-spy-tools/${entry.slug}/`}>
-            <span class="label-mono" style="color: var(--color-gold);">
-              Head-to-head
-            </span>
-            <h3 style="font-size: 1.1rem; margin: 0.25rem 0;">
-              {entry.data.title}
-            </h3>
-            <span class="arrow">Compare →</span>
-          </a>
-        ))
-      }
+      {VERSUS_SLUGS.map((slug) => (
+        <a class="card versus-card" href={routes.versus(slug)}>
+          <span class="label-mono" style="color: var(--color-gold);">Head-to-head</span>
+          <h3 style="font-size: 1.1rem; margin: 0.25rem 0;">AdRecon vs {slug.charAt(0).toUpperCase() + slug.slice(1).replace('ads', 'ADS')}</h3>
+          <span class="arrow">Compare →</span>
+        </a>
+      ))}
     </div>
   </section>
 
   <section class="container-max" style="padding: 2rem 1.25rem;">
     <h2>Ranked listicles</h2>
-    <p class="muted">
-      Best-of rankings for head terms, budgets, platforms, and specialized
-      workflows.
-    </p>
+    <p class="muted">Best-of rankings for every intent — including the TikTok and free-tier lists where AdRecon honestly isn't the pick.</p>
     <div class="listicle-grid">
-      {
-        featuredListicles.map((entry) => (
-          <a class="card listicle-card" href={routes.listicle(entry.slug)}>
-            <span class="label-mono" style="color: var(--color-gold);">
-              Ranking
-            </span>
-            <h3 style="margin: 0.25rem 0 0.5rem; font-size: 1.1rem;">
-              {entry.data.title}
-            </h3>
-            <p class="muted" style="font-size: 0.9rem; margin: 0;">
-              {entry.data.description}
-            </p>
-            <span class="arrow" style="margin-top: 0.5rem;">
-              See ranking →
-            </span>
-          </a>
-        ))
-      }
-    </div>
-  </section>
-
-  {
-    specialistListicles.length > 0 && (
-      <section class="container-max" style="padding: 0 1.25rem 2rem;">
-        <h2>Specialized ranking pages</h2>
-        <p class="muted">
-          Long-tail ranking pages for Meta ads, TikTok, agencies, dropshipping,
-          media buyers, and other specific workflows.
-        </p>
-        <div class="listicle-grid">
-          {specialistListicles.map((entry) => (
-            <a class="card listicle-card" href={routes.listicle(entry.slug)}>
-              <span class="label-mono" style="color: var(--color-gold);">
-                Specialized
-              </span>
-              <h3 style="margin: 0.25rem 0 0.5rem; font-size: 1.1rem;">
-                {entry.data.title}
-              </h3>
-              <p class="muted" style="font-size: 0.9rem; margin: 0;">
-                {entry.data.description}
-              </p>
-              <span class="arrow" style="margin-top: 0.5rem;">
-                Open page →
-              </span>
-            </a>
-          ))}
-        </div>
-      </section>
-    )
-  }
-
-  {
-    competitorPairComparisons.length > 0 && (
-      <section class="container-max" style="padding: 2rem 1.25rem;">
-        <h2>Competitor-pair comparisons</h2>
-        <p class="muted">
-          Not every buyer is choosing between AdRecon and a rival. These pages
-          compare the other major matchups directly.
-        </p>
-        <div class="versus-grid versus-grid--wide">
-          {competitorPairComparisons.map((entry) => (
-            <a
-              class="card versus-card versus-card--detail"
-              href={`/ad-spy-tools/${entry.slug}/`}
-            >
-              <span class="label-mono" style="color: var(--color-gold);">
-                Competitor pair
-              </span>
-              <h3 style="font-size: 1.1rem; margin: 0.25rem 0 0.45rem;">
-                {entry.data.title}
-              </h3>
-              <p class="muted" style="font-size: 0.9rem; margin: 0;">
-                {entry.data.description}
-              </p>
-              <span class="arrow" style="margin-top: 0.65rem;">
-                Compare directly →
-              </span>
-            </a>
-          ))}
-        </div>
-      </section>
-    )
-  }
-
-  <section class="container-max" style="padding: 2rem 1.25rem;">
-    <h2>Buyer question library</h2>
-    <p class="muted">
-      Bottom-funnel pages covering pricing, free trials, alternatives, and
-      simple worth-it calls before you buy.
-    </p>
-    <div class="intent-library">
-      {
-        intentGroups.map(
-          (group) =>
-            group.entries.length > 0 && (
-              <section class="intent-cluster">
-                <div class="intent-cluster__head">
-                  <h3>{group.title}</h3>
-                  <p class="muted">{group.description}</p>
-                </div>
-                <div class="intent-grid">
-                  {group.entries.map((entry) => (
-                    <a
-                      class="card intent-card"
-                      href={`/ad-spy-tools/${entry.slug}/`}
-                    >
-                      <span class="label-mono">{entry.data.intentKind}</span>
-                      <h4>{entry.data.title}</h4>
-                      <p>{entry.data.description}</p>
-                      <span class="arrow">Read page →</span>
-                    </a>
-                  ))}
-                </div>
-              </section>
-            ),
-        )
-      }
+      {listicles.map((l) => (
+        <a class="card listicle-card" href={`/ad-spy-tools/${l.slug}/`}>
+          <span class="label-mono" style="color: var(--color-gold);">Ranking</span>
+          <h3 style="margin: 0.25rem 0 0.5rem; font-size: 1.1rem;">{l.title}</h3>
+          <p class="muted" style="font-size: 0.9rem; margin: 0;">{l.blurb}</p>
+          <span class="arrow" style="margin-top: 0.5rem;">See ranking →</span>
+        </a>
+      ))}
     </div>
   </section>
 
   <section class="container-max" style="padding: 2rem 1.25rem;">
     <h2>How to choose</h2>
     <div class="prose" style="max-width: var(--container-prose);">
-      <p>
-        If you run Meta affiliate campaigns on ClickBank, Digistore24, BuyGoods,
-        MaxWeb, or WarriorPlus → start with <a href={routes.review("adrecon")}
-          >AdRecon</a
-        >. The affiliate-network classifier and Winning Offers Directory are the
-        features you'll use daily.
-      </p>
-      <p>
-        If you need Boolean-search depth across Meta's historical ad database → <a
-          href={routes.review("adspy")}>AdSpy</a
-        >. The search operators are worth the $149/mo floor.
-      </p>
-      <p>
-        If you want to sample the category on $0 → <a
-          href={routes.review("bigspy")}>BigSpy</a
-        >. The free tier is real.
-      </p>
-      <p>
-        If TikTok is your primary platform → <a href={routes.review("pipiads")}
-          >PiPiADS</a
-        >. The TikTok Ads Library depth beats generalists.
-      </p>
-      <p>
-        If you sell dropshipping products or run a DTC e-commerce brand → <a
-          href={routes.review("minea")}>Minea</a
-        >. Product + supplier research is the workflow match.
-      </p>
-      <p>
-        If you run a creative agency and need swipe files, briefs, and client
-        workflows → <a href={routes.review("foreplay")}>Foreplay</a>. The UX is
-        the reason.
-      </p>
-      <p>
-        If you actively buy Native ads on Taboola/Outbrain + Google Display +
-        Meta → <a href={routes.review("poweradspy")}>PowerAdSpy</a>. The
-        multi-surface coverage is unique.
-      </p>
+      <p>If you run Meta affiliate campaigns on ClickBank, Digistore24, BuyGoods, MaxWeb, or WarriorPlus → start with <a href={routes.review('adrecon')}>AdRecon</a>. The affiliate-network classifier and Winning Offers Directory are the features you'll use daily.</p>
+      <p>If you need Boolean-search depth across Meta's historical ad database → <a href={routes.review('adspy')}>AdSpy</a>. The search operators are worth the $149/mo floor.</p>
+      <p>If you want to sample the category on $0 → <a href={routes.review('bigspy')}>BigSpy</a>. The free tier is real.</p>
+      <p>If TikTok is your primary platform → <a href={routes.review('pipiads')}>PiPiADS</a>. The TikTok Ads Library depth beats generalists.</p>
+      <p>If you sell dropshipping products or run a DTC e-commerce brand → <a href={routes.review('minea')}>Minea</a>. Product + supplier research is the workflow match.</p>
+      <p>If you run a creative agency and need swipe files, briefs, and client workflows → <a href={routes.review('foreplay')}>Foreplay</a>. The UX is the reason.</p>
+      <p>If you actively buy Native ads on Taboola/Outbrain + Google Display + Meta → <a href={routes.review('poweradspy')}>PowerAdSpy</a>. The multi-surface coverage is unique.</p>
     </div>
   </section>
 
   <FAQ items={faqs} heading="Ad spy tool FAQs" />
+
+  <CTA
+    variant="footer"
+    campaign="hub-footer"
+    medium="hub"
+    label="Try AdRecon →"
+    kicker="Running Meta affiliate campaigns?"
+    body="300,000+ ads, creatives, landing pages, and offers. Affiliate network classification. Landing Page Ripper. $299 lifetime — as of April 2026."
+  />
 </BaseLayout>
 
 <style>
-  .muted {
-    color: var(--color-ink-mute);
-  }
-  .quick-picks {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .quick-picks li {
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--color-line);
-    font-size: 0.98rem;
-  }
-  .quick-picks li:last-child {
-    border-bottom: 0;
-  }
+  .muted { color: var(--color-ink-mute); }
+  .quick-picks { list-style: none; padding: 0; margin: 0; }
+  .quick-picks li { padding: 0.6rem 0; border-bottom: 1px solid var(--color-line); font-size: 0.98rem; }
+  .quick-picks li:last-child { border-bottom: 0; }
 
-  .review-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
-  }
-  .review-card {
-    padding: 1.5rem;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    transition: transform 0.15s ease;
-  }
-  .review-card:hover {
-    transform: translateY(-3px);
-  }
-  .review-card-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-  }
-  .review-card-foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.88rem;
-    color: var(--color-ink-mute);
-    padding-top: 0.6rem;
-    border-top: 1px solid var(--color-line);
-  }
+  .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .review-card { padding: 1.5rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.75rem; transition: transform 0.15s ease; }
+  .review-card:hover { transform: translateY(-3px); }
+  .review-card-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .review-card-foot { display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; color: var(--color-ink-mute); padding-top: 0.6rem; border-top: 1px solid var(--color-line); }
 
-  .versus-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-  .versus-card {
-    padding: 1.25rem;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.15s ease;
-  }
-  .versus-card:hover {
-    transform: translateY(-2px);
-  }
-  .versus-grid--wide {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
-  .versus-card--detail {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
+  .versus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1.5rem; }
+  .versus-card { padding: 1.25rem; text-decoration: none; color: inherit; transition: transform 0.15s ease; }
+  .versus-card:hover { transform: translateY(-2px); }
 
-  .listicle-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
-  }
-  .listicle-card {
-    padding: 1.5rem;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.15s ease;
-  }
-  .listicle-card:hover {
-    transform: translateY(-2px);
-  }
+  .listicle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .listicle-card { padding: 1.5rem; text-decoration: none; color: inherit; transition: transform 0.15s ease; }
+  .listicle-card:hover { transform: translateY(-2px); }
 
-  .intent-library {
-    display: grid;
-    gap: 2rem;
-    margin-top: 1.5rem;
-  }
-  .intent-cluster {
-    display: grid;
-    gap: 1rem;
-  }
-  .intent-cluster__head h3 {
-    margin: 0 0 0.3rem;
-    font-size: 1.15rem;
-  }
-  .intent-cluster__head p {
-    margin: 0;
-  }
-  .intent-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
-  }
-  .intent-card {
-    padding: 1.35rem;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-  .intent-card h4 {
-    margin: 0;
-    font-size: 1.02rem;
-    line-height: 1.35;
-  }
-  .intent-card p {
-    margin: 0;
-    color: var(--color-ink-mute);
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  .arrow {
-    color: var(--color-gold);
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
+  .arrow { color: var(--color-gold); font-weight: 600; font-size: 0.9rem; }
 </style>

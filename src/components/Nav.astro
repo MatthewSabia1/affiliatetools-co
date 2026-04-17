@@ -1,51 +1,31 @@
 ---
 /**
- * Nav — clean editorial top bar. Light theme, minimal chrome, one wordmark,
- * and a link to editorial standards.
+ * Nav — clean SaaS top bar. Light theme, minimal chrome, one wordmark, one CTA.
  */
-import { routes, SITE_URL } from "@/lib/constants";
+import { buildAdreconCta, routes, SITE_URL } from '@/lib/constants';
+
+const ctaHref = buildAdreconCta({ medium: 'home', campaign: 'nav' });
 
 const links = [
-  { href: routes.hub(), label: "Ad Spy Tools" },
-  { href: "/guides/", label: "Guides" },
-  { href: routes.methodology(), label: "Methodology" },
-  { href: routes.about(), label: "About" },
+  { href: routes.hub(), label: 'Ad Spy Tools' },
+  { href: '/guides/', label: 'Guides' },
+  { href: routes.methodology(), label: 'Methodology' },
+  { href: routes.about(), label: 'About' },
 ];
 
-const { pathname } = Astro.url ?? new URL("/", SITE_URL);
+const { pathname } = Astro.url ?? new URL('/', SITE_URL);
 const isActive = (href: string) =>
-  href === "/" ? pathname === "/" : pathname.startsWith(href);
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
 ---
 
 <header class="site-nav">
   <div class="container-wide site-nav__inner">
     <a class="site-nav__logo" href="/" aria-label="AffiliateTools.co home">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        class="site-nav__logo-icon"
-      >
-        <rect
-          x="2"
-          y="2"
-          width="20"
-          height="20"
-          rx="5"
-          fill="currentColor"
-          opacity="0.12"></rect>
-        <path
-          d="M7 15 L12 6 L17 15 M9 12 H15"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          fill="none"></path>
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" class="site-nav__logo-icon">
+        <rect x="2" y="2" width="20" height="20" rx="5" fill="currentColor" opacity="0.12"/>
+        <path d="M7 15 L12 6 L17 15 M9 12 H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
-      <span class="site-nav__logo-name"
-        >AffiliateTools<span class="site-nav__logo-tld">.co</span></span
-      >
+      <span class="site-nav__logo-name">AffiliateTools<span class="site-nav__logo-tld">.co</span></span>
     </a>
 
     <nav class="site-nav__links" aria-label="Primary">
@@ -53,10 +33,7 @@ const isActive = (href: string) =>
         links.map((l) => (
           <a
             href={l.href}
-            class:list={[
-              "site-nav__link",
-              { "site-nav__link--active": isActive(l.href) },
-            ]}
+            class:list={['site-nav__link', { 'site-nav__link--active': isActive(l.href) }]}
           >
             {l.label}
           </a>
@@ -65,8 +42,8 @@ const isActive = (href: string) =>
     </nav>
 
     <div class="site-nav__right">
-      <a class="btn btn-secondary btn-sm" href={routes.disclosure()}>
-        Standards
+      <a class="btn btn-primary btn-sm" href={ctaHref} rel="noopener">
+        Try AdRecon
       </a>
     </div>
 
@@ -81,16 +58,11 @@ const isActive = (href: string) =>
       <div class="site-nav__drawer">
         {
           links.map((l) => (
-            <a href={l.href} class="site-nav__drawer-link">
-              {l.label}
-            </a>
+            <a href={l.href} class="site-nav__drawer-link">{l.label}</a>
           ))
         }
-        <a
-          class="btn btn-secondary site-nav__drawer-cta"
-          href={routes.disclosure()}
-        >
-          Editorial standards
+        <a class="btn btn-primary site-nav__drawer-cta" href={ctaHref} rel="noopener">
+          Try AdRecon →
         </a>
       </div>
     </details>
@@ -124,21 +96,10 @@ const isActive = (href: string) =>
     font-size: 1rem;
     letter-spacing: -0.02em;
   }
-  .site-nav__logo:hover {
-    text-decoration: none;
-    color: var(--color-accent-hover);
-  }
-  .site-nav__logo-icon {
-    flex: 0 0 auto;
-  }
-  .site-nav__logo-name {
-    color: var(--color-type);
-    font-weight: 700;
-  }
-  .site-nav__logo-tld {
-    color: var(--color-type-mute);
-    font-weight: 500;
-  }
+  .site-nav__logo:hover { text-decoration: none; color: var(--color-accent-hover); }
+  .site-nav__logo-icon { flex: 0 0 auto; }
+  .site-nav__logo-name { color: var(--color-type); font-weight: 700; }
+  .site-nav__logo-tld { color: var(--color-type-mute); font-weight: 500; }
 
   .site-nav__links {
     display: none;
@@ -155,25 +116,12 @@ const isActive = (href: string) =>
     letter-spacing: -0.005em;
     transition: color 0.15s ease;
   }
-  .site-nav__link:hover {
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-  .site-nav__link--active {
-    color: var(--color-accent);
-    font-weight: 600;
-  }
+  .site-nav__link:hover { color: var(--color-accent); text-decoration: none; }
+  .site-nav__link--active { color: var(--color-accent); font-weight: 600; }
 
-  .site-nav__right {
-    display: none;
-    align-items: center;
-    gap: 0.75rem;
-  }
+  .site-nav__right { display: none; align-items: center; gap: 0.75rem; }
 
-  .site-nav__mobile {
-    position: relative;
-    display: block;
-  }
+  .site-nav__mobile { position: relative; display: block; }
   .site-nav__mobile > summary {
     list-style: none;
     cursor: pointer;
@@ -182,9 +130,7 @@ const isActive = (href: string) =>
     border: 1px solid var(--color-line);
     background: var(--color-canvas);
   }
-  .site-nav__mobile > summary::-webkit-details-marker {
-    display: none;
-  }
+  .site-nav__mobile > summary::-webkit-details-marker { display: none; }
   .site-nav__hamburger {
     display: inline-flex;
     flex-direction: column;
@@ -196,19 +142,11 @@ const isActive = (href: string) =>
     height: 1.5px;
     background: var(--color-type);
     border-radius: 2px;
-    transition:
-      transform 0.15s ease,
-      opacity 0.15s ease;
+    transition: transform 0.15s ease, opacity 0.15s ease;
   }
-  .site-nav__mobile[open] > summary .site-nav__hamburger > span:nth-child(1) {
-    transform: translateY(5.5px) rotate(45deg);
-  }
-  .site-nav__mobile[open] > summary .site-nav__hamburger > span:nth-child(2) {
-    opacity: 0;
-  }
-  .site-nav__mobile[open] > summary .site-nav__hamburger > span:nth-child(3) {
-    transform: translateY(-5.5px) rotate(-45deg);
-  }
+  .site-nav__mobile[open] > summary .site-nav__hamburger > span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .site-nav__mobile[open] > summary .site-nav__hamburger > span:nth-child(2) { opacity: 0; }
+  .site-nav__mobile[open] > summary .site-nav__hamburger > span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
   .site-nav__drawer {
     position: absolute;
     top: calc(100% + 0.6rem);
@@ -230,24 +168,12 @@ const isActive = (href: string) =>
     border-radius: var(--radius-sm);
     font-weight: 500;
   }
-  .site-nav__drawer-link:hover {
-    background: var(--color-surface);
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-  .site-nav__drawer-cta {
-    margin-top: 0.4rem;
-  }
+  .site-nav__drawer-link:hover { background: var(--color-surface); color: var(--color-accent); text-decoration: none; }
+  .site-nav__drawer-cta { margin-top: 0.4rem; }
 
   @media (min-width: 900px) {
-    .site-nav__links {
-      display: flex;
-    }
-    .site-nav__right {
-      display: flex;
-    }
-    .site-nav__mobile {
-      display: none;
-    }
+    .site-nav__links { display: flex; }
+    .site-nav__right { display: flex; }
+    .site-nav__mobile { display: none; }
   }
 </style>
