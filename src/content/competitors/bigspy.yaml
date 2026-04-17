@@ -1,0 +1,142 @@
+slug: bigspy
+name: BigSpy
+tagline: Ad intelligence across Facebook, TikTok, YouTube, and six more platforms.
+foundedYear: 2017
+homepageUrl: https://bigspy.com
+pricingUrl: https://bigspy.com/pricing
+logo:
+  path: /logos/bigspy.svg
+  invertInLight: false
+  width: 240
+  height: 48
+brandColor: "#ff4d4f"
+platforms:
+  - Meta (Facebook)
+  - Meta (Instagram)
+  - TikTok
+  - YouTube
+  - Twitter/X
+  - Pinterest
+  - Yahoo
+primaryUseCases:
+  - Multi-platform ad research
+  - First-time creative discovery
+  - Agency competitor analysis
+  - Low-budget creative inspiration
+pricing:
+  startingMonthly: 9
+  currency: USD
+  priceAsOf: "2026-04-17"
+  freeTier: true
+  freeTrial: null
+  tiers:
+    - name: Free
+      monthly: 0
+      billing: monthly
+      highlight: Limited-use free tier
+      features:
+        - Preview a capped number of ads
+        - Spot-check across platforms
+        - No export, no advanced filters
+    - name: Basic
+      monthly: 9
+      billing: monthly
+      highlight: Entry paid tier
+      features:
+        - Expanded daily query limits
+        - Ad filters across Meta + TikTok
+        - Basic creative exports
+    - name: Pro
+      monthly: 99
+      billing: monthly
+      highlight: Most popular tier
+      features:
+        - Unlimited search
+        - All platforms
+        - Creative downloads
+        - Saved projects
+    - name: VIP Enterprise
+      monthly: 249
+      billing: monthly
+      highlight: For teams + agencies
+      features:
+        - Team seats
+        - Priority support
+        - API access
+        - Advanced analytics
+  refundPolicy: Limited — consult billing policy at checkout
+  notes: >-
+    BigSpy tier structure and prices shift periodically. Verify current pricing at
+    bigspy.com/pricing before purchasing.
+
+coverage:
+  platforms:
+    - Meta (Facebook, Instagram)
+    - TikTok
+    - YouTube
+    - Twitter/X
+    - Pinterest
+    - Yahoo
+  claimedAdCount: "Billions of ads across platforms (BigSpy's marketing claim)"
+  geoCount: null
+  historyDepth: "2017-present"
+  updateCadence: daily
+
+scores:
+  coverage: 9
+  dataFreshness: 6
+  price: 8
+  ux: 6
+  landingPages: 2
+  offers: 2
+  affiliateFocus: 5
+  search: 7
+
+strengths:
+  - Broadest platform coverage — Facebook, Instagram, TikTok, YouTube, Twitter, Pinterest, Yahoo
+  - Genuine free tier for first-time researchers
+  - Lowest paid entry point at $9/month (as of April 2026)
+  - Generalist visibility suits agencies serving multiple client types
+  - Cross-platform creative discovery — useful for brand-side research
+
+weaknesses:
+  - Shallow depth on any single platform compared to specialists
+  - No affiliate-network classification (no ClickBank / Digistore / BuyGoods detection)
+  - No landing page capture or archive
+  - No creative grouping across advertisers
+  - Mixed data-quality reports in affiliate marketing communities
+  - No dedicated offer intelligence
+
+bestFor:
+  - First-time ad researchers evaluating tools on the free tier
+  - Generalist agencies serving cross-vertical clients
+  - Budget-constrained solopreneurs on the $9 Basic plan
+  - Teams needing quick cross-platform visibility rather than single-platform depth
+
+notFor:
+  - Serious Meta-focused affiliate operators who need research depth
+  - CPA affiliates running ClickBank or Digistore offers who need network classification
+  - Teams needing landing page archives for teardown
+  - Anyone building a workflow around 120+ days running profitability signals
+
+standoutFeature: >-
+  The broadest free tier on the market, covering Facebook, Instagram, TikTok,
+  YouTube, Twitter, and Pinterest — useful for first-timers sampling the category.
+
+screenshots:
+  - path: /screenshots/bigspy/hero.svg
+    caption: BigSpy homepage
+    alt: BigSpy hero section showcasing multi-platform ad intelligence
+    sourceUrl: https://bigspy.com
+  - path: /screenshots/bigspy/dashboard.svg
+    caption: Sample dashboard layout
+    alt: BigSpy dashboard showing the cross-platform ad feed
+    sourceUrl: https://bigspy.com
+  - path: /screenshots/bigspy/pricing.svg
+    caption: Pricing overview
+    alt: BigSpy tier pricing across Free, Basic, Pro, and VIP Enterprise
+    sourceUrl: https://bigspy.com/pricing
+
+externalRatings: []
+
+cardBlurb: Ad intelligence across 7+ platforms with a genuine free tier. Strong for generalist discovery, weaker for affiliate depth. From $9/mo.

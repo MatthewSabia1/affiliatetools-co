@@ -1,0 +1,116 @@
+slug: adspy
+name: AdSpy
+tagline: The largest searchable database of Facebook and Instagram ads in the world.
+foundedYear: 2015
+homepageUrl: https://adspy.com
+pricingUrl: https://adspy.com
+logo:
+  path: /logos/adspy.png
+  invertInLight: false
+  width: 190
+  height: 37
+brandColor: "#1E4FB5"
+platforms:
+  - Meta (Facebook)
+  - Meta (Instagram)
+primaryUseCases:
+  - Affiliate / performance marketing
+  - Facebook ad research
+  - Dropshipping creative ideas
+pricing:
+  startingMonthly: 149
+  currency: USD
+  priceAsOf: "2026-04-17"
+  freeTier: false
+  freeTrial: null
+  tiers:
+    - name: AdSpy
+      monthly: 149
+      annual: null
+      billing: monthly
+      seatsIncluded: 1
+      highlight: Virtually unlimited usage
+      features:
+        - Facebook + Instagram ad database (AdSpy claims 200M+ ads indexed)
+        - Boolean search operators
+        - Search by ad text, page name, URL, comments
+        - Filter by affiliate network, affiliate ID, Offer ID, landing page technologies
+        - Demographic filters (location, gender, age range)
+        - Comment search — user reactions inside ad comments
+        - Advertiser coverage across 225 countries and 88 languages
+        - Single plan — one price, one tier
+  refundPolicy: 3-day money-back guarantee
+  notes: >-
+    AdSpy offers a single plan at $149/month (as of April 2026). AdSpy markets the price
+    as introductory and notes it may change. No free trial is advertised on the homepage;
+    confirm current terms on adspy.com before subscribing.
+
+coverage:
+  platforms:
+    - Meta (Facebook, Instagram)
+  claimedAdCount: AdSpy claims 200M+ ads indexed (201.0 million+ per their homepage)
+  geoCount: 225
+  historyDepth: 2015-present
+  updateCadence: daily or better
+
+scores:
+  coverage: 7
+  dataFreshness: 7
+  price: 4
+  ux: 5
+  landingPages: 3
+  offers: 3
+  affiliateFocus: 8
+  search: 9
+
+strengths:
+  - Very large Facebook and Instagram ad database (AdSpy claims 200M+ ads)
+  - Boolean search operators — deepest query language among affiliate-facing spy tools
+  - Built by affiliates for affiliates — search by affiliate network, affiliate ID, and Offer ID
+  - Long market tenure (since ~2015) means deep historical archive
+  - Comment search surfaces user reactions competitors miss
+  - 225-country, 88-language coverage for global affiliate research
+
+weaknesses:
+  - No free trial — $149 commitment before seeing the product
+  - UI has not been meaningfully updated in years and feels dated vs newer tools
+  - No landing page capture or archive feature
+  - No creative grouping across advertisers (no "proven creatives" concept)
+  - No dedicated offer intelligence directory
+  - Meta-only — no TikTok, YouTube, or Google coverage
+  - $149/month floor excludes smaller operators and new affiliates
+
+bestFor:
+  - Solo affiliates with a $150+/month ad-research budget
+  - Boolean-search power users who need precise query control
+  - Researchers who want deep historical Meta archives dating back to 2015
+  - Affiliates who search by Offer ID or affiliate network daily
+notFor:
+  - Budget-conscious first-time ad researchers (no free trial, $149 floor)
+  - TikTok-first or multi-platform marketers
+  - Teams needing landing page archives or offer intelligence
+  - Operators who want a modern, regularly-updated UI
+
+standoutFeature: >-
+  Boolean search operators layered over one of the largest historical Facebook and
+  Instagram ad archives on the market — AdSpy's biggest moat.
+
+screenshots:
+  - path: /screenshots/adspy/hero.png
+    caption: AdSpy homepage hero
+    alt: Screenshot of AdSpy homepage showing welcome tagline, get-started CTA, and 200,958,000+ ads claim
+    sourceUrl: https://adspy.com
+  - path: /screenshots/adspy/dashboard.png
+    caption: "What AdSpy can do"
+    alt: AdSpy feature callouts — discover campaigns, save on testing, scout markets, browse by importance
+    sourceUrl: https://adspy.com
+  - path: /screenshots/adspy/pricing.png
+    caption: Simple and Fair Pricing — $149/month
+    alt: AdSpy pricing section showing $149 per month for virtually unlimited usage
+    sourceUrl: https://adspy.com
+
+externalRatings: []
+
+cardBlurb: >-
+  Decade-old Facebook and Instagram ad archive with 200M+ ads and boolean search.
+  $149/mo, single tier, no free trial. Built by affiliates for affiliates.

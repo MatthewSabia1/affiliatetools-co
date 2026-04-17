@@ -1,0 +1,75 @@
+---
+/**
+ * Editorial disclosure block.
+ * Shows our relationship to AdRecon and the methodology link.
+ */
+import { ADRECON_HOME_URL, routes } from '@/lib/constants';
+
+interface Props {
+  variant?: 'inline' | 'sidebar';
+  publishDate?: string;
+  updatedDate?: string;
+}
+
+const { variant = 'inline', publishDate, updatedDate } = Astro.props;
+
+function fmt(d?: string): string | null {
+  if (!d) return null;
+  const parsed = new Date(d);
+  if (isNaN(parsed.getTime())) return d;
+  return parsed.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+const publishedLabel = fmt(publishDate);
+const updatedLabel = fmt(updatedDate);
+---
+
+<aside class:list={['authorship', `authorship--${variant}`]} role="note">
+  <p class="authorship__label label-mono">
+    {variant === 'sidebar' ? 'Editorial disclosure' : 'Independent review · Editorial disclosure'}
+  </p>
+  <p class="authorship__body">
+    This review was produced by the AdRecon team, operators of
+    <a href={ADRECON_HOME_URL} rel="noopener">AdRecon.io</a> — a competitor to most tools reviewed
+    here. We disclose this openly. See our <a href={routes.methodology()}>methodology</a> for how
+    we test and rank.
+  </p>
+  {(publishedLabel || updatedLabel) && (
+    <p class="authorship__dates">
+      {publishedLabel && <span>Published {publishedLabel}</span>}
+      {publishedLabel && updatedLabel && <span class="authorship__dot" aria-hidden="true"> · </span>}
+      {updatedLabel && <span>Updated {updatedLabel}</span>}
+    </p>
+  )}
+</aside>
+
+<style>
+  .authorship {
+    border: 1px dashed var(--color-line-strong);
+    border-radius: var(--radius-md);
+    background: color-mix(in oklch, var(--color-surface) 70%, transparent);
+    padding: 1rem 1.15rem;
+    color: var(--color-ink-dim);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  .authorship--inline { margin: 1.5rem 0; }
+  .authorship--sidebar {
+    padding: 0.9rem 1rem;
+    font-size: 0.82rem;
+  }
+  .authorship__label {
+    margin: 0 0 0.45rem;
+    color: var(--color-gold);
+  }
+  .authorship__body { margin: 0; color: var(--color-ink-dim); }
+  .authorship__body a { color: var(--color-gold); }
+  .authorship__dates {
+    margin: 0.55rem 0 0;
+    color: var(--color-ink-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+  }
+  .authorship__dot { color: var(--color-line-strong); }
+</style>

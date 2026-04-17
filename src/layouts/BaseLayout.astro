@@ -1,0 +1,106 @@
+---
+import '@/styles/global.css';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { SITE_URL, SITE_NAME } from '@/lib/constants';
+import { organizationJsonLd, websiteJsonLd, type JsonLd } from '@/lib/schema';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  jsonLd?: JsonLd[];
+  pageType?: string;
+}
+
+const { title, description, canonical, ogImage, jsonLd = [], pageType = 'website' } = Astro.props;
+
+const resolvedOg = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`)
+  : `${SITE_URL}/og/default.png`;
+
+const canonicalUrl = canonical.startsWith('http') ? canonical : `${SITE_URL}${canonical}`;
+
+// Always-on structured data
+const baselineJsonLd: JsonLd[] = [websiteJsonLd(), organizationJsonLd()];
+const allJsonLd: JsonLd[] = [...baselineJsonLd, ...jsonLd];
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <meta property="og:type" content={pageType} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={resolvedOg} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOg} />
+
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="theme-color" content="#06060a" />
+    <meta name="color-scheme" content="dark" />
+
+    {
+      allJsonLd.map((block) => (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(block)}
+        />
+      ))
+    }
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <Nav />
+
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <style is:global>
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        z-index: 100;
+        padding: 0.75rem 1rem;
+        background: var(--color-gold);
+        color: var(--color-canvas);
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 0 0 var(--radius-md) 0;
+      }
+      .skip-link:focus {
+        left: 0;
+      }
+      main:focus {
+        outline: none;
+      }
+    </style>
+  </body>
+</html>

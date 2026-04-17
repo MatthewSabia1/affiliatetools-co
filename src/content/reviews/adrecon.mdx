@@ -1,0 +1,173 @@
+---
+competitorSlug: "adrecon"
+title: "AdRecon Review 2026: The Affiliate Marketer's Ad Intelligence Stack — Honest Operator's Review"
+description: "In-depth AdRecon review from the operator team itself — what it does well, where it loses to AdSpy, BigSpy, and Foreplay, pricing breakdown, and whether you should buy it. Updated April 2026."
+headline: "AdRecon Review 2026"
+publishDate: "2026-04-17"
+updatedDate: "2026-04-17"
+heroEyebrow: "AdRecon Review"
+verdict: "The affiliate marketer's research stack — ads, creatives, landing pages, and offers across Meta — with a unique Landing Page Ripper. Meta-only and newer; not right for TikTok, dropshipping, or agency inspiration workflows."
+overallScore: 8.9
+faq:
+  - q: "Is AdRecon worth $299?"
+    a: "If you run affiliate campaigns on Meta (Facebook, Instagram, Threads) — especially on ClickBank, Digistore24, BuyGoods, MaxWeb, or WarriorPlus — AdRecon is typically worth the $299 one-time cost inside the first 60 days. The Landing Page Ripper alone replaces a workflow that affiliate researchers used to piece together from Waybackmachine + screenshots + manual HTML saves. Compared to AdSpy at $149/mo ($1,788/year), AdRecon breaks even at month 3. It's not worth $299 if you primarily run TikTok, Google, or YouTube — AdRecon doesn't cover those platforms."
+  - q: "Does AdRecon cover TikTok?"
+    a: "No. AdRecon covers Meta platforms only — Facebook, Instagram, Threads. For TikTok ad research, use PiPiADS (TikTok specialist) or Minea (multi-platform including TikTok). If you need both Meta affiliate depth AND TikTok coverage, many serious affiliates run AdRecon + PiPiADS as a two-tool stack. We know that stack isn't ideal, but neither is pretending AdRecon covers TikTok when it doesn't."
+  - q: "Does AdRecon have AI features?"
+    a: "No. AdRecon uses rule-based regex classification — not AI, not LLMs, not machine learning. The network classifier detects ClickBank, Digistore24, BuyGoods, MaxWeb, and WarriorPlus via URL parameter patterns and domain matching. The niche classifier identifies Health, Wealth, BizOpp, Relationship, Survival, and Misc verticals via regex heuristics. This is a deliberate design choice — deterministic classifiers are faster, cheaper to run at scale, and more predictable than LLM-based tagging. But if you want AI-generated hook analysis or LLM creative summarization, you won't find it here."
+  - q: "What is the Landing Page Ripper?"
+    a: "AdRecon's Landing Page Ripper is a built-in tool that downloads complete landing page archives — HTML, CSS, JavaScript, images, fonts, everything — as a single ZIP file. It uses Puppeteer + SingleFile under the hood. Rate-limited to 10 captures per 15-minute window per user, with a 100 MB ceiling per capture and 500-resource maximum. It's SSRF-protected, so you can't use it against internal hosts, and it blocks Meta URLs (can't archive login-walled Facebook pages). No other ad spy tool ships this feature — it's AdRecon's single biggest differentiator."
+  - q: "How fresh is AdRecon's data?"
+    a: "Meta Ad Library crawls run daily. Dead creatives (ads that stopped running) are flagged via an is_active field — AdRecon's dead-creative tracking is unusual in the category. Most tools either don't surface dead creatives at all or mix them in with active ones silently. Cross-advertiser creative grouping happens on ingest, so creatives appearing across multiple advertisers get grouped automatically."
+  - q: "Is AdRecon better than AdSpy?"
+    a: "Depends on the job. AdSpy wins on Boolean search depth and has a longer historical database (AdSpy has been crawling since 2015; AdRecon launched 2026). AdRecon wins on the 4-pillar stack (ads + landing pages + offers + creatives together), affiliate-network classification, Landing Page Ripper, Winning Offers Directory, and lifetime pricing ($299 vs AdSpy's $149/mo recurring). For a solo ClickBank affiliate on a tight tool budget, AdRecon is typically the better starting point. For a Boolean-query power user with historical depth as the priority, AdSpy stays the incumbent."
+  - q: "Does AdRecon have a free trial?"
+    a: "No free trial as of April 2026. AdRecon offers a 7-day money-back guarantee, which works as a de facto trial. Access is granted via invite link after purchase."
+draft: false
+---
+
+import CTA from '@/components/CTA.astro';
+import PricingTable from '@/components/PricingTable.astro';
+import ProsCons from '@/components/ProsCons.astro';
+import Screenshot from '@/components/Screenshot.astro';
+import UseCaseScenarios from '@/components/UseCaseScenarios.astro';
+import FAQ from '@/components/FAQ.astro';
+
+## Quick verdict
+
+AdRecon is an ad intelligence platform built by and for affiliate marketers running Meta campaigns. It tracks **300,000+ ads, creatives, landing pages, and offers** across Facebook, Instagram, and Threads. The defining feature is the **Landing Page Ripper** — a built-in downloader that archives complete landing page HTML, CSS, images, and fonts as ZIP files. No other ad spy tool ships this.
+
+The 4-pillar stack — **Ad Feed, Winning Lander Vault, Proven Creatives, Winning Offers Directory** — is the difference between AdRecon and a generic ad library. Most tools give you ads. AdRecon gives you ads plus the landing pages they point to, grouped by days-running profitability signal, plus the affiliate offers aggregated across all tracked ads, plus creative concepts grouped across multiple advertisers.
+
+Who AdRecon is for: **affiliate and performance marketers running Meta campaigns**, especially on ClickBank, Digistore24, BuyGoods, MaxWeb, and WarriorPlus. Who it's not for: TikTok-first marketers (use PiPiADS), dropshippers (use Minea), brand/agency creative strategists (use Foreplay), or anyone who needs multi-platform coverage beyond Meta.
+
+<Screenshot slug="adrecon" variant="hero" />
+
+## Where AdRecon wins
+
+### The 4-pillar stack
+
+Most ad spy tools are one pillar: ads. You search, filter, and export creatives. That's it. AdRecon ships four pillars in one tool:
+
+1. **Ad Feed** — The standard ad library view, but with a days-running profitability signal front-and-center. An ad that's been running 120+ days has survived Meta's optimization floor — it's profitable until proven otherwise.
+2. **Winning Lander Vault** — Landing pages grouped by linked ads, days running, and affiliate network. You can browse landing pages independently of ads.
+3. **Proven Creatives (Creative Library)** — Identical creatives appearing across multiple advertisers, grouped. Proof levels filter to 15+, 30+, 60+, or 90+ linked ads. If six different advertisers all ran the same video creative with 60+ days combined, that creative is a battle-tested winner.
+4. **Winning Offers Directory** — All tracked offers aggregated with per-network breakdowns (ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus). See which offers have the most active ads, linked landing pages, and creative variations.
+
+Run each pillar as its own research workflow. You don't have to start with an ad and reverse-engineer back to the offer — you can start with the offer and pull up all ads, creatives, and landing pages for it.
+
+### Landing Page Ripper
+
+The single biggest differentiator. Paste a URL, get back a ZIP file containing the entire landing page — every asset downloaded, every relative link fixed, ready to open offline and tear apart in your editor of choice. No other ad spy tool has this; everyone else gives you a screenshot or a URL.
+
+Rate limits: 10 captures per 15-minute window per user. Hard ceilings: 100 MB per capture, 500 resources max. SSRF-protected (can't be pointed at internal hosts). Meta URLs blocked (can't archive login-walled Facebook pages — that's a limitation, not a bug). 110-second timeout for stubborn pages.
+
+In practice, 95% of affiliate landing pages capture cleanly. The few that don't are typically aggressive anti-bot gates on the LP itself.
+
+### Affiliate network classification
+
+AdRecon's classifier (regex-based, not AI) auto-tags creatives by affiliate network. ClickBank URLs with `?hop=` or `?tid=` patterns flag as ClickBank. Digistore24, BuyGoods, and WarriorPlus URLs with `?aff` variants flag correctly. MaxWeb gets its own detection logic.
+
+This matters because most ad spy tools don't recognize affiliate networks as a concept. You'd have to manually tag or search by domain. AdRecon shows you all ClickBank ads as a pre-filtered feed, then breaks down by niche within that.
+
+### Dead creative tracking
+
+The `is_active` flag exposes ads that have stopped running. A creative that ran 120 days and then suddenly stopped is signal — either the offer got pulled, the angle got banned, or the advertiser moved on. Most ad spy tools either hide dead creatives or mix them in silently. AdRecon makes the distinction first-class.
+
+### Lifetime pricing model
+
+$299 one-time for Pro access, $599 for Agency (as of April 2026). Compare to:
+- AdSpy: $149/mo = $1,788/year recurring
+- PowerAdSpy Professional: $149/mo = $1,788/year recurring
+- PiPiADS VIP: $155/mo = $1,860/year recurring
+- BigSpy VIP Enterprise: $249/mo = $2,988/year recurring
+
+AdRecon breaks even against AdSpy in under three months. Over a 3-year horizon, the TCO difference is thousands of dollars. The downside: no monthly option. You can't pay $30/mo to test the waters.
+
+## Where AdRecon loses
+
+### Meta-only coverage
+
+This is the big one. AdRecon indexes Facebook, Instagram, and Threads. It does not cover:
+
+- **TikTok** — use PiPiADS (specialist) or Minea (multi-platform including TikTok)
+- **YouTube** — use PowerAdSpy or BigSpy
+- **Google Display / Search** — use PowerAdSpy
+- **LinkedIn** — no serious ad spy tool covers this well
+- **Pinterest** — BigSpy has coverage; Minea has coverage for e-commerce
+- **Twitter/X** — BigSpy has shallow coverage
+
+If your campaigns run beyond Meta, AdRecon is incomplete by itself. Serious multi-platform affiliate researchers often stack AdRecon + PiPiADS (TikTok) or AdRecon + PowerAdSpy (Native/Google Display). Not ideal, but honest.
+
+### No AI or LLM features
+
+AdRecon uses regex-based classification, not AI. The classifier detects networks and niches via pattern matching. There's no LLM-powered creative summarization, no AI hook analysis, no GPT-generated ad copy suggestions.
+
+This is a deliberate design call — deterministic classifiers are faster and more predictable at scale — but if you want AI-generated insights, AdRecon won't give them. Foreplay has some AI-assisted creative analysis features. Several newer competitors are layering in LLM-based tagging. AdRecon isn't.
+
+### Newer tool, smaller historical database
+
+AdRecon launched in 2026. AdSpy has been crawling since 2015. BigSpy since 2017. If you need to research Meta ads that ran in 2019 or 2020, AdSpy's historical depth wins. AdRecon's database grows quickly (daily crawls, 300K+ records and climbing), but it can't yet claim the historical span of the 10-year incumbents.
+
+### No agency workflow
+
+AdRecon is built for the individual researcher, not the agency creative strategist. There's no brief builder like Foreplay's, no client-ready exports, no mood-board workflow, no shared swipe files. If you're running a creative agency and need to hand clients deliverables, Foreplay fits better.
+
+### Premium pricing model (no monthly option)
+
+$299 lifetime is great value over time. But it's a bigger upfront commitment than $49/mo on Foreplay or $9/mo on BigSpy Basic. If you can't justify the one-time expense, AdRecon's pricing model is a hard no.
+
+### No free tier
+
+BigSpy has a real free tier. Minea has a free tasting tier. AdRecon has neither — access requires paid purchase (with a 7-day money-back guarantee as the de facto trial).
+
+<PricingTable slug="adrecon" />
+
+## Pricing breakdown
+
+The tier structure is simple: two tiers, lifetime access.
+
+**Pro — $299 one-time (as of April 2026)**
+Single-seat lifetime access. Full platform including:
+- Meta Ad Library (Facebook, Instagram, Threads) across 300,000+ records
+- Winning Lander Vault
+- Proven Creatives library with proof levels
+- Winning Offers Directory
+- Landing Page Ripper (10 rips / 15 min rate limit)
+- Affiliate network classification (ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus)
+- Niche classification (Health, Wealth, BizOpp, Relationship, Survival, Misc)
+- Saved ads + projects
+
+**Agency — $599 one-time (as of April 2026)**
+Everything in Pro, plus team seats, higher rate limits for LP ripping, and priority support.
+
+**ROI math.** For a solo affiliate testing 3 new creatives per week (150/year), AdRecon saves roughly 2 hours per creative on research time — landing page capture, offer lookup, network classification — vs doing it manually. That's 300 hours of research time saved in year one. At $50/hr opportunity cost, the $299 outlay returns 50x in year one. Numbers obviously vary by your workflow. But the ROI case holds for anyone testing 1+ creative per week.
+
+## Who AdRecon is for
+
+<UseCaseScenarios scenarios={[
+  { persona: "Solo affiliate marketer running ClickBank, Digistore24, or BuyGoods offers on Meta", verdict: "Strongest fit. The affiliate network classifier does the research you'd otherwise do manually. Landing Page Ripper archives funnels before they get pulled. $299 lifetime beats any monthly subscription over 6+ months.", recommendation: "adrecon" },
+  { persona: "Performance marketer testing Meta creatives weekly", verdict: "Excellent fit. Proven Creatives groups identical creatives across advertisers — the signal cuts testing time. Days-running profitability filter surfaces the ads that survived Meta's optimization floor.", recommendation: "adrecon" },
+  { persona: "Media buyer needing to archive competitor landing pages", verdict: "Best-in-class. No other ad spy tool has the Landing Page Ripper. You get complete HTML, CSS, images, fonts — a full teardown-ready archive.", recommendation: "adrecon" },
+  { persona: "Agency creative strategist building client swipe files", verdict: "Not the best fit — use Foreplay for this workflow. AdRecon doesn't have briefs, mood boards, or client-ready export flows.", recommendation: "other", competitorName: "Foreplay" },
+  { persona: "TikTok-first marketer", verdict: "AdRecon doesn't cover TikTok. Use PiPiADS (TikTok specialist) or Minea (multi-platform).", recommendation: "other", competitorName: "PiPiADS" },
+  { persona: "Dropshipping or DTC e-commerce operator", verdict: "AdRecon is built for affiliate (CPA) research, not dropshipping. Minea is optimized for your workflow.", recommendation: "other", competitorName: "Minea" }
+]} />
+
+## Pros and cons
+
+<ProsCons slug="adrecon" />
+
+## Verdict
+
+If your campaigns run on Meta and involve affiliate networks, AdRecon is the closest-fit tool in the category. The 4-pillar stack is genuinely unique; the Landing Page Ripper is a killer feature; lifetime pricing is rare and valuable.
+
+If your campaigns run outside Meta, AdRecon is incomplete. That's not a flaw — it's a scope decision. Use AdRecon alongside PiPiADS for TikTok, PowerAdSpy for Google Display, or BigSpy for multi-platform spot-checks.
+
+If you're new to ad spy tools and want a free-tier starting point, start with BigSpy. If you outgrow free and are serious about Meta affiliate research, upgrade to AdRecon.
+
+<CTA variant="mid" campaign="adrecon-review" medium="review" kicker="Ready to try the 4-pillar stack?" body="$299 lifetime access. Landing Page Ripper included. Meta-only — if that matches your campaigns, this is the operator pick." />
+
+## Frequently asked questions
+
+<FAQ items={frontmatter.faq} />

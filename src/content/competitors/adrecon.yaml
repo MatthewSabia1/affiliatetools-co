@@ -1,0 +1,129 @@
+slug: adrecon
+name: AdRecon
+tagline: The affiliate marketer's ad intelligence stack — built deep on Meta.
+foundedYear: 2026
+homepageUrl: https://adrecon.io
+pricingUrl: https://adrecon.io/app/
+logo:
+  path: /logos/adrecon.svg
+  invertInLight: false
+  width: 48
+  height: 48
+brandColor: "#C9A55C"
+platforms:
+  - Meta (Facebook)
+  - Meta (Instagram)
+  - Meta (Threads)
+primaryUseCases:
+  - Affiliate research (CPA / ClickBank / Digistore)
+  - Creative analysis across advertisers
+  - Landing page research
+  - Offer intelligence
+pricing:
+  startingMonthly: null
+  currency: USD
+  priceAsOf: "2026-04-17"
+  freeTier: false
+  freeTrial: null
+  tiers:
+    - name: Pro
+      monthly: null
+      annual: null
+      billing: one-time
+      seatsIncluded: 1
+      highlight: Lifetime access
+      features:
+        - Full Meta Ad Library (Facebook, Instagram, Threads)
+        - 300,000+ ads, creatives, landing pages, offers
+        - Winning Lander Vault
+        - Proven Creatives / Creative Library
+        - Winning Offers Directory
+        - Landing Page Ripper (10 rips / 15 min)
+        - Network classification (ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus)
+        - Daily Meta Ad Library updates
+        - Saved ads + projects
+    - name: Agency
+      monthly: null
+      annual: null
+      billing: one-time
+      highlight: For teams and agencies
+      features:
+        - Everything in Pro
+        - Priority support
+        - Higher rate limits for Landing Page Ripper
+        - Team seat support
+  refundPolicy: 7-day money-back
+  notes: >-
+    AdRecon is a one-time lifetime purchase — $299 (Pro) and $599 (Agency) as of April 2026.
+    Monthly subscription tiers are not currently offered. Confirm current pricing at checkout
+    since introductory lifetime offers may be revised.
+
+coverage:
+  platforms:
+    - Meta (Facebook, Instagram, Threads)
+  claimedAdCount: 300,000+ ads, creatives, landing pages, and offers
+  geoCount: null
+  historyDepth: 2026-present
+  updateCadence: daily
+
+scores:
+  coverage: 7
+  dataFreshness: 9
+  price: 9
+  ux: 8
+  landingPages: 10
+  offers: 10
+  affiliateFocus: 10
+  search: 8
+
+strengths:
+  - Four-pillar stack — ads, landing pages, offers, and creatives — in one tool
+  - Landing Page Ripper archives full HTML, CSS, and assets for offline study
+  - Proven Creatives groups identical winning creatives across advertisers with proof tiers (15+/30+/60+/90+ linked ads)
+  - Winning Offers Directory aggregates affiliate offers with network and niche breakdowns (unique to AdRecon)
+  - Affiliate-network classification for ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus
+  - Dead-creative tracking via is_active flag surfaces ads that stopped running after long flights
+  - Lifetime pricing ($299 / $599) vs competitor monthly subscriptions
+  - Days-running profitability signal — 120+ days running = confirmed profitable
+
+weaknesses:
+  - Meta-only — no TikTok, YouTube, LinkedIn, Google, or Pinterest coverage
+  - Newer tool (launched 2026) — smaller historical database than AdSpy's decade-plus archive
+  - No LLM, AI, or ML features — classifiers are regex-based (deterministic, not fancy)
+  - Not built for brand or e-commerce research (affiliate-focused by design)
+  - No agency creative-brief or mood-board workflow like Foreplay
+
+bestFor:
+  - Solo affiliates running Meta offers on ClickBank, Digistore24, BuyGoods, MaxWeb, or WarriorPlus
+  - Performance marketers doing cross-advertiser creative research
+  - Media buyers who need landing page archives for offline teardown
+  - Operators who want ads, landing pages, offers, and creatives in one tool
+notFor:
+  - TikTok-first marketers (use PiPiADS or Minea)
+  - Dropshippers and DTC operators (Minea is better suited)
+  - Agencies building mood boards and client swipe files (Foreplay wins)
+  - YouTube or Google Ads researchers (try PowerAdSpy or BigSpy)
+
+standoutFeature: >-
+  The Landing Page Ripper — no other ad-spy tool packages complete landing page archives
+  (HTML, CSS, images, fonts) as a downloadable ZIP for offline teardown.
+
+screenshots:
+  - path: /screenshots/adrecon/hero.png
+    caption: AdRecon landing page (invite-only access gate)
+    alt: Screenshot of AdRecon homepage showing the terminal-style access request card with live scan counts
+    sourceUrl: https://adrecon.io
+  - path: /screenshots/adrecon/features.svg
+    caption: The four-pillar affiliate intelligence stack
+    alt: AdRecon feature grid — Ad Feed, Winning Lander Vault, Proven Creatives, Winning Offers
+    sourceUrl: https://adrecon.io
+  - path: /screenshots/adrecon/proof.svg
+    caption: Scale and proof tiers
+    alt: AdRecon scale card — 300,000+ records, 120+ days profitability signal, daily updates, and proven-creative tiers
+    sourceUrl: https://adrecon.io
+
+externalRatings: []
+
+cardBlurb: >-
+  The affiliate marketer's ad intelligence stack — 300K+ ads, creatives, landing pages,
+  and offers across Meta with a unique landing page ripper. Lifetime from $299.

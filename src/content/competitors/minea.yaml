@@ -1,0 +1,138 @@
+slug: minea
+name: Minea
+tagline: The all-in-one e-commerce and dropshipping ad research platform.
+foundedYear: 2021
+homepageUrl: https://minea.com
+pricingUrl: https://minea.com/pricing
+logo:
+  path: /logos/minea.svg
+  invertInLight: false
+  width: 200
+  height: 48
+brandColor: "#10b981"
+platforms:
+  - Meta (Facebook)
+  - Meta (Instagram)
+  - TikTok
+  - Pinterest
+  - Influencer ads
+primaryUseCases:
+  - Dropshipping product research
+  - DTC e-commerce ad spying
+  - Influencer campaign analysis
+  - Shopify-adjacent workflows
+pricing:
+  startingMonthly: 49
+  currency: EUR
+  priceAsOf: "2026-04-17"
+  freeTier: true
+  freeTrial: null
+  tiers:
+    - name: Lite (Free)
+      monthly: 0
+      billing: monthly
+      highlight: Tasting tier
+      features:
+        - Limited ad previews
+        - Spot-check product research
+    - name: Starter
+      monthly: 49
+      billing: monthly
+      highlight: Entry paid tier
+      features:
+        - Facebook + Instagram ad search
+        - Basic product research
+        - Limited daily queries
+    - name: Premium
+      monthly: 99
+      billing: monthly
+      highlight: Most popular
+      features:
+        - TikTok + Pinterest access
+        - Influencer ad tracking
+        - Expanded queries
+        - Shopify-adjacent tooling
+    - name: Business
+      monthly: 399
+      billing: monthly
+      highlight: Agencies + brands
+      features:
+        - Team seats
+        - Priority support
+        - Advanced analytics
+        - API access
+  refundPolicy: Contact support
+  notes: >-
+    Minea is EUR-priced by default; USD conversion varies. Confirm current
+    tiers at minea.com/pricing.
+
+coverage:
+  platforms:
+    - Meta (Facebook, Instagram)
+    - TikTok
+    - Pinterest
+    - Influencer campaigns
+  claimedAdCount: "Millions of e-commerce ads indexed (Minea's marketing claim)"
+  geoCount: null
+  historyDepth: "2021-present"
+  updateCadence: daily
+
+scores:
+  coverage: 7
+  dataFreshness: 7
+  price: 7
+  ux: 8
+  landingPages: 5
+  offers: 4
+  affiliateFocus: 4
+  search: 7
+
+strengths:
+  - Purpose-built for dropshipping and e-commerce product research
+  - Multi-platform coverage including TikTok and Pinterest
+  - Influencer ad tracking — rare in the category
+  - Good product-to-supplier workflow for dropshippers
+  - Free tier for initial evaluation
+
+weaknesses:
+  - Not built for CPA or affiliate-network research
+  - No ClickBank / Digistore / BuyGoods classification
+  - EUR pricing can surprise US buyers at checkout
+  - No landing page archive download for affiliate funnels
+  - No cross-advertiser creative grouping
+  - Less relevant for lead-gen / info-product affiliates
+
+bestFor:
+  - Dropshippers sourcing winning products
+  - DTC e-commerce operators
+  - Shopify sellers researching competitors
+  - Influencer-campaign-focused brands
+  - TikTok Shop sellers
+
+notFor:
+  - CPA affiliates running ClickBank, Digistore, or BuyGoods offers
+  - Info-product marketers
+  - Teams needing affiliate-network classification
+  - Lead-gen affiliates
+
+standoutFeature: >-
+  Dropshipping and e-commerce-specific workflow — product research,
+  supplier mapping, and influencer tracking in one tool.
+
+screenshots:
+  - path: /screenshots/minea/hero.svg
+    caption: Minea homepage
+    alt: Minea hero showing e-commerce and dropshipping ad research
+    sourceUrl: https://minea.com
+  - path: /screenshots/minea/dashboard.svg
+    caption: Product research dashboard
+    alt: Minea product research view with TikTok and Meta ad feeds
+    sourceUrl: https://minea.com
+  - path: /screenshots/minea/pricing.svg
+    caption: Pricing overview
+    alt: Minea pricing tiers Lite, Starter, Premium, Business
+    sourceUrl: https://minea.com/pricing
+
+externalRatings: []
+
+cardBlurb: E-commerce and dropshipping ad research across Meta, TikTok, Pinterest. Free tier. Starts at €49/mo.

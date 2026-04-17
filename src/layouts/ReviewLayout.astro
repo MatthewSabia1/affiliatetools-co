@@ -1,0 +1,145 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import Hero from '@/components/Hero.astro';
+import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import AtAGlance from '@/components/AtAGlance.astro';
+import CTA from '@/components/CTA.astro';
+import TOC from '@/components/TOC.astro';
+import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import type { CompetitorSlug } from '@/lib/constants';
+import { absoluteUrl, routes, SITE_URL } from '@/lib/constants';
+import {
+  breadcrumbList,
+  faqPage,
+  reviewJsonLd,
+  organizationJsonLd,
+  type JsonLd,
+} from '@/lib/schema';
+
+export interface Props {
+  review: CollectionEntry<'reviews'>;
+  competitor: CollectionEntry<'competitors'>;
+  headings: MarkdownHeading[];
+}
+
+const { review, competitor, headings } = Astro.props;
+const { data: reviewData } = review;
+const { data: comp } = competitor;
+const compSlug = comp.slug as CompetitorSlug;
+
+const pagePath = routes.review(compSlug);
+const pageUrl = absoluteUrl(pagePath);
+
+const crumbItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Ad Spy Tools', href: routes.hub() },
+  { name: `${comp.name} Review` },
+];
+
+const firstScreenshot = comp.screenshots[0]?.path;
+const screenshotUrl = firstScreenshot
+  ? (firstScreenshot.startsWith('http') ? firstScreenshot : `${SITE_URL}${firstScreenshot.startsWith('/') ? firstScreenshot : `/${firstScreenshot}`}`)
+  : undefined;
+
+const jsonLd: JsonLd[] = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Ad Spy Tools', path: routes.hub() },
+    { name: `${comp.name} Review`, path: pagePath },
+  ]),
+  reviewJsonLd({
+    pageUrl,
+    reviewedName: comp.name,
+    reviewedDescription: comp.tagline,
+    reviewedUrl: comp.homepageUrl,
+    reviewedScreenshot: screenshotUrl,
+    reviewedFeatures: comp.strengths,
+    reviewedPrice: comp.pricing.startingMonthly,
+    reviewedCurrency: comp.pricing.currency,
+    rating: reviewData.overallScore,
+    reviewBody: reviewData.verdict,
+    datePublished: reviewData.publishDate,
+    dateModified: reviewData.updatedDate,
+    headline: reviewData.headline || reviewData.title,
+  }),
+  organizationJsonLd(),
+];
+
+if (reviewData.faq && reviewData.faq.length > 0) {
+  jsonLd.push(faqPage(reviewData.faq));
+}
+---
+
+<BaseLayout
+  title={reviewData.title}
+  description={reviewData.description}
+  canonical={pagePath}
+  ogImage={screenshotUrl}
+  jsonLd={jsonLd}
+  pageType="article"
+>
+  <div class="container-wide" style="padding-top: 1.5rem;">
+    <Breadcrumb items={crumbItems} />
+  </div>
+
+  <Hero
+    eyebrow={reviewData.heroEyebrow || 'Competitor review'}
+    title={reviewData.headline || reviewData.title}
+    sub={reviewData.verdict}
+    updatedDate={reviewData.updatedDate}
+  >
+    <span class="chip">Score {reviewData.overallScore}/10</span>
+  </Hero>
+
+  <article class="container-wide review-article">
+    <div class="review-grid">
+      <div class="review-main">
+        <AuthorshipBox publishDate={reviewData.publishDate} updatedDate={reviewData.updatedDate} />
+        <div class="prose">
+          <slot />
+        </div>
+      </div>
+      <aside class="review-sidebar">
+        <div class="sticky-sidebar review-sidebar-inner">
+          <AtAGlance slug={compSlug} />
+          <CTA
+            variant="mid"
+            campaign={`${compSlug}-review`}
+            medium="review"
+            label="Try AdRecon"
+          />
+          <TOC headings={headings} />
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <style>
+    .review-article {
+      padding-block: 2.5rem 4rem;
+    }
+    .review-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 3rem;
+    }
+    @media (min-width: 1024px) {
+      .review-grid {
+        grid-template-columns: minmax(0, 1fr) 320px;
+      }
+    }
+    .review-main {
+      min-width: 0;
+    }
+    .review-sidebar {
+      min-width: 0;
+    }
+    .review-sidebar-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  </style>
+</BaseLayout>

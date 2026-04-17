@@ -1,0 +1,91 @@
+---
+/**
+ * Screenshot.astro — Captioned figure for a competitor screenshot variant.
+ * Reads screenshots[] from the competitor YAML, matches by variant hint.
+ */
+import { getCompetitor } from '@/lib/competitors';
+import type { CompetitorSlug } from '@/lib/constants';
+
+export interface Props {
+  slug: CompetitorSlug;
+  variant: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { slug, variant, loading = 'lazy' } = Astro.props;
+const competitor = await getCompetitor(slug);
+const { name, screenshots } = competitor.data;
+
+// Try to match by path segment, caption/alt substring, or filename.
+const needle = variant.toLowerCase();
+const match = screenshots.find((s) => {
+  const hay = `${s.path} ${s.caption} ${s.alt}`.toLowerCase();
+  return hay.includes(needle);
+}) || screenshots[0];
+---
+
+{match && (
+  <figure class="screenshot">
+    <div class="screenshot__frame">
+      <img
+        src={match.path.startsWith('/') ? match.path : `/${match.path}`}
+        alt={match.alt}
+        width={match.width ?? 1600}
+        height={match.height ?? 1000}
+        loading={loading}
+        decoding="async"
+      />
+    </div>
+    <figcaption class="screenshot__caption">
+      <span>{match.caption}</span>
+      {match.sourceUrl && (
+        <a
+          class="screenshot__source"
+          href={match.sourceUrl}
+          rel="nofollow noopener"
+          target="_blank"
+        >
+          Source: {name}
+        </a>
+      )}
+    </figcaption>
+  </figure>
+)}
+
+<style>
+  .screenshot {
+    margin: 1.75rem 0;
+  }
+  .screenshot__frame {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+      var(--shadow-soft);
+  }
+  .screenshot__frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .screenshot__caption {
+    margin-top: 0.65rem;
+    font-size: 0.88rem;
+    color: var(--color-ink-mute);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    line-height: 1.5;
+  }
+  .screenshot__source {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-ink-subtle);
+  }
+  .screenshot__source:hover {
+    color: var(--color-gold);
+  }
+</style>

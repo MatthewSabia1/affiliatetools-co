@@ -1,0 +1,151 @@
+---
+/**
+ * RelatedLinks.astro — Contextual cross-links for reviews, versus, and listicle pages.
+ * Anchor variants come from cross-links.ts helpers so anchors stay stable but varied.
+ */
+import type { CompetitorSlug, ListicleSlug } from '@/lib/constants';
+import type { RelatedLink } from '@/lib/cross-links';
+import {
+  getReviewRelated,
+  getVersusRelated,
+  getListicleRelated,
+} from '@/lib/cross-links';
+
+export interface Props {
+  kind: 'review' | 'versus' | 'listicle';
+  slug: string;
+  heading?: string;
+}
+
+const { kind, slug, heading } = Astro.props;
+
+let links: RelatedLink[] = [];
+if (kind === 'review') {
+  links = getReviewRelated(slug as CompetitorSlug);
+} else if (kind === 'versus') {
+  links = getVersusRelated(slug as Exclude<CompetitorSlug, 'adrecon'>);
+} else if (kind === 'listicle') {
+  links = getListicleRelated(slug as ListicleSlug);
+}
+
+const resolvedHeading = heading || (kind === 'listicle' ? 'Continue researching' : 'Related articles');
+
+const kindLabel = (k: RelatedLink['kind']): string => {
+  switch (k) {
+    case 'review': return 'Review';
+    case 'versus': return 'Versus';
+    case 'listicle': return 'Listicle';
+    case 'hub': return 'Hub';
+    case 'external': return 'External';
+    default: return '';
+  }
+};
+const kindChipClass = (k: RelatedLink['kind']): string => {
+  if (k === 'versus') return 'chip chip-gold';
+  if (k === 'listicle') return 'chip chip-green';
+  return 'chip';
+};
+---
+
+{links.length > 0 && (
+  <section class="related" aria-label={resolvedHeading}>
+    <h2 class="related__heading">{resolvedHeading}</h2>
+    <ul class="related__grid" role="list">
+      {links.map((link) => (
+        <li>
+          <a class="related-card" href={link.href}>
+            <span class={kindChipClass(link.kind)}>{kindLabel(link.kind)}</span>
+            <span class="related-card__label">{link.label}</span>
+            {link.blurb && <span class="related-card__blurb">{link.blurb}</span>}
+            <span class="related-card__arrow" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M4 9H14M14 9L9 4M14 9L9 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .related {
+    margin: 3rem 0 2rem;
+  }
+  .related__heading {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+  }
+
+  .related__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 1024px) {
+    .related__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .related__grid { grid-template-columns: 1fr; }
+  }
+  .related__grid li { margin: 0; }
+
+  .related-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    min-height: 100%;
+  }
+  .related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+    border-color: color-mix(in oklch, var(--color-gold) 35%, var(--color-line));
+    text-decoration: none;
+  }
+  .related-card:focus-visible {
+    outline-offset: 2px;
+  }
+
+  .related-card .chip {
+    align-self: flex-start;
+  }
+
+  .related-card__label {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.98rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  .related-card__blurb {
+    font-size: 0.85rem;
+    color: var(--color-ink-mute);
+    line-height: 1.45;
+  }
+  .related-card__arrow {
+    margin-top: auto;
+    color: var(--color-gold);
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.15s ease;
+  }
+  .related-card:hover .related-card__arrow {
+    transform: translateX(3px);
+  }
+</style>

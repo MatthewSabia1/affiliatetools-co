@@ -1,0 +1,159 @@
+---
+/**
+ * Scorecard.astro — Horizontal bar chart of the 8 editorial scores.
+ * Overall average at the top, dimensions below. Colors bars by severity.
+ */
+import { getCompetitor, overallScore, scoreSeverity } from '@/lib/competitors';
+import type { CompetitorSlug } from '@/lib/constants';
+import Rating from './Rating.astro';
+
+export interface Props {
+  slug: CompetitorSlug;
+  highlightAxes?: string[];
+}
+
+const { slug, highlightAxes = [] } = Astro.props;
+
+const competitor = await getCompetitor(slug);
+const { scores, name } = competitor.data;
+
+const AXIS_LABELS: Record<keyof typeof scores, string> = {
+  coverage: 'Coverage',
+  dataFreshness: 'Data freshness',
+  price: 'Price / value',
+  ux: 'UX',
+  landingPages: 'Landing pages',
+  offers: 'Offer intelligence',
+  affiliateFocus: 'Affiliate focus',
+  search: 'Search & filters',
+};
+
+const AXIS_ORDER: Array<keyof typeof scores> = [
+  'coverage',
+  'dataFreshness',
+  'price',
+  'ux',
+  'landingPages',
+  'offers',
+  'affiliateFocus',
+  'search',
+];
+
+const overall = overallScore(scores);
+const highlightSet = new Set(highlightAxes);
+---
+
+<section class="scorecard card" aria-label={`${name} scorecard`}>
+  <header class="scorecard__header">
+    <div>
+      <p class="label-mono">AffiliateTools scorecard</p>
+      <h3 class="scorecard__title">{name}</h3>
+    </div>
+    <Rating value={overall} showLabel={false} />
+  </header>
+
+  <ul class="scorecard__list" role="list">
+    {AXIS_ORDER.map((axis) => {
+      const value = scores[axis];
+      const sev = scoreSeverity(value);
+      const pct = Math.max(0, Math.min(100, (value / 10) * 100));
+      const isHighlight = highlightSet.has(axis);
+      return (
+        <li class:list={['score-row', `sev-${sev}`, isHighlight ? 'is-highlight' : null]}>
+          <span class="score-row__label">{AXIS_LABELS[axis]}</span>
+          <div class="score-row__bar" role="progressbar" aria-valuenow={value} aria-valuemin={1} aria-valuemax={10} aria-label={`${AXIS_LABELS[axis]}: ${value} out of 10`}>
+            <span class="score-row__fill" style={`width: ${pct}%;`}></span>
+          </div>
+          <span class="score-row__value">{value.toFixed(1)}</span>
+        </li>
+      );
+    })}
+  </ul>
+</section>
+
+<style>
+  .scorecard {
+    padding: 1.5rem;
+  }
+  .scorecard__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .scorecard__title {
+    font-family: var(--font-sans);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0.35rem 0 0;
+  }
+
+  .scorecard__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.65rem;
+  }
+  .score-row {
+    display: grid;
+    grid-template-columns: minmax(8.5rem, 10rem) 1fr 2.5rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: var(--radius-sm);
+    margin: 0;
+  }
+  .score-row.is-highlight {
+    background: var(--color-gold-soft);
+  }
+
+  .score-row__label {
+    font-size: 0.88rem;
+    color: var(--color-ink-mute);
+    font-weight: 500;
+  }
+  .score-row__value {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--color-ink);
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .score-row__bar {
+    position: relative;
+    height: 8px;
+    background: var(--color-surface-3);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .score-row__fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+
+  .sev-high .score-row__fill { background: var(--color-success); }
+  .sev-med .score-row__fill { background: var(--color-warning); }
+  .sev-low .score-row__fill { background: var(--color-danger); }
+
+  @media (max-width: 520px) {
+    .score-row {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        'label value'
+        'bar   bar';
+      gap: 0.35rem 0.75rem;
+    }
+    .score-row__label { grid-area: label; }
+    .score-row__value { grid-area: value; }
+    .score-row__bar { grid-area: bar; }
+  }
+</style>

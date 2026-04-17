@@ -1,0 +1,83 @@
+---
+import type { GetStaticPaths } from 'astro';
+import ListicleLayout from '@/layouts/ListicleLayout.astro';
+import IntentLayout from '@/layouts/IntentLayout.astro';
+import RelatedLinks from '@/components/RelatedLinks.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { LISTICLE_SLUGS, type ListicleSlug } from '@/lib/constants';
+
+/**
+ * Dispatch route — every `/ad-spy-tools/{slug}/` URL that is NOT a review and NOT a versus page.
+ *
+ * Handles:
+ *   - Listicles  (collection `listicles`)
+ *   - Intent     (collection `intent`)
+ *
+ * Review pages    →  [slug]-review.astro  (literal suffix in filename is more specific)
+ * Versus pages    →  [vs].astro            (disjoint getStaticPaths output)
+ */
+
+type PropsShape =
+  | { kind: 'listicle'; entry: CollectionEntry<'listicles'> }
+  | { kind: 'intent'; entry: CollectionEntry<'intent'> };
+
+export const getStaticPaths = (async () => {
+  const listicles = await getCollection('listicles', ({ data }) => !data.draft);
+  const intents = await getCollection('intent', ({ data }) => !data.draft);
+
+  const paths: Array<{ params: { slug: string }; props: PropsShape }> = [];
+
+  for (const entry of listicles) {
+    paths.push({
+      params: { slug: entry.slug },
+      props: { kind: 'listicle', entry },
+    });
+  }
+
+  for (const entry of intents) {
+    paths.push({
+      params: { slug: entry.slug },
+      props: { kind: 'intent', entry },
+    });
+  }
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+const props = Astro.props as PropsShape;
+
+const LISTICLE_SLUG_SET = new Set<string>(LISTICLE_SLUGS);
+
+const rendered = await props.entry.render();
+const Content = rendered.Content;
+const headings = rendered.headings;
+---
+
+{
+  props.kind === 'listicle' && (
+    <ListicleLayout listicle={props.entry} headings={headings}>
+      <Content />
+      {LISTICLE_SLUG_SET.has(props.entry.slug) && (
+        <RelatedLinks kind="listicle" slug={props.entry.slug as ListicleSlug} />
+      )}
+    </ListicleLayout>
+  )
+}
+
+{
+  props.kind === 'intent' && (
+    <IntentLayout
+      title={props.entry.data.title}
+      description={props.entry.data.description}
+      canonical={`/ad-spy-tools/${props.entry.slug}/`}
+      competitorSlug={props.entry.data.competitorSlug}
+      intentKind={props.entry.data.intentKind}
+      publishDate={props.entry.data.publishDate}
+      updatedDate={props.entry.data.updatedDate}
+      faq={props.entry.data.faq}
+      campaignSlug={props.entry.slug}
+    >
+      <Content />
+    </IntentLayout>
+  )
+}

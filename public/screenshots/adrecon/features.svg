@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" role="img" aria-label="AdRecon four-pillar affiliate intelligence stack">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#06060A"/>
+      <stop offset="1" stop-color="#0C0C10"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C9A55C"/>
+      <stop offset="1" stop-color="#B8944E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <g stroke="#1A1A22" stroke-width="1">
+    <line x1="0" y1="220" x2="1440" y2="220"/>
+    <line x1="0" y1="680" x2="1440" y2="680"/>
+  </g>
+  <text x="80" y="130" font-family="ui-sans-serif, -apple-system, Helvetica Neue, Arial" font-size="22" font-weight="600" fill="#A1A1AA" letter-spacing="2">ADRECON / FEATURE STACK</text>
+  <text x="80" y="185" font-family="ui-serif, Georgia, serif" font-size="52" font-weight="700" fill="#F5F5F0">The affiliate marketer's ad intelligence stack.</text>
+  <g font-family="ui-sans-serif, -apple-system, Helvetica Neue, Arial">
+    <g transform="translate(80,280)">
+      <rect width="300" height="360" rx="14" fill="#0C0C10" stroke="#1A1A22"/>
+      <rect x="24" y="28" width="60" height="6" fill="url(#gold)"/>
+      <text x="24" y="78" font-size="26" font-weight="700" fill="#F5F5F0">Ad Feed</text>
+      <text x="24" y="112" font-size="16" fill="#A1A1AA">Meta Ad Library</text>
+      <text x="24" y="136" font-size="16" fill="#A1A1AA">Facebook / Instagram / Threads</text>
+      <text x="24" y="180" font-size="14" fill="#A1A1AA">120+ days running</text>
+      <text x="24" y="202" font-size="14" fill="#A1A1AA">= confirmed profitable</text>
+      <text x="24" y="260" font-size="40" font-weight="700" fill="#C9A55C">300K+</text>
+      <text x="24" y="290" font-size="13" fill="#A1A1AA" letter-spacing="1">RECORDS TRACKED</text>
+    </g>
+    <g transform="translate(400,280)">
+      <rect width="300" height="360" rx="14" fill="#0C0C10" stroke="#1A1A22"/>
+      <rect x="24" y="28" width="60" height="6" fill="url(#gold)"/>
+      <text x="24" y="78" font-size="26" font-weight="700" fill="#F5F5F0">Winning Lander Vault</text>
+      <text x="24" y="112" font-size="16" fill="#A1A1AA">Landing pages grouped</text>
+      <text x="24" y="136" font-size="16" fill="#A1A1AA">by linked ads + network</text>
+      <text x="24" y="180" font-size="14" fill="#A1A1AA">Landing Page Ripper</text>
+      <text x="24" y="202" font-size="14" fill="#A1A1AA">Full HTML + CSS + assets</text>
+      <text x="24" y="260" font-size="40" font-weight="700" fill="#C9A55C">ZIP</text>
+      <text x="24" y="290" font-size="13" fill="#A1A1AA" letter-spacing="1">OFFLINE ARCHIVE</text>
+    </g>
+    <g transform="translate(720,280)">
+      <rect width="300" height="360" rx="14" fill="#0C0C10" stroke="#1A1A22"/>
+      <rect x="24" y="28" width="60" height="6" fill="url(#gold)"/>
+      <text x="24" y="78" font-size="26" font-weight="700" fill="#F5F5F0">Proven Creatives</text>
+      <text x="24" y="112" font-size="16" fill="#A1A1AA">Identical creatives grouped</text>
+      <text x="24" y="136" font-size="16" fill="#A1A1AA">across advertisers</text>
+      <text x="24" y="180" font-size="14" fill="#A1A1AA">Proof levels</text>
+      <text x="24" y="202" font-size="14" fill="#A1A1AA">15+ / 30+ / 60+ / 90+ ads</text>
+      <text x="24" y="260" font-size="40" font-weight="700" fill="#C9A55C">90+</text>
+      <text x="24" y="290" font-size="13" fill="#A1A1AA" letter-spacing="1">LINKED ADS = ELITE</text>
+    </g>
+    <g transform="translate(1040,280)">
+      <rect width="300" height="360" rx="14" fill="#0C0C10" stroke="#1A1A22"/>
+      <rect x="24" y="28" width="60" height="6" fill="url(#gold)"/>
+      <text x="24" y="78" font-size="26" font-weight="700" fill="#F5F5F0">Winning Offers</text>
+      <text x="24" y="112" font-size="16" fill="#A1A1AA">Aggregated affiliate offers</text>
+      <text x="24" y="136" font-size="16" fill="#A1A1AA">across all tracked ads</text>
+      <text x="24" y="180" font-size="14" fill="#A1A1AA">ClickBank / Digistore24</text>
+      <text x="24" y="202" font-size="14" fill="#A1A1AA">BuyGoods / MaxWeb / WarriorPlus</text>
+      <text x="24" y="260" font-size="40" font-weight="700" fill="#C9A55C">40+</text>
+      <text x="24" y="290" font-size="13" fill="#A1A1AA" letter-spacing="1">AFFILIATE NETWORKS</text>
+    </g>
+  </g>
+  <g font-family="ui-sans-serif, -apple-system, Helvetica Neue, Arial">
+    <text x="80" y="740" font-size="14" fill="#A1A1AA" letter-spacing="2">AFFILIATE NETWORKS DETECTED</text>
+    <text x="80" y="780" font-size="22" font-weight="600" fill="#F5F5F0">ClickBank  ·  Digistore24  ·  BuyGoods  ·  MaxWeb  ·  WarriorPlus  ·  GiddyUp  ·  42+ others</text>
+    <text x="80" y="828" font-size="14" fill="#A1A1AA">Regex-based classification  ·  Daily Meta Ad Library crawl  ·  Meta-only</text>
+  </g>
+</svg>

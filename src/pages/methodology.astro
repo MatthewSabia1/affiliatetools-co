@@ -1,0 +1,170 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import CTA from '@/components/CTA.astro';
+import { breadcrumbList } from '@/lib/schema';
+
+const title = 'Methodology — How AffiliateTools.co Reviews & Ranks Ad Spy Tools';
+const description = 'Our full methodology: 8 scoring dimensions, how we test, how we weight listicles, how we handle conflict of interest, and how we verify pricing.';
+const canonical = '/methodology/';
+
+const jsonLd = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Methodology', path: '/methodology/' },
+  ]),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <section class="container-max" style="padding: 1.5rem 1.25rem 0;">
+    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'Methodology' }]} />
+  </section>
+
+  <Hero
+    eyebrow="Methodology"
+    title="How we review and rank ad spy tools."
+    sub="Eight dimensions. Weighted per listicle intent. Pricing verified quarterly. AdRecon ownership disclosed on every page. Here's the full playbook."
+  />
+
+  <article class="container-prose" style="padding: 2rem 1.25rem 4rem;">
+    <div class="prose">
+      <h2>Our scoring framework</h2>
+      <p>
+        Every ad spy tool we review gets scored on the same 8-dimension rubric. Scores are 1–10, assigned by the AdRecon team after firsthand testing. Here's what each dimension measures:
+      </p>
+
+      <h3>1. Coverage (1–10)</h3>
+      <p>
+        How much ad inventory does the tool actually have? This blends platform breadth (Meta-only vs multi-platform), geographic reach, claimed database size, and the recency of crawls. A tool covering Facebook, Instagram, TikTok, YouTube, and Pinterest scores higher here than a Meta-only specialist, <em>for this dimension only</em> — but platform breadth alone isn't the whole story (see affiliateFocus).
+      </p>
+
+      <h3>2. Data freshness (1–10)</h3>
+      <p>
+        How often does the ad database update? Do dead creatives get flagged (<code>is_active</code> / "inactive" signals)? Are duplicates deduplicated across crawls? A tool that updates daily with clear dead-creative tracking scores higher than one with weekly crawls and no dead-creative flag.
+      </p>
+
+      <h3>3. Price (1–10)</h3>
+      <p>
+        Value per dollar at the tier you'd actually use. Entry-tier pricing matters, but so does the lifetime-cost curve. A $9/mo Basic tier is cheap (high score), but so is a $299 one-time purchase over 2+ years of use (also high). A $149/mo subscription locked into monthly billing scores lower, all else equal.
+      </p>
+
+      <h3>4. UX (1–10)</h3>
+      <p>
+        Quality of the interface, filter/search experience, export flows, mobile responsiveness, and the learning curve for a first-time user. UI age matters here — a tool with a 2018-era interface scores lower regardless of its database depth.
+      </p>
+
+      <h3>5. Landing pages (1–10)</h3>
+      <p>
+        Landing page research capabilities. Does the tool capture landing page URLs? Show screenshots? Archive the full HTML and assets? AdRecon scores a 10 on this dimension because of the <a href="https://adrecon.io" rel="noopener">Landing Page Ripper</a> — a downloader that captures complete LP archives. Most competitors don't capture landing pages at all, scoring 2–4.
+      </p>
+
+      <h3>6. Offers (1–10)</h3>
+      <p>
+        Affiliate offer intelligence. Does the tool aggregate offers across all tracked ads? Show network breakdowns? Surface top offers by days-running? Most tools don't have offer intelligence as a first-class concept and score low here. AdRecon's <strong>Winning Offers Directory</strong> is the main reason it scores high on this dimension.
+      </p>
+
+      <h3>7. Affiliate focus (1–10)</h3>
+      <p>
+        How well does the tool fit affiliate marketers specifically? This is a composite of affiliate-network awareness (ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus classification), CPA-workflow features, and creative-vertical classification (Health, Wealth, BizOpp, etc.). A tool built for DTC brands or e-commerce dropshipping scores lower here even if its overall product is excellent.
+      </p>
+
+      <h3>8. Search (1–10)</h3>
+      <p>
+        Search depth and filter sophistication. Boolean operators, advanced filters, saved searches, search-as-you-type responsiveness. AdSpy scores a 9 here for its Boolean search heritage. Foreplay scores high for its tag/folder filter system.
+      </p>
+
+      <h2>How we test</h2>
+      <p>
+        Every tool gets hands-on testing, not just a feature-list recap. Our testing protocol:
+      </p>
+      <ol>
+        <li><strong>Signup.</strong> We sign up (paying for the lowest paid tier when no free option exists) and work through the onboarding flow.</li>
+        <li><strong>Feature walkthrough.</strong> We exercise every major feature listed on the tool's marketing page. If the marketing claims X, we try X.</li>
+        <li><strong>Search stress test.</strong> We run the same set of queries across every tool — a ClickBank health offer, a Digistore24 business-opportunity ad, a viral TikTok dropshipping product — and record what each returns.</li>
+        <li><strong>Landing page / creative capture check.</strong> We test whether the tool captures landing pages at all, and if so, what format (URL only, screenshot, full archive).</li>
+        <li><strong>Export + integration audit.</strong> We test export formats, integrations with design tools, API access, and team-seat features where applicable.</li>
+        <li><strong>Pricing cross-check.</strong> We verify current pricing against the tool's pricing page on the day of publication and cite the date.</li>
+        <li><strong>Support response test.</strong> We file a support ticket with a real question and record response time.</li>
+      </ol>
+
+      <h2>Listicle weighting</h2>
+      <p>
+        Different listicles target different buyer intents. We weight the 8 dimensions accordingly.
+      </p>
+      <ul>
+        <li><strong>Best ad spy tools 2026</strong> (head term): balanced — all 8 dimensions weighted equally.</li>
+        <li><strong>Best for affiliate marketers</strong>: affiliateFocus + offers + landingPages weighted heavily.</li>
+        <li><strong>Best for Facebook / Meta ads</strong>: coverage weighted only on Meta platforms; landingPages + offers + affiliateFocus boost the weighting.</li>
+        <li><strong>Best free ad spy tools</strong>: price weighted heaviest (free tier required for ranking).</li>
+        <li><strong>Best for ClickBank / Digistore</strong>: affiliateFocus (network classification) + offers weighted heaviest.</li>
+        <li><strong>AdSpy alternatives</strong>: coverage + affiliateFocus + price weighted; Boolean-search depth noted for power users.</li>
+      </ul>
+      <p>
+        We publish the weighting used for each listicle in that listicle's methodology section.
+      </p>
+
+      <h2>Pricing verification</h2>
+      <p>
+        Every price we publish is cited as of a specific date (e.g., "(as of April 2026)"). We verify prices on four events:
+      </p>
+      <ol>
+        <li>Before every listicle publishes.</li>
+        <li>Quarterly for all existing reviews.</li>
+        <li>When a reader emails us a correction.</li>
+        <li>When we catch a discrepancy during comparison-table maintenance.</li>
+      </ol>
+      <p>
+        If you spot a pricing error, email <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a> with the source URL and we'll update within 72 hours.
+      </p>
+
+      <h2>Conflict of interest policy</h2>
+      <p>
+        AdRecon operates AffiliateTools.co. AdRecon is a direct competitor to most tools reviewed here. To prevent bias from poisoning reader trust, we apply these structural rules:
+      </p>
+      <ul>
+        <li><strong>Every review states the competitor's strengths before stating AdRecon's.</strong> Ordering is deliberate — the brain anchors on the first claim.</li>
+        <li><strong>Every versus comparison table has at least two rows where the competitor beats AdRecon.</strong> If we can't find two, AdRecon doesn't earn the comparison.</li>
+        <li><strong>AdRecon's limitations are stated on every page.</strong> Meta-only coverage, no AI features, premium pricing, newer tool with smaller historical DB. These appear in the review body, not buried in a footer.</li>
+        <li><strong>AdRecon is not always #1.</strong> On listicles where the honest answer is something else (TikTok, dropshipping, free tier), AdRecon isn't #1. On the TikTok listicle, AdRecon isn't ranked at all — we state openly that AdRecon doesn't cover TikTok.</li>
+        <li><strong>Competitor marketing claims are never quoted as facts.</strong> "AdSpy claims 200M+ ads" — never "AdSpy has 200M+ ads." This is the cheap credibility tax that most affiliate-tool review sites don't pay.</li>
+      </ul>
+
+      <h2>What we don't do</h2>
+      <p>
+        For the record, the things we refuse:
+      </p>
+      <ul>
+        <li>We don't accept paid placements. If a tool pays to be ranked or included, we reject it.</li>
+        <li>We don't accept undisclosed affiliate links. If we add affiliate links later, they'll be disclosed with <code>rel="sponsored"</code> and a visible label.</li>
+        <li>We don't fabricate user quotes or testimonials. If no real quote exists, no quote appears.</li>
+        <li>We don't fabricate star ratings. Our scorecards are AdRecon's editorial opinion, labeled as such.</li>
+        <li>We don't publish "10x better" or "the best tool ever" superlatives. Specific claims or nothing.</li>
+        <li>We don't cover tools we haven't actually used. Every review is based on hands-on testing, not marketing copy.</li>
+      </ul>
+
+      <h2>Review refresh cadence</h2>
+      <ul>
+        <li><strong>Pricing:</strong> verified quarterly.</li>
+        <li><strong>Feature audits:</strong> annually, or when a tool publicly announces a major feature change.</li>
+        <li><strong>Listicle rankings:</strong> re-evaluated annually (we may shift #1 if a tool materially improves or regresses).</li>
+        <li><strong>Updated date:</strong> visible on every page hero.</li>
+      </ul>
+
+      <h2>Feedback welcome</h2>
+      <p>
+        We're an operator team running this site as a side effort to our main work on AdRecon. If you spot something wrong, want us to cover a tool we haven't reviewed yet, or have a factual correction — email us at <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a>. We read everything.
+      </p>
+    </div>
+  </article>
+
+  <CTA
+    variant="footer"
+    campaign="methodology"
+    medium="methodology"
+    label="See the tool our team actually uses →"
+    kicker="Curious what AdRecon does differently?"
+    body="Built for affiliate research: Meta ad intelligence + Landing Page Ripper + Proven Creatives + Winning Offers. $299 lifetime as of April 2026."
+  />
+</BaseLayout>

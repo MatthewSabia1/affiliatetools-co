@@ -1,0 +1,29 @@
+# build
+dist/
+.astro/
+.wrangler/
+
+# deps
+node_modules/
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editor
+.vscode/
+.idea/
+.DS_Store
+
+# research notes (internal — not committed)
+_research/
+
+# OS
+Thumbs.db

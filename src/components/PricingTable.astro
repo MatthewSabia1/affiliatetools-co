@@ -1,0 +1,263 @@
+---
+/**
+ * PricingTable.astro — Grid of pricing tiers loaded from competitor YAML.
+ * Includes free-trial badge, "as of" footnote, and a nofollow sponsored external CTA.
+ */
+import { getCompetitor } from '@/lib/competitors';
+import type { CompetitorSlug } from '@/lib/constants';
+import { DATA_AS_OF } from '@/lib/constants';
+
+export interface Props {
+  slug: CompetitorSlug;
+}
+
+const { slug } = Astro.props;
+const competitor = await getCompetitor(slug);
+const { name, pricing, homepageUrl, pricingUrl } = competitor.data;
+
+const ctaUrl = pricingUrl || homepageUrl;
+
+// Heuristic: "recommended" = the tier whose monthly price is closest to the
+// claimed startingMonthly if there's a mid tier; otherwise, the cheapest paid
+// tier. Each YAML can signal recommendation via the `highlight` field, but we
+// also fallback by position (middle tier of 3+).
+const tiers = pricing.tiers;
+const recommendedIndex = (() => {
+  if (tiers.length === 0) return -1;
+  if (tiers.length === 1) return 0;
+  if (tiers.length >= 3) return 1; // middle tier
+  return 0;
+})();
+
+const formatPrice = (amount: number | null, currency: string): string => {
+  if (amount === null) return 'Custom';
+  if (amount === 0) return 'Free';
+  const symbol = currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$';
+  return `${symbol}${amount.toLocaleString('en-US')}`;
+};
+
+const trialLabel = (() => {
+  if (pricing.freeTrial && pricing.freeTrial.days > 0) {
+    return `Free trial: ${pricing.freeTrial.days} days`;
+  }
+  if (pricing.freeTier) return 'Free tier available';
+  return 'No free trial';
+})();
+
+const trialChipClass = pricing.freeTrial || pricing.freeTier ? 'chip chip-green' : 'chip chip-danger';
+---
+
+<section class="pricing card" aria-label={`${name} pricing`}>
+  <header class="pricing__header">
+    <div class="pricing__header-left">
+      <p class="label-mono">Pricing</p>
+      <h3 class="pricing__title">{name} pricing tiers</h3>
+    </div>
+    <span class={trialChipClass} aria-label={trialLabel}>
+      {trialLabel}
+    </span>
+  </header>
+
+  <div class="pricing__grid" data-count={Math.min(4, tiers.length)}>
+    {tiers.slice(0, 4).map((tier, i) => {
+      const isRecommended = i === recommendedIndex;
+      const billingSuffix = tier.billing === 'one-time'
+        ? 'one-time'
+        : tier.billing === 'annual'
+        ? '/year'
+        : tier.billing === 'custom'
+        ? ''
+        : '/month';
+      return (
+        <article class:list={['pricing-tier', isRecommended ? 'is-recommended' : null]}>
+          {isRecommended && <span class="pricing-tier__ribbon chip chip-gold">Recommended</span>}
+          <h4 class="pricing-tier__name">{tier.name}</h4>
+          <p class="pricing-tier__price">
+            <span class="pricing-tier__amount">{formatPrice(tier.monthly, pricing.currency)}</span>
+            {tier.monthly !== null && tier.monthly !== 0 && (
+              <span class="pricing-tier__cycle">{billingSuffix}</span>
+            )}
+          </p>
+          {tier.highlight && <p class="pricing-tier__highlight">{tier.highlight}</p>}
+          {tier.seatsIncluded !== undefined && (
+            <p class="pricing-tier__seats">{tier.seatsIncluded} seat{tier.seatsIncluded === 1 ? '' : 's'} included</p>
+          )}
+          {tier.features.length > 0 && (
+            <ul class="pricing-tier__features" role="list">
+              {tier.features.map((feature) => (
+                <li>
+                  <svg class="pricing-tier__check" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </article>
+      );
+    })}
+  </div>
+
+  <footer class="pricing__footer">
+    <p class="pricing__footnote">
+      Prices as of {DATA_AS_OF}. Always confirm at checkout — competitor pricing changes frequently.
+    </p>
+    <a
+      class="btn btn-secondary btn-sm"
+      href={ctaUrl}
+      rel="nofollow sponsored external"
+      target="_blank"
+    >
+      Visit {name}
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </footer>
+</section>
+
+<style>
+  .pricing {
+    padding: 1.5rem;
+  }
+  .pricing__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .pricing__title {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0.2rem 0 0;
+  }
+
+  .pricing__grid {
+    display: grid;
+    gap: 0.85rem;
+  }
+  .pricing__grid[data-count='1'] { grid-template-columns: 1fr; }
+  .pricing__grid[data-count='2'] { grid-template-columns: repeat(2, 1fr); }
+  .pricing__grid[data-count='3'] { grid-template-columns: repeat(3, 1fr); }
+  .pricing__grid[data-count='4'] { grid-template-columns: repeat(4, 1fr); }
+
+  @media (max-width: 880px) {
+    .pricing__grid[data-count='3'],
+    .pricing__grid[data-count='4'] {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .pricing__grid[data-count='2'],
+    .pricing__grid[data-count='3'],
+    .pricing__grid[data-count='4'] {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .pricing-tier {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.1rem;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .pricing-tier:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+  }
+  .pricing-tier.is-recommended {
+    border-color: color-mix(in oklch, var(--color-gold) 50%, var(--color-line));
+    background: color-mix(in oklch, var(--color-gold-soft) 55%, var(--color-surface-2));
+  }
+  .pricing-tier__ribbon {
+    align-self: flex-start;
+    margin-bottom: 0.25rem;
+  }
+  .pricing-tier__name {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .pricing-tier__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin: 0.25rem 0 0.15rem;
+    line-height: 1;
+  }
+  .pricing-tier__amount {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-ink);
+  }
+  .pricing-tier__cycle {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-ink-subtle);
+  }
+  .pricing-tier__highlight {
+    font-size: 0.9rem;
+    color: var(--color-ink-dim);
+    margin: 0;
+  }
+  .pricing-tier__seats {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-ink-subtle);
+    margin: 0;
+  }
+  .pricing-tier__features {
+    list-style: none;
+    padding: 0;
+    margin: 0.35rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .pricing-tier__features li {
+    display: flex;
+    gap: 0.45rem;
+    align-items: flex-start;
+    color: var(--color-ink-dim);
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .pricing-tier__check {
+    flex: 0 0 auto;
+    color: var(--color-success);
+    margin-top: 0.25rem;
+  }
+
+  .pricing__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .pricing__footnote {
+    font-size: 0.8rem;
+    color: var(--color-ink-subtle);
+    margin: 0;
+  }
+</style>

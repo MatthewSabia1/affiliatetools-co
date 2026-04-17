@@ -1,0 +1,180 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import Hero from '@/components/Hero.astro';
+import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from '@/components/CTA.astro';
+import TOC from '@/components/TOC.astro';
+import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import { getCollection } from 'astro:content';
+import { absoluteUrl, routes } from '@/lib/constants';
+import {
+  breadcrumbList,
+  faqPage,
+  articleJsonLd,
+  itemListJsonLd,
+  organizationJsonLd,
+  type JsonLd,
+} from '@/lib/schema';
+
+export interface Props {
+  listicle: CollectionEntry<'listicles'>;
+  headings: MarkdownHeading[];
+}
+
+const { listicle, headings } = Astro.props;
+const { data: l } = listicle;
+const listicleSlug = listicle.slug;
+
+const pagePath = `/ad-spy-tools/${listicleSlug}/`;
+const pageUrl = absoluteUrl(pagePath);
+
+const crumbItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Ad Spy Tools', href: routes.hub() },
+  { name: l.title },
+];
+
+// Hydrate ranking with competitor data for ItemList JSON-LD.
+const competitors = await getCollection('competitors');
+const bySlug = new Map(competitors.map((c) => [c.data.slug, c.data]));
+
+const rankingItems = l.ranking.map((r) => {
+  const comp = bySlug.get(r.competitorSlug);
+  return {
+    position: r.rank,
+    name: comp?.name ?? r.competitorSlug,
+    description: r.verdict,
+    url: comp?.homepageUrl ?? `https://affiliatetools.co/ad-spy-tools/${r.competitorSlug}-review/`,
+    startingPrice: comp?.pricing.startingMonthly ?? null,
+    currency: comp?.pricing.currency,
+    features: comp?.strengths,
+  };
+});
+
+const winner = l.ranking.find((r) => r.rank === 1);
+const winnerComp = winner ? bySlug.get(winner.competitorSlug) : undefined;
+
+const intentLabel: Record<typeof l.intent, string> = {
+  'head-term': 'Head-term ranking',
+  'bottom-funnel': 'Bottom-funnel ranking',
+  'long-tail': 'Long-tail ranking',
+  alternatives: 'Alternatives ranking',
+};
+
+const jsonLd: JsonLd[] = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Ad Spy Tools', path: routes.hub() },
+    { name: l.title, path: pagePath },
+  ]),
+  articleJsonLd({
+    pageUrl,
+    headline: l.title,
+    description: l.description,
+    datePublished: l.publishDate,
+    dateModified: l.updatedDate,
+  }),
+  itemListJsonLd({ items: rankingItems }),
+  organizationJsonLd(),
+];
+
+if (l.faq && l.faq.length > 0) {
+  jsonLd.push(faqPage(l.faq));
+}
+---
+
+<BaseLayout
+  title={l.title}
+  description={l.description}
+  canonical={pagePath}
+  jsonLd={jsonLd}
+  pageType="article"
+>
+  <div class="container-wide" style="padding-top: 1.5rem;">
+    <Breadcrumb items={crumbItems} />
+  </div>
+
+  <Hero
+    eyebrow={intentLabel[l.intent]}
+    title={l.title}
+    sub={l.description}
+    updatedDate={l.updatedDate}
+  >
+    <span class="chip">{l.ranking.length} tools ranked</span>
+  </Hero>
+
+  {
+    winner && winnerComp && (
+      <section class="container-wide winner-banner-wrap" aria-label="Top pick">
+        <div class="winner-banner card card-accent">
+          <div class="winner-label label-mono">TL;DR — Our #1 Pick</div>
+          <div class="winner-title">
+            <strong>{winnerComp.name}</strong> — {winner.verdict}
+          </div>
+          <div class="winner-meta">
+            <span class="chip">Best for: {winner.bestFor}</span>
+            <span class="chip">{winner.priceNote}</span>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <article class="container-wide listicle-article">
+    <div class="listicle-grid">
+      <div class="listicle-main">
+        <AuthorshipBox publishDate={l.publishDate} updatedDate={l.updatedDate} />
+        <div class="prose">
+          <slot />
+        </div>
+      </div>
+      <aside class="listicle-sidebar">
+        <div class="sticky-sidebar listicle-sidebar-inner">
+          <TOC headings={headings} />
+          <CTA
+            variant="mid"
+            campaign={listicleSlug}
+            medium="listicle"
+            label="Try AdRecon"
+          />
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <style>
+    .listicle-article {
+      padding-block: 2.5rem 4rem;
+    }
+    .listicle-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 3rem;
+    }
+    @media (min-width: 1024px) {
+      .listicle-grid {
+        grid-template-columns: minmax(0, 1fr) 300px;
+      }
+    }
+    .listicle-sidebar-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .winner-banner-wrap {
+      padding-block: 1.25rem 0.25rem;
+    }
+    .winner-banner {
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .winner-label { color: var(--color-gold); }
+    .winner-title { font-size: 1.25rem; color: var(--color-ink); line-height: 1.45; }
+    .winner-title strong { color: var(--color-gold); }
+    .winner-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  </style>
+</BaseLayout>

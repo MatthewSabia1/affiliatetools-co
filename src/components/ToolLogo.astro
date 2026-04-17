@@ -1,0 +1,83 @@
+---
+/**
+ * ToolLogo.astro — Renders a competitor's logo from YAML data.
+ * Handles both raster and SVG via <img>, with optional light-mode invert + wordmark.
+ */
+import { getCompetitor } from '@/lib/competitors';
+import type { CompetitorSlug } from '@/lib/constants';
+
+export interface Props {
+  slug: CompetitorSlug;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  showName?: boolean;
+}
+
+const { slug, size = 'md', showName = false } = Astro.props;
+
+const competitor = await getCompetitor(slug);
+const { name, logo } = competitor.data;
+
+const SIZES: Record<NonNullable<Props['size']>, number> = {
+  sm: 20,
+  md: 28,
+  lg: 40,
+  xl: 64,
+};
+
+const px = SIZES[size];
+const width = logo.width ?? px;
+const height = logo.height ?? px;
+// Preserve intrinsic aspect ratio but scale the displayed height to `px`.
+const aspect = width && height ? width / height : 1;
+const displayH = px;
+const displayW = Math.round(displayH * aspect);
+
+const logoPath = logo.path.startsWith('/') ? logo.path : `/${logo.path}`;
+---
+
+<span class:list={['tool-logo', `size-${size}`, logo.invertInLight ? 'invert-in-light' : null]}>
+  <img
+    src={logoPath}
+    alt={`${name} logo`}
+    width={displayW}
+    height={displayH}
+    loading="lazy"
+    decoding="async"
+  />
+  {showName && <span class="tool-logo__name">{name}</span>}
+</span>
+
+<style>
+  .tool-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    line-height: 1;
+    vertical-align: middle;
+  }
+  .tool-logo img {
+    display: block;
+    object-fit: contain;
+    max-height: 100%;
+  }
+  .tool-logo__name {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  .size-sm .tool-logo__name { font-size: 0.9rem; }
+  .size-md .tool-logo__name { font-size: 1rem; }
+  .size-lg .tool-logo__name { font-size: 1.15rem; }
+  .size-xl .tool-logo__name { font-size: 1.4rem; }
+
+  /* Site is dark-first; invert is a hint for logos that were authored
+     for light backgrounds. Flip to a near-white rendering. */
+  @media (prefers-color-scheme: dark) {
+    .invert-in-light img { filter: none; }
+  }
+  .invert-in-light img {
+    filter: brightness(0) invert(1);
+  }
+</style>

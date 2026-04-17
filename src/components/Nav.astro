@@ -1,0 +1,186 @@
+---
+/**
+ * Top navigation. Sticky, dark surface with blur backdrop.
+ * Mobile: <details> element for no-JS hamburger.
+ */
+import { buildAdreconCta, routes, SITE_URL } from '@/lib/constants';
+
+const ctaHref = buildAdreconCta({ medium: 'home', campaign: 'nav' });
+
+const links = [
+  { href: routes.hub(), label: 'Ad Spy Tools' },
+  { href: '/guides/', label: 'Guides' },
+  { href: routes.methodology(), label: 'Methodology' },
+  { href: routes.about(), label: 'About' },
+];
+
+const { pathname } = Astro.url ?? new URL('/', SITE_URL);
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+
+<header class="site-nav">
+  <div class="container-wide site-nav__inner">
+    <a class="site-nav__logo" href="/" aria-label="AffiliateTools.co home">
+      <span class="site-nav__logo-name">AffiliateTools</span>
+      <span class="site-nav__logo-tld">.co</span>
+    </a>
+
+    <nav class="site-nav__links" aria-label="Primary">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            class:list={['site-nav__link', { 'site-nav__link--active': isActive(l.href) }]}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+      <a
+        class="btn btn-primary btn-sm site-nav__cta"
+        href={ctaHref}
+        rel="noopener"
+      >
+        AdRecon <span aria-hidden="true">→</span>
+      </a>
+    </nav>
+
+    <details class="site-nav__mobile">
+      <summary aria-label="Open navigation menu">
+        <span class="site-nav__hamburger" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </summary>
+      <div class="site-nav__drawer">
+        {
+          links.map((l) => (
+            <a href={l.href} class="site-nav__drawer-link">
+              {l.label}
+            </a>
+          ))
+        }
+        <a class="btn btn-primary site-nav__drawer-cta" href={ctaHref} rel="noopener">
+          AdRecon <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in oklch, var(--color-canvas) 78%, transparent);
+    border-bottom: 1px solid var(--color-line);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  }
+  .site-nav__inner {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .site-nav__logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.08rem;
+    text-decoration: none;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+  .site-nav__logo:hover { color: var(--color-ink); text-decoration: none; }
+  .site-nav__logo-name { color: var(--color-ink); }
+  .site-nav__logo-tld { color: var(--color-ink-subtle); }
+
+  .site-nav__links {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .site-nav__link {
+    font-size: 0.92rem;
+    color: var(--color-ink-mute);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .site-nav__link:hover { color: var(--color-ink); text-decoration: none; }
+  .site-nav__link--active { color: var(--color-ink); }
+
+  .site-nav__cta { margin-left: 0.5rem; }
+
+  /* Mobile */
+  .site-nav__mobile {
+    position: relative;
+    display: block;
+  }
+  .site-nav__mobile > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+  }
+  .site-nav__mobile > summary::-webkit-details-marker { display: none; }
+  .site-nav__hamburger {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 20px;
+  }
+  .site-nav__hamburger > span {
+    display: block;
+    height: 2px;
+    background: var(--color-ink);
+    border-radius: 2px;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .site-nav__mobile[open] > summary .site-nav__hamburger > span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .site-nav__mobile[open] > summary .site-nav__hamburger > span:nth-child(2) {
+    opacity: 0;
+  }
+  .site-nav__mobile[open] > summary .site-nav__hamburger > span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+  .site-nav__drawer {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    right: 0;
+    min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+  .site-nav__drawer-link {
+    padding: 0.65rem 0.75rem;
+    color: var(--color-ink-dim);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+  }
+  .site-nav__drawer-link:hover { background: var(--color-surface-2); color: var(--color-ink); text-decoration: none; }
+  .site-nav__drawer-cta { margin-top: 0.4rem; }
+
+  @media (min-width: 768px) {
+    .site-nav__links { display: flex; }
+    .site-nav__mobile { display: none; }
+  }
+</style>

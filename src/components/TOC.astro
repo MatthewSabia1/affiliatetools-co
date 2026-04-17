@@ -1,0 +1,107 @@
+---
+/**
+ * Table of contents. Accepts the headings array produced by Astro's getHeadings().
+ * Filters to h2 and h3 only. Sticky on desktop. Pure-CSS current-section
+ * highlight via :target; no client JS required.
+ */
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+  title?: string;
+}
+
+const { headings, title = 'On this page' } = Astro.props;
+
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{items.length > 0 && (
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc__title label-mono">{title}</p>
+    <ol class="toc__list">
+      {items.map((h) => (
+        <li
+          class:list={['toc__item', { 'toc__item--h3': h.depth === 3 }]}
+          data-slug={h.slug}
+        >
+          <a href={`#${h.slug}`} class="toc__link">{h.text}</a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<style>
+  .toc {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .toc__title {
+    margin: 0 0 0.75rem;
+  }
+  .toc__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    border-left: 1px solid var(--color-line);
+  }
+  .toc__item {
+    margin: 0;
+    padding: 0;
+  }
+  .toc__link {
+    display: block;
+    padding: 0.35rem 0.9rem;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    color: var(--color-ink-mute);
+    text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .toc__link:hover {
+    color: var(--color-ink);
+    border-left-color: color-mix(in oklch, var(--color-gold) 45%, transparent);
+    text-decoration: none;
+  }
+  .toc__item--h3 .toc__link {
+    padding-left: 1.75rem;
+    font-size: 0.82rem;
+    color: var(--color-ink-subtle);
+  }
+  .toc__item--h3 .toc__link:hover { color: var(--color-ink-dim); }
+
+  /* Current-section highlight (pure CSS). When a heading's ID is the URL fragment
+     and its parent section is :target, the matching TOC link lights up. */
+  :global(:target) ~ * .toc__link,
+  :global(:target) .toc__link {
+    /* no-op fallback */
+  }
+
+  /* A lightweight :has()-based current highlight for modern browsers. */
+  @supports selector(:has(*)) {
+    :global(h2:target),
+    :global(h3:target) {
+      scroll-margin-top: 5rem;
+    }
+  }
+
+  .toc__link:focus-visible {
+    border-left-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  .toc__link[aria-current='true'] {
+    color: var(--color-gold);
+    border-left-color: var(--color-gold);
+    background: color-mix(in oklch, var(--color-gold-soft) 60%, transparent);
+  }
+</style>

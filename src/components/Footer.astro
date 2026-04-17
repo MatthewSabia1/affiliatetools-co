@@ -1,0 +1,204 @@
+---
+/**
+ * Editorial footer. 4-column desktop grid, stacked on mobile.
+ */
+import {
+  COMPETITOR_NAMES,
+  VERSUS_SLUGS,
+  COMPETITOR_SLUGS,
+  LISTICLE_SLUGS,
+  ADRECON_HOME_URL,
+  routes,
+  SITE_NAME,
+  SITE_TAGLINE,
+} from '@/lib/constants';
+
+const reviewCols = COMPETITOR_SLUGS.map((slug) => ({
+  href: routes.review(slug),
+  label: `${COMPETITOR_NAMES[slug]} review`,
+}));
+
+const versusCols = VERSUS_SLUGS.map((slug) => ({
+  href: routes.versus(slug),
+  label: `AdRecon vs ${COMPETITOR_NAMES[slug]}`,
+}));
+
+const listicleLabels: Record<(typeof LISTICLE_SLUGS)[number], string> = {
+  'best-ad-spy-tools-2026': 'Best ad spy tools of 2026',
+  'best-ad-spy-tools-for-affiliate-marketers': 'Best for affiliate marketers',
+  'best-ad-spy-tools-for-facebook-ads': 'Best for Facebook ads',
+  'best-ad-spy-tools-for-clickbank': 'Best for ClickBank',
+  'adspy-alternatives': 'AdSpy alternatives',
+  'best-free-ad-spy-tools': 'Best free ad spy tools',
+};
+
+const guideCols = LISTICLE_SLUGS.map((slug) => ({
+  href: routes.listicle(slug),
+  label: listicleLabels[slug],
+}));
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container-wide site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__col site-footer__col--brand">
+        <a class="site-footer__logo" href="/" aria-label={`${SITE_NAME} home`}>
+          <span class="site-footer__logo-name">AffiliateTools</span>
+          <span class="site-footer__logo-tld">.co</span>
+        </a>
+        <p class="site-footer__tagline">{SITE_TAGLINE}</p>
+        <p class="site-footer__operated">
+          Operated by <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a> — we disclose this
+          openly. See our <a href={routes.methodology()}>methodology</a> for how we test.
+        </p>
+      </div>
+
+      <div class="site-footer__col">
+        <h3 class="site-footer__heading">Reviews</h3>
+        <ul class="site-footer__list">
+          {reviewCols.map((l) => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h3 class="site-footer__heading">Head-to-head</h3>
+        <ul class="site-footer__list">
+          {versusCols.map((l) => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h3 class="site-footer__heading">Guides</h3>
+        <ul class="site-footer__list">
+          {guideCols.map((l) => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__legal">
+      <p class="site-footer__copy">
+        © {year} {SITE_NAME}. All trademarks property of their respective owners.
+      </p>
+      <ul class="site-footer__legal-links">
+        <li><a href={routes.about()}>About</a></li>
+        <li><a href={routes.methodology()}>Methodology</a></li>
+        <li><a href={routes.contact()}>Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 5rem;
+    border-top: 1px solid var(--color-line);
+    background: linear-gradient(180deg, transparent, color-mix(in oklch, var(--color-surface) 55%, transparent));
+  }
+  .site-footer__inner {
+    padding-top: 3.5rem;
+    padding-bottom: 2rem;
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  @media (min-width: 640px) {
+    .site-footer__grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .site-footer__grid { grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 3rem; }
+  }
+  .site-footer__col--brand { max-width: 22rem; }
+  .site-footer__logo {
+    display: inline-flex;
+    align-items: baseline;
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    line-height: 1;
+  }
+  .site-footer__logo:hover { color: var(--color-ink); text-decoration: none; }
+  .site-footer__logo-name { color: var(--color-ink); }
+  .site-footer__logo-tld { color: var(--color-ink-subtle); }
+  .site-footer__tagline {
+    margin: 0.9rem 0 0.75rem;
+    color: var(--color-ink-dim);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .site-footer__operated {
+    color: var(--color-ink-mute);
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .site-footer__heading {
+    font-size: 0.74rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-subtle);
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+  .site-footer__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .site-footer__list li { margin: 0; color: var(--color-ink-mute); }
+  .site-footer__list a {
+    color: var(--color-ink-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    transition: color 0.15s ease;
+  }
+  .site-footer__list a:hover { color: var(--color-ink); text-decoration: underline; text-decoration-color: color-mix(in oklch, var(--color-gold) 50%, transparent); }
+
+  .site-footer__legal {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  @media (min-width: 768px) {
+    .site-footer__legal { flex-direction: row; align-items: center; gap: 1.5rem; }
+  }
+  .site-footer__copy {
+    margin: 0;
+    color: var(--color-ink-subtle);
+    font-size: 0.82rem;
+  }
+  .site-footer__legal-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.25rem;
+  }
+  .site-footer__legal-links li { margin: 0; }
+  .site-footer__legal-links a {
+    color: var(--color-ink-mute);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+  .site-footer__legal-links a:hover { color: var(--color-ink); text-decoration: underline; }
+</style>

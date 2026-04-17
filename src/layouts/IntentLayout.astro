@@ -1,0 +1,111 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import Hero from '@/components/Hero.astro';
+import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from '@/components/CTA.astro';
+import { routes, absoluteUrl } from '@/lib/constants';
+import {
+  breadcrumbList,
+  articleJsonLd,
+  faqPage,
+  organizationJsonLd,
+  type JsonLd,
+} from '@/lib/schema';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  competitorSlug?: string;
+  intentKind: 'worth-it' | 'pricing' | 'free-trial' | 'alternatives';
+  publishDate: string;
+  updatedDate: string;
+  faq?: Array<{ q: string; a: string }>;
+  campaignSlug: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  intentKind,
+  publishDate,
+  updatedDate,
+  faq,
+  campaignSlug,
+} = Astro.props;
+
+const crumbItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Ad Spy Tools', href: routes.hub() },
+  { name: title },
+];
+
+const eyebrowLabel: Record<Props['intentKind'], string> = {
+  'worth-it': 'Buyer question',
+  pricing: 'Pricing breakdown',
+  'free-trial': 'Free-trial guide',
+  alternatives: 'Alternatives',
+};
+
+const pageUrl = absoluteUrl(canonical);
+
+const jsonLd: JsonLd[] = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Ad Spy Tools', path: routes.hub() },
+    { name: title, path: canonical },
+  ]),
+  articleJsonLd({
+    pageUrl,
+    headline: title,
+    description,
+    datePublished: publishDate,
+    dateModified: updatedDate,
+  }),
+  organizationJsonLd(),
+];
+
+if (faq && faq.length > 0) {
+  jsonLd.push(faqPage(faq));
+}
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLd={jsonLd}
+  pageType="article"
+>
+  <div class="container-wide" style="padding-top: 1.5rem;">
+    <Breadcrumb items={crumbItems} />
+  </div>
+
+  <Hero
+    eyebrow={eyebrowLabel[intentKind]}
+    title={title}
+    sub={description}
+    updatedDate={updatedDate}
+  />
+
+  <article class="container-prose intent-article">
+    <AuthorshipBox publishDate={publishDate} updatedDate={updatedDate} />
+    <div class="prose">
+      <slot />
+    </div>
+    <div class="intent-footer-cta">
+      <CTA variant="footer" campaign={campaignSlug} medium="review" label="Try AdRecon" />
+    </div>
+  </article>
+
+  <style>
+    .intent-article {
+      padding-block: 2.5rem 4rem;
+    }
+    .intent-footer-cta {
+      margin-top: 3rem;
+    }
+  </style>
+</BaseLayout>

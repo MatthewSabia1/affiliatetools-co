@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" role="img" aria-label="AdRecon scale and proof — 300,000+ records across Meta Ad Library">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#06060A"/>
+      <stop offset="1" stop-color="#0C0C10"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <g font-family="ui-sans-serif, -apple-system, Helvetica Neue, Arial">
+    <text x="80" y="120" font-size="20" font-weight="600" fill="#A1A1AA" letter-spacing="2">ADRECON / SCALE + SIGNAL</text>
+    <text x="80" y="180" font-family="ui-serif, Georgia, serif" font-size="48" font-weight="700" fill="#F5F5F0">Proof-first ranking. Built deep on Meta.</text>
+  </g>
+  <g transform="translate(80, 260)" font-family="ui-sans-serif, -apple-system, Helvetica Neue, Arial">
+    <g>
+      <rect width="400" height="180" rx="14" fill="#0C0C10" stroke="#1A1A22"/>
+      <text x="32" y="56" font-size="14" fill="#A1A1AA" letter-spacing="2">RECORDS TRACKED</text>
+      <text x="32" y="128" font-size="72" font-weight="700" fill="#C9A55C">300,000+</text>
+      <text x="32" y="158" font-size="13" fill="#A1A1AA">ads · creatives · landing pages · offers</text>
+    </g>
+    <g transform="translate(420, 0)">
+      <rect width="400" height="180" rx="14" fill="#0C0C10" stroke="#1A1A22"/>
+      <text x="32" y="56" font-size="14" fill="#A1A1AA" letter-spacing="2">PROFITABILITY SIGNAL</text>
+      <text x="32" y="128" font-size="72" font-weight="700" fill="#34D399">120+ days</text>
+      <text x="32" y="158" font-size="13" fill="#A1A1AA">ads running this long = confirmed profitable</text>
+    </g>
+    <g transform="translate(840, 0)">
+      <rect width="400" height="180" rx="14" fill="#0C0C10" stroke="#1A1A22"/>
+      <text x="32" y="56" font-size="14" fill="#A1A1AA" letter-spacing="2">UPDATE CADENCE</text>
+      <text x="32" y="128" font-size="72" font-weight="700" fill="#F5F5F0">Daily</text>
+      <text x="32" y="158" font-size="13" fill="#A1A1AA">Meta Ad Library crawl + dead-creative tracking</text>
+    </g>
+  </g>
+  <g transform="translate(80, 480)" font-family="ui-sans-serif, -apple-system, Helvetica Neue, Arial">
+    <rect width="1280" height="320" rx="14" fill="#0C0C10" stroke="#1A1A22"/>
+    <text x="32" y="52" font-size="14" fill="#A1A1AA" letter-spacing="2">PROVEN CREATIVE TIERS</text>
+    <g transform="translate(32, 84)">
+      <rect x="0"    y="0" width="280" height="180" rx="10" fill="#0C0C10" stroke="#1A1A22"/>
+      <text x="20" y="36" font-size="14" fill="#A1A1AA">15+ linked ads</text>
+      <text x="20" y="96" font-size="48" font-weight="700" fill="#F5F5F0">Emerging</text>
+      <text x="20" y="140" font-size="13" fill="#A1A1AA">Early proof of traction</text>
+
+      <rect x="300" y="0" width="280" height="180" rx="10" fill="#0C0C10" stroke="#1A1A22"/>
+      <text x="320" y="36" font-size="14" fill="#A1A1AA">30+ linked ads</text>
+      <text x="320" y="96" font-size="48" font-weight="700" fill="#F5F5F0">Validated</text>
+      <text x="320" y="140" font-size="13" fill="#A1A1AA">Multi-advertiser confirmation</text>
+
+      <rect x="600" y="0" width="280" height="180" rx="10" fill="#0C0C10" stroke="#1A1A22"/>
+      <text x="620" y="36" font-size="14" fill="#A1A1AA">60+ linked ads</text>
+      <text x="620" y="96" font-size="48" font-weight="700" fill="#C9A55C">Proven</text>
+      <text x="620" y="140" font-size="13" fill="#A1A1AA">Repeatable winner across accounts</text>
+
+      <rect x="900" y="0" width="280" height="180" rx="10" fill="#0C0C10" stroke="#1A1A22"/>
+      <text x="920" y="36" font-size="14" fill="#A1A1AA">90+ linked ads</text>
+      <text x="920" y="96" font-size="48" font-weight="700" fill="#34D399">Elite</text>
+      <text x="920" y="140" font-size="13" fill="#A1A1AA">Top-tier swipe-file candidate</text>
+    </g>
+  </g>
+</svg>

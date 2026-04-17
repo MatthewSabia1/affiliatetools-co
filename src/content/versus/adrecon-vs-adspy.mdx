@@ -1,0 +1,136 @@
+---
+competitorSlug: "adspy"
+title: "AdRecon vs AdSpy (2026): Which Ad Spy Tool Wins for Affiliate Marketers?"
+description: "Full AdRecon vs AdSpy comparison — pricing math, platform coverage, search depth, landing-page tools, and use-case-specific verdicts. Updated April 2026."
+publishDate: "2026-04-17"
+updatedDate: "2026-04-17"
+tldr:
+  chooseAdrecon: "You run Meta affiliate campaigns on ClickBank, Digistore24, or similar CPA networks — AdRecon's 4-pillar stack (ads + landing pages + offers + creatives) and $299 lifetime pricing win."
+  chooseCompetitor: "You need Boolean search operators across AdSpy's 10-year Meta ad database and don't need landing-page archives, affiliate-network classification, or creative concept grouping."
+focusAxes:
+  - price
+  - affiliateFocus
+  - landingPages
+  - offers
+  - search
+  - coverage
+faq:
+  - q: "Is AdRecon cheaper than AdSpy?"
+    a: "Over any horizon longer than 2 months, yes. AdRecon's $299 lifetime (one-time) costs less than 2 months of AdSpy at $149/mo ($298 for 2 months). Year one: AdSpy = $1,788, AdRecon = $299 — difference of $1,489. Over 5 years assuming AdSpy holds price: AdSpy = $8,940, AdRecon = $299 — $8,641 savings."
+  - q: "Does AdRecon cover as many Meta ads as AdSpy?"
+    a: "Not in total historical count. AdSpy has been crawling Meta since approximately 2015 and claims 200M+ indexed ads. AdRecon launched in 2026 and currently tracks 300,000+ records (ads, creatives, landing pages, offers combined). AdSpy wins on historical depth; AdRecon wins on affiliate-specific classification and the 4-pillar stack. Different strengths."
+  - q: "Can I use both AdRecon and AdSpy?"
+    a: "Yes, and some serious affiliates do. Use AdSpy for Boolean search across historical Meta ads; use AdRecon for affiliate-network classification, landing page archives, and offer intelligence. Combined annual cost: AdSpy $1,788 + AdRecon $299 one-time = $2,087 year one. For researchers with budget, the two-tool stack is viable."
+  - q: "Which has better search?"
+    a: "AdSpy wins on search depth — Boolean operators (AND / OR / NOT) across multiple fields are native to AdSpy and absent in AdRecon. AdRecon's search is filter-chip based, more modern but less expressive. If Boolean queries are part of your workflow, this difference matters."
+  - q: "Which has landing page archives?"
+    a: "AdRecon. This is a structural difference — AdRecon's Landing Page Ripper captures complete HTML/CSS/assets as ZIP files. AdSpy shows you destination URLs only. For LP teardown workflows, AdRecon is the only option between these two tools."
+  - q: "Does AdSpy classify ClickBank / Digistore / BuyGoods?"
+    a: "No. AdSpy doesn't auto-classify affiliate networks. Manual tagging via domain filters required. AdRecon auto-detects ClickBank, Digistore24, BuyGoods, MaxWeb, and WarriorPlus via regex-based URL pattern matching."
+draft: false
+---
+
+import CTA from '@/components/CTA.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
+import UseCaseScenarios from '@/components/UseCaseScenarios.astro';
+import ProsCons from '@/components/ProsCons.astro';
+import FAQ from '@/components/FAQ.astro';
+
+## TL;DR
+
+**Choose AdRecon if:** You run affiliate campaigns on Meta (Facebook, Instagram, Threads) — especially on ClickBank, Digistore24, BuyGoods, MaxWeb, or WarriorPlus. AdRecon's network classification, Landing Page Ripper, Winning Offers Directory, and $299 lifetime pricing fit affiliate research workflows. Break even vs AdSpy in under 3 months; save ~$1,500/year from month 4 onward.
+
+**Choose AdSpy if:** You need Boolean search operators across AdSpy's ~10-year Meta historical ad database, are comfortable with older UX, and don't need landing page archives or affiliate-offer intelligence. Worth the $149/mo for Boolean-query power users.
+
+**Both cover Meta only.** Neither touches TikTok, YouTube, or Google. If you need those, use PiPiADS, BigSpy, or PowerAdSpy alongside.
+
+<ComparisonTable slugs={["adrecon", "adspy"]} />
+
+## Where AdSpy wins
+
+**Boolean search operators.** AdSpy's search language — `text:fitness AND cta:buy NOT keyword:detox` — is unmatched in the category. AdRecon uses filter chips. If your workflow involves complex repeatable queries, AdSpy is genuinely hard to replace.
+
+**Historical ad database.** AdSpy has been crawling Meta since approximately 2015. AdRecon launched 2026. If you need to research a 2018 campaign's evolution, AdSpy's historical span wins.
+
+**Affiliate-community familiarity.** Since 2015, AdSpy has been the default "ad spy tool" reference in affiliate marketing courses, forums, and YouTube tutorials. If your team is already fluent in AdSpy's UI, switching costs are real.
+
+**Meta-only focus since 2015.** A decade of single-platform specialization means the Meta crawl is mature. Edge cases handled. Infrastructure stable.
+
+## Where AdRecon wins
+
+**The 4-pillar stack (ads + landing pages + offers + creatives).** AdSpy is one pillar: ads. AdRecon ships four integrated pillars — Ad Feed, Winning Lander Vault, Proven Creatives, Winning Offers Directory. For affiliate research workflows that span offers → landing pages → ads → creatives, the integrated stack is a structural advantage.
+
+**Affiliate-network classification.** AdRecon auto-detects ClickBank, Digistore24, BuyGoods, MaxWeb, and WarriorPlus via regex-based URL pattern matching. AdSpy doesn't. For CPA affiliates, this is hours per week of research time saved.
+
+**Landing Page Ripper.** AdRecon's built-in landing page archiver (Puppeteer + SingleFile, 10 rips / 15 min, 100MB ceiling) downloads complete LP archives as ZIPs. AdSpy shows URLs only. No other ad spy tool has this feature.
+
+**Winning Offers Directory.** Aggregate view of all tracked offers with per-network breakdowns. AdSpy is ad-centric; AdRecon is offer-aware.
+
+**Proven Creatives (cross-advertiser grouping).** When the same creative runs across multiple advertisers, AdRecon groups it with proof levels (15+, 30+, 60+, 90+ linked ads). AdSpy shows each instance as a separate ad.
+
+**Dead creative tracking.** AdRecon's `is_active` flag exposes ads that stopped running. AdSpy doesn't surface this as a first-class signal.
+
+**Lifetime pricing.** $299 one-time vs $149/mo recurring. The TCO difference compounds: over 3 years, AdRecon saves $5,065 vs AdSpy. Over 5 years, $8,641.
+
+**Modern UX.** AdRecon has a 2026-era design; AdSpy's UI is substantially unchanged since 2018.
+
+## Pricing comparison
+
+| | AdRecon | AdSpy |
+|---|---|---|
+| Entry price | $299 one-time | $149/mo |
+| Billing | Lifetime | Recurring monthly |
+| Free trial | No (7-day money-back) | No (3-day money-back) |
+| Year 1 cost | $299 | $1,788 |
+| Year 3 cost | $299 | $5,364 |
+| Year 5 cost | $299 | $8,940 |
+
+**Prices as of April 2026.** Verify current at each tool's pricing page.
+
+**Break-even math.** At AdSpy's $149/mo, paying AdRecon's $299 upfront pays back in 2.0 months. After month 2, you're saving $149/mo indefinitely. Over a 3-year tool lifecycle, the net savings are roughly $5,000 — real money for a solo affiliate.
+
+## Platform coverage
+
+Both tools are **Meta only** — Facebook, Instagram, and (for AdRecon) Threads. Neither covers TikTok, YouTube, Google, or Pinterest.
+
+This matters because "Meta-only" limits both tools to a subset of the affiliate ecosystem. If your campaigns run outside Meta, you need an additional tool:
+- **TikTok →** PiPiADS or Minea
+- **YouTube →** PowerAdSpy or BigSpy
+- **Google Display / Native →** PowerAdSpy
+- **Pinterest →** BigSpy or Minea
+- **Multi-platform generalist →** BigSpy (free tier start)
+
+For Meta-first affiliates, the Meta-only focus is actually a feature — depth over breadth.
+
+## Use-case scenarios
+
+<UseCaseScenarios scenarios={[
+  { persona: "Solo ClickBank affiliate with $150/mo+ tool budget", verdict: "AdRecon wins. Auto-classifies ClickBank creatives, Landing Page Ripper archives funnels, $299 lifetime pays back in 2 months.", recommendation: "adrecon" },
+  { persona: "Power user who writes repeatable search queries", verdict: "AdSpy wins. Boolean operators are native and genuinely hard to replicate with filter chips.", recommendation: "competitor", competitorName: "AdSpy" },
+  { persona: "Media buyer needing to archive competitor landing pages", verdict: "AdRecon wins. No other ad spy tool has the Landing Page Ripper.", recommendation: "adrecon" },
+  { persona: "Researcher studying Meta ads from 2018-2022", verdict: "AdSpy wins. Historical database span beats AdRecon's 2026-present coverage.", recommendation: "competitor", competitorName: "AdSpy" },
+  { persona: "CPA affiliate researching Digistore24 or BuyGoods offers", verdict: "AdRecon wins. Auto-classifies these networks; AdSpy requires manual tagging.", recommendation: "adrecon" },
+  { persona: "Agency creative strategist building client briefs", verdict: "Neither. Use Foreplay — modern UI, brief builder, swipe files, agency workflows.", recommendation: "other", competitorName: "Foreplay" }
+]} />
+
+## Can you use both?
+
+Yes. At total Year 1 cost of $2,087 (AdRecon $299 lifetime + AdSpy $1,788/year), some serious affiliates run both:
+- AdSpy for Boolean search + historical depth on Meta
+- AdRecon for the 4-pillar stack + affiliate network classification + Landing Page Ripper
+
+After Year 1, the incremental cost is just AdSpy's $1,788/year since AdRecon is already paid. For 6-figure affiliates where research time is the bottleneck, the two-tool stack is reasonable. For solo operators under 6-figure revenue, pick one.
+
+## Verdict
+
+For affiliate marketers running Meta campaigns on ClickBank, Digistore24, or related networks — AdRecon is the better first pick. The 4-pillar stack, affiliate-network classification, Landing Page Ripper, and lifetime pricing fit the CPA workflow cleanly. AdSpy's Boolean search advantage doesn't outweigh the structural advantages AdRecon has for this specific use case.
+
+For Boolean-query power users who live in search syntax and need historical depth — AdSpy's advantages are real and worth the $149/mo. Don't force-fit AdRecon onto a workflow it wasn't designed for.
+
+For multi-platform campaigns — neither is sufficient alone. Stack with PiPiADS (TikTok), PowerAdSpy (Native/Google Display), or BigSpy (generalist).
+
+<CTA variant="mid" campaign="adrecon-vs-adspy" medium="versus" kicker="The 4-pillar stack vs Boolean search — which fits your workflow?" body="AdRecon: 300,000+ records, affiliate-network classification, Landing Page Ripper, $299 lifetime. AdSpy: Boolean search depth, 10-year Meta history, $149/mo recurring." />
+
+## FAQ
+
+<FAQ items={frontmatter.faq} />

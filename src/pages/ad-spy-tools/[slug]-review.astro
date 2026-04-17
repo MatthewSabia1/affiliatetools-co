@@ -1,0 +1,32 @@
+---
+import type { GetStaticPaths } from 'astro';
+import ReviewLayout from '@/layouts/ReviewLayout.astro';
+import RelatedLinks from '@/components/RelatedLinks.astro';
+import { getAllReviews } from '@/lib/competitors';
+import { getEntry } from 'astro:content';
+import type { CompetitorSlug } from '@/lib/constants';
+
+export const getStaticPaths = (async () => {
+  const reviews = await getAllReviews();
+  return reviews.map((review) => ({
+    params: { slug: review.data.competitorSlug },
+    props: { review },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = {
+  review: Awaited<ReturnType<typeof getAllReviews>>[number];
+};
+
+const { review } = Astro.props as Props;
+const competitor = await getEntry('competitors', review.data.competitorSlug);
+if (!competitor) {
+  throw new Error(`Missing competitor data for review: ${review.data.competitorSlug}`);
+}
+const { Content, headings } = await review.render();
+---
+
+<ReviewLayout review={review} competitor={competitor} headings={headings}>
+  <Content />
+  <RelatedLinks kind="review" slug={competitor.data.slug as CompetitorSlug} />
+</ReviewLayout>

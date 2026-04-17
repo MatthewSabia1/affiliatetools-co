@@ -1,0 +1,184 @@
+---
+/**
+ * Shared call-to-action block.
+ * Variants: hero | mid | footer | inline.
+ * All link to AdRecon with proper UTM tagging via buildAdreconCta().
+ */
+import { buildAdreconCta } from '@/lib/constants';
+
+type Medium =
+  | 'home'
+  | 'hub'
+  | 'review'
+  | 'versus'
+  | 'listicle'
+  | 'guide'
+  | 'footer'
+  | 'about'
+  | 'methodology';
+
+interface Props {
+  variant: 'hero' | 'mid' | 'footer' | 'inline';
+  campaign: string;
+  medium: Medium;
+  label?: string;
+  kicker?: string;
+  body?: string;
+  content?: string; // utm_content override
+}
+
+const {
+  variant,
+  campaign,
+  medium,
+  label = 'Try AdRecon',
+  kicker,
+  body,
+  content,
+} = Astro.props;
+
+// Map 'guide' (accepted in props for clarity) to an allowed CTA medium.
+const ctaMedium: Parameters<typeof buildAdreconCta>[0]['medium'] =
+  medium === 'guide' ? 'listicle' : medium;
+
+const href = buildAdreconCta({
+  medium: ctaMedium,
+  campaign,
+  content: content ?? variant,
+});
+---
+
+{variant === 'inline' && (
+  <a class="btn btn-primary btn-sm cta-inline" href={href} rel="noopener">
+    {label} <span aria-hidden="true">→</span>
+  </a>
+)}
+
+{variant === 'hero' && (
+  <div class="cta-hero">
+    <a class="btn btn-primary btn-lg" href={href} rel="noopener">
+      {label} <span aria-hidden="true">→</span>
+    </a>
+  </div>
+)}
+
+{variant === 'mid' && (
+  <aside class="cta-mid card card-accent" aria-label="Call to action">
+    <div class="cta-mid__text">
+      {kicker && <p class="cta-mid__kicker">{kicker}</p>}
+      {body && <p class="cta-mid__body">{body}</p>}
+    </div>
+    <div class="cta-mid__actions">
+      <a class="btn btn-primary btn-lg" href={href} rel="noopener">
+        {label} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </aside>
+)}
+
+{variant === 'footer' && (
+  <section class="cta-footer" aria-label="Try AdRecon">
+    <div class="container-max cta-footer__inner">
+      <div class="cta-footer__text">
+        {kicker && <p class="cta-footer__kicker">{kicker}</p>}
+        {body && <p class="cta-footer__body">{body}</p>}
+      </div>
+      <div class="cta-footer__actions">
+        <a class="btn btn-primary btn-lg" href={href} rel="noopener">
+          {label} <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .cta-inline {
+    text-decoration: none;
+    vertical-align: baseline;
+  }
+
+  .cta-hero {
+    margin-top: 1rem;
+  }
+
+  /* Mid — 2-col card */
+  .cta-mid {
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    align-items: center;
+  }
+  .cta-mid__kicker {
+    margin: 0 0 0.4rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+  }
+  .cta-mid__body {
+    margin: 0;
+    color: var(--color-ink-dim);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .cta-mid__actions {
+    display: flex;
+    justify-content: flex-start;
+  }
+  @media (min-width: 720px) {
+    .cta-mid {
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+    }
+    .cta-mid__actions { justify-content: flex-end; }
+  }
+
+  /* Footer — full-width gradient banner */
+  .cta-footer {
+    margin: 4rem 0 0;
+    padding: 3.5rem 0;
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(201, 165, 92, 0.15), transparent 60%),
+      radial-gradient(ellipse at 85% 100%, rgba(52, 211, 153, 0.08), transparent 55%),
+      color-mix(in oklch, var(--color-surface) 85%, transparent);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .cta-footer__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .cta-footer__kicker {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--color-ink);
+    font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+  .cta-footer__body {
+    margin: 0;
+    color: var(--color-ink-mute);
+    font-size: 1.02rem;
+    line-height: 1.55;
+    max-width: 42rem;
+  }
+  .cta-footer__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  @media (min-width: 860px) {
+    .cta-footer__inner {
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+    }
+  }
+</style>

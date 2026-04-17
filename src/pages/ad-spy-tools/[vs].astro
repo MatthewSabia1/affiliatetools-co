@@ -1,0 +1,65 @@
+---
+import type { GetStaticPaths } from 'astro';
+import VersusLayout from '@/layouts/VersusLayout.astro';
+import RelatedLinks from '@/components/RelatedLinks.astro';
+import { getAllVersus } from '@/lib/competitors';
+import { getEntry } from 'astro:content';
+import type { CompetitorSlug } from '@/lib/constants';
+
+/**
+ * Handles every versus page — both AdRecon vs X and competitor-pair (X vs Y).
+ * The entry filename IS the full URL slug (e.g. "adrecon-vs-adspy", "adspy-vs-bigspy").
+ */
+
+export const getStaticPaths = (async () => {
+  const entries = await getAllVersus();
+  const paths = [] as Array<{
+    params: { vs: string };
+    props: {
+      versus: (typeof entries)[number];
+      aSlug: string;
+      bSlug: string;
+    };
+  }>;
+  for (const entry of entries) {
+    const idx = entry.slug.indexOf('-vs-');
+    if (idx === -1) continue;
+    const aSlug = entry.slug.slice(0, idx);
+    const bSlug = entry.slug.slice(idx + '-vs-'.length);
+    if (!aSlug || !bSlug) continue;
+    paths.push({
+      params: { vs: entry.slug },
+      props: { versus: entry, aSlug, bSlug },
+    });
+  }
+  return paths;
+}) satisfies GetStaticPaths;
+
+type Props = {
+  versus: Awaited<ReturnType<typeof getAllVersus>>[number];
+  aSlug: string;
+  bSlug: string;
+};
+
+const { versus, aSlug, bSlug } = Astro.props as Props;
+
+const competitorA = await getEntry('competitors', aSlug);
+const competitorB = await getEntry('competitors', bSlug);
+if (!competitorA) throw new Error(`Missing competitor data: ${aSlug}`);
+if (!competitorB) throw new Error(`Missing competitor data: ${bSlug}`);
+
+const { Content, headings } = await versus.render();
+
+// Related-links destination: the non-AdRecon slug.
+const relatedSlug = (aSlug === 'adrecon' ? bSlug : aSlug) as Exclude<CompetitorSlug, 'adrecon'>;
+---
+
+<VersusLayout
+  versus={versus}
+  competitorA={competitorA}
+  competitorB={competitorB}
+  headings={headings}
+>
+  <Content />
+  <RelatedLinks kind="versus" slug={relatedSlug} />
+</VersusLayout>

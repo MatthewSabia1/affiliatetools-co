@@ -1,0 +1,143 @@
+---
+/**
+ * Article-page hero. Supports 'default' and 'compact' variants.
+ * Slot: custom badges/score chips.
+ */
+
+interface CTA {
+  href: string;
+  label: string;
+  rel?: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  sub?: string;
+  updatedDate?: string; // ISO or free-form; rendered as "Updated {Month Year}"
+  primaryCta?: CTA;
+  secondaryCta?: CTA;
+  variant?: 'default' | 'compact';
+}
+
+const {
+  eyebrow,
+  title,
+  sub,
+  updatedDate,
+  primaryCta,
+  secondaryCta,
+  variant = 'default',
+} = Astro.props;
+
+function formatUpdated(d?: string): string | null {
+  if (!d) return null;
+  const parsed = new Date(d);
+  if (isNaN(parsed.getTime())) return d; // fall through if unparseable
+  return parsed.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
+
+const updatedLabel = formatUpdated(updatedDate);
+---
+
+<section class:list={['hero', `hero--${variant}`]}>
+  <div class="container-max hero__inner">
+    {eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
+
+    <h1 class="hero__title">{title}</h1>
+
+    {sub && <p class="hero__sub">{sub}</p>}
+
+    <div class="hero__meta">
+      {updatedLabel && (
+        <span class="chip chip-gold hero__updated">Updated {updatedLabel}</span>
+      )}
+      <slot />
+    </div>
+
+    {(primaryCta || secondaryCta) && (
+      <div class="hero__ctas">
+        {primaryCta && (
+          <a
+            class="btn btn-primary btn-lg"
+            href={primaryCta.href}
+            rel="noopener"
+          >
+            {primaryCta.label}
+          </a>
+        )}
+        {secondaryCta && (
+          <a
+            class="btn btn-secondary btn-lg"
+            href={secondaryCta.href}
+            rel={secondaryCta.rel ?? 'noopener'}
+          >
+            {secondaryCta.label}
+          </a>
+        )}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: 3.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .hero--default { padding-top: 4.5rem; padding-bottom: 3rem; }
+  .hero--compact { padding-top: 2.5rem; padding-bottom: 1.5rem; }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 60rem;
+  }
+
+  .hero__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+
+  .hero__title {
+    margin: 0;
+    color: var(--color-ink);
+  }
+
+  .hero--compact .hero__title {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+  }
+
+  .hero__sub {
+    margin: 1rem 0 0;
+    color: var(--color-ink-mute);
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    line-height: 1.55;
+    max-width: 44rem;
+  }
+
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 1.25rem;
+  }
+
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .hero--default .hero__title { letter-spacing: -0.02em; }
+  }
+</style>

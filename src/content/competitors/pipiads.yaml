@@ -1,0 +1,133 @@
+slug: pipiads
+name: PiPiADS
+tagline: The TikTok ad spy tool — deepest coverage of TikTok Ads Library and TikTok Shop.
+foundedYear: 2021
+homepageUrl: https://pipiads.com
+pricingUrl: https://pipiads.com/pricing
+logo:
+  path: /logos/pipiads.svg
+  invertInLight: false
+  width: 240
+  height: 48
+brandColor: "#ff0050"
+platforms:
+  - TikTok
+  - TikTok Shop
+primaryUseCases:
+  - TikTok ad research
+  - TikTok Shop product research
+  - Short-form creative analysis
+  - Viral product hunting
+pricing:
+  startingMonthly: 77
+  currency: USD
+  priceAsOf: "2026-04-17"
+  freeTier: true
+  freeTrial: null
+  tiers:
+    - name: Free
+      monthly: 0
+      billing: monthly
+      highlight: Limited previews
+      features:
+        - Capped daily ad previews
+        - Spot-check TikTok trends
+    - name: Starter
+      monthly: 77
+      billing: monthly
+      highlight: Entry paid tier
+      features:
+        - TikTok Ads Library search
+        - Product filtering
+        - Daily trend feed
+        - Basic exports
+    - name: VIP
+      monthly: 155
+      billing: monthly
+      highlight: Most popular
+      features:
+        - Expanded query limits
+        - TikTok Shop integration
+        - Creative downloads
+        - Saved collections
+    - name: Pro
+      monthly: 263
+      billing: monthly
+      highlight: For agencies + teams
+      features:
+        - Team seats
+        - Priority support
+        - API access
+        - Advanced analytics
+  refundPolicy: Contact support
+  notes: >-
+    PiPiADS tiers and prices change. Verify at pipiads.com/pricing before
+    committing.
+
+coverage:
+  platforms:
+    - TikTok
+    - TikTok Shop
+  claimedAdCount: "The largest TikTok ad database (PiPiADS' marketing claim)"
+  geoCount: null
+  historyDepth: "2021-present"
+  updateCadence: daily
+
+scores:
+  coverage: 5
+  dataFreshness: 8
+  price: 6
+  ux: 7
+  landingPages: 4
+  offers: 3
+  affiliateFocus: 6
+  search: 7
+
+strengths:
+  - Deepest TikTok Ads Library coverage
+  - TikTok Shop product research integration
+  - Short-form creative analysis (hooks, retention points)
+  - Trend-feed format matches how TikTok affiliates actually research
+  - Strong for TikTok Shop sellers
+
+weaknesses:
+  - TikTok-only — no Meta, YouTube, or Google coverage
+  - No affiliate-network classification (no ClickBank / Digistore)
+  - No landing page archive download
+  - Narrow use case — not useful for non-TikTok campaigns
+  - No cross-advertiser creative grouping like AdRecon's Proven Creatives
+  - Higher entry price than generalist tools like BigSpy
+
+bestFor:
+  - TikTok-first affiliates
+  - TikTok Shop sellers
+  - Short-form creative researchers
+  - Dropshippers focused on TikTok as a channel
+
+notFor:
+  - Meta-focused marketers (use AdRecon or AdSpy instead)
+  - CPA affiliates running non-TikTok offers
+  - Multi-platform agencies (use BigSpy or PowerAdSpy)
+  - Teams needing landing page archives or affiliate-network intelligence
+
+standoutFeature: >-
+  The only ad spy tool with first-class TikTok Ads Library + TikTok Shop
+  integration — a specialist competitors can't match on TikTok depth.
+
+screenshots:
+  - path: /screenshots/pipiads/hero.svg
+    caption: PiPiADS homepage
+    alt: PiPiADS hero showing TikTok ad intelligence platform
+    sourceUrl: https://pipiads.com
+  - path: /screenshots/pipiads/dashboard.svg
+    caption: TikTok ad library dashboard
+    alt: PiPiADS dashboard showing the TikTok Ads Library feed
+    sourceUrl: https://pipiads.com
+  - path: /screenshots/pipiads/pricing.svg
+    caption: Pricing tiers
+    alt: PiPiADS pricing tiers Free, Starter, VIP, Pro
+    sourceUrl: https://pipiads.com/pricing
+
+externalRatings: []
+
+cardBlurb: TikTok-focused ad intelligence with TikTok Shop integration. Deep on TikTok, zero other platforms. From $77/mo.

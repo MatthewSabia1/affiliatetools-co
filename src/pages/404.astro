@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+
+const title = 'Page not found — AffiliateTools.co';
+const description = 'That page does not exist. Try the ad spy tools hub or browse reviews.';
+const canonical = '/404/';
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Hero
+    eyebrow="404"
+    title="Page not found."
+    sub="This URL doesn't map to anything on AffiliateTools.co. If you got here from a broken link on our site, please email hello@affiliatetools.co so we can fix it."
+    primaryCta={{ href: '/ad-spy-tools/', label: 'Go to the ad spy tools hub →' }}
+    secondaryCta={{ href: '/', label: 'Back home' }}
+  />
+
+  <section class="container-prose" style="padding: 2rem 1.25rem 4rem;">
+    <div class="prose">
+      <h2>Popular destinations</h2>
+      <ul>
+        <li><a href="/ad-spy-tools/">Ad spy tools hub</a> — the category overview</li>
+        <li><a href="/ad-spy-tools/best-ad-spy-tools-2026/">Best ad spy tools of 2026</a> — our flagship ranking</li>
+        <li><a href="/ad-spy-tools/best-ad-spy-tools-for-affiliate-marketers/">Best for affiliate marketers</a></li>
+        <li><a href="/ad-spy-tools/adrecon-vs-adspy/">AdRecon vs AdSpy</a> — the flagship head-to-head</li>
+        <li><a href="/about/">About AffiliateTools.co</a></li>
+        <li><a href="/methodology/">Our methodology</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

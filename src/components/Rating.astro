@@ -1,0 +1,80 @@
+---
+/**
+ * Rating.astro — Big rounded pill showing a 1–10 score.
+ * Color-coded by severity (red < 5, amber 5–7.4, green ≥ 7.5).
+ */
+import { scoreSeverity } from '@/lib/competitors';
+
+export interface Props {
+  value: number;
+  showLabel?: boolean;
+}
+
+const { value, showLabel = false } = Astro.props;
+
+const clamped = Math.max(1, Math.min(10, value));
+const display = (Math.round(clamped * 10) / 10).toFixed(1);
+const severity = scoreSeverity(clamped);
+---
+
+<div class:list={['rating-pill', `sev-${severity}`]} role="img" aria-label={`Score: ${display} out of 10`}>
+  {showLabel && <span class="rating-label label-mono">AffiliateTools score</span>}
+  <div class="rating-body">
+    <span class="rating-number">{display}</span>
+    <span class="rating-max">/ 10</span>
+  </div>
+</div>
+
+<style>
+  .rating-pill {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-line);
+    background: var(--color-surface-2);
+    min-width: 7.5rem;
+  }
+  .rating-label {
+    color: var(--color-ink-subtle);
+  }
+  .rating-body {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    line-height: 1;
+  }
+  .rating-number {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: -0.03em;
+    color: var(--color-ink);
+  }
+  .rating-max {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-ink-subtle);
+    font-weight: 500;
+  }
+
+  .sev-high {
+    background: color-mix(in oklch, var(--color-success) 14%, var(--color-surface-2));
+    border-color: color-mix(in oklch, var(--color-success) 40%, var(--color-line));
+  }
+  .sev-high .rating-number { color: var(--color-success); }
+
+  .sev-med {
+    background: color-mix(in oklch, var(--color-warning) 14%, var(--color-surface-2));
+    border-color: color-mix(in oklch, var(--color-warning) 40%, var(--color-line));
+  }
+  .sev-med .rating-number { color: var(--color-warning); }
+
+  .sev-low {
+    background: color-mix(in oklch, var(--color-danger) 14%, var(--color-surface-2));
+    border-color: color-mix(in oklch, var(--color-danger) 40%, var(--color-line));
+  }
+  .sev-low .rating-number { color: var(--color-danger); }
+</style>

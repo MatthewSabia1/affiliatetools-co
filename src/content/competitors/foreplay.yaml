@@ -1,0 +1,130 @@
+slug: foreplay
+name: Foreplay
+tagline: The creative intelligence platform for brands and agencies.
+foundedYear: 2021
+homepageUrl: https://foreplay.co
+pricingUrl: https://foreplay.co/pricing
+logo:
+  path: /logos/foreplay.svg
+  invertInLight: false
+  width: 240
+  height: 48
+brandColor: "#a78bfa"
+platforms:
+  - Meta (Facebook)
+  - Meta (Instagram)
+  - TikTok
+primaryUseCases:
+  - Creative inspiration and swipe files
+  - Agency client work and briefs
+  - Mood-board collaboration
+  - Brand creative strategy
+pricing:
+  startingMonthly: 49
+  currency: USD
+  priceAsOf: "2026-04-17"
+  freeTier: false
+  freeTrial:
+    days: 7
+    creditCardRequired: false
+    notes: "Free trial terms can vary — verify at signup."
+  tiers:
+    - name: Inspiration
+      monthly: 49
+      billing: monthly
+      highlight: Solo or freelance users
+      features:
+        - Unlimited ad search on Meta + TikTok
+        - Swipe file folders
+        - Ad downloads
+        - Tag organization
+    - name: Agency
+      monthly: 99
+      billing: monthly
+      highlight: Most popular
+      features:
+        - Everything in Inspiration
+        - Team collaboration
+        - Brief builder
+        - Client-ready exports
+    - name: Teams
+      monthly: null
+      billing: custom
+      highlight: For larger agencies
+      features:
+        - Custom seat count
+        - Priority support
+        - Design tool integrations
+        - SSO
+  refundPolicy: Contact support — typically 14-day window
+  notes: >-
+    Foreplay pricing is refreshed periodically. Confirm current tiers at
+    foreplay.co/pricing.
+
+coverage:
+  platforms:
+    - Meta (Facebook, Instagram)
+    - TikTok
+  claimedAdCount: null
+  geoCount: null
+  historyDepth: "2021-present"
+  updateCadence: daily
+
+scores:
+  coverage: 6
+  dataFreshness: 8
+  price: 7
+  ux: 9
+  landingPages: 3
+  offers: 2
+  affiliateFocus: 4
+  search: 7
+
+strengths:
+  - Modern, collaborative UI — arguably the best in the category
+  - Swipe files, folders, tags, and brief builder for agency workflows
+  - Strong TikTok coverage alongside Meta
+  - Designed for creative strategists working across multiple clients
+  - Design-tool integrations and client-ready exports
+
+weaknesses:
+  - Smaller database than AdSpy or BigSpy
+  - No affiliate-network classification (not the target audience)
+  - No offer intelligence
+  - No landing page ripper or archive
+  - Inspiration workflow, not deep-research workflow
+  - Higher tier pricing escalates for larger agency teams
+
+bestFor:
+  - Creative agencies building client swipe files
+  - Brand-side creative strategists running mood boards
+  - DTC brands researching their competitors' ad creative
+  - Teams collaborating on ad brief development
+
+notFor:
+  - CPA or ClickBank affiliates doing offer-driven research
+  - Solo operators on a tight tool budget
+  - Researchers who need landing page archives
+  - Teams running Meta-only affiliate offers (AdRecon fits better)
+
+standoutFeature: >-
+  Modern agency-friendly workflow — swipe files, briefs, tags, and
+  design-tool integrations in a best-in-class UI.
+
+screenshots:
+  - path: /screenshots/foreplay/hero.svg
+    caption: Foreplay homepage
+    alt: Foreplay hero showcasing creative intelligence platform
+    sourceUrl: https://foreplay.co
+  - path: /screenshots/foreplay/dashboard.svg
+    caption: Swipe file dashboard
+    alt: Foreplay swipe file view showing tagged creative inspiration
+    sourceUrl: https://foreplay.co
+  - path: /screenshots/foreplay/pricing.svg
+    caption: Pricing tiers
+    alt: Foreplay pricing tiers Inspiration, Agency, Teams
+    sourceUrl: https://foreplay.co/pricing
+
+externalRatings: []
+
+cardBlurb: Creative intelligence platform beloved by agencies. Modern UI, swipe files, team workflow. From $49/mo.

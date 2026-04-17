@@ -1,0 +1,146 @@
+slug: poweradspy
+name: PowerAdSpy
+tagline: Ad intelligence across Facebook, Google, YouTube, Native, and more.
+foundedYear: 2017
+homepageUrl: https://poweradspy.com
+pricingUrl: https://poweradspy.com/pricing
+logo:
+  path: /logos/poweradspy.svg
+  invertInLight: false
+  width: 280
+  height: 48
+brandColor: "#3b82f6"
+platforms:
+  - Meta (Facebook)
+  - Meta (Instagram)
+  - YouTube
+  - Google Display
+  - Native (Taboola/Outbrain-style)
+  - Quora
+  - Reddit
+  - TikTok
+primaryUseCases:
+  - Multi-platform ad research
+  - Native / Google Display discovery
+  - YouTube ad analysis
+  - Cross-format campaign inspiration
+pricing:
+  startingMonthly: 49
+  currency: USD
+  priceAsOf: "2026-04-17"
+  freeTier: false
+  freeTrial:
+    days: 7
+    creditCardRequired: true
+    notes: "Trial terms vary by tier — verify at checkout."
+  tiers:
+    - name: Basic
+      monthly: 49
+      billing: monthly
+      highlight: Entry paid tier
+      features:
+        - Meta + Instagram ad search
+        - Basic filters and saved searches
+        - Limited daily queries
+    - name: Standard
+      monthly: 99
+      billing: monthly
+      highlight: Multi-platform access
+      features:
+        - Access to YouTube + Google Display
+        - Expanded daily query limits
+        - Creative downloads
+    - name: Professional
+      monthly: 149
+      billing: monthly
+      highlight: Most popular
+      features:
+        - All platforms unlocked
+        - Unlimited searches
+        - Team collaboration (limited seats)
+    - name: Ultimate
+      monthly: 299
+      billing: monthly
+      highlight: Agencies + teams
+      features:
+        - Team seats
+        - Priority support
+        - API access
+        - Advanced exports
+  refundPolicy: 7-day refund window (verify current terms)
+  notes: >-
+    PowerAdSpy tier structure may change. Verify current pricing at
+    poweradspy.com/pricing.
+
+coverage:
+  platforms:
+    - Meta (Facebook, Instagram)
+    - YouTube
+    - Google Display
+    - Native (Taboola/Outbrain)
+    - Quora
+    - Reddit
+    - TikTok
+  claimedAdCount: "Millions of ads across platforms (PowerAdSpy's marketing claim)"
+  geoCount: null
+  historyDepth: null
+  updateCadence: daily
+
+scores:
+  coverage: 8
+  dataFreshness: 5
+  price: 6
+  ux: 5
+  landingPages: 4
+  offers: 3
+  affiliateFocus: 6
+  search: 6
+
+strengths:
+  - Broadest platform mix for paid tools — includes Native and Google Display
+  - Mid-priced tiers starting at $49/month (as of April 2026)
+  - Long tenure in the ad-spy category (since 2017)
+  - Includes some landing page previews that BigSpy lacks
+  - Covers Quora, Reddit, and other surfaces most tools skip
+
+weaknesses:
+  - Data-quality inconsistency reports in affiliate marketing communities
+  - Spread thin across 7+ integrations with variable depth per platform
+  - No affiliate-network classification (no ClickBank / Digistore auto-detect)
+  - No landing page archive download — previews only
+  - UI feels dated compared to modern entrants like Foreplay
+  - No cross-advertiser creative grouping
+
+bestFor:
+  - Marketers who actively buy on Native + Google Display + Meta
+  - Multi-platform agencies needing one tool for 3+ ad networks
+  - Media buyers researching Taboola/Outbrain creative formats
+  - Teams comfortable with an older UX in exchange for platform breadth
+
+notFor:
+  - Meta-focused affiliates who want deep Boolean search (use AdSpy) or the 4-pillar research stack (use AdRecon)
+  - CPA researchers needing affiliate-network classification
+  - Teams needing LP archive download
+  - Buyers prioritizing modern UX
+
+standoutFeature: >-
+  Native ads plus Google Display coverage — two surfaces most specialist
+  ad spy tools skip entirely.
+
+screenshots:
+  - path: /screenshots/poweradspy/hero.svg
+    caption: PowerAdSpy homepage
+    alt: PowerAdSpy hero showing multi-platform coverage
+    sourceUrl: https://poweradspy.com
+  - path: /screenshots/poweradspy/dashboard.svg
+    caption: Multi-platform dashboard view
+    alt: PowerAdSpy cross-platform dashboard sample
+    sourceUrl: https://poweradspy.com
+  - path: /screenshots/poweradspy/pricing.svg
+    caption: Pricing overview
+    alt: PowerAdSpy pricing tiers Basic through Ultimate
+    sourceUrl: https://poweradspy.com/pricing
+
+externalRatings: []
+
+cardBlurb: Multi-platform ad intel including Native and Google Display. Broad but thin per platform. Starts at $49/mo.

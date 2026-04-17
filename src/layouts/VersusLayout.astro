@@ -1,0 +1,237 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import Hero from '@/components/Hero.astro';
+import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from '@/components/CTA.astro';
+import TOC from '@/components/TOC.astro';
+import ToolLogo from '@/components/ToolLogo.astro';
+import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import type { CompetitorSlug } from '@/lib/constants';
+import { absoluteUrl, routes } from '@/lib/constants';
+import {
+  breadcrumbList,
+  faqPage,
+  articleJsonLd,
+  softwareApplication,
+  organizationJsonLd,
+  type JsonLd,
+} from '@/lib/schema';
+
+export interface Props {
+  versus: CollectionEntry<'versus'>;
+  competitorA: CollectionEntry<'competitors'>;
+  competitorB: CollectionEntry<'competitors'>;
+  headings: MarkdownHeading[];
+  /** Override URL path (defaults to `/ad-spy-tools/{entry.slug}/`). */
+  pagePath?: string;
+}
+
+const { versus, competitorA, competitorB, headings, pagePath: overridePath } = Astro.props;
+const { data: v } = versus;
+const { data: a } = competitorA;
+const { data: b } = competitorB;
+
+const aSlug = a.slug as CompetitorSlug;
+const bSlug = b.slug as CompetitorSlug;
+
+const pagePath = overridePath ?? `/ad-spy-tools/${versus.slug}/`;
+const pageUrl = absoluteUrl(pagePath);
+
+const crumbItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Ad Spy Tools', href: routes.hub() },
+  { name: `${a.name} vs ${b.name}` },
+];
+
+const jsonLd: JsonLd[] = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Ad Spy Tools', path: routes.hub() },
+    { name: `${a.name} vs ${b.name}`, path: pagePath },
+  ]),
+  articleJsonLd({
+    pageUrl,
+    headline: v.title,
+    description: v.description,
+    datePublished: v.publishDate,
+    dateModified: v.updatedDate,
+  }),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        item: softwareApplication({
+          name: a.name,
+          description: a.tagline,
+          url: a.homepageUrl,
+          featureList: a.strengths,
+          startingPrice: a.pricing.startingMonthly,
+          currency: a.pricing.currency,
+        }),
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        item: softwareApplication({
+          name: b.name,
+          description: b.tagline,
+          url: b.homepageUrl,
+          featureList: b.strengths,
+          startingPrice: b.pricing.startingMonthly,
+          currency: b.pricing.currency,
+        }),
+      },
+    ],
+  },
+  organizationJsonLd(),
+];
+
+if (v.faq && v.faq.length > 0) {
+  jsonLd.push(faqPage(v.faq));
+}
+
+// `tldr.chooseAdrecon` is semantically "choose side A (AdRecon)" when A is AdRecon.
+// For competitor-pair versus, we re-use the same keys: author should write them
+// with "chooseAdrecon" populated with the side-A recommendation regardless.
+const tldrA = v.tldr.chooseAdrecon;
+const tldrB = v.tldr.chooseCompetitor;
+---
+
+<BaseLayout
+  title={v.title}
+  description={v.description}
+  canonical={pagePath}
+  jsonLd={jsonLd}
+  pageType="article"
+>
+  <div class="container-wide" style="padding-top: 1.5rem;">
+    <Breadcrumb items={crumbItems} />
+  </div>
+
+  <Hero
+    eyebrow="Head-to-head"
+    title={v.title}
+    sub={v.description}
+    updatedDate={v.updatedDate}
+  />
+
+  <section class="container-wide vs-logos-section" aria-label="Tools compared">
+    <div class="vs-logos">
+      <div class="vs-tool">
+        <ToolLogo slug={aSlug} size="xl" showName />
+      </div>
+      <div class="vs-separator" aria-hidden="true">vs</div>
+      <div class="vs-tool">
+        <ToolLogo slug={bSlug} size="xl" showName />
+      </div>
+    </div>
+  </section>
+
+  <section class="container-wide tldr-section" aria-label="TL;DR verdict">
+    <div class="tldr-grid">
+      <div class="tldr-card card">
+        <div class="label-mono">Choose {a.name}</div>
+        <p>{tldrA}</p>
+      </div>
+      <div class="tldr-card card">
+        <div class="label-mono">Choose {b.name}</div>
+        <p>{tldrB}</p>
+      </div>
+    </div>
+  </section>
+
+  <article class="container-wide versus-article">
+    <div class="versus-grid">
+      <div class="versus-main">
+        <AuthorshipBox publishDate={v.publishDate} updatedDate={v.updatedDate} />
+        <div class="prose">
+          <slot />
+        </div>
+      </div>
+      <aside class="versus-sidebar">
+        <div class="sticky-sidebar versus-sidebar-inner">
+          <CTA
+            variant="mid"
+            campaign={`${versus.slug}`}
+            medium="versus"
+            label="Try AdRecon"
+          />
+          <TOC headings={headings} />
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <style>
+    .versus-article {
+      padding-block: 2.5rem 4rem;
+    }
+    .versus-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 3rem;
+    }
+    @media (min-width: 1024px) {
+      .versus-grid {
+        grid-template-columns: minmax(0, 1fr) 300px;
+      }
+    }
+    .versus-sidebar-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .vs-logos-section {
+      padding-block: 1.5rem 0.5rem;
+    }
+    .vs-logos {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 1rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-lg);
+    }
+    .vs-tool {
+      display: flex;
+      justify-content: center;
+    }
+    .vs-separator {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      color: var(--color-ink-subtle);
+      font-style: italic;
+    }
+
+    .tldr-section {
+      padding-block: 1.5rem 0.5rem;
+    }
+    .tldr-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .tldr-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .tldr-card {
+      padding: 1.25rem 1.5rem;
+    }
+    .tldr-card p {
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+      color: var(--color-ink);
+      font-size: 1.05rem;
+    }
+  </style>
+</BaseLayout>

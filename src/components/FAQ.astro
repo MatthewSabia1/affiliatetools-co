@@ -1,0 +1,66 @@
+---
+/**
+ * FAQ.astro — <details>-based FAQ list + inline FAQPage JSON-LD.
+ * Accepts multi-paragraph answers as HTML/MDX strings (rendered via set:html).
+ */
+import { faqPage } from '@/lib/schema';
+
+export interface FAQItem {
+  q: string;
+  a: string;
+}
+
+export interface Props {
+  items: FAQItem[];
+  heading?: string;
+  id?: string;
+}
+
+const { items, heading = 'Frequently asked questions', id = 'faq' } = Astro.props;
+
+const jsonLd = faqPage(items);
+---
+
+<section class="faq" aria-labelledby={`${id}-heading`}>
+  <h2 id={`${id}-heading`} class="faq__heading">{heading}</h2>
+  <div class="faq__list">
+    {items.map((item) => (
+      <details class="faq-item">
+        <summary>{item.q}</summary>
+        <div class="faq-item__answer" set:html={item.a} />
+      </details>
+    ))}
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline></script>
+
+<style>
+  .faq {
+    margin: 2.5rem 0;
+  }
+  .faq__heading {
+    margin-top: 0;
+  }
+  .faq__list {
+    border-top: 1px solid var(--color-line);
+  }
+  .faq-item__answer {
+    line-height: 1.65;
+  }
+  .faq-item__answer :global(p) {
+    margin: 0 0 0.75rem;
+    color: var(--color-ink-dim);
+  }
+  .faq-item__answer :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .faq-item__answer :global(a) {
+    color: var(--color-gold);
+  }
+  .faq-item__answer :global(ul),
+  .faq-item__answer :global(ol) {
+    margin: 0.35rem 0 0.75rem;
+    padding-left: 1.25rem;
+  }
+</style>

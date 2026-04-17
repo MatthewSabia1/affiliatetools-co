@@ -1,0 +1,272 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import CTA from '@/components/CTA.astro';
+import ToolLogo from '@/components/ToolLogo.astro';
+import Rating from '@/components/Rating.astro';
+import FAQ from '@/components/FAQ.astro';
+import { getCompetitorsInDisplayOrder, overallScore } from '@/lib/competitors';
+import { routes, SITE_URL, SITE_NAME, SITE_DESCRIPTION, VERSUS_SLUGS } from '@/lib/constants';
+import { collectionPageJsonLd, breadcrumbList, faqPage } from '@/lib/schema';
+
+const competitors = await getCompetitorsInDisplayOrder();
+const flagshipListicles = [
+  { slug: 'best-ad-spy-tools-2026', title: 'Best Ad Spy Tools of 2026', blurb: 'Our flagship ranking — tested across 8 dimensions.' },
+  { slug: 'best-ad-spy-tools-for-affiliate-marketers', title: 'Best Ad Spy Tools for Affiliate Marketers', blurb: 'Affiliate-specific picks with CPA-network classification in mind.' },
+  { slug: 'best-ad-spy-tools-for-facebook-ads', title: 'Best Ad Spy Tools for Facebook Ads', blurb: 'Meta-focused picks for Facebook & Instagram research.' },
+  { slug: 'adspy-alternatives', title: 'AdSpy Alternatives', blurb: 'Better-value alternatives to the $149/mo incumbent.' },
+  { slug: 'best-free-ad-spy-tools', title: 'Best Free Ad Spy Tools', blurb: 'What actually works at $0 — and when to upgrade.' },
+  { slug: 'best-ad-spy-tools-for-clickbank', title: 'Best Ad Spy Tools for ClickBank', blurb: 'Tools that auto-detect ClickBank creatives vs those that don\'t.' },
+];
+
+const faqs = [
+  { q: 'Who operates AffiliateTools.co?', a: 'AffiliateTools.co is operated by the AdRecon team — AdRecon is an ad intelligence platform for affiliate marketers on Meta. AdRecon is a direct competitor to most of the tools we review. We disclose this openly on every page and compensate for it by publishing our methodology, stating competitor strengths before our own, and admitting AdRecon\'s limitations (Meta-only coverage, no AI features, premium pricing).' },
+  { q: 'What category is "affiliate tools"?', a: 'The affiliate marketer\'s software stack includes ad spy tools (for researching what\'s working), landing page builders, affiliate tracking platforms, offer networks, email marketing tools, and creative research tools. Our v1 coverage focuses on ad spy tools; we plan to expand into landing page builders, tracking platforms, and email tools over time.' },
+  { q: 'Are these reviews paid placements?', a: 'No. We do not accept paid placement or sponsored rankings. AdRecon pays for the infrastructure hosting this site, but no tool on this site paid to be included or to improve its ranking. See our methodology for the ranking criteria we actually use.' },
+  { q: 'How often are reviews updated?', a: 'We refresh pricing quarterly and rerun full feature audits annually. Every page shows the "Updated" date in the hero. If you spot an outdated fact, please email hello@affiliatetools.co.' },
+  { q: 'Does AffiliateTools.co cover tools beyond ad spy?', a: 'Not yet in v1. The current scope is ad spy / ad intelligence tools for affiliate marketers on Meta. Future expansion will cover email marketing, affiliate networks, landing page builders, and tracking platforms.' },
+];
+
+const canonical = '/';
+const title = 'AffiliateTools.co — Honest Reviews of Ad Spy Tools & Affiliate Software';
+const description = SITE_DESCRIPTION;
+
+const jsonLd = [
+  breadcrumbList([{ name: 'Home', path: '/' }]),
+  collectionPageJsonLd({
+    pageUrl: `${SITE_URL}/`,
+    name: 'AffiliateTools.co',
+    description,
+    hasPart: competitors.slice(0, 7).map((c) => ({
+      url: `${SITE_URL}${routes.review(c.data.slug as any)}`,
+      name: `${c.data.name} Review`,
+      description: c.data.cardBlurb,
+    })),
+  }),
+  faqPage(faqs),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd} pageType="website">
+  <Hero
+    eyebrow="AffiliateTools.co"
+    title="The affiliate marketer's software review library."
+    sub="Honest, research-backed reviews of ad spy tools, landing-page platforms, and the software affiliate marketers actually run. Operated by the AdRecon team — we disclose that openly."
+    primaryCta={{ href: '/ad-spy-tools/', label: 'Browse ad spy tools →' }}
+    secondaryCta={{ href: '/about/', label: 'Who we are' }}
+  />
+
+  <section class="container-max" style="padding: 3rem 1.25rem;">
+    <div class="intro-grid">
+      <div class="intro-prose">
+        <p class="intro-lead">
+          Affiliate marketers buy their tools differently than brand marketers. You need specificity
+          — tools that understand ClickBank creatives, that track days-running instead of
+          impressions, that capture landing pages before they get pulled. Most review sites don't
+          know the difference.
+        </p>
+        <p>
+          AffiliateTools.co is built by operators for operators. We review ad spy tools, landing
+          page platforms, affiliate networks, tracking stacks, and the broader software set that
+          actually runs affiliate campaigns. Every review admits where a competitor wins before we
+          pitch our own tool. Every claim is dated. Every price cites the source.
+        </p>
+        <p>
+          Today our coverage is focused on <strong>ad spy tools</strong>. Over the next quarters we
+          plan to expand into <strong>landing-page builders</strong>, <strong>affiliate networks</strong>,
+          <strong>tracking platforms</strong>, and <strong>email marketing</strong>. Bookmark the hub
+          and check back, or subscribe to hear when new reviews drop.
+        </p>
+      </div>
+      <aside class="intro-aside card">
+        <h3 class="label-mono" style="margin: 0 0 0.75rem; color: var(--color-gold); letter-spacing: 0.14em;">Quick picks</h3>
+        <ul class="quick-picks">
+          <li><strong>Best overall for Meta affiliates:</strong> <a href="/ad-spy-tools/adrecon-review/">AdRecon</a></li>
+          <li><strong>Best for Boolean-search power users:</strong> <a href="/ad-spy-tools/adspy-review/">AdSpy</a></li>
+          <li><strong>Best free tier:</strong> <a href="/ad-spy-tools/bigspy-review/">BigSpy</a></li>
+          <li><strong>Best for TikTok:</strong> <a href="/ad-spy-tools/pipiads-review/">PiPiADS</a></li>
+          <li><strong>Best for dropshipping:</strong> <a href="/ad-spy-tools/minea-review/">Minea</a></li>
+          <li><strong>Best for agencies:</strong> <a href="/ad-spy-tools/foreplay-review/">Foreplay</a></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="container-max" style="padding: 2rem 1.25rem 3rem;">
+    <div class="section-header">
+      <h2>Categories</h2>
+      <p class="muted">What AffiliateTools.co covers — starting with ad spy, expanding soon.</p>
+    </div>
+    <div class="cat-grid">
+      <a class="card cat-card cat-live" href="/ad-spy-tools/">
+        <div class="cat-icon">⬢</div>
+        <div>
+          <h3>Ad Spy Tools</h3>
+          <p>7 reviews, 21 head-to-heads, and ranked listicles for affiliate marketers, agencies, and performance buyers.</p>
+          <span class="chip chip-gold">Live</span>
+        </div>
+      </a>
+      <div class="card cat-card cat-soon">
+        <div class="cat-icon">◇</div>
+        <div>
+          <h3>Landing Page Builders</h3>
+          <p>ClickFunnels, Leadpages, Unbounce, Systeme.io — reviewed for affiliate marketers specifically.</p>
+          <span class="chip">Coming soon</span>
+        </div>
+      </div>
+      <div class="card cat-card cat-soon">
+        <div class="cat-icon">⌗</div>
+        <div>
+          <h3>Tracking & Analytics</h3>
+          <p>Voluum, RedTrack, Binom, FunnelFlux, Everflow — what real affiliates run.</p>
+          <span class="chip">Coming soon</span>
+        </div>
+      </div>
+      <div class="card cat-card cat-soon">
+        <div class="cat-icon">✉</div>
+        <div>
+          <h3>Email Marketing</h3>
+          <p>Beehiiv, ConvertKit, Klaviyo — scored against affiliate use cases specifically.</p>
+          <span class="chip">Coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-max" style="padding: 2rem 1.25rem 3rem;">
+    <div class="section-header">
+      <h2>Featured reviews</h2>
+      <p class="muted">All 7 ad spy tools we cover — each reviewed across 8 dimensions.</p>
+    </div>
+    <div class="review-grid">
+      {competitors.map((c) => (
+        <a class="card review-card" href={routes.review(c.data.slug as any)}>
+          <div class="review-card-head">
+            <ToolLogo slug={c.data.slug as any} size="md" />
+            <Rating value={overallScore(c.data.scores)} />
+          </div>
+          <h3>{c.data.name}</h3>
+          <p class="muted" style="font-size: 0.95rem;">{c.data.cardBlurb}</p>
+          <div class="review-card-foot">
+            <span>Starting {c.data.pricing.startingMonthly === null ? (c.data.slug === 'adrecon' ? '$299 lifetime' : 'Custom') : `$${c.data.pricing.startingMonthly}/mo`}</span>
+            <span class="arrow">Read review →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-max" style="padding: 2rem 1.25rem 3rem;">
+    <div class="section-header">
+      <h2>Popular head-to-heads</h2>
+      <p class="muted">AdRecon vs every competitor — honest, side-by-side.</p>
+    </div>
+    <div class="versus-grid">
+      {VERSUS_SLUGS.map((slug) => (
+        <a class="card versus-card" href={routes.versus(slug)}>
+          <span class="label-mono" style="color: var(--color-gold);">Head-to-head</span>
+          <h3 style="font-size: 1.125rem; margin: 0.35rem 0;">AdRecon vs {slug.charAt(0).toUpperCase() + slug.slice(1)}</h3>
+          <span class="arrow">Compare →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-max" style="padding: 2rem 1.25rem 3rem;">
+    <div class="section-header">
+      <h2>Best of</h2>
+      <p class="muted">Ranked listicles across the most-asked queries.</p>
+    </div>
+    <div class="listicle-grid">
+      {flagshipListicles.map((l) => (
+        <a class="card listicle-card" href={`/ad-spy-tools/${l.slug}/`}>
+          <h3>{l.title}</h3>
+          <p class="muted" style="font-size: 0.95rem;">{l.blurb}</p>
+          <span class="arrow">Read ranking →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-max" style="padding: 2rem 1.25rem 3rem;">
+    <div class="section-header">
+      <h2>Why AffiliateTools.co</h2>
+    </div>
+    <div class="why-grid">
+      <div class="card why-card">
+        <div class="why-icon">◆</div>
+        <h3>Operator-built</h3>
+        <p>Run by the AdRecon team — affiliate marketers ourselves. We know the difference between a ClickBank creative and an e-commerce one.</p>
+      </div>
+      <div class="card why-card">
+        <div class="why-icon">◇</div>
+        <h3>Meta-focused honesty</h3>
+        <p>We publish AdRecon's limitations (Meta-only coverage, no AI features, premium pricing) openly. If another tool wins for your use case, we say so.</p>
+      </div>
+      <div class="card why-card">
+        <div class="why-icon">⬡</div>
+        <h3>No paid placements</h3>
+        <p>No tool paid to be included or ranked. We cite competitor marketing claims as claims — not facts — and date every price.</p>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faqs} heading="Frequently asked questions" />
+
+  <CTA
+    variant="footer"
+    campaign="home-footer"
+    medium="home"
+    label="Try AdRecon — $299 lifetime"
+    kicker="Running Meta affiliate campaigns?"
+    body="300,000+ ads, creatives, landing pages, and offers. Landing Page Ripper. Network classification for ClickBank, Digistore24, BuyGoods, MaxWeb, and WarriorPlus. The affiliate research stack."
+  />
+</BaseLayout>
+
+<style>
+  .intro-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .intro-grid { grid-template-columns: 1fr; } }
+  .intro-lead { font-size: 1.25rem; color: var(--color-ink); line-height: 1.55; }
+  .intro-aside { padding: 1.5rem; }
+  .quick-picks { list-style: none; padding: 0; margin: 0; }
+  .quick-picks li { padding: 0.5rem 0; border-bottom: 1px solid var(--color-line); font-size: 0.95rem; }
+  .quick-picks li:last-child { border-bottom: 0; }
+
+  .section-header { margin-bottom: 1.5rem; }
+  .section-header h2 { margin-top: 0; }
+  .muted { color: var(--color-ink-mute); }
+
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+  .cat-card { padding: 1.5rem; display: flex; gap: 1rem; text-decoration: none; color: inherit; transition: transform 0.15s ease; }
+  .cat-card:hover { transform: translateY(-2px); }
+  .cat-card.cat-live { border-color: color-mix(in oklch, var(--color-gold) 35%, var(--color-line)); }
+  .cat-card.cat-soon { opacity: 0.72; cursor: default; }
+  .cat-card h3 { margin: 0 0 0.4rem; font-size: 1.125rem; }
+  .cat-card p { margin: 0 0 0.5rem; font-size: 0.93rem; color: var(--color-ink-mute); }
+  .cat-icon { font-size: 1.75rem; color: var(--color-gold); line-height: 1; flex: 0 0 auto; }
+
+  .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .review-card { padding: 1.5rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.75rem; transition: transform 0.15s ease; }
+  .review-card:hover { transform: translateY(-3px); }
+  .review-card-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .review-card h3 { margin: 0; font-size: 1.25rem; font-family: var(--font-sans); font-weight: 700; }
+  .review-card-foot { display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; color: var(--color-ink-mute); padding-top: 0.6rem; border-top: 1px solid var(--color-line); }
+  .review-card .arrow { color: var(--color-gold); font-weight: 600; }
+
+  .versus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; }
+  .versus-card { padding: 1.25rem; text-decoration: none; color: inherit; transition: transform 0.15s ease; }
+  .versus-card:hover { transform: translateY(-2px); }
+
+  .listicle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .listicle-card { padding: 1.5rem; text-decoration: none; color: inherit; transition: transform 0.15s ease; }
+  .listicle-card:hover { transform: translateY(-2px); }
+  .listicle-card h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .why-card { padding: 1.75rem; }
+  .why-card h3 { margin: 0.5rem 0 0.5rem; }
+  .why-card p { margin: 0; font-size: 0.95rem; color: var(--color-ink-mute); }
+  .why-icon { color: var(--color-gold); font-size: 1.5rem; line-height: 1; }
+
+  .arrow { color: var(--color-gold); font-weight: 600; font-size: 0.9rem; }
+</style>
