@@ -1,0 +1,167 @@
+---
+title: "Facebook Ad Library: Complete Guide (2026)"
+description: "The definitive guide to Meta's free Facebook Ad Library — how to search, what filters exist, what's missing, when to upgrade to a paid tool, and the API for developers. Updated April 2026."
+publishDate: "2026-04-17"
+updatedDate: "2026-04-17"
+heroEyebrow: "Guide"
+faq:
+  - q: "What is the Facebook Ad Library?"
+    a: "Facebook Ad Library (officially Meta Ad Library) is a free, public database of every active ad running on Facebook, Instagram, Threads, and Audience Network. It's available at facebook.com/ads/library and is legally required for political and sensitive-category ads under the EU Digital Services Act and US political-ads transparency rules. Meta voluntarily publishes all ads globally — not just political — which makes it the most comprehensive free ad research source."
+  - q: "Is Meta Ad Library free?"
+    a: "Yes, completely free to search and view. There's also a free Ad Library API for developers and researchers. What's paid are third-party tools (AdRecon, AdSpy, BigSpy, etc.) that add research workflow on top of Ad Library data — filters, saved searches, days-running signal, landing page archives, affiliate-network classification, and historical data."
+  - q: "What filters does Facebook Ad Library support?"
+    a: "Country (required), ad category (All ads, Issues/Elections/Politics, Employment, Credit, Housing, Social Issues), advertiser name, keyword in ad text, languages, platforms (FB, IG, Threads, Audience Network), media type, ad delivery status (active or inactive), and date range. No filters for days running, landing page URL, affiliate network, niche, or creative grouping — those require third-party tools."
+  - q: "Can I see inactive or historical ads?"
+    a: "Partially. Political and Issue ads are kept for 7 years. Regular ads are shown while active; once an advertiser pauses an ad, it typically disappears from the public library within days. Third-party tools like AdRecon and AdSpy capture ads historically and retain them after the advertiser pauses — which is why historical research requires a paid tool."
+  - q: "Does Ad Library show ad spend?"
+    a: "Only for political, elections, and social-issue ads. For those ad categories, Meta publishes approximate spend ranges and impression estimates. For regular commercial ads (most of what affiliates research), no spend data is exposed — you rely on proxy signals like days running and creative variant count."
+  - q: "Can I use Ad Library via API?"
+    a: "Yes. The Ad Library API is free and documented at developers.facebook.com/docs/marketing-api/reference/ads_archive. You need a Facebook developer account and an access token. Rate limits apply. The API is useful for building custom research dashboards or automated monitoring of specific advertisers. It's also the data source most third-party tools use as a primary feed."
+  - q: "When should I upgrade from Ad Library to a paid tool?"
+    a: "When you need days-running signal (the most important affiliate metric), historical ads after they go inactive, landing page archives for offline teardown, affiliate-network classification, saved searches, niche aggregation, or creative grouping across advertisers. For casual research and spot-checks, Ad Library alone is enough. For serious media buyers testing 3+ creatives per week, paid tools pay for themselves fast."
+draft: false
+---
+
+import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
+
+<AuthorshipBox />
+
+## TL;DR
+
+Meta Ad Library (facebook.com/ads/library) is the free, official, legally-mandated archive of active ads running on Facebook, Instagram, Threads, and Audience Network. It's the primary data source every paid Meta ad spy tool builds on, and it's the starting point every affiliate and media buyer should know.
+
+You can search by advertiser, country, keyword, category, platform, language, date range, and active status. Clicking any ad shows creative, copy, platforms running, start date, landing page URL, and (for political ads) estimated spend and impressions. Political and issue ads are retained for seven years; commercial ads typically disappear shortly after the advertiser pauses them.
+
+What Ad Library doesn't have: days-running metric (it shows start date, not elapsed days), historical coverage of inactive commercial ads, affiliate-network classification, landing-page archives, saved searches, and most of the workflow tooling serious researchers need. That gap is what paid tools like AdRecon, AdSpy, BigSpy, and Foreplay fill — they ingest Ad Library data and add the research layer on top.
+
+This guide walks through how to actually use Ad Library effectively, the filters and workflows that work, what's missing, the API for developers, and when and why to layer a paid tool. Free tool first, paid tool when the workload demands it.
+
+## How to access Meta Ad Library
+
+Go to facebook.com/ads/library. You don't need a Facebook account or login.
+
+The first thing you'll be asked is a country. This is mandatory — ads are regionalized and you have to pick one. The country determines which ads you see (a US-targeted ad won't appear if you select Germany).
+
+Second choice is ad category. "All ads" is the default and what you want for most research. The other categories — Issues/Elections/Politics, Employment, Credit, Housing, Social Issues — are legally-regulated categories with extra transparency (spend ranges, impression estimates, targeting demographics). If you're researching regular commercial ads, stay in "All ads."
+
+Third is the search query. You can search by advertiser name (e.g., "Shopify"), keyword in ad text (e.g., "weight loss"), or leave blank to browse. Results appear as cards showing ad creative, advertiser, and a "See ad details" link for each.
+
+## Search modes that work
+
+**By advertiser name.** The most useful mode for competitive research. Type a known competitor's Facebook page name. Results show every active ad that page is running. Click "See ad details" on any card to see creative variants, start date, platforms, and landing page URL.
+
+**By keyword.** Searches ad text for the keyword. Useful for niche exploration — "Keto" surfaces every active ad mentioning Keto. Volume is high so narrow with country + category filters.
+
+**By Page Transparency (side door).** Every Facebook page has a Page Transparency section. Navigate to any Facebook page, click "Page Transparency" in the right sidebar, then "See all" under "Ads from this Page." This opens the Ad Library view filtered to that specific advertiser. Quicker than searching by name if you're already on the page.
+
+**By URL parameter.** You can construct Ad Library URLs directly. `facebook.com/ads/library/?country=US&q=[keyword]` works. Useful for bookmarking specific searches.
+
+## Filters to know
+
+After a search, filter options appear in the left panel.
+
+- **Platforms** — Facebook, Instagram, Threads, Audience Network. Filter to specific platforms if you want.
+- **Media type** — Image, Video, Meme (carousel), No image/video. Useful if you're researching a specific ad format.
+- **Active status** — Active or Inactive. Inactive is populated for political ads (7-year retention); for commercial ads, inactive ads disappear from the library shortly after pause.
+- **Language** — languages the ad is running in.
+- **Impressions by date** — for political/issue ads with exposed impression estimates.
+
+No days-running filter. No landing-page-URL filter. No creative-grouping filter. These are the big gaps that paid tools fill.
+
+## What each ad card shows
+
+Click "See ad details" on any ad card and you get:
+
+- **Creative** — image, video, or carousel. Multiple variants if the advertiser is running creative variations.
+- **Ad copy** — primary text, headline, description.
+- **Start date** — when Meta first saw the ad. No elapsed-days metric.
+- **Platforms** — FB, IG, Threads, Audience Network.
+- **Landing page URL** — destination URL for the ad's CTA button.
+- **Page info** — page name, creation date, likes/followers, page history.
+- **Library ID** — unique ID for the ad. Useful for bookmarks.
+
+For political/issue ads, you also get estimated spend range, impression range, demographic targeting (age, gender, country), and total ads run by that advertiser in the political category.
+
+## Page Transparency (the advertiser dossier)
+
+Page Transparency is Ad Library's under-appreciated feature. Every Facebook page has a public transparency report showing:
+
+- Page creation date.
+- Page name history (if name changed).
+- Primary country of page admins.
+- Merged pages (if the page was combined with others).
+- Ads history link.
+
+For competitive research, Page Transparency is useful because it lets you audit an advertiser's full history at a glance. New page + high ad volume = either a drop-shipper or an affiliate running fresh accounts. Old page + consistent ads = established brand. Multi-country admin team + US-targeted ads = signal of agency or affiliate operation, not a local brand.
+
+## The Ad Library API
+
+For developers and power users, Meta publishes a free Ad Library API.
+
+- **Endpoint** — `graph.facebook.com/v[version]/ads_archive`.
+- **Authentication** — Facebook developer account + access token.
+- **Documentation** — developers.facebook.com/docs/marketing-api/reference/ads_archive.
+- **Rate limits** — standard Graph API limits apply; specifics in the dev portal.
+
+Parameters include ad_type (political/all), country, search_terms, advertiser page ID, media_type, and pagination. Returns JSON with the same fields as the web UI plus machine-readable structure.
+
+Use cases: building custom research dashboards, automated competitor monitoring (check every Monday if advertiser X has new ads), exporting ad sets for internal analysis, feeding data into your own pipelines.
+
+Most third-party ad spy tools — AdRecon included — use Ad Library API as a primary data source and augment with their own scrapers and classifiers. The raw data is free; the value add is the workflow layer.
+
+## What Ad Library can't do
+
+Eight gaps serious researchers hit:
+
+1. **No days-running metric.** Shows start date only. You'd have to calculate "days since start" manually per ad.
+2. **No historical inactive ads.** Once an advertiser pauses, the ad disappears within days (commercial ads). No way to see what a brand was running six months ago.
+3. **No affiliate-network classification.** No way to filter to "ClickBank creatives only" or "Digistore24 only."
+4. **No landing page URL filter.** You can see the LP URL per ad but can't filter by URL pattern.
+5. **No landing page archive.** Click-through to LPs is live — if the LP goes down, the ad in Ad Library still shows but the LP is gone. No offline archive.
+6. **No creative grouping.** Same creative running under many advertiser accounts appears as separate ads.
+7. **No saved searches.** You have to rebuild every filter set each session.
+8. **No niche aggregation.** "Show me all Health-niche ads" requires manual keyword filtering.
+
+Each of these is a paid-tool feature. Paid tools aren't better than Ad Library — they're a workflow layer on top of it.
+
+## When to upgrade to a paid tool
+
+Three triggers.
+
+**Trigger one: you need days running.** If your research depends on "sort by days running to find proven winners," Ad Library alone can't do it. Paid tools surface days-running as a sortable field. AdRecon, AdSpy, BigSpy, Foreplay all expose it.
+
+**Trigger two: you need historical ads.** If you want to research a brand's ad history over the last six months, Ad Library won't show inactive commercial ads. Paid tools archive historically.
+
+**Trigger three: your workflow volume exceeds manual.** If you're testing 3+ creatives per week and researching 5+ advertisers regularly, manual Ad Library sessions stop scaling. Paid-tool saved searches, niche aggregation, and affiliate-network classification save hours per week.
+
+For affiliate marketers specifically, there's a fourth trigger — affiliate-network classification. AdRecon is the only tool that auto-detects ClickBank, Digistore24, BuyGoods, MaxWeb, and WarriorPlus creatives. If your research is network-specific, paid tooling saves the manual URL filtering.
+
+## Which tool should you use?
+
+Start with Meta Ad Library. It's free, it's the primary source, and it covers spot-checks and competitive monitoring perfectly.
+
+Upgrade to AdRecon if you're an affiliate marketer researching Meta offers and want days-running sort, affiliate-network classification, Landing Page Ripper, and the Winning Offers Directory. $299 lifetime (as of April 2026). Meta-only — pairs well with Ad Library rather than replacing it.
+
+Upgrade to AdSpy if you want Boolean URL search and a 10-year Meta historical database. $149/month (as of April 2026). More expensive but deep historical coverage.
+
+Upgrade to Foreplay if you're building agency creative briefs and want swipe-file workflow. From $49/month (as of April 2026). Meta + TikTok.
+
+Use BigSpy's free tier for zero-budget multi-platform spot-checks. From $9/month for paid upgrades (as of April 2026).
+
+Most serious researchers run Meta Ad Library (free) + one paid tool. The free tool stays in your workflow forever; the paid tool adds the workflow layer.
+
+<CTA variant="mid" campaign="facebook-ad-library-guide" medium="guide" />
+
+## FAQ
+
+<FAQ items={frontmatter.faq} />
+
+## Related reading
+
+- [How to Spy on Facebook Ads](/guides/how-to-spy-on-facebook-ads/) — full research workflow.
+- [What Is an Ad Spy Tool?](/guides/what-is-an-ad-spy-tool/) — category definition and how to pick.
+- [How to Analyze Ad Creative](/guides/how-to-analyze-ad-creative/) — hook-proof-CTA framework.
+- [Best Ad Spy Tools for Facebook Ads](/listicles/best-ad-spy-tools-for-facebook-ads/) — ranked picks.
+- [Best Free Ad Spy Tools](/listicles/best-free-ad-spy-tools/) — free-tier comparison.

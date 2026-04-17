@@ -1,0 +1,129 @@
+---
+title: "How to Find Winning ClickBank Offers: Network Classifier + Days-Running Workflow (2026)"
+description: "Step-by-step workflow for finding proven ClickBank offers on Meta — network classification, days-running signal, funnel teardowns, and the ClickBank Marketplace as cross-reference. Updated April 2026."
+publishDate: "2026-04-17"
+updatedDate: "2026-04-17"
+heroEyebrow: "Guide"
+faq:
+  - q: "What's the fastest way to find winning ClickBank offers?"
+    a: "Combine ClickBank Marketplace Gravity scores with Meta Ad Library evidence. Gravity measures recent affiliate sales — high Gravity means other affiliates are moving the offer. Then confirm in an ad spy tool: is the offer currently running on Meta with ads 90+ days old? If yes, it's a live, working offer. If Gravity is high but Meta ads are all under 14 days old, it's early-stage and unproven. If Gravity is high and Meta ads are 120+ days, it's a proven scaled winner."
+  - q: "Can I filter ad spy tools for ClickBank creatives specifically?"
+    a: "Only AdRecon classifies ClickBank creatives natively. AdRecon's classifier detects ClickBank URL patterns (?hop=, ?tid= parameters, plus vendor subdomains) and auto-tags every creative as ClickBank. You can filter the Ad Feed to ClickBank and see all currently-running ClickBank ads sorted by days running. Other tools (AdSpy, BigSpy, Foreplay, PiPiADS, Minea) require manual URL filtering — search for 'hop' in URL fields and manually confirm each result."
+  - q: "What's ClickBank Gravity and does it matter?"
+    a: "Gravity is ClickBank's affiliate-velocity metric — it measures how many unique affiliates made at least one sale in the last 12 weeks, weighted by recency. High Gravity (30+) means many affiliates are actively selling the product. Low Gravity (under 10) means few affiliates or the offer is new. Gravity is useful as a filter for 'offers worth investigating' but it doesn't tell you anything about ad quality or current Meta performance — you need ad spy data for that."
+  - q: "How do I tell a scaled ClickBank winner from a test campaign?"
+    a: "Three signals. 1) Days running — ads 90+ days old are scaled; under 14 days are tests. 2) Variant count — advertisers running 20+ creative variants of the same offer are in scaling mode. 3) Number of advertisers — offers running under many different affiliate pages (10+ simultaneously) are either white-label winners or top ClickBank offers being pushed by multiple affiliates. AdRecon's Winning Offers Directory surfaces all three signals per offer."
+  - q: "Which ClickBank niches work best on Meta?"
+    a: "Health (weight loss, supplements, diabetes, joint pain) is the largest category by ad volume. Wealth (crypto, investing, side-income, real estate) is second. Relationship and Self-Help are smaller but durable. Survival and Biz-Opp rotate based on seasonality. AdRecon's niche classifier auto-tags creatives into Health, Wealth, BizOpp, Relationship, Survival, Misc — you can filter to niche and see which ClickBank offers are dominating that vertical right now."
+  - q: "What about Digistore24, BuyGoods, MaxWeb, WarriorPlus?"
+    a: "All classified alongside ClickBank in AdRecon's network classifier. These networks often host similar offers (or identical offers under different vendor accounts) in the same Health and Wealth niches. A common affiliate workflow is to see a winner on ClickBank, then search the same vertical across Digistore24 and BuyGoods to find equivalent offers with better commissions or lower competition. AdRecon's Winning Offers Directory shows all five networks in one view."
+  - q: "Is Meta Ad Library enough for ClickBank research?"
+    a: "Partially. Meta Ad Library shows you specific ClickBank vendor ads if you know the advertiser name. It doesn't filter by ClickBank as a category, doesn't show days running, and doesn't aggregate offers. For serious ClickBank research, layer a paid tool on top — AdRecon specifically if you want network classification as a first-class feature, AdSpy if you prefer Boolean URL search, BigSpy's free tier for budget spot-checks."
+draft: false
+---
+
+import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
+
+<AuthorshipBox />
+
+## TL;DR
+
+Finding winning ClickBank offers combines two data sources: ClickBank Marketplace (what's being sold) and ad spy tools (what's being advertised profitably). Neither alone gives you the full picture.
+
+ClickBank Marketplace surfaces Gravity — an affiliate-velocity score — and commission rates. Use it to identify offers worth investigating. Gravity above 30 means multiple affiliates are actively selling; Gravity under 10 usually means the offer is either too new or underperforming.
+
+Ad spy tools confirm what's actually working on Meta. The workflow: filter an ad spy tool to ClickBank creatives, sort by days running (descending), and the top of the list is the set of ClickBank offers that have been running profitably on Meta for 90+ days. Cross-reference with Gravity and commission rate, and you have a shortlist of "proven winners worth testing."
+
+The tool that makes this workflow fastest is AdRecon, because it's the only ad spy tool that auto-classifies ClickBank creatives. Other tools require manual URL filtering (search for `?hop=` in URL fields and hand-confirm each result). AdRecon reads URL patterns during ingestion and tags every creative with its affiliate network, so you can filter to ClickBank in one click and sort by days running to see the winners.
+
+This guide walks through the full workflow: ClickBank Marketplace filtering, ad spy cross-reference, days-running interpretation, funnel teardowns via landing page archives, and the network-plus-niche view that turns "which offer should I run?" into a repeatable process.
+
+## Step 1 — Filter ClickBank Marketplace by Gravity + niche
+
+Start at the source. Log into ClickBank and open Marketplace. Filter by category (Health & Fitness, E-business & E-marketing, Self-Help, etc.), then by Gravity range (30+ is a reasonable floor for "actively moving"). Sort by Gravity descending.
+
+Gravity is ClickBank's proprietary metric. It measures how many unique affiliates drove at least one sale in the last 12 weeks, weighted by how recent those sales were. A product with Gravity 150 has many active affiliates making recent sales. Gravity 15 has a handful of affiliates and/or older sales.
+
+For winner-finding, filter to Gravity 30+ and look at the top 20-30 products in your target niche. These are the offers with the most affiliate velocity — but velocity doesn't guarantee they're being run profitably on Meta (maybe affiliates are running them on native or email). You need the ad spy step to confirm Meta performance.
+
+Commission rate matters too. ClickBank offers range from $30 to $200+ per sale depending on product and upsell flow. Filter out anything under your commission threshold, because even a high-Gravity offer isn't useful if the payout doesn't cover Meta CPMs in your niche.
+
+Export or copy the shortlist. Typical shortlist after filtering: 15-25 ClickBank products in your target niche with decent Gravity and commissions.
+
+## Step 2 — Cross-reference with an ad spy tool
+
+Now check which offers on your shortlist are actually running on Meta. This is the single most important step, because Gravity measures sales velocity, not Meta ad performance. An offer can be making sales through email lists or native ads while being absent from Meta. An offer can have high Gravity and be a Meta failure.
+
+**If you use AdRecon:** Open the Ad Feed, filter Network to ClickBank. Sort by days running, descending. You now see every tracked ClickBank creative on Meta, ordered by how long it's been running. Scan the first 50-100 results. For each offer on your ClickBank Marketplace shortlist, search AdRecon for the vendor name or landing page pattern — if you see multiple ads 90+ days old, the offer is running profitably on Meta. If you see no ads, or only ads under 14 days old, it's either not on Meta or is still in testing.
+
+**If you use AdSpy:** Search with Boolean URL operators like `url:hop AND url:[vendor-keyword]`. Returns ClickBank creatives matching your vendor shortlist. Manual work compared to AdRecon's native classification but accomplishes the same filter.
+
+**If you use BigSpy or Foreplay:** Paste the vendor's landing page domain into the search. Review results. Note days running and variant count for each.
+
+**If you use Meta Ad Library (free):** Search by advertiser name. Only works if you know the Facebook page the advertiser is running under — not always obvious for ClickBank affiliates running under their own page names.
+
+## Step 3 — Read the days-running signal
+
+Days running is the most important signal in Meta media buying. Meta's algorithm kills unprofitable ads fast — usually within 14-30 days. An ad still running after 90 days is almost certainly profitable. An ad running 180+ days is a scaled winner. An ad running 365+ days is a category-defining evergreen.
+
+For ClickBank research specifically:
+
+- **Ads 0-14 days** — tests. Interesting but don't copy the angle yet. Wait to see if the advertiser doubles down.
+- **Ads 14-45 days** — scaling signal. The advertiser has decided the creative works and is pushing volume. Worth studying.
+- **Ads 45-90 days** — proven. The creative has survived Meta's early kill window and is consistently profitable.
+- **Ads 90-180 days** — scaled winners. Likely budget is being held intentionally, not just maintained.
+- **Ads 180+ days** — evergreen winners. These are the creatives you study repeatedly to extract patterns.
+
+In AdRecon's Ad Feed, sort by days running descending. The top of the list is ClickBank winners. Bookmark 5-10 creatives per niche for teardown.
+
+## Step 4 — Funnel teardown (landing page research)
+
+Winner offers aren't just about the ad. The landing page, upsell flow, and back-end funnel are what actually determine profitability. The ad gets a click; the funnel does the conversion.
+
+For each bookmarked creative:
+
+1. Click the landing page URL from the ad. Open in browser.
+2. Capture the LP for offline study. In AdRecon, use Landing Page Ripper (downloads HTML + CSS + assets as ZIP). Manually, save page or use a full-page screenshot tool.
+3. Analyze structure: hero promise, social proof position, CTA placement, upsell sequence, order form layout, scarcity/urgency triggers.
+4. Note the angle — what emotional lever the copy pulls. Weight loss offers might use "stubborn belly fat," "metabolism after 40," "gut bacteria breakthrough," "Keto without dieting" — each is a distinct angle under the same niche.
+5. Study the VSL or advertorial (if present). ClickBank Health offers heavily use video sales letters and advertorial LPs — the script structure is often the most important asset to study.
+
+Build a pattern file. After 10-15 teardowns, clear patterns emerge — the top 3 angles in Health-niche ClickBank offers, the 4-5 proof stack formats that recur, the 2-3 upsell strategies. Your own creative becomes a remix of proven patterns, not guesses.
+
+## Step 5 — Use the Winning Offers view
+
+AdRecon's Winning Offers Directory aggregates offers across all tracked creatives. Instead of starting at one ad and guessing the offer, you start at the offer level with pre-aggregated stats: total ads tracked, active ads right now, average days running, linked landing pages, niche classification, and network classification.
+
+For ClickBank specifically, filter Winning Offers → Network: ClickBank. Sort by active ads descending. The top offers are the ClickBank winners with the most current Meta activity.
+
+This is a different workflow than Ad Feed sorting. Ad Feed starts at the creative and aggregates to the offer mentally. Winning Offers starts at the offer and aggregates creatives to you. Both are useful; they give different views of the same underlying data.
+
+No other ad spy tool has an equivalent view. BigSpy, AdSpy, PowerAdSpy, Foreplay — all start at the ad level, not the offer level.
+
+## Which tool should you use?
+
+For ClickBank-specific research on Meta, AdRecon is the clearest fit. Auto-classification of ClickBank (plus Digistore24, BuyGoods, MaxWeb, WarriorPlus), days-running sort, Landing Page Ripper, Winning Offers Directory. $299 lifetime (as of April 2026). Meta-only — if you run ClickBank on TikTok too, you'll need a second tool.
+
+For Boolean URL search across a large Meta historical database, AdSpy is the specialist. $149/month (as of April 2026). No ClickBank classification but 10 years of Meta history. Useful if you do a lot of "what did this vendor run in 2018" research.
+
+For TikTok-first ClickBank research (Health and Wealth offers increasingly run on TikTok), PiPiADS is the specialist. From $77/month (as of April 2026). No ClickBank classification there either but deep TikTok coverage.
+
+For multi-platform coverage with native/display where some ClickBank Health offers migrate, PowerAdSpy from $49/month (as of April 2026). Broad but shallow.
+
+For zero-budget starting research, BigSpy free tier plus Meta Ad Library covers early exploration. Upgrade to AdRecon when research volume exceeds what manual filtering can handle.
+
+<CTA variant="mid" campaign="how-to-find-clickbank-offers" medium="guide" />
+
+## FAQ
+
+<FAQ items={frontmatter.faq} />
+
+## Related reading
+
+- [Best Ad Spy Tools for ClickBank](/listicles/best-ad-spy-tools-for-clickbank/) — ranked picks for ClickBank research.
+- [How to Spy on Facebook Ads](/guides/how-to-spy-on-facebook-ads/) — broader Meta research workflow.
+- [How to Research Landing Pages](/guides/how-to-research-landing-pages/) — LP teardown framework.
+- [Best Offer Research Tools](/listicles/best-offer-research-tools/) — offer-intelligence category.
+- [Best Ad Spy Tools for Affiliate Marketers](/listicles/best-ad-spy-tools-for-affiliate-marketers/) — affiliate-specific picks.
