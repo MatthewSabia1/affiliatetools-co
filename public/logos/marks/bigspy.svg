@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="BigSpy mark">
+  <defs>
+    <linearGradient id="bigspy-mark-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff4d4f"/>
+      <stop offset="1" stop-color="#c71e24"/>
+    </linearGradient>
+  </defs>
+  <circle cx="24" cy="24" r="18" fill="url(#bigspy-mark-g)"/>
+  <circle cx="24" cy="24" r="8" fill="#fff"/>
+  <circle cx="24" cy="24" r="3.4" fill="#c71e24"/>
+</svg>

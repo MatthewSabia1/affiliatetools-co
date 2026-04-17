@@ -10,9 +10,17 @@ export interface Props {
   slug: CompetitorSlug;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showName?: boolean;
+  surface?: 'auto' | 'none' | 'neutral' | 'dark';
+  mode?: 'full' | 'mark';
 }
 
-const { slug, size = 'md', showName = false } = Astro.props;
+const {
+  slug,
+  size = 'md',
+  showName = false,
+  surface = 'auto',
+  mode = 'full',
+} = Astro.props;
 
 const competitor = await getCompetitor(slug);
 const { name, logo } = competitor.data;
@@ -25,22 +33,27 @@ const SIZES: Record<NonNullable<Props['size']>, number> = {
 };
 
 const px = SIZES[size];
-const width = logo.width ?? px;
-const height = logo.height ?? px;
+const isMarkMode = mode === 'mark';
+const width = isMarkMode ? px : (logo.width ?? px);
+const height = isMarkMode ? px : (logo.height ?? px);
 // Preserve intrinsic aspect ratio but scale the displayed height to `px`.
 const aspect = width && height ? width / height : 1;
 const displayH = px;
 const displayW = Math.round(displayH * aspect);
 
-const logoPath = logo.path.startsWith('/') ? logo.path : `/${logo.path}`;
-const surface = logo.surface ?? 'transparent';
+const logoPath = isMarkMode
+  ? `/logos/marks/${slug}.svg`
+  : (logo.path.startsWith('/') ? logo.path : `/${logo.path}`);
+const resolvedSurface =
+  surface === 'auto' ? (logo.surface ?? 'transparent') : surface;
 ---
 
 <span
   class:list={[
     'tool-logo',
     `size-${size}`,
-    `surface-${surface}`,
+    `surface-${resolvedSurface}`,
+    `mode-${mode}`,
     logo.invertInLight ? 'invert-in-light' : null,
   ]}
 >
@@ -50,7 +63,7 @@ const surface = logo.surface ?? 'transparent';
       alt={`${name} logo`}
       width={displayW}
       height={displayH}
-      loading="lazy"
+      loading="eager"
       decoding="async"
     />
   </span>
@@ -80,7 +93,7 @@ const surface = logo.surface ?? 'transparent';
     font-family: var(--font-sans);
     font-weight: 700;
     letter-spacing: -0.01em;
-    color: var(--color-ink);
+    color: var(--color-type);
   }
 
   .size-sm .tool-logo__name { font-size: 0.9rem; }
@@ -116,6 +129,29 @@ const surface = logo.surface ?? 'transparent';
   .size-xl.surface-neutral .tool-logo__mark,
   .size-xl.surface-dark .tool-logo__mark {
     padding: 0.65rem 1rem;
+  }
+  .surface-none .tool-logo__mark {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+  }
+  .mode-mark {
+    gap: 0.62rem;
+  }
+  .mode-mark .tool-logo__mark {
+    border-radius: 12px;
+    flex: 0 0 auto;
+  }
+  .mode-mark img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
+  .mode-mark .tool-logo__name {
+    font-weight: 720;
+    letter-spacing: -0.022em;
   }
 
   /* Site is dark-first; invert is a hint for logos that were authored

@@ -203,6 +203,7 @@ const competitorCards = competitors.map((c) => {
   return {
     slug,
     name: c.data.name,
+    brandColor: c.data.brandColor,
     blurb: c.data.cardBlurb,
     startLabel: startLabelFor(c.data),
     overall: overallScore(c.data.scores),
@@ -345,34 +346,44 @@ const recentGuides = guides.slice(0, 4).map((guide) => ({
     <div class="review-grid">
       {
         competitorCards.map((card) => (
-          <a class="rev" href={card.href}>
+          <a class="rev" href={card.href} style={`--rev-brand: ${card.brandColor};`}>
             <div class="rev__topline">
               <span class="rev__rank label-mono">Review</span>
               <span class="rev__price">{card.startLabel}</span>
             </div>
-            <div class="rev__logo-wrap">
-              <ToolLogo slug={card.slug} size="md" />
+            <div class="rev__hero">
+              <div class="rev__logo-wrap">
+                <ToolLogo
+                  slug={card.slug}
+                  size="lg"
+                  surface="none"
+                  mode="mark"
+                  showName
+                />
+              </div>
+              <div class="rev__score-wrap">
+                <span class="rev__score-label label-mono">Score</span>
+                <Rating value={card.overall} size="md" />
+              </div>
             </div>
             <h3 class="rev__name">{card.name}</h3>
             <p class="rev__blurb">{card.blurb}</p>
-            <div class="rev__divider" aria-hidden="true" />
-            <div class="rev__score-row">
-              <Rating value={card.overall} />
-              <ul class="rev__dims">
-                {card.topDims.map(([k, v]) => (
-                  <li class="rev__dim">
+            <ul class="rev__dims">
+              {card.topDims.map(([k, v]) => (
+                <li class="rev__dim">
+                  <span class="rev__dim-topline">
                     <span class="rev__dim-name">{DIM_NAMES[k]}</span>
-                    <span class="rev__dim-track" aria-hidden="true">
-                      <span
-                        class="rev__dim-fill"
-                        style={`width: ${v * 10}%;`}
-                      />
-                    </span>
                     <span class="rev__dim-val">{v.toFixed(1)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  </span>
+                  <span class="rev__dim-track" aria-hidden="true">
+                    <span
+                      class="rev__dim-fill"
+                      style={`width: ${v * 10}%;`}
+                    />
+                  </span>
+                </li>
+              ))}
+            </ul>
             <span class="rev__cta">
               Read full review
               <svg
@@ -598,7 +609,7 @@ const recentGuides = guides.slice(0, 4).map((guide) => ({
     background:
       radial-gradient(
         ellipse 80% 50% at 50% 0%,
-        rgba(30, 86, 160, 0.14),
+        color-mix(in srgb, var(--rev-brand) 20%, transparent),
         transparent 70%
       ),
       linear-gradient(180deg, #0f1724 0%, #0a0f1a 100%);
@@ -618,6 +629,7 @@ const recentGuides = guides.slice(0, 4).map((guide) => ({
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 0;
     border-radius: 14px;
     pointer-events: none;
     background: linear-gradient(
@@ -626,6 +638,10 @@ const recentGuides = guides.slice(0, 4).map((guide) => ({
       transparent 30%
     );
     mix-blend-mode: overlay;
+  }
+  .rev > * {
+    position: relative;
+    z-index: 1;
   }
   .rev:hover {
     transform: translateY(-3px);
@@ -663,22 +679,62 @@ const recentGuides = guides.slice(0, 4).map((guide) => ({
     white-space: nowrap;
   }
 
+  .rev__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: stretch;
+    margin-bottom: 1rem;
+  }
   .rev__logo-wrap {
-    background: #ffffff;
-    border-radius: 10px;
-    padding: 0.9rem 1rem;
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--rev-brand) 10%, #ffffff) 0%,
+        color-mix(in srgb, var(--rev-brand) 4%, #f5f7fb) 100%
+      );
+    border-radius: 18px;
+    padding: 1rem 1.05rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: 64px;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-    margin-bottom: 1rem;
+    min-height: 88px;
+    border: 1px solid color-mix(in srgb, var(--rev-brand) 18%, rgba(255, 255, 255, 0.08));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      0 18px 32px -28px rgba(6, 10, 18, 0.9);
+  }
+  .rev__logo-wrap :global(.tool-logo) {
+    max-width: 100%;
   }
   .rev__logo-wrap :global(img),
   .rev__logo-wrap :global(svg) {
-    max-height: 36px;
+    max-height: 34px;
     max-width: 100%;
     width: auto;
+  }
+  .rev__score-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.55rem;
+  }
+  .rev__score-label {
+    color: rgba(255, 255, 255, 0.48);
+  }
+  .rev__score-wrap :global(.rating-pill) {
+    min-width: 6.1rem;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.24)),
+      color-mix(in srgb, var(--rev-brand) 13%, #eef2f7);
+    border-color: color-mix(in srgb, var(--rev-brand) 20%, rgba(255, 255, 255, 0.16));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.68),
+      0 20px 32px -26px rgba(6, 10, 18, 0.92);
+  }
+  .rev__score-wrap :global(.rating-label) {
+    color: rgba(11, 20, 32, 0.52);
   }
 
   .rev__name {
@@ -697,64 +753,60 @@ const recentGuides = guides.slice(0, 4).map((guide) => ({
     line-height: 1.55;
   }
 
-  .rev__divider {
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.08),
-      transparent
-    );
-    margin: 0.25rem 0 1.1rem;
-  }
-
-  .rev__score-row {
-    display: flex;
-    gap: 1.25rem;
-    align-items: flex-start;
-    margin-bottom: 1.25rem;
-  }
-
   .rev__dims {
     list-style: none;
     padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.38rem;
-    flex: 1;
+    margin: 0 0 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
   }
   .rev__dim {
-    display: grid;
-    grid-template-columns: 78px 1fr 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0.85rem 0.9rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    margin: 0;
+  }
+  .rev__dim-topline {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.6rem;
-    font-size: 0.72rem;
   }
   .rev__dim-name {
     color: rgba(255, 255, 255, 0.55);
     letter-spacing: -0.005em;
     font-weight: 500;
+    font-size: 0.74rem;
   }
   .rev__dim-track {
-    height: 3px;
+    height: 4px;
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 2px;
+    border-radius: 999px;
     overflow: hidden;
     position: relative;
   }
   .rev__dim-fill {
     display: block;
     height: 100%;
-    background: linear-gradient(90deg, #8fb1ec 0%, #dbe7fb 100%);
-    border-radius: 2px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--rev-brand) 45%, #d7e5ff) 0%,
+      color-mix(in srgb, var(--rev-brand) 24%, #ffffff) 100%
+    );
+    border-radius: 999px;
     transition: width 0.8s cubic-bezier(0.25, 0.9, 0.3, 1) 0.15s;
   }
   .rev__dim-val {
     font-family: var(--font-mono);
     font-weight: 600;
     color: rgba(255, 255, 255, 0.82);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     text-align: right;
     font-variant-numeric: tabular-nums;
   }
@@ -776,6 +828,18 @@ const recentGuides = guides.slice(0, 4).map((guide) => ({
   .rev:hover .rev__cta {
     gap: 0.55rem;
     color: #d5e4f8;
+  }
+
+  @media (max-width: 740px) {
+    .rev__hero {
+      grid-template-columns: 1fr;
+    }
+    .rev__score-wrap {
+      align-items: flex-start;
+    }
+    .rev__dims {
+      grid-template-columns: 1fr;
+    }
   }
 
   .versus-grid {

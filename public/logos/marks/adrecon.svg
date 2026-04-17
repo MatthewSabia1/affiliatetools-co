@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="AdRecon mark">
+  <defs>
+    <linearGradient id="adrecon-mark-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e2c5f"/>
+      <stop offset="1" stop-color="#1e56a0"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="40" height="40" rx="10" fill="url(#adrecon-mark-g)"/>
+  <path d="M15 33 24 15l9 18M19 26h10" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
