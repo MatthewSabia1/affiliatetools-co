@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import { breadcrumbList } from '@/lib/schema';
+
+const title = 'Terms of Service — AffiliateTools.co';
+const description = 'The terms governing your use of AffiliateTools.co — an editorial review site operated by the AdRecon team.';
+const canonical = '/terms/';
+const jsonLd = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Terms of Service', path: '/terms/' },
+  ]),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <section class="container-max" style="padding: 1.5rem 1.5rem 0;">
+    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'Terms of Service' }]} />
+  </section>
+
+  <Hero
+    eyebrow="Legal"
+    title="Terms of Service"
+    sub="The terms governing your use of this site. Last updated April 17, 2026."
+    variant="compact"
+  />
+
+  <article class="container-prose" style="padding: 2rem 1.25rem 4rem;">
+    <div class="prose">
+      <h2>Acceptance</h2>
+      <p>By accessing AffiliateTools.co, you agree to these terms. If you disagree, stop using the site.</p>
+
+      <h2>Operator</h2>
+      <p>AffiliateTools.co ("we," "our") is operated by AdRecon (matt@mediaglobe.io), a Meta-focused ad intelligence platform.</p>
+
+      <h2>Editorial content</h2>
+      <p>All reviews, comparisons, listicles, and ranking content on this site are <strong>editorial opinion</strong> produced by the AdRecon team. Our editorial methodology is published at <a href="/methodology/">/methodology/</a>. Readers should independently verify pricing, features, and policies of any tool before purchasing.</p>
+      <p>We make reasonable efforts to verify factual claims about competitor products. All pricing is dated at time of publication. We do not warrant that every detail remains accurate at the moment you read it. If you find an error, email <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a> and we will investigate and correct promptly.</p>
+
+      <h2>No professional advice</h2>
+      <p>Our content is informational. It is not legal, financial, tax, or investment advice. Consult qualified professionals before making commercial decisions based on our reviews.</p>
+
+      <h2>Conflict of interest</h2>
+      <p>AdRecon — the operator of this site — is a competitor to most tools reviewed on AffiliateTools.co. We disclose this openly on every review, versus page, and in our <a href="/disclosure/">editorial disclosure</a>. We compensate structurally by stating competitor strengths before our own, publishing our methodology, and ranking AdRecon #1 only where it honestly wins.</p>
+
+      <h2>Trademarks</h2>
+      <p>All tool names, logos, and brands mentioned on this site (AdSpy, BigSpy, PowerAdSpy, Foreplay, Minea, PiPiADS, and others) are the property of their respective owners. Use of these marks on AffiliateTools.co is limited to nominative fair use — naming and comparing products for editorial purposes. We are not affiliated with any of these companies unless stated.</p>
+
+      <h2>Third-party links</h2>
+      <p>This site links to third-party websites, including competitor homepages and AdRecon. We are not responsible for content, policies, or practices of third-party sites. Outbound links do not constitute endorsement beyond what is stated in the linking review.</p>
+
+      <h2>No paid placements</h2>
+      <p>As of April 2026, AffiliateTools.co accepts no paid rankings, sponsored reviews, or paid placements of any kind. If this changes, we will disclose it prominently.</p>
+
+      <h2>User conduct</h2>
+      <p>You may read and share our content. You may not:</p>
+      <ul>
+        <li>Scrape, systematically download, or mirror the site.</li>
+        <li>Use the site's content to train AI models without permission.</li>
+        <li>Misrepresent our content as your own or remove authorship.</li>
+        <li>Use automated tools to submit bulk requests.</li>
+        <li>Attempt to disrupt, overload, or reverse-engineer the site.</li>
+      </ul>
+
+      <h2>Intellectual property</h2>
+      <p>Editorial content (reviews, comparisons, guides, prose) is © 2026 AdRecon and licensed for personal, non-commercial reading. You may quote short passages with attribution. Wholesale republication requires written permission.</p>
+
+      <h2>Warranty disclaimer</h2>
+      <p>THE SITE AND ITS CONTENT ARE PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DISCLAIM ALL WARRANTIES INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT ACCURACY, COMPLETENESS, OR CURRENCY OF CONTENT.</p>
+
+      <h2>Limitation of liability</h2>
+      <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, ADRECON AND ITS OPERATORS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM OR RELATED TO YOUR USE OF THIS SITE OR RELIANCE ON ANY CONTENT. OUR TOTAL LIABILITY FOR ANY CLAIM IS LIMITED TO $100 USD.</p>
+
+      <h2>Indemnification</h2>
+      <p>You agree to indemnify and hold harmless AdRecon, AffiliateTools.co, and their operators from any claim arising from your violation of these terms or misuse of the site.</p>
+
+      <h2>Governing law</h2>
+      <p>These terms are governed by the laws of the State of Delaware, United States, without regard to conflict-of-laws principles. Disputes shall be resolved in the state or federal courts of Delaware.</p>
+
+      <h2>Changes to these terms</h2>
+      <p>We may update these terms at any time. Material changes will be announced via a notice on the homepage. Continued use after changes constitutes acceptance.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about these terms → <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a>.</p>
+    </div>
+  </article>
+</BaseLayout>

@@ -170,7 +170,8 @@ const LISTICLE_ANCHORS: Record<ListicleSlug, string[]> = {
  * Deterministically pick an anchor variant for a destination,
  * seeded by the source page slug so anchors stay stable but varied.
  */
-function pickAnchor(variants: string[], sourceSeed: string): string {
+function pickAnchor(variants: string[] | undefined, sourceSeed: string): string {
+  if (!variants || variants.length === 0) return 'read more';
   let sum = 0;
   for (let i = 0; i < sourceSeed.length; i++) sum = (sum + sourceSeed.charCodeAt(i)) % 1024;
   return variants[sum % variants.length];

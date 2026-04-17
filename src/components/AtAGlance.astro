@@ -40,12 +40,16 @@ const currencySymbol =
   c.pricing.currency === 'EUR' ? '€' : c.pricing.currency === 'GBP' ? '£' : '$';
 
 const startPrice = c.pricing.startingMonthly;
+// Prefer explicit one-time/lifetime pricing when startingMonthly is null (e.g. AdRecon).
+const oneTimeTier = c.pricing.tiers.find((t) => t.billing === 'one-time');
 const startLabel =
-  startPrice === null
+  startPrice === null && oneTimeTier
+    ? `${currencySymbol}299+ lifetime`
+    : startPrice === null
     ? 'Custom pricing'
     : startPrice === 0
     ? 'Free tier available'
-    : `${currencySymbol}${startPrice}/mo`;
+    : `From ${currencySymbol}${startPrice}/mo`;
 
 const adreconCta = buildAdreconCta({
   medium: 'review',
@@ -155,7 +159,7 @@ const isAdRecon = slug === 'adrecon';
   .at-a-glance__name {
     margin: 0.25rem 0 0;
     font-size: 1.25rem;
-    color: var(--color-ink);
+    color: var(--color-type);
   }
   .at-a-glance__stats {
     display: grid;
@@ -168,7 +172,7 @@ const isAdRecon = slug === 'adrecon';
   .at-a-glance__stat dt { margin: 0 0 0.3rem; }
   .at-a-glance__stat dd { margin: 0; }
   .at-a-glance__price {
-    color: var(--color-ink);
+    color: var(--color-type);
     font-weight: 600;
     font-size: 1rem;
     display: flex;
@@ -227,7 +231,7 @@ const isAdRecon = slug === 'adrecon';
   .at-a-glance__bar-value {
     font-family: var(--font-mono);
     font-size: 0.78rem;
-    color: var(--color-ink);
+    color: var(--color-type);
     text-align: right;
   }
 
@@ -263,7 +267,7 @@ const isAdRecon = slug === 'adrecon';
     font-size: 0.85rem;
     color: var(--color-ink-dim);
   }
-  .at-a-glance__external-row a { color: var(--color-ink); text-decoration: none; }
+  .at-a-glance__external-row a { color: var(--color-type); text-decoration: none; }
   .at-a-glance__external-row a:hover { color: var(--color-gold); text-decoration: underline; }
   .at-a-glance__external-rating { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-ink-mute); }
   .at-a-glance__external-count { color: var(--color-ink-subtle); }

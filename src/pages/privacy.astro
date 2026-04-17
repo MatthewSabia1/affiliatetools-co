@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import { breadcrumbList } from '@/lib/schema';
+
+const title = 'Privacy Policy — AffiliateTools.co';
+const description = 'How AffiliateTools.co collects, uses, and protects visitor data. We use only privacy-friendly analytics, do not sell data, and comply with GDPR and CCPA.';
+const canonical = '/privacy/';
+const jsonLd = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Privacy Policy', path: '/privacy/' },
+  ]),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <section class="container-max" style="padding: 1.5rem 1.5rem 0;">
+    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'Privacy Policy' }]} />
+  </section>
+
+  <Hero
+    eyebrow="Legal"
+    title="Privacy Policy"
+    sub="How we collect, use, and protect visitor data. Last updated April 17, 2026."
+    variant="compact"
+  />
+
+  <article class="container-prose" style="padding: 2rem 1.25rem 4rem;">
+    <div class="prose">
+      <h2>Summary</h2>
+      <p>
+        AffiliateTools.co is a static editorial review site. We do not sell personal data. We do not show third-party ads. We use only privacy-friendly analytics (Cloudflare Web Analytics) that does not set tracking cookies. This policy explains what little data we do collect, why, and your rights.
+      </p>
+      <p><strong>Operator.</strong> This site is operated by AdRecon (matt@mediaglobe.io) — a Meta-focused ad intelligence platform.</p>
+
+      <h2>Data we collect</h2>
+      <p>The site itself collects no personal data directly. The following is collected by infrastructure providers on our behalf:</p>
+      <ul>
+        <li><strong>Request logs (Cloudflare Pages).</strong> When you visit a page, Cloudflare receives an HTTP request containing your IP address, user agent, referring URL, and timestamp. Cloudflare retains these access logs for a limited period for security and debugging. We do not correlate IP addresses with identities.</li>
+        <li><strong>Aggregate analytics (Cloudflare Web Analytics).</strong> We use Cloudflare's privacy-focused analytics, which does not use cookies or fingerprint visitors. Data is aggregated server-side: page views, referrer, country, device type.</li>
+        <li><strong>Email (if you email us).</strong> If you email <code>hello@affiliatetools.co</code>, we receive your message and any information you include. We store emails in our mail provider (Google Workspace) and retain correspondence to respond and follow up.</li>
+      </ul>
+      <p>We do <strong>not</strong> use Google Analytics, Meta Pixel, Hotjar, Mixpanel, Segment, or any tracker that cross-site-follows visitors.</p>
+
+      <h2>Cookies</h2>
+      <p>AffiliateTools.co does not set first-party tracking cookies. The only exception is session-level cookies set by Cloudflare edge infrastructure for bot protection and cache routing. These are strictly necessary cookies; no opt-in consent is required under GDPR/ePrivacy.</p>
+      <p>If you click an outbound link to a competitor tool (AdSpy, BigSpy, etc.) or to AdRecon, you leave our site and enter theirs — those sites have their own privacy policies and cookies.</p>
+
+      <h2>AdRecon CTAs</h2>
+      <p>When you click an "AdRecon" call-to-action on this site, your browser navigates to <code>adrecon.io/app/</code> with UTM tracking parameters (utm_source=affiliatetools.co, utm_medium=&lt;page-type&gt;, utm_campaign=&lt;slug&gt;). These parameters let AdRecon's analytics attribute visits to AffiliateTools.co for internal reporting. No personal data is sent beyond what your browser transmits in normal web navigation. AdRecon's privacy policy applies once you're on their site.</p>
+
+      <h2>Affiliate / sponsored links</h2>
+      <p>As of April 2026, AffiliateTools.co contains <strong>zero affiliate links</strong> and accepts <strong>no paid placements</strong>. All outbound links to competitor tools use <code>rel="nofollow sponsored external"</code> as a precautionary SEO signal even though we receive no compensation. If this ever changes, we will disclose it with a visible label on every affected page.</p>
+
+      <h2>Data you provide</h2>
+      <p>We do not operate forms, accounts, or subscriptions on this site. If you email us, you voluntarily share your email address and message content. We use that information only to respond. We do not add your email to any marketing list.</p>
+
+      <h2>Children's privacy</h2>
+      <p>AffiliateTools.co is intended for business professionals and is not directed at children under 13 (or 16 in the EEA). We do not knowingly collect personal data from children.</p>
+
+      <h2>Your rights</h2>
+      <p>Under GDPR, CCPA, and similar regulations, you may have the right to:</p>
+      <ul>
+        <li>Request a copy of personal data we hold about you.</li>
+        <li>Request correction or deletion of personal data.</li>
+        <li>Object to processing on certain grounds.</li>
+        <li>File a complaint with your local data protection authority.</li>
+      </ul>
+      <p>To exercise any of these rights, email <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a>. Since we collect minimal data, most requests are handled quickly.</p>
+
+      <h2>Third-party processors</h2>
+      <p>Our infrastructure uses these providers. Each has its own privacy policy:</p>
+      <ul>
+        <li><strong>Cloudflare</strong> (Pages hosting + DNS + analytics) — <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">privacy policy</a>.</li>
+        <li><strong>GitHub</strong> (code hosting) — <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">privacy policy</a>.</li>
+        <li><strong>Google Workspace</strong> (email) — <a href="https://policies.google.com/privacy" rel="noopener">privacy policy</a>.</li>
+        <li><strong>Google Fonts</strong> (fonts loaded over CDN) — <a href="https://developers.google.com/fonts/faq/privacy" rel="noopener">privacy notice</a>.</li>
+      </ul>
+
+      <h2>Changes to this policy</h2>
+      <p>We update this policy when our data practices change or when regulations evolve. The "Last updated" date at the top of this page reflects the most recent change. Material changes will be announced via a notice on the homepage.</p>
+
+      <h2>Contact</h2>
+      <p>Privacy questions → <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a>. Include <code>PRIVACY</code> in the subject line for faster routing.</p>
+    </div>
+  </article>
+</BaseLayout>

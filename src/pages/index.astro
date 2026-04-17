@@ -6,7 +6,7 @@ import ToolLogo from '@/components/ToolLogo.astro';
 import Rating from '@/components/Rating.astro';
 import FAQ from '@/components/FAQ.astro';
 import { getCompetitorsInDisplayOrder, overallScore } from '@/lib/competitors';
-import { routes, SITE_URL, SITE_NAME, SITE_DESCRIPTION, VERSUS_SLUGS } from '@/lib/constants';
+import { routes, SITE_URL, SITE_DESCRIPTION, VERSUS_SLUGS } from '@/lib/constants';
 import { collectionPageJsonLd, breadcrumbList, faqPage } from '@/lib/schema';
 
 const competitors = await getCompetitorsInDisplayOrder();
@@ -49,11 +49,11 @@ const jsonLd = [
 
 <BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd} pageType="website">
   <Hero
-    eyebrow="AffiliateTools.co"
-    title="The affiliate marketer's software review library."
-    sub="Honest, research-backed reviews of ad spy tools, landing-page platforms, and the software affiliate marketers actually run. Operated by the AdRecon team — we disclose that openly."
-    primaryCta={{ href: '/ad-spy-tools/', label: 'Browse ad spy tools →' }}
-    secondaryCta={{ href: '/about/', label: 'Who we are' }}
+    eyebrow="Independent review hub · Updated April 2026"
+    title="The software affiliate marketers actually run — reviewed honestly."
+    sub="Hands-on reviews of ad spy tools, landing-page builders, affiliate networks, and the software that runs real affiliate campaigns. Operated by the AdRecon team — we disclose that openly."
+    primaryCta={{ href: '/ad-spy-tools/', label: 'Browse ad spy tools' }}
+    secondaryCta={{ href: '/methodology/', label: 'How we test' }}
   />
 
   <section class="container-max" style="padding: 3rem 1.25rem;">
@@ -226,7 +226,7 @@ const jsonLd = [
 <style>
   .intro-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3rem; align-items: start; }
   @media (max-width: 900px) { .intro-grid { grid-template-columns: 1fr; } }
-  .intro-lead { font-size: 1.25rem; color: var(--color-ink); line-height: 1.55; }
+  .intro-lead { font-size: 1.25rem; color: var(--color-type); line-height: 1.55; }
   .intro-aside { padding: 1.5rem; }
   .quick-picks { list-style: none; padding: 0; margin: 0; }
   .quick-picks li { padding: 0.5rem 0; border-bottom: 1px solid var(--color-line); font-size: 0.95rem; }

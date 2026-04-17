@@ -1,0 +1,56 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import { breadcrumbList } from '@/lib/schema';
+
+const title = 'Cookie Policy — AffiliateTools.co';
+const description = 'AffiliateTools.co does not use tracking cookies. Here is exactly what cookies (if any) are set when you visit.';
+const canonical = '/cookies/';
+const jsonLd = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Cookie Policy', path: '/cookies/' },
+  ]),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <section class="container-max" style="padding: 1.5rem 1.5rem 0;">
+    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'Cookie Policy' }]} />
+  </section>
+
+  <Hero
+    eyebrow="Legal"
+    title="Cookie Policy"
+    sub="Short version: we don't use tracking cookies. Last updated April 17, 2026."
+    variant="compact"
+  />
+
+  <article class="container-prose" style="padding: 2rem 1.25rem 4rem;">
+    <div class="prose">
+      <h2>The short version</h2>
+      <p>AffiliateTools.co does <strong>not</strong> set any first-party tracking cookies. We do not use Google Analytics, Meta Pixel, Hotjar, or any similar tracker. We use Cloudflare Web Analytics, which is cookie-free by design.</p>
+
+      <h2>What cookies (if any) are set</h2>
+      <p>The only cookies that may appear when visiting this site are set by Cloudflare, our edge infrastructure provider. These are strictly necessary for security and performance:</p>
+      <ul>
+        <li><code>__cf_bm</code> — Cloudflare bot management. Used to distinguish human visitors from bots. Expires after 30 minutes of inactivity.</li>
+        <li><code>cf_clearance</code> — set only if you pass a Cloudflare challenge. Used to avoid repeated challenges. Valid for the session.</li>
+      </ul>
+      <p>Under GDPR and ePrivacy, strictly-necessary cookies do not require opt-in consent.</p>
+
+      <h2>Third-party resources</h2>
+      <p>When you visit AffiliateTools.co, your browser also loads fonts from Google Fonts (<code>fonts.googleapis.com</code> and <code>fonts.gstatic.com</code>). Google Fonts does not set cookies on the requesting page, but your IP address is logged by Google for rate limiting. See <a href="https://developers.google.com/fonts/faq/privacy" rel="noopener">Google Fonts privacy notice</a>.</p>
+
+      <h2>If you click outbound links</h2>
+      <p>Clicking a link to a competitor tool (AdSpy, BigSpy, etc.) or to AdRecon takes you to their site. That site's cookies apply once you arrive there — we have no control over them. See each tool's own cookie policy.</p>
+
+      <h2>If you email us</h2>
+      <p>Our support email is hosted on Google Workspace. Google may set cookies on mail.google.com when you use Gmail. That's Google's policy, not ours.</p>
+
+      <h2>Contact</h2>
+      <p>Cookie questions → <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a>.</p>
+    </div>
+  </article>
+</BaseLayout>

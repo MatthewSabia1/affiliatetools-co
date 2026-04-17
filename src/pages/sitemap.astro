@@ -1,0 +1,123 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import { breadcrumbList } from '@/lib/schema';
+import { routes, COMPETITOR_SLUGS, VERSUS_SLUGS, LISTICLE_SLUGS, COMPETITOR_NAMES } from '@/lib/constants';
+
+const title = 'Site Map — AffiliateTools.co';
+const description = 'Full HTML site map of AffiliateTools.co — every page on the site organized by section.';
+const canonical = '/sitemap/';
+const jsonLd = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Site Map', path: '/sitemap/' },
+  ]),
+];
+
+const listicleLabels: Record<(typeof LISTICLE_SLUGS)[number], string> = {
+  'best-ad-spy-tools-2026': 'Best ad spy tools of 2026',
+  'best-ad-spy-tools-for-affiliate-marketers': 'Best for affiliate marketers',
+  'best-ad-spy-tools-for-facebook-ads': 'Best for Facebook ads',
+  'best-ad-spy-tools-for-clickbank': 'Best for ClickBank affiliates',
+  'adspy-alternatives': 'AdSpy alternatives',
+  'best-free-ad-spy-tools': 'Best free ad spy tools',
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <section class="container-max" style="padding: 1.5rem 1.5rem 0;">
+    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'Site Map' }]} />
+  </section>
+
+  <Hero
+    eyebrow="Navigation"
+    title="Site map"
+    sub="Every page on AffiliateTools.co, organized by section."
+    variant="compact"
+  />
+
+  <article class="container-max" style="padding: 2rem 1.5rem 4rem;">
+    <div class="sitemap-grid">
+      <section class="sitemap-col">
+        <h2>Core</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">Methodology</a></li>
+          <li><a href="/disclosure/">Editorial disclosure</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+
+        <h2 style="margin-top: 2.5rem;">Ad spy tools</h2>
+        <ul>
+          <li><a href={routes.hub()}>Category hub</a></li>
+        </ul>
+      </section>
+
+      <section class="sitemap-col">
+        <h2>Reviews</h2>
+        <ul>
+          {COMPETITOR_SLUGS.map((slug) => (
+            <li><a href={routes.review(slug)}>{COMPETITOR_NAMES[slug]} review</a></li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="sitemap-col">
+        <h2>Head-to-head comparisons</h2>
+        <ul>
+          {VERSUS_SLUGS.map((slug) => (
+            <li><a href={routes.versus(slug)}>AdRecon vs {COMPETITOR_NAMES[slug]}</a></li>
+          ))}
+        </ul>
+
+        <h2 style="margin-top: 2.5rem;">Rankings</h2>
+        <ul>
+          {LISTICLE_SLUGS.map((slug) => (
+            <li><a href={routes.listicle(slug)}>{listicleLabels[slug]}</a></li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="sitemap-col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
+          <li><a href="/cookies/">Cookie Policy</a></li>
+          <li><a href="/disclosure/">Editorial disclosure</a></li>
+        </ul>
+
+        <h2 style="margin-top: 2.5rem;">Machine-readable</h2>
+        <ul>
+          <li><a href="/sitemap-index.xml">XML sitemap index</a></li>
+          <li><a href="/robots.txt">robots.txt</a></li>
+          <li><a href="/rss.xml">RSS feed</a></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .sitemap-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 720px) { .sitemap-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1080px) { .sitemap-grid { grid-template-columns: repeat(4, 1fr); } }
+  .sitemap-col h2 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.85rem;
+    color: var(--color-type);
+    letter-spacing: -0.01em;
+  }
+  .sitemap-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+  .sitemap-col li { margin: 0; }
+  .sitemap-col a { color: var(--color-type-dim); font-size: 0.9rem; text-decoration: none; }
+  .sitemap-col a:hover { color: var(--color-accent); text-decoration: none; }
+</style>

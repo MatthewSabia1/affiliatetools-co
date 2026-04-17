@@ -68,7 +68,7 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
     transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
   }
   .toc__link:hover {
-    color: var(--color-ink);
+    color: var(--color-type);
     border-left-color: color-mix(in oklch, var(--color-gold) 45%, transparent);
     text-decoration: none;
   }
@@ -96,7 +96,7 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
   .toc__link:focus-visible {
     border-left-color: var(--color-gold);
-    color: var(--color-ink);
+    color: var(--color-type);
   }
 
   .toc__link[aria-current='true'] {

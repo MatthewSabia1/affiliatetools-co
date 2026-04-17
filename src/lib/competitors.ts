@@ -45,12 +45,12 @@ export async function getAllVersus(): Promise<VersusEntry[]> {
 
 export async function getListicle(slug: string): Promise<ListicleEntry | undefined> {
   const all = await getCollection('listicles');
-  return all.find((l) => l.data.slug === slug && !l.data.draft);
+  return all.find((l) => l.slug === slug && !l.data.draft);
 }
 
 export async function getAllListicles(): Promise<ListicleEntry[]> {
   const all = await getCollection('listicles');
-  return all.filter((l) => !l.data.draft).sort((a, b) => a.data.slug.localeCompare(b.data.slug));
+  return all.filter((l) => !l.data.draft).sort((a, b) => a.slug.localeCompare(b.slug));
 }
 
 /** Score averaging for display. */

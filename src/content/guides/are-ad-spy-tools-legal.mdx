@@ -1,0 +1,141 @@
+---
+title: "Are Ad Spy Tools Legal? What Marketers Can and Can't Do (2026)"
+description: "A grounded guide to ad spy tool legality — public-data basis, platform ToS issues, fair use of competitor creatives, and what you can and can't do with the data you gather. Updated April 2026."
+publishDate: "2026-04-17"
+updatedDate: "2026-04-17"
+heroEyebrow: "Guide"
+faq:
+  - q: "Are ad spy tools legal to use?"
+    a: "Yes, using ad spy tools is legal in the US, EU, UK, Canada, Australia, and most jurisdictions. The data they surface is public by design — Meta, TikTok, and Google are legally required to publish active ads via their transparency tools. Third-party spy tools aggregate that public data plus additional scrapes of publicly visible ad placements. Using the tools to view competitor ads is not illegal anywhere we're aware of."
+  - q: "Is scraping ads legal for the company that operates the spy tool?"
+    a: "Complicated. Accessing public ad library data via official APIs is clearly legal. Scraping public web pages has a mixed legal history — hiQ v. LinkedIn and related US cases generally protect public-data scraping, but individual platforms can still pursue contract-based claims (terms-of-service violations) or Computer Fraud and Abuse Act claims in some fact patterns. This is the operator's problem, not the user's. When you subscribe to a reputable tool, the operator has made that legal call on your behalf."
+  - q: "Can I copy a competitor's ad creative?"
+    a: "No — copying the actual images, video, or copy is copyright infringement regardless of how you found the ad. What you can (and should) do is study the ad, identify the angle, hook structure, offer position, and creative format, and produce your own original version. Ad spy tools are research tools, not asset libraries. Using them to swipe copy wholesale exposes you to DMCA takedowns, ad account bans, and in extreme cases, civil suits."
+  - q: "Can I copy a competitor's landing page?"
+    a: "Same rule as creative: no wholesale copying. Ripping a competitor's LP HTML and re-hosting it with your affiliate link swapped in is copyright infringement and often trademark infringement too. What you can do: study the structure (hero, proof stack, offer position, upsell sequence), note the angle and emotional lever, and build your own original LP using those principles. Landing Page Ripper tools exist to enable study — not to enable plagiarism."
+  - q: "Are there platform terms of service issues for spy tool users?"
+    a: "For end users, generally no. Platform ToS governs the relationship between the platform and users who post content or run ads — not between the platform and researchers viewing public ads. Meta's ad library is explicitly designed to be accessed by competitors and researchers. If you're running ads on Meta, your main concern is your own ad compliance, not whether researching competitors creates a ToS issue."
+  - q: "What about GDPR and personal data in ads?"
+    a: "Ad library data is considered publicly disclosed by the advertiser — Meta, TikTok, and Google Ads Transparency Center publish it to fulfill transparency obligations (DSA in the EU, political ads laws in the US). Personal data concerns would apply to user-targeting data, not to the ad creative itself. Spy tools don't expose user-level targeting data — they expose creative and metadata about ads the advertiser chose to publish publicly."
+  - q: "Can I get sued for using an ad spy tool?"
+    a: "We're not aware of any end-user lawsuit for viewing public ad data via a third-party tool. Lawsuits in this space target the operators (for scraping or ToS breaches) or target users who copy-pasted creative or LP code wholesale. If you use spy tools as research only and produce your own original creative, the legal risk profile is essentially zero."
+draft: false
+---
+
+import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
+
+<AuthorshipBox />
+
+## TL;DR
+
+Ad spy tools are legal to use. The ads they surface are already public — Meta, TikTok, and Google are required to publish active ads via transparency libraries, and third-party tools aggregate that public data into a more useful interface. Viewing competitor ads for research is not illegal in the US, EU, UK, Canada, Australia, or any jurisdiction we've been able to find.
+
+The legal questions sit in two different places. First, the scraping question — how the tool operator gathers data — is the operator's problem, not yours. Reputable tools pull from official APIs (Meta Ad Library API, Google Ads Transparency Center) where possible and operate scrapers where APIs don't exist. Courts have generally sided with public-data scrapers (hiQ v. LinkedIn is the canonical case) but individual platforms can still pursue contract-based claims. When you pay for a subscription, you're trusting the operator has navigated this.
+
+Second, the copyright question — what you do with the data — is your problem. Copying a competitor's ad creative, landing page HTML, or ad copy wholesale is copyright infringement regardless of how you found the material. Ad spy tools are research tools. Use them to study angles, hooks, structures, and patterns. Produce your own original creative. That's the legal lane and it's where all serious media buyers operate.
+
+This guide walks through the public-data legal basis, platform terms of service, copyright fair-use for study, what you can and can't do with competitor ads you find, and a few practical rules for staying in the clear.
+
+## Where ad spy tools get their data
+
+The foundation is public ad library data that platforms are legally required to publish.
+
+**Meta Ad Library** is mandated by the EU Digital Services Act for political and sensitive-category ads across the EU, and by US law for political ads. Meta went further and publishes every active ad across Facebook, Instagram, Threads, and Audience Network — even non-political ads — for all users globally. The library has a public UI and a documented API. Accessing it is explicitly encouraged.
+
+**TikTok Creative Center** publishes top-performing TikTok ads by industry and region. TikTok's Commercial Content Library further publishes ads across the EU for DSA compliance.
+
+**Google Ads Transparency Center** publishes ads from verified advertisers across Google Search, Display, YouTube, and Shopping — launched in 2023, expanded in 2024-2025.
+
+**LinkedIn Ads Library** publishes sponsored content on LinkedIn across the EU (DSA compliance) and globally for verified advertisers.
+
+This is the data platforms are legally required, or have voluntarily committed, to publish. Aggregating it into a third-party product is the equivalent of a news site republishing press releases — the underlying data is explicitly public.
+
+Most ad spy tools also scrape additional data points the official libraries don't expose — for example, days-running timestamps calculated from first-seen dates, creative grouping based on visual similarity, or landing page URLs parsed from ad destination data. This is where tools differentiate and where the scraping legal discussion comes in.
+
+## The scraping question (operator-side, not user-side)
+
+When a tool's scrapers visit public ad placements or ad library pages to collect data, the legal landscape is nuanced but generally favorable.
+
+In the US, the hiQ Labs v. LinkedIn case (9th Circuit, 2019, reaffirmed 2022) held that scraping publicly accessible data does not violate the Computer Fraud and Abuse Act. Meta v. Bright Data (ND Cal, 2024) further reinforced that scraping public data from Facebook did not breach Facebook's ToS in a way that created liability. Courts have generally been consistent: public data is public.
+
+Contract-based claims remain viable when the scraper had to accept platform terms of service to access data (e.g., created a logged-in account). This is why reputable ad spy tools focus on unauthenticated public data paths where possible.
+
+The EU has separate rules — the Digital Services Act actually requires platforms to expose ad libraries via API, which makes API-based ad-spy operation clearly compliant. Scraping beyond the API in the EU sits in a gray area governed by database rights (Database Directive 96/9/EC) and platform ToS.
+
+None of this affects end users. You're paying for access to an aggregated database. The operator made the scraping call. Your concern is whether the tool is reputable and well-operated — not whether scraping is legal in general.
+
+## Copyright, fair use, and the research-vs.-copying line
+
+This is where end users need to be careful. Copyright law protects the creative content in ads — the images, videos, copy, and layout — regardless of whether you found the ad in a spy tool, a social feed, or a competitor's blog.
+
+**What you can do** under research and fair-use principles (US §107, EU research exceptions, UK fair dealing):
+
+- View and study any ad in an ad library.
+- Take notes on the angle, hook, offer position, and creative format.
+- Archive the ad for your own reference (saved ads, swipe files).
+- Share the ad with your team or client for internal research discussion.
+- Use the analysis to inform your own original creative.
+- Reference the ad in reviews or analysis content (this article does exactly that, with attribution).
+
+**What you cannot do:**
+
+- Download the image or video file and re-upload it as your ad.
+- Copy the ad copy verbatim or with trivial word substitutions.
+- Clone a landing page HTML and swap the affiliate link.
+- Re-publish competitor creative as your swipe-file product.
+- Train an AI model specifically to output direct copies of specific competitor ads.
+
+The line is "study and reinterpret" vs. "copy and republish." Every experienced media buyer operates on the study side of this line. Ad spy tools are research infrastructure, not asset libraries.
+
+## Landing page research specifically
+
+Landing pages are copyrightable as compilations (the arrangement of text, images, and design is protected) and often contain third-party trademarks, product images, and testimonial content with additional rights layers.
+
+The legal rule for LP research is the same as for ads: study is fine, copying is not. You can:
+
+- Open a competitor's LP in your browser.
+- Save a local copy for study (fair-use research copy).
+- Analyze the hero, proof stack, CTA placement, upsell sequence.
+- Take screenshots for your internal research notes.
+- Build your own LP informed by the patterns you observed.
+
+You cannot:
+
+- Re-host the HTML with your affiliate link swapped in.
+- Copy the copy verbatim.
+- Reuse the testimonials, imagery, or trademarks.
+
+AdRecon's Landing Page Ripper, for example, downloads LP archives as ZIPs specifically for study. The tool deliberately rate-limits captures (10 per 15 minutes per user) and blocks Meta platform URLs (you can't capture FB/IG login walls). The intended use is teardowns — read the code, study the structure, learn the patterns. The unintended and rule-breaking use is re-hosting.
+
+## Platform ToS and ad-account safety
+
+One concern affiliate marketers have is whether using spy tools creates risk for their ad account. It doesn't.
+
+Meta's Terms of Service and Advertising Policies govern what you do as an advertiser on Meta — not what you do as a researcher of other advertisers. Meta explicitly operates an ad library and publishes an API for competitive research. Using the library (directly or via a third-party tool) is expected.
+
+Where you can get into ToS trouble is running ads that copy competitor creative (Meta enforces against ad copying), submitting plagiarized LPs through Meta's review (detected and flagged), or using scraping tools against Meta with a logged-in account that belongs to an ads manager (this is a ToS breach that could affect your ad account).
+
+Rule of thumb: your ad account is governed by what you do as an advertiser. Your research tools are a separate question. Don't mix them — don't use the same account for running ads and running scrapers, don't upload ripped competitor creative, don't clone LPs.
+
+## Which tool should you use?
+
+Legality isn't a differentiator between reputable ad spy tools — they all operate on the same public-data basis. What differentiates them is workflow, coverage, and what you do with the data once you have it.
+
+If you're an affiliate marketer researching Meta offers, AdRecon gives you affiliate-network classification and a Landing Page Ripper designed specifically for study-grade funnel teardowns. The Meta-only focus keeps scope clear. For brand or agency work, Foreplay's swipe-file workflow fits creative-strategy teams better. For multi-platform coverage, BigSpy or PowerAdSpy. For TikTok, PiPiADS or Minea.
+
+The legal rule is the same across all of these: research-grade use is fine, copy-paste is not. Pick the tool that matches your research workflow and use it as a research tool. That's the entire legal framework.
+
+<CTA variant="mid" campaign="are-ad-spy-tools-legal" medium="guide" />
+
+## FAQ
+
+<FAQ items={frontmatter.faq} />
+
+## Related reading
+
+- [What Is an Ad Spy Tool?](/guides/what-is-an-ad-spy-tool/) — category overview and how to pick.
+- [Facebook Ad Library: Complete Guide](/guides/facebook-ad-library-guide/) — the free official data source.
+- [How to Research Landing Pages](/guides/how-to-research-landing-pages/) — legal and effective LP teardowns.
+- [How to Analyze Ad Creative](/guides/how-to-analyze-ad-creative/) — study frameworks that stay inside fair use.
