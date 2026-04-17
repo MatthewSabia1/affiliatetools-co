@@ -1,9 +1,9 @@
 ---
-import '@/styles/global.css';
-import Nav from '@/components/Nav.astro';
-import Footer from '@/components/Footer.astro';
-import { SITE_URL, SITE_NAME } from '@/lib/constants';
-import { organizationJsonLd, websiteJsonLd, type JsonLd } from '@/lib/schema';
+import "@/styles/global.css";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
+import { SITE_URL, SITE_NAME } from "@/lib/constants";
+import { organizationJsonLd, websiteJsonLd, type JsonLd } from "@/lib/schema";
 
 export interface Props {
   title: string;
@@ -14,13 +14,24 @@ export interface Props {
   pageType?: string;
 }
 
-const { title, description, canonical, ogImage, jsonLd = [], pageType = 'website' } = Astro.props;
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  jsonLd = [],
+  pageType = "website",
+} = Astro.props;
 
 const resolvedOg = ogImage
-  ? (ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`)
+  ? ogImage.startsWith("http")
+    ? ogImage
+    : `${SITE_URL}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`
   : `${SITE_URL}/og/default.png`;
 
-const canonicalUrl = canonical.startsWith('http') ? canonical : `${SITE_URL}${canonical}`;
+const canonicalUrl = canonical.startsWith("http")
+  ? canonical
+  : `${SITE_URL}${canonical}`;
 
 // Always-on structured data
 const baselineJsonLd: JsonLd[] = [websiteJsonLd(), organizationJsonLd()];
@@ -28,7 +39,7 @@ const allJsonLd: JsonLd[] = [...baselineJsonLd, ...jsonLd];
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,6 +48,12 @@ const allJsonLd: JsonLd[] = [...baselineJsonLd, ...jsonLd];
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE_NAME} RSS feed`}
+      href={`${SITE_URL}/rss.xml`}
+    />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -57,9 +74,12 @@ const allJsonLd: JsonLd[] = [...baselineJsonLd, ...jsonLd];
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={resolvedOg} />
 
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <meta name="theme-color" content="#06060a" />
-    <meta name="color-scheme" content="dark" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1"
+    />
+    <meta name="theme-color" content="#fbfcfd" />
+    <meta name="color-scheme" content="light" />
 
     {
       allJsonLd.map((block) => (
@@ -99,7 +119,8 @@ const allJsonLd: JsonLd[] = [...baselineJsonLd, ...jsonLd];
         left: 0;
       }
       main:focus {
-        outline: none;
+        outline: 2px solid var(--color-accent);
+        outline-offset: 6px;
       }
     </style>
   </body>

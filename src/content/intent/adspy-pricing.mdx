@@ -19,10 +19,10 @@ faq:
 draft: false
 ---
 
-import AuthorshipBox from '@/components/AuthorshipBox.astro';
-import CTA from '@/components/CTA.astro';
-import PricingTable from '@/components/PricingTable.astro';
-import FAQ from '@/components/FAQ.astro';
+import AuthorshipBox from "@/components/AuthorshipBox.astro";
+import CTA from "@/components/CTA.astro";
+import PricingTable from "@/components/PricingTable.astro";
+import FAQ from "@/components/FAQ.astro";
 
 <AuthorshipBox />
 
@@ -37,6 +37,7 @@ AdSpy's pricing model is one of the simplest in the ad spy category: no freemium
 AdSpy operates on a single-tier subscription model (as of April 2026):
 
 **Standard — $149/month**
+
 - Full database access (AdSpy claims 200M+ ads)
 - Meta coverage (Facebook + Instagram only)
 - Boolean search operators
@@ -78,25 +79,26 @@ Where the math fails:
 
 Here's how AdSpy pricing stacks against alternatives over a 24-month horizon (as of April 2026):
 
-| Tool | Monthly | 24-month total | Lifetime option |
-|---|---|---|---|
-| AdSpy | $149 | $3,576 | No |
-| PowerAdSpy (Basic) | $49 | $1,176 | No |
-| Foreplay (Inspiration) | $49 | $1,176 | No |
-| BigSpy (Pro) | $99 | $2,376 | No |
-| PiPiADS (Starter) | $77 | $1,848 | No |
-| Minea (Starter) | €49 | ~$1,272 | No |
-| AdRecon | — | $299 | $299 one-time |
+| Tool                   | Monthly | 24-month total | Lifetime option |
+| ---------------------- | ------- | -------------- | --------------- |
+| AdSpy                  | $149    | $3,576         | No              |
+| PowerAdSpy (Basic)     | $49     | $1,176         | No              |
+| Foreplay (Inspiration) | $49     | $1,176         | No              |
+| BigSpy (Pro)           | $99     | $2,376         | No              |
+| PiPiADS (Starter)      | $77     | $1,848         | No              |
+| Minea (Starter)        | €49     | ~$1,272        | No              |
+| AdRecon                | —       | $299           | $299 one-time   |
 
 The lifetime-vs-monthly distinction matters. AdRecon at $299 one-time (as of April 2026) beats every monthly tier above except Minea's entry price over 24+ months. Over 36+ months, the gap widens further. For affiliate marketers who expect to use an ad spy tool for more than 6 months, the lifetime calculation is usually the honest comparison.
 
 ## The AdRecon comparison
 
-We run AdRecon, so take this section with that disclosure — we've tried to keep it factual.
+This section compares the raw pricing math as directly as possible.
 
 **AdRecon price:** $299 or $599 one-time lifetime (as of April 2026 — still confirm at checkout).
 
 **What AdRecon does that AdSpy doesn't:**
+
 - Automatic affiliate-network classification (ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus) via regex-based pattern matching
 - Landing Page Ripper (Puppeteer + SingleFile full HTML/CSS/asset archives)
 - Winning Lander Vault (landing pages grouped by linked ads + days-running)
@@ -105,6 +107,7 @@ We run AdRecon, so take this section with that disclosure — we've tried to kee
 - Dead Creative Tracking (surfaces ads that stopped running after long runs — rare in the category)
 
 **What AdSpy does that AdRecon doesn't:**
+
 - Deeper Meta historical index (AdSpy claims 200M+ ads since ~2015)
 - Boolean search operators (AdRecon uses filter-chip search)
 - Comment tracking on ads

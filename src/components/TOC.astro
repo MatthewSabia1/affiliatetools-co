@@ -16,26 +16,65 @@ interface Props {
   title?: string;
 }
 
-const { headings, title = 'On this page' } = Astro.props;
+const { headings, title = "On this page" } = Astro.props;
 
 const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
 ---
 
-{items.length > 0 && (
-  <nav class="toc" aria-label="Table of contents">
-    <p class="toc__title label-mono">{title}</p>
-    <ol class="toc__list">
-      {items.map((h) => (
-        <li
-          class:list={['toc__item', { 'toc__item--h3': h.depth === 3 }]}
-          data-slug={h.slug}
-        >
-          <a href={`#${h.slug}`} class="toc__link">{h.text}</a>
-        </li>
-      ))}
-    </ol>
-  </nav>
-)}
+{
+  items.length > 0 && (
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc__title label-mono">{title}</p>
+      <ol class="toc__list">
+        {items.map((h) => (
+          <li
+            class:list={["toc__item", { "toc__item--h3": h.depth === 3 }]}
+            data-slug={h.slug}
+          >
+            <a href={`#${h.slug}`} class="toc__link">
+              {h.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<script>
+  const updateCurrent = () => {
+    const links = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>(".toc__link"),
+    );
+    if (links.length === 0) return;
+
+    const headings = links
+      .map((link) => {
+        const id = link.getAttribute("href")?.slice(1);
+        const heading = id ? document.getElementById(id) : null;
+        return heading ? { link, heading } : null;
+      })
+      .filter(
+        (entry): entry is { link: HTMLAnchorElement; heading: HTMLElement } =>
+          entry !== null,
+      );
+
+    if (headings.length === 0) return;
+
+    const active =
+      headings.findLast(
+        (entry) => entry.heading.getBoundingClientRect().top <= 140,
+      ) || headings[0];
+    if (!active) return;
+
+    links.forEach((link) => link.removeAttribute("aria-current"));
+    active.link.setAttribute("aria-current", "true");
+  };
+
+  updateCurrent();
+  document.addEventListener("scroll", updateCurrent, { passive: true });
+  window.addEventListener("hashchange", updateCurrent);
+</script>
 
 <style>
   .toc {
@@ -65,7 +104,10 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
     border-left: 2px solid transparent;
     color: var(--color-ink-mute);
     text-decoration: none;
-    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background 0.15s ease;
   }
   .toc__link:hover {
     color: var(--color-type);
@@ -77,7 +119,9 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
     font-size: 0.82rem;
     color: var(--color-ink-subtle);
   }
-  .toc__item--h3 .toc__link:hover { color: var(--color-ink-dim); }
+  .toc__item--h3 .toc__link:hover {
+    color: var(--color-ink-dim);
+  }
 
   /* Current-section highlight (pure CSS). When a heading's ID is the URL fragment
      and its parent section is :target, the matching TOC link lights up. */
@@ -99,7 +143,7 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
     color: var(--color-type);
   }
 
-  .toc__link[aria-current='true'] {
+  .toc__link[aria-current="true"] {
     color: var(--color-gold);
     border-left-color: var(--color-gold);
     background: color-mix(in oklch, var(--color-gold-soft) 60%, transparent);

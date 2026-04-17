@@ -4,10 +4,11 @@
  * Loads competitor data via getCompetitor(slug) and renders a condensed scorecard.
  * Intended for review/versus pages (sticky on desktop).
  */
-import ToolLogo from '@/components/ToolLogo.astro';
-import { getCompetitor, overallScore } from '@/lib/competitors';
-import type { CompetitorSlug } from '@/lib/constants';
-import { buildAdreconCta, DATA_AS_OF } from '@/lib/constants';
+import ToolLogo from "@/components/ToolLogo.astro";
+import { getCompetitor, overallScore } from "@/lib/competitors";
+import type { CompetitorSlug } from "@/lib/constants";
+import { DATA_AS_OF, routes } from "@/lib/constants";
+import { formatStartingPrice } from "@/lib/pricing";
 
 interface Props {
   slug: CompetitorSlug;
@@ -20,47 +21,32 @@ const c = entry.data;
 const score = overallScore(c.scores);
 
 // Select the top 3 scorecard dimensions to surface.
-const scoreEntries = Object.entries(c.scores) as Array<[keyof typeof c.scores, number]>;
-const topThree = [...scoreEntries]
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 3);
+const scoreEntries = Object.entries(c.scores) as Array<
+  [keyof typeof c.scores, number]
+>;
+const topThree = [...scoreEntries].sort((a, b) => b[1] - a[1]).slice(0, 3);
 
 const niceNames: Record<keyof typeof c.scores, string> = {
-  coverage: 'Coverage',
-  dataFreshness: 'Data freshness',
-  price: 'Value',
-  ux: 'UX',
-  landingPages: 'Landing pages',
-  offers: 'Offers',
-  affiliateFocus: 'Affiliate fit',
-  search: 'Search',
+  coverage: "Coverage",
+  dataFreshness: "Data freshness",
+  price: "Value",
+  ux: "UX",
+  landingPages: "Landing pages",
+  offers: "Offers",
+  affiliateFocus: "Affiliate fit",
+  search: "Search",
 };
 
-const currencySymbol =
-  c.pricing.currency === 'EUR' ? '€' : c.pricing.currency === 'GBP' ? '£' : '$';
-
-const startPrice = c.pricing.startingMonthly;
-// Prefer explicit one-time/lifetime pricing when startingMonthly is null (e.g. AdRecon).
-const oneTimeTier = c.pricing.tiers.find((t) => t.billing === 'one-time');
-const startLabel =
-  startPrice === null && oneTimeTier
-    ? `${currencySymbol}299+ lifetime`
-    : startPrice === null
-    ? 'Custom pricing'
-    : startPrice === 0
-    ? 'Free tier available'
-    : `From ${currencySymbol}${startPrice}/mo`;
-
-const adreconCta = buildAdreconCta({
-  medium: 'review',
-  campaign: `at-a-glance-${slug}`,
-  content: 'sidebar',
+const startLabel = formatStartingPrice(c.pricing, {
+  prefixFrom: true,
+  freeLabel: "Free tier available",
 });
-
-const isAdRecon = slug === 'adrecon';
 ---
 
-<aside class="at-a-glance card card-accent sticky-sidebar" aria-label="At a glance">
+<aside
+  class="at-a-glance card card-accent sticky-sidebar"
+  aria-label="At a glance"
+>
   <header class="at-a-glance__header">
     <ToolLogo slug={slug} size="md" />
     <div class="at-a-glance__identity">
@@ -89,15 +75,20 @@ const isAdRecon = slug === 'adrecon';
   <div class="at-a-glance__scorecard">
     <p class="label-mono">Top dimensions</p>
     <ul class="at-a-glance__bars">
-      {topThree.map(([key, val]) => (
-        <li class="at-a-glance__bar-row">
-          <span class="at-a-glance__bar-label">{niceNames[key]}</span>
-          <span class="at-a-glance__bar-track" aria-hidden="true">
-            <span class="at-a-glance__bar-fill" style={`width:${(val / 10) * 100}%`}></span>
-          </span>
-          <span class="at-a-glance__bar-value">{val.toFixed(1)}</span>
-        </li>
-      ))}
+      {
+        topThree.map(([key, val]) => (
+          <li class="at-a-glance__bar-row">
+            <span class="at-a-glance__bar-label">{niceNames[key]}</span>
+            <span class="at-a-glance__bar-track" aria-hidden="true">
+              <span
+                class="at-a-glance__bar-fill"
+                style={`width:${(val / 10) * 100}%`}
+              />
+            </span>
+            <span class="at-a-glance__bar-value">{val.toFixed(1)}</span>
+          </li>
+        ))
+      }
     </ul>
   </div>
 
@@ -106,37 +97,38 @@ const isAdRecon = slug === 'adrecon';
     <span>{c.bestFor[0]}</span>
   </p>
 
-  {c.externalRatings && c.externalRatings.length > 0 && (
-    <div class="at-a-glance__external">
-      <p class="label-mono">External sources</p>
-      <ul class="at-a-glance__external-list">
-        {c.externalRatings.map((r) => (
-          <li class="at-a-glance__external-row">
-            <a href={r.url} rel="nofollow noopener">{r.source}</a>
-            <span class="at-a-glance__external-rating">
-              {r.rating !== null ? `${r.rating}/${r.outOf}` : '—'}
-              {typeof r.reviewCount === 'number' && r.reviewCount > 0 ? (
-                <span class="at-a-glance__external-count"> · {r.reviewCount.toLocaleString()} reviews</span>
-              ) : null}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )}
+  {
+    c.externalRatings && c.externalRatings.length > 0 && (
+      <div class="at-a-glance__external">
+        <p class="label-mono">External sources</p>
+        <ul class="at-a-glance__external-list">
+          {c.externalRatings.map((r) => (
+            <li class="at-a-glance__external-row">
+              <a href={r.url} rel="nofollow noopener">
+                {r.source}
+              </a>
+              <span class="at-a-glance__external-rating">
+                {r.rating !== null ? `${r.rating}/${r.outOf}` : "—"}
+                {typeof r.reviewCount === "number" && r.reviewCount > 0 ? (
+                  <span class="at-a-glance__external-count">
+                    {" "}
+                    · {r.reviewCount.toLocaleString()} reviews
+                  </span>
+                ) : null}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
 
   <div class="at-a-glance__ctas">
-    {!isAdRecon && (
-      <a
-        class="btn btn-secondary"
-        href={c.homepageUrl}
-        rel="nofollow sponsored noopener"
-      >
-        Visit {c.name}
-      </a>
-    )}
-    <a class="btn btn-primary" href={adreconCta} rel="noopener">
-      {isAdRecon ? 'Open AdRecon' : 'Try AdRecon'}
+    <a class="btn btn-secondary" href={c.homepageUrl} rel="nofollow noopener">
+      Visit official site
+    </a>
+    <a class="btn btn-secondary" href={routes.methodology()}>
+      Read methodology
     </a>
   </div>
 </aside>
@@ -169,8 +161,12 @@ const isAdRecon = slug === 'adrecon';
     padding-top: 1rem;
     border-top: 1px solid var(--color-line);
   }
-  .at-a-glance__stat dt { margin: 0 0 0.3rem; }
-  .at-a-glance__stat dd { margin: 0; }
+  .at-a-glance__stat dt {
+    margin: 0 0 0.3rem;
+  }
+  .at-a-glance__stat dd {
+    margin: 0;
+  }
   .at-a-glance__price {
     color: var(--color-type);
     font-weight: 600;
@@ -193,10 +189,19 @@ const isAdRecon = slug === 'adrecon';
     color: var(--color-gold);
     font-family: var(--font-serif);
   }
-  .at-a-glance__score-value { font-size: 2.1rem; line-height: 1; }
-  .at-a-glance__score-outof { color: var(--color-ink-subtle); font-family: var(--font-mono); font-size: 0.78rem; }
+  .at-a-glance__score-value {
+    font-size: 2.1rem;
+    line-height: 1;
+  }
+  .at-a-glance__score-outof {
+    color: var(--color-ink-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
 
-  .at-a-glance__scorecard .label-mono { margin: 0 0 0.6rem; }
+  .at-a-glance__scorecard .label-mono {
+    margin: 0 0 0.6rem;
+  }
   .at-a-glance__bars {
     list-style: none;
     padding: 0;
@@ -214,7 +219,9 @@ const isAdRecon = slug === 'adrecon';
     font-size: 0.82rem;
     color: var(--color-ink-dim);
   }
-  .at-a-glance__bar-label { color: var(--color-ink-mute); }
+  .at-a-glance__bar-label {
+    color: var(--color-ink-mute);
+  }
   .at-a-glance__bar-track {
     display: block;
     height: 6px;
@@ -226,7 +233,11 @@ const isAdRecon = slug === 'adrecon';
   .at-a-glance__bar-fill {
     display: block;
     height: 100%;
-    background: linear-gradient(90deg, color-mix(in oklch, var(--color-gold) 70%, transparent), var(--color-gold));
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--color-gold) 70%, transparent),
+      var(--color-gold)
+    );
   }
   .at-a-glance__bar-value {
     font-family: var(--font-mono);
@@ -247,9 +258,13 @@ const isAdRecon = slug === 'adrecon';
     font-size: 0.9rem;
     line-height: 1.45;
   }
-  .at-a-glance__best-for .label-mono { margin: 0; }
+  .at-a-glance__best-for .label-mono {
+    margin: 0;
+  }
 
-  .at-a-glance__external .label-mono { margin: 0 0 0.55rem; }
+  .at-a-glance__external .label-mono {
+    margin: 0 0 0.55rem;
+  }
   .at-a-glance__external-list {
     list-style: none;
     padding: 0;
@@ -267,10 +282,22 @@ const isAdRecon = slug === 'adrecon';
     font-size: 0.85rem;
     color: var(--color-ink-dim);
   }
-  .at-a-glance__external-row a { color: var(--color-type); text-decoration: none; }
-  .at-a-glance__external-row a:hover { color: var(--color-gold); text-decoration: underline; }
-  .at-a-glance__external-rating { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-ink-mute); }
-  .at-a-glance__external-count { color: var(--color-ink-subtle); }
+  .at-a-glance__external-row a {
+    color: var(--color-type);
+    text-decoration: none;
+  }
+  .at-a-glance__external-row a:hover {
+    color: var(--color-gold);
+    text-decoration: underline;
+  }
+  .at-a-glance__external-rating {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-ink-mute);
+  }
+  .at-a-glance__external-count {
+    color: var(--color-ink-subtle);
+  }
 
   .at-a-glance__ctas {
     display: flex;
@@ -278,5 +305,7 @@ const isAdRecon = slug === 'adrecon';
     gap: 0.5rem;
     margin-top: 0.25rem;
   }
-  .at-a-glance__ctas .btn { width: 100%; }
+  .at-a-glance__ctas .btn {
+    width: 100%;
+  }
 </style>

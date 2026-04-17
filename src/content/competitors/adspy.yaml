@@ -7,6 +7,7 @@ pricingUrl: https://adspy.com
 logo:
   path: /logos/adspy.png
   invertInLight: false
+  surface: dark
   width: 190
   height: 37
 brandColor: "#1E4FB5"

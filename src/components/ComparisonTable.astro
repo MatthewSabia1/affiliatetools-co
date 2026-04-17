@@ -2,12 +2,12 @@
 /**
  * ComparisonTable.astro — Side-by-side axis comparison for 2–4 tools.
  * Rows mix scalar rows (price, platforms, trial) with 1–10 score bars.
- * AdRecon column gets a subtle accent background.
  */
-import { getCompetitor, scoreSeverity } from '@/lib/competitors';
-import type { CompetitorSlug } from '@/lib/constants';
-import { DATA_AS_OF } from '@/lib/constants';
-import ToolLogo from './ToolLogo.astro';
+import { getCompetitor, scoreSeverity } from "@/lib/competitors";
+import type { CompetitorSlug } from "@/lib/constants";
+import { DATA_AS_OF } from "@/lib/constants";
+import { formatStartingPrice } from "@/lib/pricing";
+import ToolLogo from "./ToolLogo.astro";
 
 export interface Props {
   slugs: CompetitorSlug[];
@@ -18,101 +18,118 @@ export interface Props {
 type Competitor = Awaited<ReturnType<typeof getCompetitor>>;
 
 const DEFAULT_AXES = [
-  'startingPrice',
-  'freeTrial',
-  'platforms',
-  'landingPages',
-  'offers',
-  'coverage',
-  'dataFreshness',
-  'ux',
-  'affiliateFocus',
-  'search',
+  "startingPrice",
+  "freeTrial",
+  "platforms",
+  "landingPages",
+  "offers",
+  "coverage",
+  "dataFreshness",
+  "ux",
+  "affiliateFocus",
+  "search",
 ];
 
 const SCORE_AXES = new Set([
-  'coverage',
-  'dataFreshness',
-  'price',
-  'ux',
-  'landingPages',
-  'offers',
-  'affiliateFocus',
-  'search',
+  "coverage",
+  "dataFreshness",
+  "price",
+  "ux",
+  "landingPages",
+  "offers",
+  "affiliateFocus",
+  "search",
 ]);
 
 const AXIS_LABEL: Record<string, string> = {
-  startingPrice: 'Starting price',
-  freeTrial: 'Free trial',
-  freeTier: 'Free tier',
-  platforms: 'Platforms',
-  claimedAdCount: 'Claimed ad count',
-  historyDepth: 'History depth',
-  updateCadence: 'Update cadence',
-  refundPolicy: 'Refund policy',
-  coverage: 'Coverage',
-  dataFreshness: 'Data freshness',
-  price: 'Price / value',
-  ux: 'UX',
-  landingPages: 'Landing pages',
-  offers: 'Offer intelligence',
-  affiliateFocus: 'Affiliate focus',
-  search: 'Search & filters',
-  standoutFeature: 'Standout feature',
+  startingPrice: "Starting price",
+  freeTrial: "Free trial",
+  freeTier: "Free tier",
+  platforms: "Platforms",
+  claimedAdCount: "Claimed ad count",
+  historyDepth: "History depth",
+  updateCadence: "Update cadence",
+  refundPolicy: "Refund policy",
+  coverage: "Coverage",
+  dataFreshness: "Data freshness",
+  price: "Price / value",
+  ux: "UX",
+  landingPages: "Landing pages",
+  offers: "Offer intelligence",
+  affiliateFocus: "Affiliate focus",
+  search: "Search & filters",
+  standoutFeature: "Standout feature",
 };
 
-const { slugs, axes = DEFAULT_AXES, heading = 'Head-to-head comparison' } = Astro.props;
+const {
+  slugs,
+  axes = DEFAULT_AXES,
+  heading = "Head-to-head comparison",
+} = Astro.props;
 
-const competitors: Competitor[] = await Promise.all(slugs.map((s) => getCompetitor(s)));
+const competitors: Competitor[] = await Promise.all(
+  slugs.map((s) => getCompetitor(s)),
+);
 
-const formatPrice = (monthly: number | null, currency: string): string => {
-  if (monthly === null) return 'Custom';
-  if (monthly === 0) return 'Free';
-  const symbol = currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$';
-  return `${symbol}${monthly.toLocaleString('en-US')}/mo`;
-};
-
-type CellKind = 'text' | 'bool' | 'score' | 'list';
+type CellKind = "text" | "bool" | "score" | "list";
 type Cell = { kind: CellKind; value: string | boolean | number | string[] };
+type ScoreAxis =
+  | "coverage"
+  | "dataFreshness"
+  | "price"
+  | "ux"
+  | "landingPages"
+  | "offers"
+  | "affiliateFocus"
+  | "search";
+
+const isScoreAxis = (axis: string): axis is ScoreAxis => SCORE_AXES.has(axis);
 
 const getCell = (c: Competitor, axis: string): Cell => {
   const d = c.data;
 
-  if (SCORE_AXES.has(axis)) {
-    return { kind: 'score', value: (d.scores as unknown as Record<string, number>)[axis] ?? 0 };
+  if (isScoreAxis(axis)) {
+    return { kind: "score", value: d.scores[axis] ?? 0 };
   }
   switch (axis) {
-    case 'startingPrice':
-      return { kind: 'text', value: formatPrice(d.pricing.startingMonthly, d.pricing.currency) };
-    case 'freeTrial':
-      return { kind: 'bool', value: Boolean(d.pricing.freeTrial && d.pricing.freeTrial.days > 0) };
-    case 'freeTier':
-      return { kind: 'bool', value: d.pricing.freeTier };
-    case 'platforms':
-      return { kind: 'list', value: d.platforms };
-    case 'claimedAdCount':
-      return { kind: 'text', value: d.coverage.claimedAdCount ?? '—' };
-    case 'historyDepth':
-      return { kind: 'text', value: d.coverage.historyDepth ?? '—' };
-    case 'updateCadence':
-      return { kind: 'text', value: d.coverage.updateCadence ?? '—' };
-    case 'refundPolicy':
-      return { kind: 'text', value: d.pricing.refundPolicy ?? '—' };
-    case 'standoutFeature':
-      return { kind: 'text', value: d.standoutFeature };
+    case "startingPrice":
+      return {
+        kind: "text",
+        value: formatStartingPrice(d.pricing, { customLabel: "Custom" }),
+      };
+    case "freeTrial":
+      return {
+        kind: "bool",
+        value: Boolean(d.pricing.freeTrial && d.pricing.freeTrial.days > 0),
+      };
+    case "freeTier":
+      return { kind: "bool", value: d.pricing.freeTier };
+    case "platforms":
+      return { kind: "list", value: d.platforms };
+    case "claimedAdCount":
+      return { kind: "text", value: d.coverage.claimedAdCount ?? "—" };
+    case "historyDepth":
+      return { kind: "text", value: d.coverage.historyDepth ?? "—" };
+    case "updateCadence":
+      return { kind: "text", value: d.coverage.updateCadence ?? "—" };
+    case "refundPolicy":
+      return { kind: "text", value: d.pricing.refundPolicy ?? "—" };
+    case "standoutFeature":
+      return { kind: "text", value: d.standoutFeature };
     default:
-      return { kind: 'text', value: '—' };
+      return { kind: "text", value: "—" };
   }
 };
 
-const adreconIndex = competitors.findIndex((c) => c.data.slug === 'adrecon');
 ---
 
 <section class="compare card" aria-label={heading}>
   <header class="compare__header">
     <p class="label-mono">Comparison</p>
     <h3 class="compare__title">{heading}</h3>
-    <p class="compare__note">Data as of {DATA_AS_OF}. Competitor claims are cited as claims, not facts.</p>
+    <p class="compare__note">
+      Data as of {DATA_AS_OF}. Competitor claims are cited as claims, not facts.
+    </p>
   </header>
 
   <div class="compare__scroll">
@@ -120,69 +137,114 @@ const adreconIndex = competitors.findIndex((c) => c.data.slug === 'adrecon');
       <thead>
         <tr>
           <th scope="col" class="compare__rowhead">Dimension</th>
-          {competitors.map((c, i) => (
-            <th
-              scope="col"
-              class:list={['compare__colhead', i === adreconIndex ? 'is-adrecon' : null]}
-            >
-              <div class="compare__toolhead">
-                <ToolLogo slug={c.data.slug as CompetitorSlug} size="sm" />
-                <span class="compare__toolname">{c.data.name}</span>
-              </div>
-            </th>
-          ))}
+          {
+            competitors.map((c) => (
+              <th scope="col" class="compare__colhead">
+                <div class="compare__toolhead">
+                  <ToolLogo slug={c.data.slug as CompetitorSlug} size="sm" />
+                  <span class="compare__toolname">{c.data.name}</span>
+                </div>
+              </th>
+            ))
+          }
         </tr>
       </thead>
       <tbody>
-        {axes.map((axis) => (
-          <tr>
-            <th scope="row" class="compare__rowhead">{AXIS_LABEL[axis] ?? axis}</th>
-            {competitors.map((c, i) => {
-              const cell = getCell(c, axis);
-              const isAdRecon = i === adreconIndex;
-              return (
-                <td class:list={['compare__cell', isAdRecon ? 'is-adrecon' : null]}>
-                  {cell.kind === 'score' && (() => {
-                    const v = cell.value as number;
-                    const pct = Math.max(0, Math.min(100, (v / 10) * 100));
-                    const sev = scoreSeverity(v);
-                    return (
-                      <div class="compare__score">
-                        <div class:list={['compare__bar', `sev-${sev}`]} role="progressbar" aria-valuenow={v} aria-valuemin={1} aria-valuemax={10}>
-                          <span class="compare__bar-fill" style={`width: ${pct}%;`}></span>
-                        </div>
-                        <span class="compare__score-num">{v.toFixed(1)}</span>
-                      </div>
-                    );
-                  })()}
-                  {cell.kind === 'bool' && (
-                    cell.value ? (
-                      <span class="compare__bool compare__bool--yes" aria-label="Yes">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                          <path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Yes
+        {
+          axes.map((axis) => (
+            <tr>
+              <th scope="row" class="compare__rowhead">
+                {AXIS_LABEL[axis] ?? axis}
+              </th>
+              {competitors.map((c) => {
+                const cell = getCell(c, axis);
+                return (
+                  <td class="compare__cell">
+                    {cell.kind === "score" &&
+                      (() => {
+                        const v = cell.value as number;
+                        const pct = Math.max(0, Math.min(100, (v / 10) * 100));
+                        const sev = scoreSeverity(v);
+                        return (
+                          <div class="compare__score">
+                            <div
+                              class:list={["compare__bar", `sev-${sev}`]}
+                              role="progressbar"
+                              aria-valuenow={v}
+                              aria-valuemin={1}
+                              aria-valuemax={10}
+                            >
+                              <span
+                                class="compare__bar-fill"
+                                style={`width: ${pct}%;`}
+                              />
+                            </div>
+                            <span class="compare__score-num">
+                              {v.toFixed(1)}
+                            </span>
+                          </div>
+                        );
+                      })()}
+                    {cell.kind === "bool" &&
+                      (cell.value ? (
+                        <span
+                          class="compare__bool compare__bool--yes"
+                          aria-label="Yes"
+                        >
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M3 8.5L6.5 12L13 5"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                          Yes
+                        </span>
+                      ) : (
+                        <span
+                          class="compare__bool compare__bool--no"
+                          aria-label="No"
+                        >
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M4 4L12 12M12 4L4 12"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                          No
+                        </span>
+                      ))}
+                    {cell.kind === "text" && (
+                      <span class="compare__text">{cell.value as string}</span>
+                    )}
+                    {cell.kind === "list" && (
+                      <span class="compare__text">
+                        {(cell.value as string[]).join(", ")}
                       </span>
-                    ) : (
-                      <span class="compare__bool compare__bool--no" aria-label="No">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                          <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        No
-                      </span>
-                    )
-                  )}
-                  {cell.kind === 'text' && (
-                    <span class="compare__text">{cell.value as string}</span>
-                  )}
-                  {cell.kind === 'list' && (
-                    <span class="compare__text">{(cell.value as string[]).join(', ')}</span>
-                  )}
-                </td>
-              );
-            })}
-          </tr>
-        ))}
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+          ))
+        }
       </tbody>
     </table>
   </div>
@@ -253,11 +315,6 @@ const adreconIndex = competitors.findIndex((c) => c.data.slug === 'adrecon');
     text-align: left;
     font-weight: 600;
   }
-  .compare__colhead.is-adrecon,
-  .compare__cell.is-adrecon {
-    background: color-mix(in oklch, var(--color-gold-soft) 65%, transparent);
-  }
-  .compare__colhead.is-adrecon { background: color-mix(in oklch, var(--color-gold-soft) 85%, var(--color-surface-3)); }
 
   .compare__toolhead {
     display: inline-flex;
@@ -295,8 +352,12 @@ const adreconIndex = competitors.findIndex((c) => c.data.slug === 'adrecon');
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
-  .compare__bool--yes { color: var(--color-success); }
-  .compare__bool--no { color: var(--color-danger); }
+  .compare__bool--yes {
+    color: var(--color-success);
+  }
+  .compare__bool--no {
+    color: var(--color-danger);
+  }
 
   .compare__score {
     display: flex;
@@ -316,9 +377,15 @@ const adreconIndex = competitors.findIndex((c) => c.data.slug === 'adrecon');
     height: 100%;
     border-radius: 999px;
   }
-  .sev-high .compare__bar-fill { background: var(--color-success); }
-  .sev-med .compare__bar-fill { background: var(--color-warning); }
-  .sev-low .compare__bar-fill { background: var(--color-danger); }
+  .sev-high .compare__bar-fill {
+    background: var(--color-success);
+  }
+  .sev-med .compare__bar-fill {
+    background: var(--color-warning);
+  }
+  .sev-low .compare__bar-fill {
+    background: var(--color-danger);
+  }
 
   .compare__score-num {
     font-family: var(--font-mono);

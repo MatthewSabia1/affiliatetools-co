@@ -1,14 +1,13 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import Breadcrumb from '@/components/Breadcrumb.astro';
-import Hero from '@/components/Hero.astro';
-import AuthorshipBox from '@/components/AuthorshipBox.astro';
-import CTA from '@/components/CTA.astro';
-import TOC from '@/components/TOC.astro';
-import type { CollectionEntry } from 'astro:content';
-import type { MarkdownHeading } from 'astro';
-import { getCollection } from 'astro:content';
-import { absoluteUrl, routes } from '@/lib/constants';
+import BaseLayout from "./BaseLayout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Hero from "@/components/Hero.astro";
+import AuthorshipBox from "@/components/AuthorshipBox.astro";
+import TOC from "@/components/TOC.astro";
+import type { CollectionEntry } from "astro:content";
+import type { MarkdownHeading } from "astro";
+import { getCollection } from "astro:content";
+import { absoluteUrl, routes } from "@/lib/constants";
 import {
   breadcrumbList,
   faqPage,
@@ -16,10 +15,10 @@ import {
   itemListJsonLd,
   organizationJsonLd,
   type JsonLd,
-} from '@/lib/schema';
+} from "@/lib/schema";
 
 export interface Props {
-  listicle: CollectionEntry<'listicles'>;
+  listicle: CollectionEntry<"listicles">;
   headings: MarkdownHeading[];
 }
 
@@ -31,13 +30,13 @@ const pagePath = `/ad-spy-tools/${listicleSlug}/`;
 const pageUrl = absoluteUrl(pagePath);
 
 const crumbItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Ad Spy Tools', href: routes.hub() },
+  { name: "Home", href: "/" },
+  { name: "Ad Spy Tools", href: routes.hub() },
   { name: l.title },
 ];
 
 // Hydrate ranking with competitor data for ItemList JSON-LD.
-const competitors = await getCollection('competitors');
+const competitors = await getCollection("competitors");
 const bySlug = new Map(competitors.map((c) => [c.data.slug, c.data]));
 
 const rankingItems = l.ranking.map((r) => {
@@ -46,7 +45,9 @@ const rankingItems = l.ranking.map((r) => {
     position: r.rank,
     name: comp?.name ?? r.competitorSlug,
     description: r.verdict,
-    url: comp?.homepageUrl ?? `https://affiliatetools.co/ad-spy-tools/${r.competitorSlug}-review/`,
+    url:
+      comp?.homepageUrl ??
+      `https://affiliatetools.co/ad-spy-tools/${r.competitorSlug}-review/`,
     startingPrice: comp?.pricing.startingMonthly ?? null,
     currency: comp?.pricing.currency,
     features: comp?.strengths,
@@ -57,16 +58,16 @@ const winner = l.ranking.find((r) => r.rank === 1);
 const winnerComp = winner ? bySlug.get(winner.competitorSlug) : undefined;
 
 const intentLabel: Record<typeof l.intent, string> = {
-  'head-term': 'Head-term ranking',
-  'bottom-funnel': 'Bottom-funnel ranking',
-  'long-tail': 'Long-tail ranking',
-  alternatives: 'Alternatives ranking',
+  "head-term": "Head-term ranking",
+  "bottom-funnel": "Bottom-funnel ranking",
+  "long-tail": "Long-tail ranking",
+  alternatives: "Alternatives ranking",
 };
 
 const jsonLd: JsonLd[] = [
   breadcrumbList([
-    { name: 'Home', path: '/' },
-    { name: 'Ad Spy Tools', path: routes.hub() },
+    { name: "Home", path: "/" },
+    { name: "Ad Spy Tools", path: routes.hub() },
     { name: l.title, path: pagePath },
   ]),
   articleJsonLd({
@@ -125,7 +126,10 @@ if (l.faq && l.faq.length > 0) {
   <article class="container-wide listicle-article">
     <div class="listicle-grid">
       <div class="listicle-main">
-        <AuthorshipBox publishDate={l.publishDate} updatedDate={l.updatedDate} />
+        <AuthorshipBox
+          publishDate={l.publishDate}
+          updatedDate={l.updatedDate}
+        />
         <div class="prose">
           <slot />
         </div>
@@ -133,12 +137,6 @@ if (l.faq && l.faq.length > 0) {
       <aside class="listicle-sidebar">
         <div class="sticky-sidebar listicle-sidebar-inner">
           <TOC headings={headings} />
-          <CTA
-            variant="mid"
-            campaign={listicleSlug}
-            medium="listicle"
-            label="Try AdRecon"
-          />
         </div>
       </aside>
     </div>
@@ -172,9 +170,21 @@ if (l.faq && l.faq.length > 0) {
       flex-direction: column;
       gap: 0.6rem;
     }
-    .winner-label { color: var(--color-gold); }
-    .winner-title { font-size: 1.25rem; color: var(--color-type); line-height: 1.45; }
-    .winner-title strong { color: var(--color-gold); }
-    .winner-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .winner-label {
+      color: var(--color-gold);
+    }
+    .winner-title {
+      font-size: 1.25rem;
+      color: var(--color-type);
+      line-height: 1.45;
+    }
+    .winner-title strong {
+      color: var(--color-gold);
+    }
+    .winner-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
   </style>
 </BaseLayout>

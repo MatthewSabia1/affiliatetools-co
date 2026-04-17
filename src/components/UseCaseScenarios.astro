@@ -3,7 +3,7 @@
  * UseCaseScenarios.astro — Persona verdict cards for versus pages.
  * Each card shows a persona, verdict, and a recommendation chip.
  */
-export type Recommendation = 'adrecon' | 'competitor' | 'both' | 'other';
+export type Recommendation = "adrecon" | "competitor" | "both" | "other";
 
 export interface Scenario {
   persona: string;
@@ -20,30 +20,34 @@ export interface Props {
 
 const {
   scenarios,
-  heading = 'Who should use which?',
-  eyebrow = 'Use cases',
+  heading = "Who should use which?",
+  eyebrow = "Use cases",
 } = Astro.props;
 
 const chipClassFor = (rec: Recommendation): string => {
   switch (rec) {
-    case 'adrecon':
-      return 'chip chip-gold';
-    case 'competitor':
-      return 'chip chip-warning';
-    case 'both':
-      return 'chip chip-green';
+    case "adrecon":
+      return "chip chip-gold";
+    case "competitor":
+      return "chip chip-warning";
+    case "both":
+      return "chip chip-green";
     default:
-      return 'chip';
+      return "chip";
   }
 };
 
 const pickLabelFor = (scenario: Scenario): string => {
-  if (scenario.recommendation === 'adrecon') return 'Our pick: AdRecon';
-  if (scenario.recommendation === 'competitor') {
-    return scenario.competitorName ? `Our pick: ${scenario.competitorName}` : 'Our pick: Competitor';
+  if (scenario.recommendation === "adrecon") return "Best fit: AdRecon";
+  if (scenario.recommendation === "competitor") {
+    return scenario.competitorName
+      ? `Best fit: ${scenario.competitorName}`
+      : "Best fit: Competitor";
   }
-  if (scenario.recommendation === 'both') return 'Our pick: Use both';
-  return scenario.competitorName ? `Our pick: ${scenario.competitorName}` : 'Our pick: Look elsewhere';
+  if (scenario.recommendation === "both") return "Best fit: Use both";
+  return scenario.competitorName
+    ? `Best fit: ${scenario.competitorName}`
+    : "Best fit: Look elsewhere";
 };
 ---
 
@@ -54,15 +58,17 @@ const pickLabelFor = (scenario: Scenario): string => {
   </header>
 
   <div class="scenarios__grid">
-    {scenarios.map((scenario) => (
-      <article class="scenario-card">
-        <h4 class="scenario-card__persona">{scenario.persona}</h4>
-        <p class="scenario-card__verdict">{scenario.verdict}</p>
-        <span class={chipClassFor(scenario.recommendation)}>
-          {pickLabelFor(scenario)}
-        </span>
-      </article>
-    ))}
+    {
+      scenarios.map((scenario) => (
+        <article class="scenario-card">
+          <h4 class="scenario-card__persona">{scenario.persona}</h4>
+          <p class="scenario-card__verdict">{scenario.verdict}</p>
+          <span class={chipClassFor(scenario.recommendation)}>
+            {pickLabelFor(scenario)}
+          </span>
+        </article>
+      ))
+    }
   </div>
 </section>
 
@@ -87,7 +93,9 @@ const pickLabelFor = (scenario: Scenario): string => {
     grid-template-columns: repeat(2, 1fr);
   }
   @media (max-width: 720px) {
-    .scenarios__grid { grid-template-columns: 1fr; }
+    .scenarios__grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .scenario-card {
@@ -98,7 +106,10 @@ const pickLabelFor = (scenario: Scenario): string => {
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-md);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      border-color 0.15s ease;
   }
   .scenario-card:hover {
     transform: translateY(-2px);

@@ -1,0 +1,195 @@
+---
+title: "How to Research Landing Pages: The Complete Teardown Workflow (2026)"
+description: "A structured approach to landing page research for affiliates — finding winning LPs, archiving them for study, deconstructing the funnel, and extracting patterns. Featuring AdRecon's Landing Page Ripper. Updated April 2026."
+publishDate: "2026-04-17"
+updatedDate: "2026-04-17"
+heroEyebrow: "Guide"
+faq:
+  - q: "How do I find the landing pages competitors are running?"
+    a: "Two ways. 1) Click through from an ad in Meta Ad Library or any ad spy tool — the landing page URL is exposed per ad. 2) Use a tool that aggregates landing pages by advertiser (AdRecon's Winning Lander Vault groups LPs by linked ads, days running, and network). Method 1 is ad-by-ad; method 2 is the whole category at a glance. For systematic research, method 2 saves hours."
+  - q: "Can I download a competitor's landing page?"
+    a: "Yes, for research purposes. Your browser saves local copies with 'Save As' (HTML only) or full page save extensions. Better: use a tool like AdRecon's Landing Page Ripper, which captures HTML, CSS, images, fonts, and referenced assets as a single ZIP for offline study. Copyright restrictions mean you can study the page, but can't re-host it with your affiliate link swapped in — that's infringement. Archive for study; produce your own original when you build."
+  - q: "What should I look for when tearing down a landing page?"
+    a: "Eight elements: 1) Hero (headline + subhead + hero image). 2) Social proof position (where testimonials, media logos, reviews live). 3) Body content (VSL, advertorial, text, infographic). 4) Offer presentation (how price and product are revealed). 5) CTA structure (button count, phrasing, placement). 6) Upsell sequence (what happens post-purchase). 7) Scarcity/urgency mechanics (countdown timers, stock counts). 8) Technical elements (page speed, mobile layout, pixels)."
+  - q: "What is an advertorial landing page?"
+    a: "An advertorial is a landing page styled as editorial content — news article, blog post, investigation, or story — with the offer embedded mid-page or at the end. The format works because it lowers the user's 'this is an ad' defense. Advertorials are dominant in ClickBank Health and Wealth verticals. Tell-tale signs: news-site layout, timestamp, author byline, journalist photo, article length, disclaimer at the bottom."
+  - q: "How does the Landing Page Ripper work?"
+    a: "AdRecon's Landing Page Ripper accepts a URL, launches a headless browser (Puppeteer + SingleFile), loads the page with all resources, and packages the complete rendered LP as a ZIP — HTML, CSS, images, fonts, JavaScript, everything. Rate limit: 10 captures per 15 minutes per user. Max 100 MB per capture. Max 500 resources per page. Blocked domains: Meta platform URLs (can't capture FB/IG login walls). It's built for fair-use research archives, not for re-hosting."
+  - q: "Are video sales letters (VSLs) worth studying?"
+    a: "Yes — VSLs are often the most valuable part of a ClickBank funnel to study. The script is the real asset. Study the opening 90 seconds (the hook and problem framing), the story structure (how credibility is established), the offer reveal (where and how price appears), and the close (urgency, guarantee, final CTA). Transcribe the VSL for note-taking. VSL frameworks are transferable across niches once you internalize the structure."
+  - q: "How many landing pages should I tear down?"
+    a: "10 per niche is enough to extract patterns. Fewer and you miss variation; more and you hit diminishing returns. Start with the top 10 LPs (sorted by days running in your ad spy tool) in your target niche. Tear each down using the 8-element framework. After 10 teardowns, clear patterns will emerge — the 2-3 dominant LP structures, the proof stack formats that repeat, the CTA patterns that work. That pattern map informs your own LP design."
+draft: false
+---
+
+import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
+
+<AuthorshipBox />
+
+## TL;DR
+
+Landing page research is where affiliate campaigns are actually won or lost. The ad gets the click; the LP does the conversion. A great ad with a broken LP is a waste of spend; a mediocre ad with a proven LP can still print. Most media buyers under-invest in LP research because it's more work than creative research — but the ROI is higher.
+
+The workflow has three phases. First, find winning LPs — either click through from proven ads (sorted by days running) or use an aggregated LP view (AdRecon's Winning Lander Vault). Second, archive them for offline study — AdRecon's Landing Page Ripper downloads complete LPs as ZIPs, or manually save via browser. Third, tear down systematically using an 8-element framework: hero, proof, body, offer, CTA, upsell, urgency, tech.
+
+Copyright matters. You can study, screenshot, annotate, and share LPs for research. You cannot re-host a competitor's LP with your affiliate link swapped in. That's infringement and a common reason for affiliate account bans. Use LP research to learn structure and patterns, then produce your own original pages.
+
+This guide walks through finding LPs, archiving them legally, the 8-element teardown framework, and the pattern-extraction workflow that turns individual teardowns into reusable templates for your own funnels. Examples lean affiliate — ClickBank Health advertorials, Wealth VSLs, BizOpp opt-ins — because that's where AdRecon users operate.
+
+## Step 1 — Find the winning LPs
+
+Start with ads, filter to proven winners (90+ days running), then capture the LP URLs. Two paths.
+
+**Path A: ad-by-ad.** Open Meta Ad Library or any ad spy tool. Filter to your niche. Sort by days running. Click into each ad, grab the LP URL, open in a new tab. Manual but free.
+
+**Path B: aggregated LP view.** AdRecon's Winning Lander Vault aggregates landing pages by linked ads, days running, and network classification. You can view "all ClickBank Health-niche landing pages sorted by days running" or "all LPs linked to offers running 120+ days" in one screen. Each entry shows how many ads link to the LP, days running, network, and a preview.
+
+Path B is substantially faster for systematic research. Path A is fine for one-off spot-checks.
+
+What to look for when selecting LPs to tear down:
+
+- **Days running** — LPs linked to ads running 90+ days are proven winners.
+- **Multiple linked ads** — LPs linked to 10+ active ads signal the LP is being heavily driven.
+- **Multiple advertisers linking same LP** — white-label offers or shared affiliate LPs, often the most battle-tested structures.
+- **LP age** — if the same LP has been active for 6+ months, it's been through enough traffic to be optimized.
+
+Build a teardown list. 10-20 LPs per niche.
+
+## Step 2 — Archive for offline study
+
+You want local copies. Browser rendering can change (LP operators update pages), server-side rendering varies by geo/device, and some LPs implement click-bot protection that makes re-visiting flag you as suspicious. A local archive is stable.
+
+**Option A: Browser-native save.** File → Save As → Webpage, Complete. Works for static LPs. Misses dynamic content (lazy-loaded images, conditional modals) and can't capture SPAs well.
+
+**Option B: SingleFile extension.** Browser extension that packages an LP into a single HTML file with inlined CSS, images, and fonts. Better than native save. Free.
+
+**Option C: Wayback Machine.** archive.org — submits URLs and generates permanent archives. Useful for historical research (what did this LP look like 6 months ago). Doesn't always capture every asset, and operators can request removal.
+
+**Option D: AdRecon's Landing Page Ripper.** Accepts a URL, launches headless Chromium (Puppeteer + SingleFile), captures the fully rendered page with all resources, and packages as a ZIP. 100 MB max per capture, 500 resources max, 110s timeout, 10 captures per 15-minute window per user, SSRF-protected. Built specifically for research archives.
+
+**Option E: Puppeteer/Playwright script.** DIY if you're technical — write a script that opens the page, waits for render, saves HTML + assets. Free but requires engineering effort.
+
+For most affiliates, Option B (SingleFile) plus Option D (Landing Page Ripper for batch archiving) covers the workflow.
+
+**Legal reminder:** archives are for research. Don't re-host ripped LPs with your affiliate link swapped in — that's copyright infringement and a common cause of ad account bans and DMCA takedowns.
+
+## Step 3 — The 8-element teardown framework
+
+Open the archived LP in your browser. Scroll top to bottom. Then tear it down element by element.
+
+### Element 1 — Hero
+
+Above-the-fold area. Goal: confirm the user is in the right place and create forward momentum.
+
+Note:
+- Headline — main promise in ~10 words.
+- Subhead — secondary promise or clarification.
+- Hero image/video — what's the primary visual?
+- Above-fold CTA — is there a CTA visible before scroll?
+
+### Element 2 — Social proof position
+
+Where does proof appear and what type?
+
+- Logo bar (media mentions, "As seen on") — typical position right below hero.
+- Testimonials — grouped, scattered, or both.
+- Data points — specific numbers (customer count, product stats).
+- Expert endorsements — doctor quotes, certification badges.
+- Before/after — image stacks, timelines.
+
+High-consideration offers stack 3-5 proof element types. Low-price impulse offers use 1-2.
+
+### Element 3 — Body content
+
+The main narrative. Formats include:
+- **VSL** — video sales letter. Autoplay or click-to-play, typically 15-45 minutes for ClickBank Health/Wealth.
+- **Advertorial** — written article format (news-site styling, author byline, timestamp).
+- **Long-form text** — direct-response style with headlines, subheads, story-driven.
+- **Infographic** — visual-heavy, minimal text.
+- **Hybrid** — advertorial with embedded VSL.
+
+For VSLs, the script is the asset — transcribe for study. For advertorials, the story structure is the asset — note opening, narrative arc, offer reveal position.
+
+### Element 4 — Offer presentation
+
+Where and how is the product revealed?
+
+- **Offer position** — early (within first scroll), middle (after problem/story), late (near CTA).
+- **Price reveal** — upfront or delayed.
+- **Price anchoring** — "was $X, now $Y" or "compare to $Z."
+- **Bundle structure** — single product, bundle, main + upsells.
+- **Delivery method** — digital download, physical shipment, subscription.
+
+### Element 5 — CTA structure
+
+The specific action asked.
+
+- Button count — one dominant or multiple scattered.
+- Button phrasing — exact words.
+- Button styling — color, size, position.
+- Button urgency — "today," "now," "limited."
+
+### Element 6 — Upsell sequence (if visible)
+
+What happens post-CTA? Some LPs expose the upsell flow; most hide it behind checkout.
+
+- Post-purchase upsells — one-click upsells, downsells.
+- Order bump — checkout-page add-ons.
+- Thank-you page — additional offers, referral mechanisms.
+
+If you can't see the upsell flow from public-facing LP, note this — it's a limit of LP-only research and a reason to also study the ad's post-click journey in depth when possible.
+
+### Element 7 — Scarcity / urgency mechanics
+
+- Countdown timers — real or fake (reloading on refresh = fake).
+- Stock counts — "only 12 left" indicators.
+- Time-limited offers — "today only," "this week only."
+- Cart expiry — "your cart expires in 15 minutes."
+
+### Element 8 — Technical elements
+
+- Page speed — load time, Core Web Vitals.
+- Mobile layout — how does it render on mobile.
+- Pixels and scripts — inspect network tab for analytics, retargeting, affiliate tracking.
+- Domain pattern — own-brand, redirect chain, vendor subdomain.
+
+## Step 4 — Extract patterns
+
+After 10 teardowns in a niche, aggregate findings into patterns.
+
+- **LP archetype** — which of the 3-4 archetype patterns dominate your niche? (VSL-first, advertorial-first, long-form text, short opt-in funnel.)
+- **Proof stack template** — which 3-4 proof elements appear in 80%+ of winners?
+- **Offer position** — early, middle, or late across the set?
+- **CTA phrasing patterns** — common verb + modifier structures.
+- **Urgency devices** — which specific urgency mechanics recur?
+- **Technical standards** — mobile-first, fast load, specific tracking pixel combinations.
+
+That pattern map is the research output. Use it to design your own LPs — not by copying elements, but by applying the same principles. A "proven ClickBank Health LP" follows predictable architecture; once you've mapped that architecture, building your own is execution, not guessing.
+
+## Which tool should you use?
+
+For affiliate LP research specifically, AdRecon is the clearest fit. The Winning Lander Vault aggregates LPs by linked ads, days running, and network — you can systematically find the winners without clicking through every ad. The Landing Page Ripper downloads complete LP archives for offline teardown. Affiliate-network classification helps you filter to ClickBank, Digistore24, BuyGoods, MaxWeb, or WarriorPlus LPs specifically. $299 lifetime (as of April 2026). Meta-only.
+
+For Boolean URL search over Meta historical data (useful for pattern research across years), AdSpy at $149/month (as of April 2026) is the alternative. No built-in LP archive — you'd use SingleFile or manual save for archiving.
+
+For multi-platform LP research including TikTok and native, BigSpy or PowerAdSpy expose LP URLs but don't archive. You'd need SingleFile or a similar tool for captures.
+
+For creative-strategist swipe-file workflow that includes LP screenshots as part of the brief, Foreplay's UI is purpose-built. From $49/month (as of April 2026). Less comprehensive LP archive vs. AdRecon's full ripper.
+
+If you're doing serious LP research at volume, the Landing Page Ripper is genuinely useful — rate-limited to prevent abuse, SSRF-protected, and designed for research-grade captures. For casual LP research, SingleFile browser extension plus manual LP URL collection works at $0.
+
+<CTA variant="mid" campaign="research-landing-pages" medium="guide" />
+
+## FAQ
+
+<FAQ items={frontmatter.faq} />
+
+## Related reading
+
+- [How to Spy on Facebook Ads](/guides/how-to-spy-on-facebook-ads/) — the ad side of the funnel.
+- [How to Analyze Ad Creative](/guides/how-to-analyze-ad-creative/) — ad-level teardown framework.
+- [How to Find Winning ClickBank Offers](/guides/how-to-find-winning-clickbank-offers/) — offer-level research.
+- [Best Ad Spy Tools of 2026](/ad-spy-tools/best-ad-spy-tools-2026/) — overall tool comparison, including which products go deepest on landing-page research.
+- [Affiliate Marketer Software Stack](/guides/affiliate-marketer-software-stack/) — where LP research fits in the full stack.

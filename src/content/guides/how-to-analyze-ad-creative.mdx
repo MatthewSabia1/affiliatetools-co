@@ -1,0 +1,170 @@
+---
+title: "How to Analyze Ad Creative: Hook, Proof, and CTA Framework (2026)"
+description: "A systematic framework for tearing down competitor ad creative — hook structure, social proof, CTA analysis, and the patterns that separate tests from scaled winners. Updated April 2026."
+publishDate: "2026-04-17"
+updatedDate: "2026-04-17"
+heroEyebrow: "Guide"
+faq:
+  - q: "What should I look for when analyzing a competitor's ad?"
+    a: "Five elements, in order: 1) Hook — the first 3 seconds of video or the first line of copy. 2) Angle — the emotional lever or problem frame. 3) Proof stack — testimonials, credentials, media logos, data points. 4) Offer — what's being sold and the price position. 5) CTA — the specific action asked, urgency, and friction. Each element is a testable variable. Copying one element at a time (never wholesale) is how you iterate intelligently."
+  - q: "What makes a hook work in Facebook ads?"
+    a: "Pattern interrupt + curiosity gap + relevance signal. The hook has to stop the scroll, which means it must break the user's expected feed rhythm. Common winning patterns: visual surprise (unexpected image, odd framing), contrarian statement ('Doctors hate this'), named callout ('For men over 40'), question with implied answer ('Why is your metabolism so slow?'), before/after split-screen. What doesn't work: generic brand imagery, stock photos, polished studio aesthetics in feed contexts."
+  - q: "How do I tell if an ad's creative is working?"
+    a: "Days running is the primary signal. Meta kills unprofitable ads within 14-30 days. An ad at 60+ days is probably working. An ad at 120+ days is definitely working. A creative running for 180+ days across multiple advertiser accounts is a scaled pattern worth studying closely. Paid ad spy tools surface days running as a sortable field; Meta Ad Library doesn't expose it directly."
+  - q: "Can I copy a competitor's creative if it's working?"
+    a: "No. Copying the actual image, video, or copy is copyright infringement. What you can do is study the hook structure, angle, proof stack, and CTA pattern, then produce your own original version that applies the same principles. Every serious media buyer operates this way — the 'swipe and refresh' workflow uses competitor creative as inspiration for originals, not as source material for plagiarism."
+  - q: "What's the difference between angle and hook?"
+    a: "Hook is the first 3 seconds — how you stop the scroll. Angle is the overarching frame — what emotional problem you're addressing and how. Example in the weight loss niche: the hook might be a split-screen before/after. The angle might be 'stubborn belly fat after 40 is hormonal, not dietary.' You can have a great hook with a weak angle (scroll-stopper that doesn't convert) or a great angle with a weak hook (good message that nobody stops to read)."
+  - q: "How much social proof do ads need?"
+    a: "Varies by niche and offer price. Low-price impulse offers ($20-50) can work with minimal proof — one testimonial, one media logo. High-price or high-consideration offers ($200+) need stacked proof — testimonials, credentials, data points, before/afters, doctor/expert endorsements. ClickBank Health and Wealth offers typically stack 3-5 proof elements in the LP and at least one in the ad creative."
+  - q: "What CTA works best in Facebook ads?"
+    a: "Specificity + low friction. 'Shop Now' is worse than 'Get 40% Off Today.' 'Learn More' is worse than 'Watch the 2-Minute Video.' The CTA should match the traffic temperature — cold traffic to cold offers works with soft CTAs (Learn More, Watch Video), cold traffic to direct offers works with specific urgency (Order Today, Claim Discount), warm retargeting can use harder CTAs (Checkout, Buy Now). Match the CTA to the audience's stage in your funnel."
+draft: false
+---
+
+import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
+
+<AuthorshipBox />
+
+## TL;DR
+
+Analyzing ad creative is a skill that compounds. Ten focused teardowns make you a better media buyer than a thousand scrolled-past ads. The trick is having a framework — otherwise you see isolated tactics and miss the pattern.
+
+The framework that actually works is five elements, studied in order: hook, angle, proof stack, offer, CTA. Each is a testable variable. Each can be swiped (studied for principle) but not copied (replicated wholesale). Together, they tell you why a creative is winning and what to test in your own ads.
+
+Good analysis starts by confirming the creative is actually winning. Meta's algorithm kills losers within weeks, so days running is the filter for "worth studying." Sort any ad spy tool by days running descending, grab the top 10 ads in your niche, and tear them down systematically. Ignore ads under 30 days — they're tests, not winners.
+
+This guide walks through the full framework: the hook sub-framework (pattern interrupt, curiosity, relevance), the angle deconstruction (emotional lever, problem frame, transformation promise), proof stack tiering, offer position, and CTA specificity. With examples from affiliate verticals — ClickBank Health, Wealth, and BizOpp offers — because that's where AdRecon's users operate.
+
+## Step 0 — Confirm the creative is winning
+
+Before spending time on analysis, confirm it's worth analyzing. Not every ad you see is a winner. Meta's feed algorithm will show you recent ads, tested creatives that haven't yet been killed, and low-performance retargeting filler. Wasting analysis on losing creative gives you false signals.
+
+The filter: days running. In AdRecon, AdSpy, BigSpy, or Foreplay, sort by days running (descending). In Meta Ad Library alone, check the start date and mentally calculate — anything over 60 days is worth studying, anything over 120 days is a confirmed winner, anything under 30 days is noise.
+
+Additional signals:
+- **Variant count** — an advertiser running 20+ variants is in scaling mode.
+- **Multiple advertisers, same creative** — creative running under 10+ affiliate accounts is a tested pattern being spread.
+- **Active status** — running right now, not historical.
+
+AdRecon's Proven Creatives library specifically surfaces creatives grouped across multiple advertisers with proof tiers (15+, 30+, 60+, 90+ linked advertisers). These are the creatives worth the most teardown time.
+
+## Element 1 — The hook
+
+The hook is the first 3 seconds of video or the first line of copy. It exists to stop the scroll. If the hook fails, nothing else in the ad matters — the user already scrolled past.
+
+Three hook patterns that work on Meta:
+
+**Pattern interrupt.** Visual surprise. A hand holding a strange object, a before/after split, an angle that breaks the feed's usual rhythm (close-up face, off-center composition, high-contrast color). The user's eye pauses because something is visually unexpected. Affiliate creatives often use odd thumbnails of supplements, unusual body angles for fitness offers, or split-screen contrasts.
+
+**Curiosity gap.** Text or script that raises a question the user wants answered. "The #1 reason your metabolism slows after 40 (it's not what you think)." "Doctors don't want you to know about this kitchen spice." "I made $1,200 this week using this one tab." The specificity combined with incomplete information creates the hook.
+
+**Named callout.** Direct address to a specific audience. "If you're a woman over 35 with stubborn belly fat, listen up." "Attention Shopify owners losing sales to cart abandonment." "Keto dieters: this one mistake is sabotaging your results." The user either is the target and stops, or isn't and keeps scrolling — both outcomes are correct for the advertiser.
+
+What doesn't work: generic brand language, polished studio video in Meta feed contexts (breaks the "organic-feeling" aesthetic Meta users expect), vague promises without specificity ("change your life").
+
+When tearing down a winner, ask: which of these hook patterns is it using? Why is it interrupting the scroll? What's the first visual frame and first 7 words of copy?
+
+## Element 2 — The angle
+
+Angle is the emotional lever the ad pulls. It's the frame the advertiser chose for the problem their offer solves.
+
+Same niche, different angles. In weight loss, the angles include:
+- Stubborn belly fat after 40 (age-gated hormonal frame)
+- Gut bacteria and metabolism (scientific novelty frame)
+- Ex-trainer's confession (contrarian authority frame)
+- Keto without dieting (easy-path frame)
+- Before/after mom transformation (social proof frame)
+
+Each angle is a distinct psychological doorway into the same product category. Advertisers test multiple angles simultaneously because different angles resonate with different audience segments.
+
+When tearing down a winner:
+1. Identify the angle in one sentence. "This ad positions supplement X as the solution to menopause-era weight gain via hormone rebalancing."
+2. Note the emotional lever. Fear (health decline), hope (transformation), frustration (tried everything), curiosity (new science).
+3. Map the problem frame. How does the ad position the user's problem? Is it their fault, someone else's fault, or nobody's fault?
+4. Identify the transformation promise. What specific outcome is promised?
+
+Angles are the most portable insight from teardowns. You can't copy a creative, but you can borrow the angle and apply it to your own offer. Many winning creatives are fresh executions of established angles.
+
+## Element 3 — The proof stack
+
+Proof elements that reduce the user's "this is too good to be true" reaction. The proof stack is the ad's credibility layer.
+
+Common proof types:
+- **Testimonials** — user quotes, video testimonials, before/afters.
+- **Credentials** — doctor, MD, PhD, certified trainer, ex-insider.
+- **Media mentions** — "As seen on Fox News, CNN, Shark Tank."
+- **Numbers** — "47,382 customers," "12.5 lbs lost in 3 weeks."
+- **Research citations** — "Harvard study," "Clinical trial results."
+- **Third-party endorsement** — "Recommended by Dr. Oz" (whether he actually did or not — this is often legally risky).
+
+Low-price impulse offers ($20-50) can often work with 1-2 proof elements. High-consideration offers ($200+ or requiring trial/commitment) typically stack 4+ elements across the ad and LP combined.
+
+When tearing down, count proof elements in the ad creative itself (not the LP). Which tier is being used? Is proof positioned up-front (before the offer) or after (to overcome post-pitch skepticism)?
+
+ClickBank Health creatives heavily lean on doctor endorsements and clinical/scientific framing. ClickBank Wealth creatives lean on lifestyle proof (luxury cars, travel, income screenshots). ClickBank BizOpp creatives lean on specific dollar-amount results.
+
+## Element 4 — The offer
+
+The offer is what the ad is selling and at what price. Often implied, not stated, in the creative itself — the ad sells the click, the landing page sells the product.
+
+What to note:
+- **Offer position** — is it stated in the ad or saved for the LP?
+- **Price signal** — is there a discount, trial, bundle, or price anchor?
+- **Urgency** — time-limited, stock-limited, or evergreen?
+- **Risk reversal** — money-back guarantee, free trial, no-obligation?
+
+Many affiliate creatives deliberately understate the offer in the ad to maximize clicks. The ad creates curiosity; the LP converts. Understanding where the offer is positioned tells you about the funnel architecture.
+
+## Element 5 — The CTA
+
+CTA is the specific action asked. Match the CTA to the traffic temperature and funnel stage.
+
+Cold traffic to cold offers typically uses soft CTAs: "Learn More," "Watch the Video," "See How It Works," "Read the Story." The goal is click-through, not conversion — the LP handles the conversion.
+
+Warm retargeting uses harder CTAs: "Get Started," "Claim Discount," "Checkout Now," "Order Today." The user has already engaged; the CTA is the final nudge.
+
+Urgency in the CTA is a lever. "Today Only," "Limited Stock," "Ends Friday." These work especially well for ClickBank-style offers with compressed sales windows.
+
+When tearing down: note the exact CTA phrasing, whether it's on the ad creative (button or overlay) or in the copy, and the friction level. Low friction (Watch Video) vs. medium (Get Started) vs. high (Buy Now).
+
+## Putting it together — the teardown worksheet
+
+For each ad you analyze, fill in:
+
+- **Days running** — 60+, 120+, 180+.
+- **Hook pattern** — pattern interrupt, curiosity gap, named callout.
+- **Angle** — one-sentence summary.
+- **Proof elements** — count and types.
+- **Offer position** — ad-stated or LP-revealed.
+- **CTA** — exact phrasing and friction level.
+
+After 10 teardowns in a niche, patterns emerge. You'll see the 3 dominant angles in ClickBank Health right now, the 2-3 proof stack formats that repeat, the CTA phrases that appear across winners. That pattern map is the output of the analysis — not a pile of individual teardowns, but an extracted framework you can apply to your own creative.
+
+## Which tool should you use?
+
+For systematic teardown workflow, AdRecon gives you days-running sort, creative grouping (Proven Creatives), and Landing Page Ripper for studying the LP side of the funnel. Meta-only, affiliate-focused, $299 lifetime (as of April 2026).
+
+For Boolean search across Meta historical data, AdSpy is the specialist. $149/month (as of April 2026). Useful if you want to search creatives containing specific copy patterns.
+
+For swipe-file workflow built for creative strategists, Foreplay's UI is purpose-built. Meta + TikTok. From $49/month (as of April 2026). Better for brief-building than AdRecon.
+
+For multi-platform teardowns including TikTok and YouTube, BigSpy's paid tier or PowerAdSpy cover the platforms. Shallow Meta depth compared to specialists.
+
+Whatever tool you pick, the framework is the same — hook, angle, proof, offer, CTA. Tools are workflow; framework is craft.
+
+<CTA variant="mid" campaign="analyze-ad-creative" medium="guide" />
+
+## FAQ
+
+<FAQ items={frontmatter.faq} />
+
+## Related reading
+
+- [How to Spy on Facebook Ads](/guides/how-to-spy-on-facebook-ads/) — research workflow overview.
+- [How to Research Landing Pages](/guides/how-to-research-landing-pages/) — LP teardown framework.
+- [How to Find Winning ClickBank Offers](/guides/how-to-find-winning-clickbank-offers/) — offer-to-creative workflow.
+- [Best Ad Creative Research Tools](/ad-spy-tools/best-ad-creative-research-tools/) — creative-specific tool picks.
+- [Affiliate Marketer Software Stack](/guides/affiliate-marketer-software-stack/) — the complete stack creatives fit into.

@@ -1,122 +1,207 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import Hero from '@/components/Hero.astro';
-import Breadcrumb from '@/components/Breadcrumb.astro';
-import CTA from '@/components/CTA.astro';
-import { breadcrumbList } from '@/lib/schema';
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Hero from "@/components/Hero.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { breadcrumbList } from "@/lib/schema";
 
-const title = 'About AffiliateTools.co — Who Runs This Site';
-const description = 'AffiliateTools.co is operated by the AdRecon team. Here is who we are, why we started, our conflict of interest, and what we review.';
-const canonical = '/about/';
+const title = "About AffiliateTools.co — How This Review Desk Works";
+const description =
+  "What AffiliateTools.co covers, why it exists, and the editorial standards behind the site.";
+const canonical = "/about/";
 
 const jsonLd = [
   breadcrumbList([
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about/' },
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about/" },
   ]),
 ];
 ---
 
-<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLd={jsonLd}
+>
   <section class="container-max" style="padding: 1.5rem 1.25rem 0;">
-    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'About' }]} />
+    <Breadcrumb items={[{ name: "Home", href: "/" }, { name: "About" }]} />
   </section>
 
   <Hero
     eyebrow="About AffiliateTools.co"
     title="The honest review site for affiliate marketer software."
-    sub="We review the software affiliate marketers actually run — starting with ad spy tools. We disclose our affiliation, publish our methodology, and admit where our own tool loses."
+    sub="We review the software affiliate marketers actually run — starting with ad spy tools. The focus is practical coverage, transparent methodology, and buyer-useful conclusions."
   />
 
   <article class="container-prose" style="padding: 2rem 1.25rem 4rem;">
     <div class="prose">
       <h2>Who we are</h2>
       <p>
-        AffiliateTools.co is operated by the team behind <a href="https://adrecon.io" rel="noopener">AdRecon</a> — an ad intelligence platform built for affiliate marketers running campaigns on Meta (Facebook, Instagram, Threads). AdRecon tracks <strong>300,000+ ads, creatives, landing pages, and linked offers</strong> across 40+ affiliate networks, and it's the tool we run ourselves.
+        AffiliateTools.co is an editorial review desk focused on the software
+        affiliate marketers actually use. The goal is simple: publish specific,
+        tested, readable coverage instead of generic "top 10" filler.
       </p>
       <p>
-        We built AffiliateTools.co because affiliate marketers couldn't find honest tool reviews. Every other site in this category fell into one of two buckets: pay-for-play listicles where every tool is "the best," or thinly-disguised marketing funnels with no real testing. Both failure modes produce the same useless outcome for the buyer.
+        We built AffiliateTools.co because affiliate marketers couldn't find
+        honest tool reviews. Every other site in this category fell into one of
+        two buckets: pay-for-play listicles where every tool is "the best," or
+        thinly-disguised marketing funnels with no real testing. Both failure
+        modes produce the same useless outcome for the buyer.
       </p>
       <p>
-        Our editorial framing is simple: <strong>we're affiliate marketers first</strong>. We know the difference between a ClickBank creative and a DTC e-commerce ad. We know why days-running matters more than impressions for CPA research. And we know when a tool is genuinely useful versus when it's just marketing the category.
+        Our editorial framing is simple: <strong
+          >we're affiliate marketers first</strong
+        >. We know the difference between a ClickBank creative and a DTC
+        e-commerce ad. We know why days-running matters more than impressions
+        for CPA research. And we know when a tool is genuinely useful versus
+        when it's just marketing the category.
       </p>
 
       <h2>Why we started</h2>
       <p>
-        In early 2026 our team was researching competitor ad intelligence tools for an internal product decision. We spent two weeks reading reviews, watching walkthroughs, and signing up for trials. The experience was frustrating:
+        In early 2026 we spent two weeks reading reviews, watching walkthroughs,
+        and signing up for trials across the ad-intelligence category. The
+        experience was frustrating:
       </p>
       <ul>
-        <li>Most "top 10" lists ranked tools based on affiliate commissions, not product quality.</li>
+        <li>
+          Most "top 10" lists ranked tools based on affiliate commissions, not
+          product quality.
+        </li>
         <li>Prices were often outdated by 6+ months.</li>
-        <li>Platform coverage was routinely overstated. Several tools claimed "TikTok support" that turned out to be a thin API wrapper around the TikTok Creative Center — not first-party ad tracking.</li>
-        <li>Features we needed (landing page archival, affiliate-network classification, creative grouping across advertisers) weren't discussed anywhere because most review sites don't understand affiliate marketing.</li>
+        <li>
+          Platform coverage was routinely overstated. Several tools claimed
+          "TikTok support" that turned out to be a thin API wrapper around the
+          TikTok Creative Center — not first-party ad tracking.
+        </li>
+        <li>
+          Features we needed (landing page archival, affiliate-network
+          classification, creative grouping across advertisers) weren't
+          discussed anywhere because most review sites don't understand
+          affiliate marketing.
+        </li>
       </ul>
       <p>
-        So we decided to write the site we wished existed. AffiliateTools.co ships with <strong>7 detailed ad spy tool reviews</strong>, <strong>21 head-to-head comparisons</strong>, and <strong>six flagship listicles</strong>, with more on the way. Every review admits where a competitor wins before we pitch our own tool. Every price is dated. Every marketing claim is attributed.
+        So we decided to write the site we wished existed. AffiliateTools.co
+        ships with <strong>7 detailed ad spy tool reviews</strong>, <strong
+          >21 head-to-head comparisons</strong
+        >, and <strong>six flagship listicles</strong>, with more on the way.
+        Every review is written to surface real tradeoffs. Every price is dated.
+        Every marketing claim is attributed.
       </p>
 
-      <h2>Our conflict of interest</h2>
+      <h2>Our editorial guardrails</h2>
       <p>
-        AdRecon is a competitor to most of the tools we review on this site. We take this conflict seriously and compensate for it in three ways:
+        Review sites only earn trust when the standards are visible. We try to
+        compensate for the category's usual bias problems in three ways:
       </p>
       <ol>
         <li>
-          <strong>Structural honesty.</strong> Every review and versus page states the competitor's strengths <em>before</em> AdRecon's. Every versus comparison table forces at least two rows where the competitor beats AdRecon. If you read the site and come away thinking "AdRecon is perfect, everyone else is garbage," we've failed — and we want to know.
+          <strong>Structural honesty.</strong> Reviews and versus pages lead with
+          the strongest arguments for the tool being evaluated. Comparison tables
+          are built to show tradeoffs, not just wins.
         </li>
         <li>
-          <strong>Open methodology.</strong> Our <a href="/methodology/">methodology page</a> documents the eight dimensions we score each tool on, how we weight those dimensions for different listicle intents, and how we verify competitor pricing. You can audit our work.
+          <strong>Open methodology.</strong> Our <a href="/methodology/"
+            >methodology page</a
+          > documents the eight dimensions we score each tool on, how we weight those
+          dimensions for different listicle intents, and how we verify competitor
+          pricing. You can audit our work.
         </li>
         <li>
-          <strong>Honest scope disclosure.</strong> AdRecon covers Meta (Facebook, Instagram, Threads) only. AdRecon has no TikTok, YouTube, LinkedIn, Google, or Pinterest coverage. AdRecon uses regex-based classification, not AI or LLMs. AdRecon starts at a premium price point ($299 one-time as of April 2026). We state these limitations on every review and versus page. If a competitor wins for a use case AdRecon doesn't fit (TikTok-first marketing, dropshipping, brand advertising), we say so.
+          <strong>Scope discipline.</strong> We would rather be obviously deep in
+          one category than pretend broad coverage exists before it does. If a tool
+          fits a narrow use case, that is how it gets presented.
         </li>
       </ol>
       <p>
-        We will never rank AdRecon #1 on a listicle where an honest answer is something else. The TikTok ad spy tools listicle recommends <a href="/ad-spy-tools/pipiads-review/">PiPiADS</a>. The dropshipping listicle recommends <a href="/ad-spy-tools/minea-review/">Minea</a>. The free-tier listicle recommends <a href="/ad-spy-tools/bigspy-review/">BigSpy</a>. AdRecon wins where AdRecon wins — Meta-based affiliate research with offer + creative + landing-page intelligence — and nowhere else.
+        That means the winner changes with the use case. The TikTok ad spy tools
+        list favors <a href="/ad-spy-tools/pipiads-review/">PiPiADS</a>. The
+        dropshipping coverage leans toward <a href="/ad-spy-tools/minea-review/"
+          >Minea</a
+        >. The free-tier coverage points readers to <a
+          href="/ad-spy-tools/bigspy-review/">BigSpy</a
+        >. The point is fit, not forcing one answer everywhere.
       </p>
 
       <h2>What we review</h2>
       <p>
-        Today: <strong>ad spy and ad intelligence tools</strong>. Seven tools in depth — AdRecon, AdSpy, BigSpy, PowerAdSpy, Foreplay, Minea, PiPiADS — plus head-to-head comparisons and ranked listicles covering the queries affiliate marketers actually search for ("adspy alternatives", "best ad spy tools for ClickBank", "best free ad spy tool", etc.).
+        Today: <strong>ad spy and ad intelligence tools</strong>. Seven tools in
+        depth — AdRecon, AdSpy, BigSpy, PowerAdSpy, Foreplay, Minea, PiPiADS —
+        plus head-to-head comparisons and ranked listicles covering the queries
+        affiliate marketers actually search for ("adspy alternatives", "best ad
+        spy tools for ClickBank", "best free ad spy tool", etc.).
       </p>
-      <p>
-        Planned next 12 months:
-      </p>
+      <p>Planned next 12 months:</p>
       <ul>
-        <li><strong>Landing page builders</strong> — ClickFunnels, Systeme.io, Leadpages, Unbounce, Instapage, scored against affiliate marketer use cases.</li>
-        <li><strong>Affiliate networks</strong> — ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus, MoreNiche, and regional networks.</li>
-        <li><strong>Tracking platforms</strong> — Voluum, RedTrack, Binom, FunnelFlux, ClickMagick, Everflow.</li>
-        <li><strong>Email marketing tools</strong> — Beehiiv, ConvertKit, Klaviyo, targeted at affiliate email monetization.</li>
-        <li><strong>CRO tools</strong> — heat maps, session recording, A/B testing for affiliate funnels.</li>
+        <li>
+          <strong>Landing page builders</strong> — ClickFunnels, Systeme.io, Leadpages,
+          Unbounce, Instapage, scored against affiliate marketer use cases.
+        </li>
+        <li>
+          <strong>Affiliate networks</strong> — ClickBank, Digistore24, BuyGoods,
+          MaxWeb, WarriorPlus, MoreNiche, and regional networks.
+        </li>
+        <li>
+          <strong>Tracking platforms</strong> — Voluum, RedTrack, Binom, FunnelFlux,
+          ClickMagick, Everflow.
+        </li>
+        <li>
+          <strong>Email marketing tools</strong> — Beehiiv, ConvertKit, Klaviyo, targeted
+          at affiliate email monetization.
+        </li>
+        <li>
+          <strong>CRO tools</strong> — heat maps, session recording, A/B testing for
+          affiliate funnels.
+        </li>
       </ul>
       <p>
-        If you're an affiliate operator with strong opinions on what we should cover next, email us.
+        If you're an affiliate operator with strong opinions on what we should
+        cover next, email us.
       </p>
 
       <h2>Editorial policies</h2>
       <ul>
-        <li><strong>Affiliate links.</strong> For v1, this site contains zero affiliate links. The only CTAs on this site link to AdRecon (our own product). If we add affiliate links to competitor tools in the future, we will disclose them with <code>rel="sponsored"</code> and a visible label.</li>
-        <li><strong>Paid placements.</strong> We do not accept paid rankings or sponsored "best of" placements. Tools are not removable from listicles in exchange for payment.</li>
-        <li><strong>Corrections.</strong> Email <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a> with corrections. We publish corrections openly — no silent edits.</li>
-        <li><strong>Fact verification.</strong> Pricing is verified quarterly. Feature claims are verified annually. Every page shows the "Updated" date in the hero.</li>
-        <li><strong>Competitor claims.</strong> Marketing claims made by competitors (e.g., "200M+ ads indexed") are cited as claims, never stated as facts.</li>
+        <li>
+          <strong>Affiliate links.</strong> For v1, this site contains zero affiliate
+          links. We are intentionally keeping the site editorial-first rather than
+          filling it with product CTAs. If we add affiliate links to competitor tools
+          in the future, we will disclose them with <code>rel="sponsored"</code> and
+          a visible label.
+        </li>
+        <li>
+          <strong>Paid placements.</strong> We do not accept paid rankings or sponsored
+          "best of" placements. Tools are not removable from listicles in exchange
+          for payment.
+        </li>
+        <li>
+          <strong>Corrections.</strong> Email <a
+            href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a
+          > with corrections. We publish corrections openly — no silent edits.
+        </li>
+        <li>
+          <strong>Fact verification.</strong> Pricing is verified quarterly. Feature
+          claims are verified annually. Every page shows the "Updated" date in the
+          hero.
+        </li>
+        <li>
+          <strong>Competitor claims.</strong> Marketing claims made by competitors
+          (e.g., "200M+ ads indexed") are cited as claims, never stated as facts.
+        </li>
       </ul>
 
       <h2>How to reach us</h2>
       <p>
-        The fastest way to reach us is email: <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a>.
+        The fastest way to reach us is email: <a
+          href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a
+        >.
       </p>
       <p>
-        For corrections, pricing updates, partnership inquiries, or tip-offs about something we missed, use the same address. See the <a href="/contact/">contact page</a> for which channel to use for what.
+        For corrections, pricing updates, partnership inquiries, or tip-offs
+        about something we missed, use the same address. See the <a
+          href="/contact/">contact page</a
+        > for which channel to use for what.
       </p>
     </div>
   </article>
-
-  <CTA
-    variant="footer"
-    campaign="about"
-    medium="about"
-    label="See our top-rated pick →"
-    kicker="Looking for the tool we review from the operator's seat?"
-    body="AdRecon is the ad intelligence platform built for affiliate marketers on Meta. 300,000+ records. Landing Page Ripper. $299 lifetime — as of April 2026."
-  />
 </BaseLayout>

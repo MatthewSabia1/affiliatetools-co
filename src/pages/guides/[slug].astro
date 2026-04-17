@@ -1,10 +1,10 @@
 ---
-import type { GetStaticPaths } from 'astro';
-import GuideLayout from '@/layouts/GuideLayout.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from "astro";
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 export const getStaticPaths = (async () => {
-  const guides = await getCollection('guides', ({ data }) => !data.draft);
+  const guides = await getCollection("guides", ({ data }) => !data.draft);
   return guides.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -12,7 +12,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 type Props = {
-  entry: CollectionEntry<'guides'>;
+  entry: CollectionEntry<"guides">;
 };
 
 const { entry } = Astro.props as Props;
@@ -28,7 +28,6 @@ const canonical = `/guides/${entry.slug}/`;
   updatedDate={entry.data.updatedDate}
   heroEyebrow={entry.data.heroEyebrow}
   faq={entry.data.faq}
-  campaignSlug={`guide-${entry.slug}`}
   headings={headings}
 >
   <Content />

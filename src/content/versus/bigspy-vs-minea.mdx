@@ -29,12 +29,12 @@ faq:
 draft: false
 ---
 
-import CTA from '@/components/CTA.astro';
-import ComparisonTable from '@/components/ComparisonTable.astro';
-import UseCaseScenarios from '@/components/UseCaseScenarios.astro';
-import FAQ from '@/components/FAQ.astro';
-import RelatedLinks from '@/components/RelatedLinks.astro';
-import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from "@/components/CTA.astro";
+import ComparisonTable from "@/components/ComparisonTable.astro";
+import UseCaseScenarios from "@/components/UseCaseScenarios.astro";
+import FAQ from "@/components/FAQ.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
+import AuthorshipBox from "@/components/AuthorshipBox.astro";
 
 <AuthorshipBox />
 
@@ -62,6 +62,8 @@ If your actual job is CPA affiliate research on Meta — ClickBank, Digistore24,
 
 **Higher query limits at upper tier.** VIP Enterprise at $249/mo unlocks generous search and export volume suited to larger research teams. Minea Business at €399/mo is positioned more as an "e-commerce team" plan with dropshipping-specific features than as raw research throughput.
 
+**Faster onboarding for non-e-commerce teams.** BigSpy's neutral UI and six-platform coverage make it usable within an hour. Minea's e-commerce-specific UI — product cards, supplier tabs, niche tags — assumes domain fluency. For a generalist marketing team or first-time buyer unfamiliar with dropshipping workflows, BigSpy's learning curve is meaningfully shorter.
+
 ## Where Minea wins
 
 **E-commerce and dropshipping-specific features.** Minea was built for product research — supplier hints, product metadata enrichment, Shopify-adjacent tooling, and niche-level filtering for e-commerce verticals. BigSpy is a general ad-spy tool without these features. For dropshippers hunting winning products, Minea's lens is the correct one.
@@ -88,17 +90,46 @@ At the top tier, Minea Business at €399/mo is roughly $430/mo — about 70% mo
 
 ## Who should choose BigSpy
 
-<UseCaseScenarios scenarios={[
-  { persona: "First-time researcher testing the ad-spy category", verdict: "Free tier and $9/mo Basic let you audit the tool at minimal cost. BigSpy's neutral UX doesn't force a specific vertical lens.", recommendation: "competitor", competitorName: "BigSpy" },
-  { persona: "Generalist agency watching competitors across 4+ platforms", verdict: "Six-platform coverage in one seat beats Minea's narrower e-commerce focus for cross-industry research. Pro at $99/mo is fair value.", recommendation: "competitor", competitorName: "BigSpy" }
-]} />
+<UseCaseScenarios
+  scenarios={[
+    {
+      persona: "First-time researcher testing the ad-spy category",
+      verdict:
+        "Free tier and $9/mo Basic let you audit the tool at minimal cost. BigSpy's neutral UX doesn't force a specific vertical lens.",
+      recommendation: "competitor",
+      competitorName: "BigSpy",
+    },
+    {
+      persona: "Generalist agency watching competitors across 4+ platforms",
+      verdict:
+        "Six-platform coverage in one seat beats Minea's narrower e-commerce focus for cross-industry research. Pro at $99/mo is fair value.",
+      recommendation: "competitor",
+      competitorName: "BigSpy",
+    },
+  ]}
+/>
 
 ## Who should choose Minea
 
-<UseCaseScenarios scenarios={[
-  { persona: "Shopify dropshipper hunting winning products on TikTok", verdict: "Minea's TikTok depth, product metadata, and supplier hints serve this workflow directly. BigSpy's generalist coverage doesn't include dropshipping-specific tooling.", recommendation: "competitor", competitorName: "Minea" },
-  { persona: "DTC brand running influencer + paid social + Pinterest campaigns", verdict: "Minea's influencer-ad surface plus e-commerce-tuned Pinterest and TikTok coverage serve DTC workflows well. Premium at €99/mo is reasonable value.", recommendation: "competitor", competitorName: "Minea" }
-]} />
+<UseCaseScenarios
+  scenarios={[
+    {
+      persona: "Shopify dropshipper hunting winning products on TikTok",
+      verdict:
+        "Minea's TikTok depth, product metadata, and supplier hints serve this workflow directly. BigSpy's generalist coverage doesn't include dropshipping-specific tooling.",
+      recommendation: "competitor",
+      competitorName: "Minea",
+    },
+    {
+      persona:
+        "DTC brand running influencer + paid social + Pinterest campaigns",
+      verdict:
+        "Minea's influencer-ad surface plus e-commerce-tuned Pinterest and TikTok coverage serve DTC workflows well. Premium at €99/mo is reasonable value.",
+      recommendation: "competitor",
+      competitorName: "Minea",
+    },
+  ]}
+/>
 
 ## The affiliate marketer question — is either the right fit?
 
@@ -114,7 +145,13 @@ AdRecon was built for that job on Meta. Meta-only (Facebook, Instagram, Threads 
 
 Honest tradeoff: AdRecon doesn't cover dropshipping product hunting (Minea's job) or cross-platform generalist research (BigSpy's job). If your research is Meta affiliate intelligence, AdRecon fits directly. If it isn't, one of the two tools above is probably the better pick.
 
-<CTA variant="mid" campaign="bigspy-vs-minea" medium="versus" kicker="Running ClickBank or Digistore offers?" body="AdRecon auto-classifies affiliate networks and tracks 300,000+ ads, landing pages, creatives, and offers across Meta. $299 lifetime." />
+<CTA
+  variant="mid"
+  campaign="bigspy-vs-minea"
+  medium="versus"
+  kicker="Running ClickBank or Digistore offers?"
+  body="AdRecon auto-classifies affiliate networks and tracks 300,000+ ads, landing pages, creatives, and offers across Meta. $299 lifetime."
+/>
 
 ## Final verdict
 

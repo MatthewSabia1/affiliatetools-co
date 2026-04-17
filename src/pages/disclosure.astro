@@ -1,87 +1,137 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import Hero from '@/components/Hero.astro';
-import Breadcrumb from '@/components/Breadcrumb.astro';
-import { breadcrumbList } from '@/lib/schema';
-import { ADRECON_HOME_URL } from '@/lib/constants';
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Hero from "@/components/Hero.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { breadcrumbList } from "@/lib/schema";
 
-const title = 'Editorial Disclosure — AffiliateTools.co';
-const description = 'AffiliateTools.co is operated by the AdRecon team — a competitor to most tools we review. Here is how we prevent that from biasing our reviews.';
-const canonical = '/disclosure/';
+const title = "Editorial Standards — AffiliateTools.co";
+const description =
+  "The editorial standards, corrections policy, and review guardrails behind AffiliateTools.co.";
+const canonical = "/disclosure/";
 const jsonLd = [
   breadcrumbList([
-    { name: 'Home', path: '/' },
-    { name: 'Editorial Disclosure', path: '/disclosure/' },
+    { name: "Home", path: "/" },
+    { name: "Editorial Standards", path: "/disclosure/" },
   ]),
 ];
 ---
 
-<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLd={jsonLd}
+>
   <section class="container-max" style="padding: 1.5rem 1.5rem 0;">
-    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'Editorial Disclosure' }]} />
+    <Breadcrumb
+      items={[{ name: "Home", href: "/" }, { name: "Editorial Standards" }]}
+    />
   </section>
 
   <Hero
     eyebrow="Editorial"
-    title="Our editorial disclosure"
-    sub="What conflict of interest this site has — and exactly how we compensate for it."
+    title="Our editorial standards"
+    sub="How reviews, rankings, corrections, and tradeoff calls are handled across the site."
     variant="compact"
   />
 
   <article class="container-prose" style="padding: 2rem 1.25rem 4rem;">
     <div class="prose">
-      <h2>Who operates this site</h2>
-      <p>AffiliateTools.co is owned and operated by <a href={ADRECON_HOME_URL} rel="noopener">AdRecon</a>, an ad intelligence platform built for affiliate marketers running campaigns on Meta (Facebook, Instagram, Threads). AdRecon tracks 300,000+ ads, creatives, landing pages, and offers across Meta with affiliate-network classification (ClickBank, Digistore24, BuyGoods, MaxWeb, WarriorPlus) and a Landing Page Ripper feature no competitor has shipped.</p>
-      <p>AdRecon is, in other words, a direct competitor to most of the tools reviewed on this site.</p>
+      <h2>What this page is for</h2>
+      <p>
+        This page documents the standards behind AffiliateTools.co: how we keep
+        reviews specific, how rankings are decided, what we do not allow
+        commercially, and how factual corrections are handled.
+      </p>
 
-      <h2>The conflict</h2>
-      <p>A review site owned by a vendor in the same category is structurally compromised. Our financial incentive is to push readers toward AdRecon. We can't pretend that isn't true.</p>
-      <p>Most "affiliate tool review sites" don't even acknowledge this conflict — they just push their own tool and hope readers don't notice. That's worse. We disclose, and we compensate.</p>
-
-      <h2>How we compensate</h2>
-      <p>Five structural rules, enforced on every page:</p>
+      <h2>How we keep reviews fair</h2>
+      <p>
+        Five structural rules guide every review, versus page, listicle, and
+        buyer guide:
+      </p>
       <ol>
         <li>
-          <strong>Competitor strengths stated before AdRecon's.</strong> Every review and versus page names what the competitor does well before we name what AdRecon does well. Human brains anchor on the first claim; leading with "here's where they win" is a deliberate trust signal.
+          <strong>Strongest case first.</strong> Reviews lead with the clearest reasons
+          a buyer might choose the tool being evaluated, not with generic praise or
+          defensive caveats.
         </li>
         <li>
-          <strong>Forced losses in comparison tables.</strong> On every AdRecon-vs-X versus page, the comparison table must show at least two rows where the competitor beats AdRecon. If we can't find two, the comparison doesn't earn publication.
+          <strong>Tradeoffs must be visible.</strong> Comparison tables and verdict
+          sections are written to show where each option wins, loses, or narrows the
+          field.
         </li>
         <li>
-          <strong>AdRecon's limitations stated openly.</strong> AdRecon is Meta-only (no TikTok, YouTube, or Google). It has no AI or LLM features (classifiers are regex-based). It prices at a premium ($299 lifetime). These limitations appear in the body of every review, not buried in a footer.
+          <strong>Scope before hype.</strong> If a tool only makes sense for one buyer
+          type or platform, we say that directly instead of stretching it into a broader
+          recommendation.
         </li>
         <li>
-          <strong>AdRecon is not always #1.</strong> On listicles where the honest answer is a different tool, we rank that tool #1. BigSpy wins our "Best free ad spy tools" ranking. When we write our TikTok coverage, PiPiADS will win — AdRecon doesn't cover TikTok and won't be listed. Editorial honesty is non-negotiable.
+          <strong>Buyer intent drives rankings.</strong> Rankings change when the
+          use case changes. Free-tier pages, TikTok pages, Meta pages, and dropshipping
+          pages are not forced into the same winner.
         </li>
         <li>
-          <strong>Competitor claims cited as claims.</strong> "AdSpy claims 200M+ ads" — never "AdSpy has 200M+ ads." Competitor marketing numbers appear in quotes with attribution, never as facts.
+          <strong>Competitor claims cited as claims.</strong> "AdSpy claims 200M+
+          ads" — never "AdSpy has 200M+ ads." Competitor marketing numbers appear
+          in quotes with attribution, never as facts.
         </li>
       </ol>
 
       <h2>What we don't do</h2>
       <ul>
         <li>We do not accept paid rankings or sponsored reviews.</li>
-        <li>We do not include affiliate links to competitor tools (as of April 2026). If we add any in the future, they will carry visible labels and <code>rel="sponsored"</code>.</li>
-        <li>We do not fabricate user testimonials, reviews, or star ratings.</li>
-        <li>We do not silently edit reviews when tools complain. Corrections are dated.</li>
-        <li>We do not use undisclosed AI-generated "reviews" dressed up as human opinion. Reviews are written by the AdRecon team based on hands-on testing.</li>
+        <li>
+          We do not include affiliate links to competitor tools (as of April
+          2026). If we add any in the future, they will carry visible labels and <code
+            >rel="sponsored"</code
+          >.
+        </li>
+        <li>
+          We do not fabricate user testimonials, reviews, or star ratings.
+        </li>
+        <li>
+          We do not silently edit reviews when tools complain. Corrections are
+          dated.
+        </li>
+        <li>
+          We do not use undisclosed AI-generated "reviews" dressed up as human
+          opinion. Reviews are written from hands-on testing.
+        </li>
       </ul>
 
-      <h2>How we fund the site</h2>
-      <p>AffiliateTools.co receives no direct revenue. The goal of the site is to bring readers who are researching ad spy tools in front of AdRecon, where some percentage will become paid customers. That funnel is legitimate but it's also why editorial honesty matters so much — if readers detect bias, the whole project fails.</p>
-      <p>AdRecon funds the domain, hosting (Cloudflare Pages, free tier today), and the editorial team's time.</p>
-
       <h2>How to tell if we've failed</h2>
-      <p>If you read multiple reviews and come away thinking "AdRecon is perfect and every competitor is garbage," we've written badly and should know. Email us at <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a> with the specific page and what felt off. We take bias complaints seriously and publish corrections.</p>
+      <p>
+        If you read multiple reviews and come away feeling that every page is
+        trying to force the same answer, we've written badly and should know.
+        Email us at <a href="mailto:hello@affiliatetools.co"
+          >hello@affiliatetools.co</a
+        > with the specific page and what felt off. We take bias complaints seriously
+        and publish corrections.
+      </p>
 
       <h2>Factual corrections</h2>
-      <p>Prices, feature sets, and policies of competitor tools change. We audit quarterly but readers spot errors faster than we do. If you notice a factual error, email us with the page URL, the error, and (ideally) a source. We publish corrections within 72 hours and never silently edit.</p>
+      <p>
+        Prices, feature sets, and policies of competitor tools change. We audit
+        quarterly but readers spot errors faster than we do. If you notice a
+        factual error, email us with the page URL, the error, and (ideally) a
+        source. We publish corrections within 72 hours and never silently edit.
+      </p>
 
-      <h2>What this disclosure covers</h2>
-      <p>This disclosure applies to every piece of content on AffiliateTools.co — reviews, versus pages, listicles, guides, and comparison tables. Every page links back to this document and to our <a href="/methodology/">methodology</a>.</p>
+      <h2>What these standards cover</h2>
+      <p>
+        These standards apply to every piece of content on AffiliateTools.co —
+        reviews, versus pages, listicles, guides, and comparison tables. Every
+        page links back to this document and to our <a href="/methodology/"
+          >methodology</a
+        >.
+      </p>
 
       <h2>Contact</h2>
-      <p>Editorial concerns → <a href="mailto:hello@affiliatetools.co">hello@affiliatetools.co</a>. Subject line: <code>EDITORIAL</code>.</p>
+      <p>
+        Editorial concerns → <a href="mailto:hello@affiliatetools.co"
+          >hello@affiliatetools.co</a
+        >. Subject line: <code>EDITORIAL</code>.
+      </p>
     </div>
   </article>
 </BaseLayout>

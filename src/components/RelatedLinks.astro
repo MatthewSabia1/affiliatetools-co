@@ -3,71 +3,97 @@
  * RelatedLinks.astro — Contextual cross-links for reviews, versus, and listicle pages.
  * Anchor variants come from cross-links.ts helpers so anchors stay stable but varied.
  */
-import type { CompetitorSlug, ListicleSlug } from '@/lib/constants';
-import type { RelatedLink } from '@/lib/cross-links';
+import type { CompetitorSlug, ListicleSlug } from "@/lib/constants";
+import type { ListicleCandidate, RelatedLink } from "@/lib/cross-links";
 import {
   getReviewRelated,
   getVersusRelated,
   getListicleRelated,
-} from '@/lib/cross-links';
+} from "@/lib/cross-links";
 
 export interface Props {
-  kind: 'review' | 'versus' | 'listicle';
+  kind: "review" | "versus" | "listicle";
   slug: string;
   heading?: string;
+  listicleCandidates?: ListicleCandidate[];
 }
 
-const { kind, slug, heading } = Astro.props;
+const { kind, slug, heading, listicleCandidates = [] } = Astro.props;
 
 let links: RelatedLink[] = [];
-if (kind === 'review') {
+if (kind === "review") {
   links = getReviewRelated(slug as CompetitorSlug);
-} else if (kind === 'versus') {
-  links = getVersusRelated(slug as Exclude<CompetitorSlug, 'adrecon'>);
-} else if (kind === 'listicle') {
-  links = getListicleRelated(slug as ListicleSlug);
+} else if (kind === "versus") {
+  const normalizedSlug = slug.includes("-vs-") ? slug.split("-vs-")[0] : slug;
+  if (normalizedSlug !== "adrecon") {
+    links = getVersusRelated(
+      normalizedSlug as Exclude<CompetitorSlug, "adrecon">,
+    );
+  }
+} else if (kind === "listicle") {
+  links = getListicleRelated(slug as ListicleSlug, listicleCandidates);
 }
 
-const resolvedHeading = heading || (kind === 'listicle' ? 'Continue researching' : 'Related articles');
+const resolvedHeading =
+  heading ||
+  (kind === "listicle" ? "Continue researching" : "Related articles");
 
-const kindLabel = (k: RelatedLink['kind']): string => {
+const kindLabel = (k: RelatedLink["kind"]): string => {
   switch (k) {
-    case 'review': return 'Review';
-    case 'versus': return 'Versus';
-    case 'listicle': return 'Listicle';
-    case 'hub': return 'Hub';
-    case 'external': return 'External';
-    default: return '';
+    case "review":
+      return "Review";
+    case "versus":
+      return "Versus";
+    case "listicle":
+      return "Listicle";
+    case "hub":
+      return "Hub";
+    case "external":
+      return "External";
+    default:
+      return "";
   }
 };
-const kindChipClass = (k: RelatedLink['kind']): string => {
-  if (k === 'versus') return 'chip chip-gold';
-  if (k === 'listicle') return 'chip chip-green';
-  return 'chip';
+const kindChipClass = (k: RelatedLink["kind"]): string => {
+  if (k === "versus") return "chip chip-gold";
+  if (k === "listicle") return "chip chip-green";
+  return "chip";
 };
 ---
 
-{links.length > 0 && (
-  <section class="related" aria-label={resolvedHeading}>
-    <h2 class="related__heading">{resolvedHeading}</h2>
-    <ul class="related__grid" role="list">
-      {links.map((link) => (
-        <li>
-          <a class="related-card" href={link.href}>
-            <span class={kindChipClass(link.kind)}>{kindLabel(link.kind)}</span>
-            <span class="related-card__label">{link.label}</span>
-            {link.blurb && <span class="related-card__blurb">{link.blurb}</span>}
-            <span class="related-card__arrow" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M4 9H14M14 9L9 4M14 9L9 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
-)}
+{
+  links.length > 0 && (
+    <section class="related" aria-label={resolvedHeading}>
+      <h2 class="related__heading">{resolvedHeading}</h2>
+      <ul class="related__grid" role="list">
+        {links.map((link) => (
+          <li>
+            <a class="related-card" href={link.href}>
+              <span class={kindChipClass(link.kind)}>
+                {kindLabel(link.kind)}
+              </span>
+              <span class="related-card__label">{link.label}</span>
+              {link.blurb && (
+                <span class="related-card__blurb">{link.blurb}</span>
+              )}
+              <span class="related-card__arrow" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path
+                    d="M4 9H14M14 9L9 4M14 9L9 14"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
 
 <style>
   .related {
@@ -90,12 +116,18 @@ const kindChipClass = (k: RelatedLink['kind']): string => {
     grid-template-columns: repeat(4, 1fr);
   }
   @media (max-width: 1024px) {
-    .related__grid { grid-template-columns: repeat(2, 1fr); }
+    .related__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   @media (max-width: 560px) {
-    .related__grid { grid-template-columns: 1fr; }
+    .related__grid {
+      grid-template-columns: 1fr;
+    }
   }
-  .related__grid li { margin: 0; }
+  .related__grid li {
+    margin: 0;
+  }
 
   .related-card {
     position: relative;
@@ -108,7 +140,10 @@ const kindChipClass = (k: RelatedLink['kind']): string => {
     border-radius: var(--radius-md);
     text-decoration: none;
     color: var(--color-type);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      border-color 0.15s ease;
     min-height: 100%;
   }
   .related-card:hover {

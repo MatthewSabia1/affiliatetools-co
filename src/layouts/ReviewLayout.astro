@@ -1,26 +1,25 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import Breadcrumb from '@/components/Breadcrumb.astro';
-import Hero from '@/components/Hero.astro';
-import AuthorshipBox from '@/components/AuthorshipBox.astro';
-import AtAGlance from '@/components/AtAGlance.astro';
-import CTA from '@/components/CTA.astro';
-import TOC from '@/components/TOC.astro';
-import type { CollectionEntry } from 'astro:content';
-import type { MarkdownHeading } from 'astro';
-import type { CompetitorSlug } from '@/lib/constants';
-import { absoluteUrl, routes, SITE_URL } from '@/lib/constants';
+import BaseLayout from "./BaseLayout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Hero from "@/components/Hero.astro";
+import AuthorshipBox from "@/components/AuthorshipBox.astro";
+import AtAGlance from "@/components/AtAGlance.astro";
+import TOC from "@/components/TOC.astro";
+import type { CollectionEntry } from "astro:content";
+import type { MarkdownHeading } from "astro";
+import type { CompetitorSlug } from "@/lib/constants";
+import { absoluteUrl, routes, SITE_URL } from "@/lib/constants";
 import {
   breadcrumbList,
   faqPage,
   reviewJsonLd,
   organizationJsonLd,
   type JsonLd,
-} from '@/lib/schema';
+} from "@/lib/schema";
 
 export interface Props {
-  review: CollectionEntry<'reviews'>;
-  competitor: CollectionEntry<'competitors'>;
+  review: CollectionEntry<"reviews">;
+  competitor: CollectionEntry<"competitors">;
   headings: MarkdownHeading[];
 }
 
@@ -33,20 +32,22 @@ const pagePath = routes.review(compSlug);
 const pageUrl = absoluteUrl(pagePath);
 
 const crumbItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Ad Spy Tools', href: routes.hub() },
+  { name: "Home", href: "/" },
+  { name: "Ad Spy Tools", href: routes.hub() },
   { name: `${comp.name} Review` },
 ];
 
 const firstScreenshot = comp.screenshots[0]?.path;
 const screenshotUrl = firstScreenshot
-  ? (firstScreenshot.startsWith('http') ? firstScreenshot : `${SITE_URL}${firstScreenshot.startsWith('/') ? firstScreenshot : `/${firstScreenshot}`}`)
+  ? firstScreenshot.startsWith("http")
+    ? firstScreenshot
+    : `${SITE_URL}${firstScreenshot.startsWith("/") ? firstScreenshot : `/${firstScreenshot}`}`
   : undefined;
 
 const jsonLd: JsonLd[] = [
   breadcrumbList([
-    { name: 'Home', path: '/' },
-    { name: 'Ad Spy Tools', path: routes.hub() },
+    { name: "Home", path: "/" },
+    { name: "Ad Spy Tools", path: routes.hub() },
     { name: `${comp.name} Review`, path: pagePath },
   ]),
   reviewJsonLd({
@@ -85,7 +86,7 @@ if (reviewData.faq && reviewData.faq.length > 0) {
   </div>
 
   <Hero
-    eyebrow={reviewData.heroEyebrow || 'Competitor review'}
+    eyebrow={reviewData.heroEyebrow || "Competitor review"}
     title={reviewData.headline || reviewData.title}
     sub={reviewData.verdict}
     updatedDate={reviewData.updatedDate}
@@ -96,7 +97,10 @@ if (reviewData.faq && reviewData.faq.length > 0) {
   <article class="container-wide review-article">
     <div class="review-grid">
       <div class="review-main">
-        <AuthorshipBox publishDate={reviewData.publishDate} updatedDate={reviewData.updatedDate} />
+        <AuthorshipBox
+          publishDate={reviewData.publishDate}
+          updatedDate={reviewData.updatedDate}
+        />
         <div class="prose">
           <slot />
         </div>
@@ -104,12 +108,6 @@ if (reviewData.faq && reviewData.faq.length > 0) {
       <aside class="review-sidebar">
         <div class="sticky-sidebar review-sidebar-inner">
           <AtAGlance slug={compSlug} />
-          <CTA
-            variant="mid"
-            campaign={`${compSlug}-review`}
-            medium="review"
-            label="Try AdRecon"
-          />
           <TOC headings={headings} />
         </div>
       </aside>

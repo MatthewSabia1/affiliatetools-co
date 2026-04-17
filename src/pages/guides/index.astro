@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import { breadcrumbList, collectionPageJsonLd } from '@/lib/schema';
+import { getCollection } from 'astro:content';
+import { SITE_URL } from '@/lib/constants';
+
+const guides = await getCollection('guides', ({ data }) => !data.draft);
+const sorted = guides.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const title = 'Guides — AffiliateTools.co';
+const description = 'Deep educational guides on ad spy research, affiliate marketing software, ClickBank offers, landing page research, and the stack that powers real affiliate campaigns.';
+const canonical = '/guides/';
+const jsonLd = [
+  breadcrumbList([
+    { name: 'Home', path: '/' },
+    { name: 'Guides', path: '/guides/' },
+  ]),
+  collectionPageJsonLd({
+    pageUrl: `${SITE_URL}/guides/`,
+    name: 'Affiliate Marketing Guides — AffiliateTools.co',
+    description,
+    hasPart: sorted.map((g) => ({
+      url: `${SITE_URL}/guides/${g.slug}/`,
+      name: g.data.title,
+      description: g.data.description,
+    })),
+  }),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <section class="container-max" style="padding: 1.5rem 1.5rem 0;">
+    <Breadcrumb items={[{ name: 'Home', href: '/' }, { name: 'Guides' }]} />
+  </section>
+
+  <Hero
+    eyebrow="Educational"
+    title="Affiliate marketing guides"
+    sub="Deep explainers on ad spy research, affiliate networks, landing page research, and the software stack that powers real affiliate campaigns."
+    updatedDate="2026-04-17"
+    variant="compact"
+  />
+
+  <article class="container-max" style="padding: 2.5rem 1.5rem 4rem;">
+    {sorted.length === 0 ? (
+      <div class="card" style="padding: 2rem; text-align: center;">
+        <p class="label-mono" style="margin-bottom: 0.5rem;">Coming soon</p>
+        <p>Guides are publishing this week. Check back or <a href="/ad-spy-tools/">browse ad spy tool reviews</a> in the meantime.</p>
+      </div>
+    ) : (
+      <div class="guides-grid">
+        {sorted.map((g) => (
+          <a class="card guides-card" href={`/guides/${g.slug}/`}>
+            <span class="label-mono">Guide</span>
+            <h3>{g.data.title}</h3>
+            <p>{g.data.description}</p>
+            <span class="guides-card__arrow">Read guide →</span>
+          </a>
+        ))}
+      </div>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .guides-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 720px) { .guides-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .guides-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .guides-card {
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .guides-card h3 { margin: 0; font-size: 1.125rem; line-height: 1.3; }
+  .guides-card p { margin: 0; color: var(--color-type-mute); font-size: 0.92rem; line-height: 1.5; }
+  .guides-card__arrow {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 0.88rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+</style>

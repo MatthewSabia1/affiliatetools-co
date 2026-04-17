@@ -29,12 +29,12 @@ faq:
 draft: false
 ---
 
-import CTA from '@/components/CTA.astro';
-import ComparisonTable from '@/components/ComparisonTable.astro';
-import UseCaseScenarios from '@/components/UseCaseScenarios.astro';
-import FAQ from '@/components/FAQ.astro';
-import RelatedLinks from '@/components/RelatedLinks.astro';
-import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from "@/components/CTA.astro";
+import ComparisonTable from "@/components/ComparisonTable.astro";
+import UseCaseScenarios from "@/components/UseCaseScenarios.astro";
+import FAQ from "@/components/FAQ.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
+import AuthorshipBox from "@/components/AuthorshipBox.astro";
 
 <AuthorshipBox />
 
@@ -59,6 +59,8 @@ If your actual research job is CPA offers on Meta — ClickBank, Digistore24, Bu
 **Mature Meta-specific handling.** Advertiser page merges, carousel ad variants, dedupe logic, creative-level metadata — a decade of Meta-only focus shows up in how AdSpy handles Facebook and Instagram edge cases. Generalist tools rarely match that polish on any one platform.
 
 **Affiliate-community heritage.** AdSpy has been the default "ad spy tool" reference in affiliate marketing since roughly 2015. Team familiarity is real. If your operators already read AdSpy screenshots without explanation, the switching cost to PowerAdSpy is a line item.
+
+**Deeper advertiser-level research.** AdSpy's advertiser pages surface historical ad counts, format distribution, and creative patterns for a given brand across a decade of Meta history. PowerAdSpy has advertiser views too, but the per-advertiser depth is shallower because engineering effort spreads across eight platforms. For competitive research on a single Meta brand, AdSpy consistently returns more signal per query.
 
 **Predictable flat pricing.** $149/mo, one tier (as of April 2026). Simple annual math. PowerAdSpy's five tiers ($49 to $299) introduce upgrade-path pressure AdSpy doesn't have.
 
@@ -88,17 +90,45 @@ Over three years at steady prices, AdSpy totals $5,364. PowerAdSpy mid-tier land
 
 ## Who should choose AdSpy
 
-<UseCaseScenarios scenarios={[
-  { persona: "Solo Meta affiliate focused exclusively on Facebook/Instagram", verdict: "AdSpy's decade of Meta history and Boolean search are unmatched in this scope. PowerAdSpy's breadth is wasted if you only care about Meta.", recommendation: "competitor", competitorName: "AdSpy" },
-  { persona: "Performance-marketing analyst auditing Meta competitors daily", verdict: "Boolean queries across 200M+ claimed Meta ads answer structured research questions PowerAdSpy can't match on a single platform. Fair value at $149/mo.", recommendation: "competitor", competitorName: "AdSpy" }
-]} />
+<UseCaseScenarios
+  scenarios={[
+    {
+      persona: "Solo Meta affiliate focused exclusively on Facebook/Instagram",
+      verdict:
+        "AdSpy's decade of Meta history and Boolean search are unmatched in this scope. PowerAdSpy's breadth is wasted if you only care about Meta.",
+      recommendation: "competitor",
+      competitorName: "AdSpy",
+    },
+    {
+      persona: "Performance-marketing analyst auditing Meta competitors daily",
+      verdict:
+        "Boolean queries across 200M+ claimed Meta ads answer structured research questions PowerAdSpy can't match on a single platform. Fair value at $149/mo.",
+      recommendation: "competitor",
+      competitorName: "AdSpy",
+    },
+  ]}
+/>
 
 ## Who should choose PowerAdSpy
 
-<UseCaseScenarios scenarios={[
-  { persona: "Multi-channel affiliate running native + display + Meta", verdict: "PowerAdSpy is one of the few tools that covers native and Google Display in the same seat as Meta. AdSpy doesn't touch those surfaces.", recommendation: "competitor", competitorName: "PowerAdSpy" },
-  { persona: "Agency generalist watching competitors across 3+ platforms", verdict: "Eight platforms in one login at mid-tier pricing beats buying four separate tools. Data quality varies by platform — worth evaluating on trial.", recommendation: "competitor", competitorName: "PowerAdSpy" }
-]} />
+<UseCaseScenarios
+  scenarios={[
+    {
+      persona: "Multi-channel affiliate running native + display + Meta",
+      verdict:
+        "PowerAdSpy is one of the few tools that covers native and Google Display in the same seat as Meta. AdSpy doesn't touch those surfaces.",
+      recommendation: "competitor",
+      competitorName: "PowerAdSpy",
+    },
+    {
+      persona: "Agency generalist watching competitors across 3+ platforms",
+      verdict:
+        "Eight platforms in one login at mid-tier pricing beats buying four separate tools. Data quality varies by platform — worth evaluating on trial.",
+      recommendation: "competitor",
+      competitorName: "PowerAdSpy",
+    },
+  ]}
+/>
 
 ## The affiliate marketer question — is either the right fit?
 
@@ -114,7 +144,13 @@ AdRecon was built for that job specifically. Meta-only (Facebook, Instagram, Thr
 
 Honest tradeoff: AdRecon covers less platform surface than either tool above. No TikTok, no YouTube, no Google Display, no native. If your ads run on those platforms, AdRecon isn't the fit — PowerAdSpy probably is. But if your research is Meta-focused affiliate intelligence, AdRecon is built to answer that question directly.
 
-<CTA variant="mid" campaign="adspy-vs-poweradspy" medium="versus" kicker="Running ClickBank or Digistore offers?" body="AdRecon auto-classifies affiliate networks and tracks 300,000+ ads, landing pages, creatives, and offers across Meta. $299 lifetime." />
+<CTA
+  variant="mid"
+  campaign="adspy-vs-poweradspy"
+  medium="versus"
+  kicker="Running ClickBank or Digistore offers?"
+  body="AdRecon auto-classifies affiliate networks and tracks 300,000+ ads, landing pages, creatives, and offers across Meta. $299 lifetime."
+/>
 
 ## Final verdict
 

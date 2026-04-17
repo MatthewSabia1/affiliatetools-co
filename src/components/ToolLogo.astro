@@ -1,7 +1,7 @@
 ---
 /**
  * ToolLogo.astro — Renders a competitor's logo from YAML data.
- * Handles both raster and SVG via <img>, with optional light-mode invert + wordmark.
+ * Handles raster + SVG logos and optional surface styling for better contrast.
  */
 import { getCompetitor } from '@/lib/competitors';
 import type { CompetitorSlug } from '@/lib/constants';
@@ -33,17 +33,27 @@ const displayH = px;
 const displayW = Math.round(displayH * aspect);
 
 const logoPath = logo.path.startsWith('/') ? logo.path : `/${logo.path}`;
+const surface = logo.surface ?? 'transparent';
 ---
 
-<span class:list={['tool-logo', `size-${size}`, logo.invertInLight ? 'invert-in-light' : null]}>
-  <img
-    src={logoPath}
-    alt={`${name} logo`}
-    width={displayW}
-    height={displayH}
-    loading="lazy"
-    decoding="async"
-  />
+<span
+  class:list={[
+    'tool-logo',
+    `size-${size}`,
+    `surface-${surface}`,
+    logo.invertInLight ? 'invert-in-light' : null,
+  ]}
+>
+  <span class="tool-logo__mark">
+    <img
+      src={logoPath}
+      alt={`${name} logo`}
+      width={displayW}
+      height={displayH}
+      loading="lazy"
+      decoding="async"
+    />
+  </span>
   {showName && <span class="tool-logo__name">{name}</span>}
 </span>
 
@@ -54,6 +64,12 @@ const logoPath = logo.path.startsWith('/') ? logo.path : `/${logo.path}`;
     gap: 0.6rem;
     line-height: 1;
     vertical-align: middle;
+  }
+  .tool-logo__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
   }
   .tool-logo img {
     display: block;
@@ -71,6 +87,36 @@ const logoPath = logo.path.startsWith('/') ? logo.path : `/${logo.path}`;
   .size-md .tool-logo__name { font-size: 1rem; }
   .size-lg .tool-logo__name { font-size: 1.15rem; }
   .size-xl .tool-logo__name { font-size: 1.4rem; }
+
+  .surface-neutral .tool-logo__mark,
+  .surface-dark .tool-logo__mark {
+    border-radius: 999px;
+    padding: 0.42rem 0.7rem;
+    border: 1px solid var(--color-line);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+  .surface-neutral .tool-logo__mark {
+    background: linear-gradient(180deg, #ffffff 0%, #f2f5f9 100%);
+  }
+  .surface-dark .tool-logo__mark {
+    background: linear-gradient(180deg, #142238 0%, #0d1727 100%);
+    border-color: color-mix(in oklch, #0d1727 72%, white);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 10px 24px rgba(10, 18, 31, 0.14);
+  }
+  .size-sm.surface-neutral .tool-logo__mark,
+  .size-sm.surface-dark .tool-logo__mark {
+    padding: 0.32rem 0.55rem;
+  }
+  .size-lg.surface-neutral .tool-logo__mark,
+  .size-lg.surface-dark .tool-logo__mark {
+    padding: 0.5rem 0.82rem;
+  }
+  .size-xl.surface-neutral .tool-logo__mark,
+  .size-xl.surface-dark .tool-logo__mark {
+    padding: 0.65rem 1rem;
+  }
 
   /* Site is dark-first; invert is a hint for logos that were authored
      for light backgrounds. Flip to a near-white rendering. */

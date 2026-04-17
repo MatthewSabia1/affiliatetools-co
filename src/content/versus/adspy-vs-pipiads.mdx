@@ -29,12 +29,12 @@ faq:
 draft: false
 ---
 
-import CTA from '@/components/CTA.astro';
-import ComparisonTable from '@/components/ComparisonTable.astro';
-import UseCaseScenarios from '@/components/UseCaseScenarios.astro';
-import FAQ from '@/components/FAQ.astro';
-import RelatedLinks from '@/components/RelatedLinks.astro';
-import AuthorshipBox from '@/components/AuthorshipBox.astro';
+import CTA from "@/components/CTA.astro";
+import ComparisonTable from "@/components/ComparisonTable.astro";
+import UseCaseScenarios from "@/components/UseCaseScenarios.astro";
+import FAQ from "@/components/FAQ.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
+import AuthorshipBox from "@/components/AuthorshipBox.astro";
 
 <AuthorshipBox />
 
@@ -58,7 +58,9 @@ If your core job is Meta affiliate research with ClickBank/Digistore offer class
 
 **Meta specialization.** A decade of single-platform focus means AdSpy's dedupe logic, advertiser page merges, and carousel handling are mature. Facebook Ad Library edge cases are handled. For operators who only care about Meta, that specialization shows up in data quality.
 
-**Predictable flat pricing.** $149/mo, one tier (as of April 2026). Simple annual budget math. PiPiADS's three tiers (Starter/VIP/Pro at $77/$155/$263) create upgrade-path pressure AdSpy doesn't have.
+**Predictable flat pricing.** $149/mo, one tier (as of April 2026). Simple annual budget math. PiPiADS's three tiers (Starter/VIP/Pro at $77/$155/$263) create upgrade-path pressure AdSpy doesn't have — you'll feel the ceiling of Starter's query limits within weeks and face a Pro upsell soon after.
+
+**Text-heavy ad library.** Meta still runs substantial image and text-led ad formats alongside video. AdSpy's UX treats text search, CTA filtering, and advertiser page analysis as first-class. PiPiADS's video-first UX deprioritizes these, which makes non-video Meta research awkward. For research that's not purely short-form video, AdSpy's lens is correct.
 
 **Affiliate-marketing heritage.** AdSpy has been the default Meta ad-spy reference in affiliate marketing courses and forums for close to a decade. Team familiarity and onboarding speed are real productivity levers.
 
@@ -88,17 +90,45 @@ Over three years at steady prices, single-tool spend: AdSpy totals $5,364, PiPiA
 
 ## Who should choose AdSpy
 
-<UseCaseScenarios scenarios={[
-  { persona: "Solo Meta affiliate running ClickBank or Digistore offers", verdict: "AdSpy's decade of Meta history and Boolean search are the category standard for Meta CPA research. PiPiADS doesn't cover this surface at all.", recommendation: "competitor", competitorName: "AdSpy" },
-  { persona: "Performance analyst auditing Facebook/Instagram competitors", verdict: "Boolean queries across AdSpy's 200M+ claimed Meta archive answer structured research questions no TikTok tool can. $149/mo is fair value for this capability.", recommendation: "competitor", competitorName: "AdSpy" }
-]} />
+<UseCaseScenarios
+  scenarios={[
+    {
+      persona: "Solo Meta affiliate running ClickBank or Digistore offers",
+      verdict:
+        "AdSpy's decade of Meta history and Boolean search are the category standard for Meta CPA research. PiPiADS doesn't cover this surface at all.",
+      recommendation: "competitor",
+      competitorName: "AdSpy",
+    },
+    {
+      persona: "Performance analyst auditing Facebook/Instagram competitors",
+      verdict:
+        "Boolean queries across AdSpy's 200M+ claimed Meta archive answer structured research questions no TikTok tool can. $149/mo is fair value for this capability.",
+      recommendation: "competitor",
+      competitorName: "AdSpy",
+    },
+  ]}
+/>
 
 ## Who should choose PiPiADS
 
-<UseCaseScenarios scenarios={[
-  { persona: "TikTok Shop affiliate scaling UGC video offers", verdict: "PiPiADS's TikTok Ads Library depth plus TikTok Shop product research is purpose-built for this workflow. AdSpy has zero TikTok data.", recommendation: "competitor", competitorName: "PiPiADS" },
-  { persona: "Short-form creative strategist building TikTok ad concepts", verdict: "Creator context, video-first UX, and native TikTok data serve creative ideation. AdSpy's Meta-formatted library won't replicate this.", recommendation: "competitor", competitorName: "PiPiADS" }
-]} />
+<UseCaseScenarios
+  scenarios={[
+    {
+      persona: "TikTok Shop affiliate scaling UGC video offers",
+      verdict:
+        "PiPiADS's TikTok Ads Library depth plus TikTok Shop product research is purpose-built for this workflow. AdSpy has zero TikTok data.",
+      recommendation: "competitor",
+      competitorName: "PiPiADS",
+    },
+    {
+      persona: "Short-form creative strategist building TikTok ad concepts",
+      verdict:
+        "Creator context, video-first UX, and native TikTok data serve creative ideation. AdSpy's Meta-formatted library won't replicate this.",
+      recommendation: "competitor",
+      competitorName: "PiPiADS",
+    },
+  ]}
+/>
 
 ## The affiliate marketer question — is either the right fit?
 
@@ -114,7 +144,13 @@ AdRecon fills that gap on Meta specifically. Meta-only (Facebook, Instagram, Thr
 
 Honest tradeoff: AdRecon won't help with TikTok (PiPiADS's job) or Boolean Meta queries across a 2015-present archive (AdSpy's job). If your research is Meta affiliate intelligence — networks, landers, offers, proven creatives — AdRecon is the direct fit.
 
-<CTA variant="mid" campaign="adspy-vs-pipiads" medium="versus" kicker="Running ClickBank or Digistore offers?" body="AdRecon auto-classifies affiliate networks and tracks 300,000+ ads, landing pages, creatives, and offers across Meta. $299 lifetime." />
+<CTA
+  variant="mid"
+  campaign="adspy-vs-pipiads"
+  medium="versus"
+  kicker="Running ClickBank or Digistore offers?"
+  body="AdRecon auto-classifies affiliate networks and tracks 300,000+ ads, landing pages, creatives, and offers across Meta. $299 lifetime."
+/>
 
 ## Final verdict
 

@@ -1,6 +1,7 @@
 ---
 /**
- * Hero — clean SaaS tier. No decoration. Just type + CTAs.
+ * Hero — refined SaaS tier. Type + CTAs + optional right-side stat panel.
+ * Now supports a `stats` slot via named slot for a data-visual panel on desktop.
  */
 
 interface CTA {
@@ -16,7 +17,8 @@ interface Props {
   updatedDate?: string;
   primaryCta?: CTA;
   secondaryCta?: CTA;
-  variant?: 'default' | 'compact';
+  variant?: "default" | "compact";
+  withStats?: boolean;
 }
 
 const {
@@ -26,60 +28,204 @@ const {
   updatedDate,
   primaryCta,
   secondaryCta,
-  variant = 'default',
+  variant = "default",
+  withStats = false,
 } = Astro.props;
 
 function formatUpdated(d?: string): string | null {
   if (!d) return null;
-  const parsed = new Date(d);
+  const parsed = new Date(/^\d{4}-\d{2}-\d{2}$/.test(d) ? `${d}T00:00:00Z` : d);
   if (isNaN(parsed.getTime())) return d;
-  return parsed.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  return parsed.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 const updatedLabel = formatUpdated(updatedDate);
-
-// Strip any stray <em> tags the page might have passed from the old design.
-const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
+const cleanTitle = title.replace(/<\/?em>/g, "").replace(/<\/?i>/g, "");
 ---
 
-<section class:list={['hero', `hero--${variant}`]}>
+<section
+  class:list={["hero", `hero--${variant}`, withStats && "hero--with-stats"]}
+>
+  <div class="hero__bg" aria-hidden="true"></div>
   <div class="container-max hero__inner">
-    {eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
-    <h1 class="hero__title">{cleanTitle}</h1>
-    {sub && <p class="hero__sub">{sub}</p>}
+    <div class="hero__left">
+      {eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
+      <h1 class="hero__title">{cleanTitle}</h1>
+      {sub && <p class="hero__sub">{sub}</p>}
 
-    <div class="hero__meta">
-      {updatedLabel && <span class="hero__updated">Updated {updatedLabel}</span>}
-      <slot />
+      <div class="hero__meta">
+        {
+          updatedLabel && (
+            <span class="hero__updated">Updated {updatedLabel}</span>
+          )
+        }
+        <slot />
+      </div>
+
+      {
+        (primaryCta || secondaryCta) && (
+          <div class="hero__ctas">
+            {primaryCta && (
+              <a
+                class="btn btn-primary btn-lg"
+                href={primaryCta.href}
+                rel="noopener"
+              >
+                {primaryCta.label}
+              </a>
+            )}
+            {secondaryCta && (
+              <a
+                class="btn btn-secondary btn-lg"
+                href={secondaryCta.href}
+                rel={secondaryCta.rel ?? "noopener"}
+              >
+                {secondaryCta.label}
+              </a>
+            )}
+          </div>
+        )
+      }
     </div>
 
-    {(primaryCta || secondaryCta) && (
-      <div class="hero__ctas">
-        {primaryCta && (
-          <a class="btn btn-primary btn-lg" href={primaryCta.href} rel="noopener">
-            {primaryCta.label}
-          </a>
-        )}
-        {secondaryCta && (
-          <a class="btn btn-secondary btn-lg" href={secondaryCta.href} rel={secondaryCta.rel ?? 'noopener'}>
-            {secondaryCta.label}
-          </a>
-        )}
-      </div>
-    )}
+    {
+      withStats && (
+        <aside class="hero__stats" aria-label="AffiliateTools at a glance">
+          <div class="hero__stats-head">
+            <span class="hero__stats-dot" aria-hidden="true" />
+            <span>LIVE · AffiliateTools index</span>
+          </div>
+          <ul class="hero__stats-list">
+            <li>
+              <span class="hero__stats-val">
+                <span class="hero__stats-num" data-count="7">
+                  7
+                </span>
+              </span>
+              <span class="hero__stats-key">Tools reviewed hands-on</span>
+            </li>
+            <li>
+              <span class="hero__stats-val">
+                <span class="hero__stats-num" data-count="300000">
+                  300K+
+                </span>
+              </span>
+              <span class="hero__stats-key">Records tracked across Meta</span>
+            </li>
+            <li>
+              <span class="hero__stats-val">
+                <span class="hero__stats-num" data-count="8">
+                  8
+                </span>
+              </span>
+              <span class="hero__stats-key">Weighted scoring dimensions</span>
+            </li>
+            <li>
+              <span class="hero__stats-val">
+                <span class="hero__stats-num" data-count="0">
+                  0
+                </span>
+              </span>
+              <span class="hero__stats-key">Paid placements accepted</span>
+            </li>
+          </ul>
+          <div class="hero__stats-foot">
+            <div class="hero__stats-bar">
+              <span class="hero__stats-bar-label">Methodology</span>
+              <span class="hero__stats-bar-track">
+                <span class="hero__stats-bar-fill" style="width: 96%;" />
+              </span>
+              <span class="hero__stats-bar-val">96% transparent</span>
+            </div>
+            <div class="hero__stats-bar">
+              <span class="hero__stats-bar-label">Refresh cadence</span>
+              <span class="hero__stats-bar-track">
+                <span class="hero__stats-bar-fill" style="width: 100%;" />
+              </span>
+              <span class="hero__stats-bar-val">Quarterly</span>
+            </div>
+          </div>
+        </aside>
+      )
+    }
   </div>
 </section>
 
 <style>
   .hero {
+    position: relative;
     padding: 4rem 0 3rem;
-    background: linear-gradient(180deg, var(--color-canvas-tint) 0%, var(--color-canvas) 100%);
     border-bottom: 1px solid var(--color-line);
+    overflow: hidden;
   }
-  .hero--default { padding: 4.5rem 0 3.5rem; }
-  .hero--compact { padding: 2.5rem 0 2rem; }
+  .hero--default {
+    padding: 4.5rem 0 3.5rem;
+  }
+  .hero--compact {
+    padding: 2.5rem 0 2rem;
+  }
 
-  .hero__inner { max-width: 52rem; }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 60% 50% at 15% 0%,
+        rgba(14, 44, 95, 0.08),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 40% 40% at 85% 100%,
+        rgba(14, 44, 95, 0.05),
+        transparent 60%
+      ),
+      linear-gradient(
+        180deg,
+        var(--color-canvas-tint) 0%,
+        var(--color-canvas) 100%
+      );
+  }
+  /* grid overlay for hero */
+  .hero__bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(14, 44, 95, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(14, 44, 95, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(
+      ellipse at 50% 30%,
+      black 0%,
+      transparent 75%
+    );
+  }
+
+  .hero__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero--with-stats .hero__inner {
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1024px) {
+    .hero--with-stats .hero__inner {
+      grid-template-columns: 1.3fr 1fr;
+      gap: 3.5rem;
+    }
+  }
+  .hero__left {
+    max-width: 54rem;
+  }
 
   .hero__eyebrow {
     font-family: var(--font-mono);
@@ -89,6 +235,17 @@ const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
     color: var(--color-accent);
     font-weight: 600;
     margin: 0 0 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .hero__eyebrow::before {
+    content: "";
+    width: 20px;
+    height: 1px;
+    background: var(--color-accent);
+    display: inline-block;
+    opacity: 0.6;
   }
 
   .hero__title {
@@ -99,7 +256,10 @@ const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
     font-weight: 740;
     letter-spacing: -0.03em;
   }
-  .hero--compact .hero__title { font-size: clamp(1.9rem, 3.2vw, 2.6rem); line-height: 1.15; }
+  .hero--compact .hero__title {
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+    line-height: 1.15;
+  }
 
   .hero__sub {
     margin: 1.1rem 0 0;
@@ -124,7 +284,7 @@ const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
     align-items: center;
     gap: 0.4rem;
     padding: 0.22rem 0.65rem;
-    background: var(--color-surface);
+    background: var(--color-canvas);
     border: 1px solid var(--color-line);
     border-radius: 999px;
     color: var(--color-type-dim);
@@ -139,6 +299,7 @@ const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
     border-radius: 50%;
     background: var(--color-success);
     display: inline-block;
+    box-shadow: 0 0 0 3px rgba(31, 122, 62, 0.2);
   }
 
   .hero__ctas {
@@ -146,5 +307,156 @@ const cleanTitle = title.replace(/<\/?em>/g, '').replace(/<\/?i>/g, '');
     flex-wrap: wrap;
     gap: 0.6rem;
     margin-top: 1.75rem;
+  }
+
+  /* ===== Right-side stats panel (dark) ===== */
+  .hero__stats {
+    position: relative;
+    background:
+      radial-gradient(
+        ellipse 80% 50% at 50% 0%,
+        rgba(40, 90, 170, 0.2),
+        transparent 70%
+      ),
+      linear-gradient(180deg, #0f1724 0%, #0a0f1a 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.4rem 1.5rem 1.25rem;
+    box-shadow:
+      0 24px 60px -24px rgba(10, 15, 26, 0.45),
+      0 0 0 1px rgba(200, 220, 255, 0.04);
+    overflow: hidden;
+  }
+  .hero__stats::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      transparent 30%
+    );
+    pointer-events: none;
+    border-radius: 16px;
+  }
+  .hero__stats-head {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1.1rem;
+  }
+  .hero__stats-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 0 6px rgba(52, 211, 153, 0.05);
+    }
+  }
+
+  .hero__stats-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+  }
+  .hero__stats-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.75rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    margin: 0;
+  }
+  .hero__stats-val {
+    font-family: var(--font-sans);
+    font-weight: 740;
+    font-size: 1.65rem;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero__stats-key {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 450;
+    line-height: 1.3;
+    margin-top: 0.3rem;
+  }
+
+  .hero__stats-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  }
+  .hero__stats-bar {
+    display: grid;
+    grid-template-columns: 112px 1fr 96px;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .hero__stats-bar-label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.02em;
+  }
+  .hero__stats-bar-track {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .hero__stats-bar-fill {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #6aa5f7, #d3e4fd);
+    border-radius: 2px;
+    transform-origin: left;
+    animation: barFill 1.1s cubic-bezier(0.2, 0.9, 0.3, 1) 0.3s both;
+  }
+  @keyframes barFill {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .hero__stats-bar-val {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.72);
+    text-align: right;
+    font-weight: 500;
+  }
+
+  @media (max-width: 1023px) {
+    .hero__stats {
+      margin-top: 1.5rem;
+    }
   }
 </style>
