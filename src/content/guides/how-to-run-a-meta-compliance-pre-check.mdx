@@ -1,0 +1,170 @@
+---
+title: "How To Run A Meta Compliance Pre Check"
+description: "Learn how to use ad-spy data to run a Meta compliance pre-check. Identify banned angles, avoid rejected creatives, and protect your ad accounts from bans."
+publishDate: "2026-04-17"
+updatedDate: "2026-04-17"
+heroEyebrow: "Operator Playbook"
+faq:
+  - q: "Can ad-spy tools tell me exactly why an ad was banned?"
+    a: "No tool can access Meta's internal rejection notes. However, you can infer bans by observing 'dead' ads—creatives that disappeared quickly after a short run—or by identifying patterns in what high-volume affiliates are currently avoiding."
+  - q: "Is it safe to copy a compliant ad exactly?"
+    a: "Compliance is not just about the creative; it is about the landing page and the offer. Even if an ad is running, your specific account health, domain age, and landing page experience can trigger a ban for the same creative."
+  - q: "How do I know if an ad is 'winning' or just 'surviving'?"
+    a: "Look for the 'days running' metric. An ad that has been active for 30+ days is likely compliant and profitable. An ad that runs for 48 hours and vanishes was likely rejected or failed to convert."
+  - q: "Should I use a bridge page for all affiliate offers?"
+    a: "Generally, yes. Meta dislikes direct linking to many CPA networks. Using a compliant bridge page or a custom landing page reduces the risk of 'Circumventing Systems' flags."
+  - q: "What is the most common compliance mistake in Meta ads?"
+    a: "Making 'unrealistic claims' or using 'before and after' imagery. These are high-signal triggers for Meta's automated review bots and almost always lead to immediate account disablement."
+draft: false
+---
+import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
+import ToolLogo from '@/components/ToolLogo.astro';
+import Screenshot from '@/components/Screenshot.astro';
+
+## TL;DR
+* **Pattern Recognition:** Use spy tools to identify "survivor" ads (those running 14+ days) to determine which hooks are currently compliant.
+* **Angle Filtering:** Filter by affiliate network (e.g., ClickBank, MaxWeb) to see how top operators are phrasing "aggressive" claims to bypass bots.
+* **LP Auditing:** Rip and analyze the landing pages of active ads to ensure the "bridge" between the ad and the offer doesn't contain banned keywords.
+* **Creative Deconstruction:** Separate the "hook" from the "promise." If a winning ad uses a vague hook but a specific promise, emulate the vagueness in the ad and the specificity on the LP.
+* **The "Dead Ad" Signal:** Identify creatives that appeared and disappeared within 72 hours; these are your "what not to do" blueprints.
+* **Account Warm-up:** Never launch a high-risk "aggressive" angle on a fresh account; use the compliance pre-check to find a "safe" entry angle first.
+
+## Why this matters
+For the professional affiliate, a Meta ad account is not just a tool—it is a revenue-generating asset. The cost of a "naive" launch is not merely the loss of a few hundred dollars in ad spend; it is the permanent loss of the Business Manager (BM), the Pixel data, and the domain reputation. When Meta flags an account for "Unacceptable Business Practices" or "Circumventing Systems," the recovery process is often a bureaucratic nightmare that results in a permanent ban.
+
+Most beginners approach compliance by reading the Meta Advertising Policies. While necessary, these policies are intentionally vague. They tell you that you cannot make "misleading claims," but they don't tell you that a specific word like "melt" in a weight loss ad is currently triggering an automatic bot rejection, while the word "dissolve" is passing through. 
+
+The only source of truth in Meta compliance is the live auction. If an ad is running today, and it has been running for three weeks, it is compliant. By using ad-spy data to run a pre-check, you shift from guessing based on a PDF of rules to executing based on empirical evidence. This saves hundreds of hours of account appeals and prevents the catastrophic loss of scaling momentum.
+
+## Prerequisites and assumptions
+Before starting this workflow, you should have a basic understanding of the Meta Ads Manager interface and the specific affiliate offer you intend to promote. You must understand the "core promise" of your offer (e.g., "lose 10lbs in 30 days") so you can search for how others are masking or framing that promise.
+
+You will need access to an ad intelligence tool. Depending on your budget and platform focus, this could be a specialist tool for Meta or a broader multi-platform spy tool. You should also have a way to archive landing pages, either through a built-in tool or a third-party web scraper, as the ad is only half of the compliance equation.
+
+## The workflow / framework
+
+### Step 1: Identify the "Survivor" Baseline
+The first step in a compliance pre-check is not looking for "cool" ads, but looking for "old" ads. In the world of affiliate marketing, longevity equals compliance. If an ad has been running for 30 days, it has survived multiple rounds of Meta's automated scans and likely several manual reviews.
+
+To do this, set your spy tool filters to a minimum "days running" threshold of 14 days. If you are in a high-risk niche (Nutra, Crypto, Gambling), push this to 30 days. You are looking for the common denominators among these survivors. Do they all avoid mentioning a specific ingredient? Do they all use a "story-based" hook rather than a "result-based" hook?
+
+If you are targeting specific networks, using a tool that classifies ads by network is a massive shortcut. Instead of searching for keywords like "keto," you can filter specifically for ads linked to ClickBank or BuyGoods. This allows you to see exactly how the top 1% of earners in your specific network are navigating the current compliance climate.
+
+<ToolLogo slug="adrecon" size="lg" showName />
+
+### Step 2: Map the "Banned Angle" Minefield
+Once you have your survivors, you need to find the "casualties." This is the inverse of Step 1. You are looking for ads that were launched recently but disappeared quickly. While spy tools don't explicitly label an ad as "Banned," you can spot the pattern: an ad appears in the database, stays for 2-3 days, and then never appears again across any other account.
+
+Compare these "short-lived" ads to your "survivors." Look for the "Trigger Words." For example, you might find that every ad using the phrase "Permanent Weight Loss" disappeared within 48 hours, while ads using "Sustainable Habit Change" are still running after a month. 
+
+Create a "Blacklist" of keywords and imagery. If you see that every ad featuring a "Before and After" split-screen image is gone, you know that Meta's computer vision AI is currently aggressive toward that specific layout. This map of banned angles becomes your guardrail for the creative phase.
+
+### Step 3: Deconstruct the Landing Page Bridge
+A common mistake is assuming that if the ad is compliant, the whole funnel is safe. Meta's bots crawl the destination URL. Many affiliates get banned not because of the ad, but because the landing page makes a claim that the ad carefully avoided.
+
+Use a "Landing Page Ripper" or an archiving tool to download the full HTML and CSS of the surviving ads' landing pages. Analyze the "Bridge." Is the landing page a simple quiz? A long-form VSL (Video Sales Letter) with a heavy disclaimer in the footer? Or a "advertorial" that looks like a news article?
+
+Check for "Compliance Buffers." Look for the presence of:
+1. **Privacy Policy and Terms of Service links** in the footer.
+2. **Disclaimer text** stating that the site is not part of the Meta website.
+3. **Avoidance of "You" language.** (e.g., changing "Do you want to lose weight?" to "Many people struggle with weight.")
+
+By ripping the LP, you can see if the operator is using "cloaking" or simply a very well-written, compliant bridge page. If they are using a compliant bridge, you can model the structure and the legal language.
+
+<ToolLogo slug="adspy" size="lg" showName />
+
+### Step 4: Test the "Vagueness Gradient"
+Now you must determine how "vague" your ad needs to be to pass the bot, while remaining "specific" enough to get the click. This is the Vagueness Gradient. 
+
+* **Level 1 (High Risk):** "Lose 20lbs in 2 weeks with this pill." (Immediate ban)
+* **Level 2 (Medium Risk):** "The secret supplement for rapid weight loss." (Likely ban/limited reach)
+* **Level 3 (Low Risk):** "The morning ritual that changed my energy levels." (High compliance)
+
+Using your spy data, find the "winning" level for your niche. If the survivors are all at Level 3, do not attempt a Level 2 launch. The goal is to move the "heavy lifting" of the sale from the ad to the landing page. The ad's only job is to get a compliant click; the landing page's job is to convert that click into a lead.
+
+### Step 5: Final Cross-Reference and Launch
+Before hitting "Publish," run your final creative through a checklist based on your research:
+1. **Visual Check:** Does this image resemble any of the "casualties" identified in Step 2?
+2. **Keyword Check:** Does the copy contain any "Blacklist" words?
+3. **LP Check:** Does the landing page have the same legal buffers as the survivors in Step 3?
+4. **Angle Check:** Is the hook at the correct "Vagueness Level" for the current Meta climate?
+
+If all boxes are checked, launch with a low budget for the first 48 hours. This is your "Live Pre-Check." If the ad is approved and spends its full daily budget without a sudden drop in impressions, you have successfully navigated the compliance minefield.
+
+## Worked example
+Imagine an operator promoting a high-ticket "Wealth Manifestation" offer from Digistore24. 
+
+**Step 1:** They use a spy tool to filter for Digistore24 ads running for 20+ days. They find 5 ads. All 5 avoid the word "Money" or "Wealth" in the primary text. Instead, they use phrases like "Financial Abundance" or "The Hidden Code."
+
+**Step 2:** They look for recent ads (last 7 days) that disappeared. They find 10 ads that used the phrase "Make $500 a day." Every single one of them is gone. They add "Make $[Amount] a day" to their Blacklist.
+
+**Step 3:** They rip the landing pages of the 5 survivors. They notice all of them use a "Quiz" format before sending the user to the actual offer. They also see a very large "Earnings Disclaimer" at the bottom of the page.
+
+**Step 4:** They determine the Vagueness Gradient. Level 1 ("Get rich quick") is banned. Level 2 ("Earn more from home") is risky. Level 3 ("Unlock your abundance mindset") is the survivor's choice.
+
+**Step 5:** They create an ad with the hook: "The 30-second ritual for abundance." They build a Quiz bridge page with a full disclaimer. They launch at $20/day. The ad is approved, and after 48 hours, they scale to $200/day.
+
+## Pitfalls to avoid
+
+### The "Copy-Paste" Trap
+Many affiliates find a winning ad and copy the text and image exactly. This is a recipe for a ban. Meta's AI can detect duplicate creatives across different accounts. If the original advertiser was "grandfathered in" (their ad was approved months ago when rules were looser), a new account uploading the same creative today will be flagged. Always rewrite the copy and tweak the imagery to create a "unique" version of a proven angle.
+
+### Ignoring the "Pixel" History
+Compliance is not just about the ad; it's about the account. If you use a Pixel that has previously been associated with banned accounts or "shady" offers, Meta's AI will scrutinize your new ads more heavily. A "compliance pre-check" should include a fresh start with a clean Pixel and a new domain if you are switching from a high-risk to a low-risk offer.
+
+### Over-Reliance on "Cloaking"
+Some operators rely on cloakers to show Meta bots a "safe" page while showing users the "aggressive" offer. While this works temporarily, Meta is an AI company; they are exceptionally good at detecting cloaking patterns. The sustainable approach is "Compliant Framing"—using a real, high-quality bridge page that is actually compliant, rather than trying to trick the bot.
+
+### Neglecting the "Comments" Section
+Meta's compliance bots also scan the comments on your ads. If users start commenting "This is a scam!" or "I lost my money!", Meta may flag the ad for "Low Quality" or "Misleading Claims," even if the ad copy itself is perfect. A compliance pre-check must include a plan for comment moderation—either hiding negative comments or responding to them professionally.
+
+### The "Fast Scale" Trigger
+Even a compliant ad can be banned if you scale too quickly. Jumping from $10/day to $1,000/day in 24 hours is a massive red flag for Meta's risk systems. It triggers a manual review of the account. When a human reviewer looks at an affiliate funnel, they are often stricter than the bot. Scale incrementally (e.g., 20% increase every 48 hours) to stay under the radar.
+
+## Which tools fit which step
+
+### Step 1 & 2: Pattern Recognition and Angle Filtering
+For these steps, you need a tool that can filter by longevity and, ideally, by affiliate network. 
+
+<ToolLogo slug="adrecon" size="lg" showName />
+AdRecon is purpose-built for this. Its ability to classify ads by networks like ClickBank and MaxWeb allows you to skip the generic keyword search and go straight to what professional affiliates are running. The "days-running" signal is the primary metric here.
+Price: $299 / $599 lifetime (one-time, not subscription) as of April 2026.
+
+<ToolLogo slug="adspy" size="lg" showName />
+AdSpy is a powerhouse for this due to its massive 10-year database. If you need to see how an angle has evolved over years, AdSpy is the choice. Its Boolean search allows you to find very specific "casualty" patterns.
+Price: $149/mo (recurring) as of April 2026.
+
+<Screenshot slug="adrecon" variant="hero" />
+
+### Step 3: Landing Page Analysis
+Once you find the ads, you need to see where they go.
+
+<ToolLogo slug="adrecon" size="lg" showName />
+The "Landing Page Ripper" feature is the key here, allowing you to download the full assets of a page to analyze the legal buffers and structure.
+
+<ToolLogo slug="bigspy" size="lg" showName />
+BigSpy is useful here for those on a budget who need to quickly check destination URLs across multiple platforms to see if the compliance strategy is consistent across Meta and TikTok.
+Price: Free · Basic $9/mo · Pro $99/mo · VIP Enterprise $249/mo as of April 2026.
+
+### Step 4 & 5: Creative Iteration and Testing
+For the actual creation and mood-boarding of your "safe" versions:
+
+<ToolLogo slug="foreplay" size="lg" showName />
+Foreplay is the best tool for organizing your "survivor" ads into mood boards and creative briefs. It helps you visualize the "Vagueness Gradient" by grouping different versions of the same hook.
+Price: Inspiration $49/mo · Strategist $99/mo · Agency $199/mo as of April 2026.
+
+<ToolLogo slug="pipiads" size="lg" showName />
+If you are cross-checking your Meta compliance against TikTok (where rules differ), PiPiADS is the gold standard for seeing what "aggressive" angles are passing on TikTok, which can sometimes give you ideas for "safe" angles on Meta.
+Price: Starter $77/mo · VIP $155/mo as of April 2026.
+
+## How to know the workflow is working
+The most immediate signal that this workflow is working is the **Approval Rate**. If you move from a 50% ad rejection rate to a 90%+ approval rate, your pre-check is functioning. 
+
+The second, more important signal is **Account Longevity**. If your Business Managers are lasting 3-6 months instead of 3-6 days, you have successfully shifted from "gambling" with your accounts to "operating" them. Finally, look at your **CPM stability**. Ads that are "borderline" compliant often suffer from "shadow-suppression," where Meta allows the ad to run but charges a massive premium for impressions. Stable, competitive CPMs are a sign that Meta's AI views your content as high-quality and compliant.
+
+<CTA variant="mid" campaign="how-to-run-a-meta-compliance-pre-check" medium="guide" kicker="Stop guessing, start spying." body="Get lifetime access to the only ad intelligence tool that classifies by affiliate network and rips landing pages." />
+
+## Frequently asked questions
+
+<FAQ items={frontmatter.faq} />

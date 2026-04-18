@@ -1,0 +1,148 @@
+---
+title: "How To Monitor Your Competitors Weekly"
+description: "Establish a professional weekly competitor monitoring cadence. Learn how to set up saved filters, track creative shifts, and automate your research workflow."
+publishDate: "2026-04-17"
+updatedDate: "2026-04-17"
+heroEyebrow: "Operator Playbook"
+faq:
+  - q: "How much time should I spend on weekly monitoring?"
+    a: "A professional operator should spend 2-4 hours per week. This includes 30 minutes for initial scanning, 90 minutes for deep-diving into winning creatives, and 60 minutes for implementing changes in their own campaigns."
+  - q: "Should I track every competitor in my niche?"
+    a: "No. Focus on 5-10 'North Star' competitors who consistently scale. Tracking too many leads to analysis paralysis and noise that obscures actual market trends."
+  - q: "How do I know if a competitor's ad is actually profitable?"
+    a: "Look for the 'days running' metric. An ad that has been active for 14+ days is almost certainly profitable, as no sane operator wastes budget on losing creatives for two weeks."
+  - q: "Can I automate the entire process?"
+    a: "You can automate the discovery via saved filters and alerts, but the analysis must be manual. AI can summarize text, but it cannot yet judge the psychological trigger of a high-converting image or video."
+  - q: "What is the best way to archive competitor landing pages?"
+    a: "Use a tool with a 'Ripper' or archiving function. Saving a URL is useless because affiliates change pages or use cloakers that block spy tools; you need the actual HTML/CSS assets saved locally."
+draft: false
+---
+import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
+import ToolLogo from '@/components/ToolLogo.astro';
+import Screenshot from '@/components/Screenshot.astro';
+
+## TL;DR
+* **Shift from Reactive to Proactive:** Stop searching for ads when your ROAS drops; monitor weekly to anticipate shifts before they hit your account.
+* **The 'Days Running' Rule:** Ignore new ads; focus exclusively on creatives that have remained active for 7-14+ days.
+* **Network Classification:** Filter by affiliate network (ClickBank, MaxWeb, etc.) to find high-intent CPA offers rather than generic e-commerce dropshipping.
+* **Asset Archiving:** Always download the full landing page HTML/CSS; relying on live URLs is a recipe for losing your research to a 404 error.
+* **The Creative Cycle:** Use a "Scan $\rightarrow$ Analyze $\rightarrow$ Adapt" loop every Monday morning to refresh your ad sets.
+* **Tool Specialization:** Use Meta-specific tools for deep CPA research and multi-platform tools for broad trend spotting.
+
+## Why this matters
+Most affiliate marketers treat competitor research as a "break glass in case of emergency" activity. When their primary campaign dies or a new offer launches, they scramble into a spy tool, filter for "last 30 days," and try to guess what is working. This reactive approach is expensive. By the time you notice a trend via a reactive search, the "winning" creative is often already saturated, and the CPMs for that specific angle have spiked.
+
+A weekly monitoring cadence transforms research from a rescue mission into a strategic advantage. When you monitor weekly, you aren't just looking for a single winning ad; you are tracking the *evolution* of an angle. You see when a competitor shifts from a "fear-based" hook to a "benefit-based" hook. You notice when they change their landing page layout from a long-form VSL to a short-form quiz. These micro-shifts are the real signals of optimization.
+
+In dollar terms, the difference is massive. An operator who identifies a scaling angle three days before the rest of the market can capture lower CPMs and higher conversion rates. Conversely, failing to notice that your top competitor has pivoted to a new offer often means you are spending budget on a dying trend while the market has already moved on.
+
+## Prerequisites and assumptions
+Before implementing this workflow, you should have a basic understanding of the CPA (Cost Per Acquisition) model and be familiar with the major affiliate networks (e.g., ClickBank, Digistore24, BuyGoods). You should already have a "North Star" list of 5-10 competitors—these are the accounts that consistently appear in your searches and seem to be scaling high volumes.
+
+You will need access to at least one ad intelligence tool. Depending on your budget and platform focus, this could be a Meta-specialist tool or a multi-platform aggregator. You should also have a dedicated folder system (or a tool like Notion or Trello) to archive the creatives and landing pages you discover.
+
+## The workflow / framework
+
+### Step 1: Define and Save Your "Intelligence Filters"
+The biggest mistake operators make is starting every search from a blank screen. This leads to "spy tool rabbit holes" where you spend three hours looking at irrelevant ads. Instead, you must build a set of saved filters that act as your weekly dashboard.
+
+Your filters should be categorized by intent. Create one filter for "Current Scaling Offers" (Filtering for ads running 14+ days), one for "New Angle Testing" (Ads running 1-3 days with high engagement), and one for "Network Specifics." For example, if you are running health offers on MaxWeb, your filter should specifically target that network's footprint.
+
+If you are using a tool like <ToolLogo slug="adrecon" size="lg" showName />, you can leverage affiliate-network classification. Instead of guessing keywords like "weight loss" or "keto," you filter directly by the network (e.g., ClickBank or BuyGoods). This removes the noise of organic brand ads and focuses purely on affiliate traffic. Set these filters and save them with clear names: `[MaxWeb] - Health - Scaling` or `[ClickBank] - Finance - New`.
+
+### Step 2: The Monday Morning "Signal Scan"
+Every Monday, run your saved filters. Your goal here is not to analyze, but to *triage*. You are looking for "signals"—deviations from the previous week's data.
+
+First, check your "Scaling" filter. Are there any new ads that have crossed the 14-day threshold? If an ad has been running for two weeks, it is mathematically likely to be profitable. This is your primary target for the week. Second, look at your "New Angle" filter. If you see five different competitors all launching ads with a similar new hook (e.g., shifting from "Lose weight fast" to "The morning ritual for metabolism"), you have identified a market shift.
+
+During this scan, do not click every link. Simply "heart" or save the ads that meet your profitability criteria. If you are using <ToolLogo slug="adspy" size="lg" showName />, utilize their Boolean search operators to refine this scan—for example, searching for `(weight loss OR metabolism) NOT "free trial"` to strip out low-quality lead-gen offers.
+
+### Step 3: Deconstruct the Funnel (The "Ripper" Phase)
+Once you have identified 3-5 winning ads, you must move beyond the creative and analyze the destination. The ad gets the click, but the landing page gets the sale. A common failure point is simply visiting the competitor's landing page in a browser. Sophisticated affiliates use cloakers or geo-targeting that will show you a "404 Not Found" or a generic page if they detect you are using a spy tool or are in the wrong region.
+
+To combat this, you need to archive the page. This is where a "Landing Page Ripper" becomes essential. Rather than just saving a URL, you want the full HTML, CSS, and image assets downloaded as a ZIP file. This allows you to see exactly how the page is structured, what tracking scripts they are using, and how the mobile version differs from the desktop version.
+
+Using <ToolLogo slug="adrecon" size="lg" showName />, you can rip the landing page directly from the ad intelligence interface. Once downloaded, open the files locally. Analyze the headline, the lead-in, and the call-to-action (CTA). Compare the landing page of the ad that has been running for 30 days against the one running for 3 days. The differences you find are the result of the competitor's own A/B testing—they have essentially paid for the research, and you are now inheriting the result.
+
+### Step 4: Map the Creative-to-Offer Relationship
+Now, you must determine if the success is due to the *creative* or the *offer*. To do this, look for "Proven Creatives" across different advertisers. If you see three different affiliates all using the same video ad for three different offers within the same niche, the creative is the driver. If you see ten different creatives all pointing to one specific offer, the offer is the driver.
+
+Create a simple spreadsheet or Notion board. Column A: The Creative (screenshot/link). Column B: The Angle (e.g., "Scientific Discovery"). Column C: The Offer (e.g., "Alpilean"). Column D: The Duration (Days Running).
+
+This mapping prevents you from blindly copying an ad that only worked because it was attached to a legendary offer. If you find a creative that works across multiple offers, you have found a "universal hook" that you can apply to your own current campaigns to breathe new life into them.
+
+### Step 5: Execute the "Adapt and Launch" Cycle
+The final step is implementation. Never copy a competitor's ad 1:1. Not only is this a recipe for ad fatigue, but Meta's algorithms often penalize identical creatives. Instead, use the "10% Pivot" rule.
+
+Take the winning angle you discovered in Step 2 and the landing page structure from Step 3. Change the hook (the first 3 seconds of the video or the first sentence of the copy) by 10%. Change the color palette of the landing page. Swap the primary image for a similar but different variation.
+
+Launch these as new ad sets. Because you based these on "days running" data, your probability of success is significantly higher than if you were guessing. Monitor these new ads for 72 hours. If the CTR (Click-Through Rate) matches or beats the competitor's estimated performance, you have successfully integrated the competitor's intelligence into your own growth.
+
+## Worked example
+Imagine an operator, "Sarah," who promotes weight loss offers via ClickBank. Her current campaign is stagnating with a 1.2x ROAS.
+
+**Monday 9:00 AM:** Sarah opens her saved filter in <ToolLogo slug="adrecon" size="lg" showName /> for `[ClickBank] - Weight Loss - 14+ Days`. She notices a new ad that has been running for 22 days. The ad doesn't use the typical "before and after" photos; instead, it uses a "strange loop-hole" angle with a video of a person talking about a specific nutrient.
+
+**Monday 10:00 AM:** Sarah uses the Landing Page Ripper to download the destination page. She discovers the competitor isn't sending traffic to a VSL (Video Sales Letter) but to a "Quiz Funnel" that asks five questions before revealing the product. This is a major shift from her own direct-to-VSL approach.
+
+**Monday 11:00 AM:** Sarah checks her "New Angle" filter and sees three other affiliates starting to test similar quiz funnels. She confirms the trend is moving toward interactive pre-sell pages.
+
+**Monday 1:00 PM:** Sarah doesn't copy the quiz exactly. She creates her own 3-question quiz using a tool like Typeform or a custom WP plugin, keeping the "nutrient loop-hole" angle but changing the visual style to match her brand. She launches three new ads with a modified version of the "loop-hole" hook. By Friday, her ROAS has jumped to 1.8x because she pivoted to the quiz funnel before her other competitors did.
+
+## Pitfalls to avoid
+
+### The "New Ad" Trap
+The most common mistake is filtering for "Ads launched in the last 24 hours" and assuming that because an ad is new, it is the "next big thing." In reality, most new ads fail within 48 hours. When you copy a brand-new ad, you are essentially volunteering to be the competitor's unpaid beta tester. Always prioritize the "Days Running" metric. If it hasn't survived a week, it isn't a signal; it's a guess.
+
+### Ignoring the "Cloak"
+Many senior affiliates use cloaking software to hide their real landing pages from spy tools. If you see a "Page Not Found" or a generic " Coming Soon" page when clicking a link in a spy tool, do not assume the ad is dead. This is often a sign that the ad is *extremely* successful and the operator is protecting their funnel. This is why using a tool that can archive or "rip" the page at the moment of discovery is critical.
+
+### The "One-Tool" Blindspot
+Relying on a single tool can leave you blind to platform shifts. For example, if you only use a Meta-specific tool, you might miss the fact that your competitors are using Meta ads as a "top of funnel" lead-gen tool but are closing the sales via a heavy TikTok retargeting campaign. While you should have a primary research hub, periodically scanning other platforms is necessary to see the full customer journey.
+
+### Copy-Paste Creative Fatigue
+Copying a winning ad verbatim is a short-term gain that leads to a long-term loss. Once an ad becomes "the winning creative" in a niche, the audience develops "banner blindness" to it. If you launch the exact same image and text, you are entering the market at the peak of the fatigue curve. Always pivot the hook or the visual by at least 10-20% to reset the novelty for the user.
+
+### Analysis Paralysis
+Spending 20 hours a week in a spy tool is not "research"; it's procrastination. The goal of weekly monitoring is to find 1-3 actionable changes to implement. If you find yourself scrolling through thousands of ads without a specific filter or goal, you are wasting time. Stick to the "Scan $\rightarrow$ Analyze $\rightarrow$ Adapt" workflow and set a hard time limit on your research sessions.
+
+## Which tools fit which step
+Depending on your specific needs—whether you are a Meta-only CPA specialist or a multi-platform generalist—different tools fit different parts of the workflow.
+
+### For Meta-Only CPA Research & Funnel Ripping
+If your entire business lives on Facebook and Instagram and you primarily use networks like ClickBank or MaxWeb, you need a specialist tool. <ToolLogo slug="adrecon" size="lg" showName /> is built specifically for this. Its ability to classify by affiliate network and its "Landing Page Ripper" makes it the most efficient choice for Step 1 (Filtering) and Step 3 (Deconstruction).
+
+Price: $299 / $599 lifetime (one-time, not subscription) as of April 2026.
+
+<Screenshot slug="adrecon" variant="hero" />
+
+### For Deep Historical Meta Analysis
+If you need to see how an angle has evolved over the last five years, or if you need complex Boolean search strings to find very specific niches, <ToolLogo slug="adspy" size="lg" showName /> is the industry standard. It lacks the landing page archiving of AdRecon but has a massive historical database.
+
+Price: $149/mo (recurring) as of April 2026.
+
+### For Multi-Platform Trend Spotting
+If you suspect your competitors are diversifying across TikTok, Pinterest, and Google, a generalist tool is better. <ToolLogo slug="bigspy" size="lg" showName /> provides a broad overview across multiple platforms and is an excellent entry point for beginners due to its free tier.
+
+Price: Free · Basic $9/mo · Pro $99/mo · VIP Enterprise $249/mo as of April 2026.
+
+For those running Native ads (Taboola/Outbrain) alongside Meta, <ToolLogo slug="poweradspy" size="lg" showName /> is the strongest option due to its Native ad coverage.
+
+Price: Basic $49/mo · Standard $99/mo · Professional $149/mo · Premium $249/mo as of April 2026.
+
+### For Creative Strategy and Mood Boarding
+If you are working with a creative team or agency to produce high-end UGC (User Generated Content), <ToolLogo slug="foreplay" size="lg" showName /> is superior. It doesn't focus on "ripping" funnels but on organizing creative inspiration into briefs.
+
+Price: Inspiration $49/mo · Strategist $99/mo · Agency $199/mo as of April 2026.
+
+## How to know the workflow is working
+You will know this cadence is paying off when your "Time to Pivot" decreases. In the beginning, you might realize an angle is dead only after your ROAS has crashed for a week. After implementing weekly monitoring, you should be able to spot the shift on Monday and have new ads live by Tuesday—often *before* your current campaigns actually start to dip.
+
+Another key signal is the "Creative Hit Rate." If you are blindly guessing, perhaps 1 in 10 ads you launch becomes a winner. By basing your launches on "days running" data and ripped funnel structures, you should see your hit rate climb to 3 or 4 in 10. When your research directly correlates to a higher percentage of winning ad sets, the workflow is functioning.
+
+<CTA variant="mid" campaign="how-to-monitor-your-competitors-weekly" medium="guide" kicker="Stop Guessing, Start Scaling" body="Get lifetime access to the only Meta ad intelligence tool built specifically for CPA affiliates. Rip landing pages and filter by affiliate network in seconds." />
+
+## Frequently asked questions
+
+<FAQ items={frontmatter.faq} />
